@@ -82,7 +82,8 @@ class LoginPage {
   }
 
   HMBIcon() {
-    const btn = cy.get(".v-btn__content > .v-icon");
+
+    const btn = cy.get(".v-btn__content > .theme--dark");
     btn.click({ force: true });
   }
 

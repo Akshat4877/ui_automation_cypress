@@ -12,10 +12,13 @@
     "Address":"Address",
     "Section":"Section",
     "Number":"Number",
+
     "Time":"Time",
     "Date":"Date",
     "ReminderName":"Reminder",
+    
     "Toggle":"Toggle",
+    
 
     "SelectList":"SelectList",
     "SelectListName":"SelectList",

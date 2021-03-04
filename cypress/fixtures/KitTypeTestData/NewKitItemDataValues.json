@@ -1,6 +1,6 @@
 {
 
-    "KitName":"BaseTesting",
+    "KitName":"Testing",
     "Url":"https://www.sanity.com",
     "Text":"sanity",
     "NewFormLibFileName":"Screenshot_12",
@@ -37,9 +37,9 @@
     "StepperValue4":"Oppo",
     "StepperValue5":"RealMe",
     
-    "UserSelectorName":"Sam Ruddy",
+    "UserSelectorName":"Jerome Casanova",
     "ContactSelectorName":"Eric Buhring",
-    "AssigningName":"Max Max",
+    "AssigningName":"Sam Ruddy",
     
     "ExtraSmalliconSize":"Extra Small",
     "SmalliconSize":"Small",

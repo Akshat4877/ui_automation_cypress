@@ -1,4 +1,4 @@
-import "@percy/cypress";
+
 import "cypress-file-upload";
 import "@applitools/eyes-cypress/commands";
 import "@4tw/cypress-drag-drop";

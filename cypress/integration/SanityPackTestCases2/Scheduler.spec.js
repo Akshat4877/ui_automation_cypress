@@ -35,7 +35,7 @@ describe("Create Active schedule for Kit Item through Add button in calendar", f
       "refreshToken",
       "jwtAccessToken"
     );
-
+    
     cy.wait(10000);
   });
 
