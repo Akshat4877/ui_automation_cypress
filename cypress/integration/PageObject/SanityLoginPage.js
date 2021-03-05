@@ -25,8 +25,8 @@ class SanityLoginPage {
     cy.visit("https://serviceproviders.ca-test.com/ClientAdmin/KitBuilder#/");
   }
 
-  visitCityComTest() {
-    cy.visit("https://citycommercial.ca-test.com/#/");
+  propmanagementcoreTest() {
+    cy.visit("https://propmanagementcore.ca-test.com/Public/Login?ReturnUrl=%2F");
   }
 
   visitCityComBuild() {

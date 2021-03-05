@@ -7,7 +7,7 @@ describe("New kit item complete creation test case", function () {
     // cy.viewport(1280, 720);
     const lp = new LoginPage();
     const slp = new SanityLoginPage();
-    //slp.visitCityComTest();
+    //slp.propmanagementcoreTest();
     slp.nvdTest()
     //slp.TmProd();
 
@@ -20,7 +20,7 @@ describe("New kit item complete creation test case", function () {
     cy.contains(" Log In ").should("be.visible");
     //Enter credentials
     lp.EnterEmail("propertymanagement@commonareas.work.dev");
-    //lp.EnterEmail("citycom@commonareas.work.dev");
+    //lp.EnterEmail("PropMgmtCoreSupport@commonareas.work.dev");
     //lp.EnterEmail("sam@armyspy.com");
     lp.EnterPassword("1234567Aa");
     lp.Submit();
@@ -337,10 +337,8 @@ describe("New kit item complete creation test case", function () {
     cy.contains(this.NewKitItemData.CheckboxSelectValue1).click({
       force: true,
     });
-    cy.contains(this.NewKitItemData.CheckboxSelectValue2).click({
-      force: true,
-    });
-    cy.contains(this.NewKitItemData.CheckboxSelectValue3).click({
+  
+    cy.contains(this.NewKitItemData.CheckboxSelectValue5).click({
       force: true,
     });
     cy.log("Checkbox Values has been set.");
@@ -464,15 +462,7 @@ describe("New kit item complete creation test case", function () {
       "be.visible"
     );
     cy.log(this.NewKitItemData.KitName + "Kit Type has been Saved");
-
-    // //close the Kit Item
-    // cy.wait(5000);
-    // //Close Kit type
-    // cy.get(".subheader--button-icon-wrapper path").click({
-    //   force: true,
-    // });
-    // cy.log(this.NewKitItemData.KitName + "Kit item has been Close");
-    // cy.wait(5000);
+    cy.wait(5000);
   });
 
   it.only("Files Tab", function () {
@@ -529,7 +519,7 @@ describe("New kit item complete creation test case", function () {
     cy.wait(5000);
   });
 
-  it("Link Existing Relation On Map", function () {
+  it.only("Link Existing Relation On Map", function () {
     //Click on Map tab
     // cy.contains(" Map ").click({ force: true });
     // cy.wait(2000);
@@ -773,14 +763,14 @@ describe("New kit item complete creation test case", function () {
     cy.xpath("//span[contains(text(),'OK')]").first().click({ force: true });
     cy.wait(2000);
     //Click on Time Entry for
-    // cy.get(
-    //   "div:nth-child(2) > div:nth-child(1) > span > div > div > div.v-input__slot > div.v-select__slot > div.v-input__append-inner > div"
-    // ).click({ force: true });
-    // cy.wait(4000);
-    // //Assertion validation
-    // cy.contains("Connection").should("be.visible");
-    // cy.wait(2000);
-    // cy.contains(this.SData.TimeEntryConnection).click({ force: true });
+    cy.get(
+      "div:nth-child(2) > div:nth-child(1) > span > div > div > div.v-input__slot > div.v-select__slot > div.v-input__append-inner > div"
+    ).click({ force: true });
+    cy.wait(4000);
+    //Assertion validation
+    cy.contains("Connection").should("be.visible");
+    cy.wait(2000);
+    cy.contains(this.SData.TimeEntryConnection).click({ force: true });
     cy.wait(1000);
     cy.get('[placeholder="Add a Description"]').type(this.SData.AddDescription);
     //Click on Save
@@ -840,4 +830,19 @@ describe("New kit item complete creation test case", function () {
     cy.log(this.NewKitItemData.KitName + "Kit item has been Close");
     cy.wait(5000);
   });
+
+  it.only("Sign Out for logged in user", function () {
+    //Click on admin
+    cy.get('[name="your-profile"]').click({ force: true });
+    cy.wait(2000);
+    cy.contains("Sign Out").click({ force: true });
+    cy.wait(5000);
+    //Log out validation assertion
+    cy.contains(" Log In ").should("be.visible");
+    cy.url().should("include", "/Public/Login?");
+    cy.log("User has been sign out");
+  });
+
 });
+
+

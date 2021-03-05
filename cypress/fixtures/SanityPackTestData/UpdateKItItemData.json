@@ -1,10 +1,9 @@
 {
 
-    "KitName":"Validation",
      
     "Url Note":"all in small letters",
 
-    "Url":"https://www.updated.com",
+    "Url":"https://www.aaupdated.com",
     "Text":"updated",
     "UpdateFileName":"Screenshot_6",
     "Telephone":"(897) 765-2905",
@@ -15,18 +14,18 @@
     "Email":"updated@yahoo.com",
     "Important Note for Email":"should be in small letters",
 
-    "Addressline1":"Romrog Updated",
-    "Addressline2":"Oak Way New",
-    "City":"Grand Island New",
+    "Addressline1":"Address1 Updated",
+    "Addressline2":"AddressLine Updated",
+    "City":"City Updated",
     "State":"Arizona",
-    "ZipCode":"09002",
+    "ZipCode":"4877",
     "Country":"United States",
     "Number":"4",
 
     "SelectListValue":"Venacura",
     
 
-    "RadioSelectValue":"SR4",
+    "RadioSelectValue":"SR5",
 
     "CheckboxSelectValue1":"CheckboxSelect1",
     "CheckboxSelectValue2":"CheckboxSelect2",
@@ -41,13 +40,13 @@
     "StepperValue5":"RealMe",
 
     "UserSelectorName":"Common Areas Support",
-    "ContactSelectorName":"Akshat Akshat",
-    "AssigningName":"Work Requests",
+    "ContactSelectorName":"Ethan Thomas",
+    "AssigningName":"Harshal Harshal",
     
 
     "DUpUserSelector":"Common Areas Support",
-    "DUpContactSelector":"Akshat Akshat",
-    "DUpAssigning":"Work Requests",
+    "DUpContactSelector":"Ethan Thomas",
+    "DUpAssigning":"Harshal Harshal",
     
     "ExtraSmalliconSize":"Extra Small",
     "SmalliconSize":"Small",
@@ -64,6 +63,10 @@
     "InspectionValue3":"3",
     "InspectionValue4":"4",
     "InspectionValue5":"5",
+
+    "Form Element Validation":"Data",
+    "LoggedTime":"5:25 pm",
+    "LoggedDate":"03/25/2021",
 
     
     

@@ -7,7 +7,6 @@ describe("New kit item complete creation test case", function () {
     // cy.viewport(1280, 720);
     const lp = new LoginPage();
     const slp = new SanityLoginPage();
-    //slp.visitCityComTest();
     slp.nvdTest()
     //slp.TmProd();
 
@@ -20,7 +19,6 @@ describe("New kit item complete creation test case", function () {
     cy.contains(" Log In ").should("be.visible");
     //Enter credentials
     lp.EnterEmail("propertymanagement@commonareas.work.dev");
-    //lp.EnterEmail("citycom@commonareas.work.dev");
     //lp.EnterEmail("sam@armyspy.com");
     lp.EnterPassword("1234567Aa");
     lp.Submit();
@@ -335,10 +333,8 @@ describe("New kit item complete creation test case", function () {
     cy.contains(this.NewKitItemData.CheckboxSelectValue1).click({
       force: true,
     });
-    cy.contains(this.NewKitItemData.CheckboxSelectValue2).click({
-      force: true,
-    });
-    cy.contains(this.NewKitItemData.CheckboxSelectValue3).click({
+
+    cy.contains(this.NewKitItemData.CheckboxSelectValue5).click({
       force: true,
     });
     cy.log("Checkbox Values has been set.");
@@ -462,15 +458,7 @@ describe("New kit item complete creation test case", function () {
       "be.visible"
     );
     cy.log(this.NewKitItemData.KitName + "Kit Type has been Saved");
-
-    // //close the Kit Item
-    // cy.wait(5000);
-    // //Close Kit type
-    // cy.get(".subheader--button-icon-wrapper path").click({
-    //   force: true,
-    // });
-    // cy.log(this.NewKitItemData.KitName + "Kit item has been Close");
-    // cy.wait(5000);
+    cy.wait(5000);
   });
 
   it.only("New Kit Item Updation", function () {
@@ -576,8 +564,9 @@ describe("New kit item complete creation test case", function () {
     cy.wait(1000);
 
     //scroll
-    cy.get('[placeholder="City"]').scrollIntoView({ force: true });
-    cy.wait(1000);
+    cy.get('[placeholder="Street address, building, company ... "]')
+      .scrollIntoView({ force: true });
+    cy.wait(3000);
 
     //Address
     cy.get('[placeholder="Street address, building, company ... "]')
@@ -589,9 +578,10 @@ describe("New kit item complete creation test case", function () {
       .clear()
       .type(this.UpdateKitItemData.Addressline2);
     cy.log("Address line1 Updated");
+    cy.wait(2000)
 
     cy.get('[placeholder="City"]').scrollIntoView({ force: true });
-    cy.wait(1000);
+    cy.wait(2000);
 
     //City
     cy.get('[placeholder="City"]').clear().type(this.UpdateKitItemData.City);
@@ -704,34 +694,22 @@ describe("New kit item complete creation test case", function () {
     cy.wait(3000);
 
     //CheckboxSelect(Values coming form KitItemValues Json File)
+    //Unchecking checked checkboxes
     cy.contains(this.UpdateKitItemData.CheckboxSelectValue1).click({
-      force: true,
-    });
-    cy.contains(this.UpdateKitItemData.CheckboxSelectValue2).click({
-      force: true,
-    });
-    cy.contains(this.UpdateKitItemData.CheckboxSelectValue3).click({
-      force: true,
-    });
-    cy.log("UnChecking existing Values.");
-    cy.wait(2000);
-    cy.contains(this.UpdateKitItemData.CheckboxSelectValue4).click({
       force: true,
     });
     cy.contains(this.UpdateKitItemData.CheckboxSelectValue5).click({
       force: true,
     });
+    //Checking new checkboxes
+    cy.contains(this.UpdateKitItemData.CheckboxSelectValue3).click({
+      force: true,
+    });
+    cy.contains(this.UpdateKitItemData.CheckboxSelectValue4).click({
+      force: true,
+    });
     cy.log("Checkbox Values updated.");
     cy.wait(3000);
-
-    //save Kit Item
-    cy.get(".v-select__selections .v-btn__content").click({ force: true });
-    cy.contains(this.NewKitItemData.KitName + " has been saved").should(
-      "be.visible"
-    );
-    cy.log(this.NewKitItemData.KitName + "Kit Type has been Saved");
-    cy.log("Partially saving new form");
-    cy.wait(5000);
 
     //Stepper
     //getting value form different json file
@@ -821,7 +799,7 @@ describe("New kit item complete creation test case", function () {
     //"These are the index value of div child":"use according to select inspection value",
     cy.get(
       ".v-chip:nth-child(" +
-      this.UpdateKitItemData.InspectionValue4 +
+      this.UpdateKitItemData.InspectionValue5 +
       ") > .v-chip__content"
     ).click({ force: true });
     cy.wait(2000);
@@ -955,7 +933,6 @@ describe("New kit item complete creation test case", function () {
     cy.wait(3000);
 
     ////////////////////////////////////////////////////////////////////
-
     //save Kit Item
     cy.get(".v-select__selections .v-btn__content").click({ force: true });
     cy.contains(this.NewKitItemData.KitName + " has been saved").should(
@@ -965,12 +942,481 @@ describe("New kit item complete creation test case", function () {
       this.NewKitItemData.KitName +
       "Kit Type has been Saved with updated values"
     );
-
-    //Close Kit type
-    // cy.get(".subheader--button-icon-wrapper .inline-svg").click({
-    //   force: true,
-    // });
-    cy.log(this.NewKitItemData.KitName + "Kit item has been Close");
     cy.log("New Kit item updated");
+  });
+});
+
+
+describe("New view updation validation test case", function () {
+  this.beforeAll(function () {
+    // cy.viewport(1280, 720);
+    const lp = new LoginPage();
+    const slp = new SanityLoginPage();
+
+    Cypress.Cookies.preserveOnce(
+      ".AspNet.ApplicationCookie",
+      "ASP.NET_SessionId",
+      "ca-cf-auth",
+      "kit-detail-selected-tab",
+      "jwt",
+      "refreshToken",
+      "jwtAccessToken"
+    );
+
+    cy.wait(10000);
+  });
+
+  this.beforeEach("KitType Data", function () {
+    Cypress.Cookies.preserveOnce(
+      ".AspNet.ApplicationCookie",
+      "ASP.NET_SessionId",
+      "ca-cf-auth",
+      "kit-detail-selected-tab",
+      "jwt",
+      "refreshToken",
+      "jwtAccessToken"
+    );
+
+    cy.fixture("SanityPackTestData/UpdateKItItemData").then(function (
+      UpDateKitItemSDTCData
+    ) {
+      this.UpdateKitItemData = UpDateKitItemSDTCData;
+    });
+
+    // cy.fixture("SanityPackTestData(Prod)/UpdateKItItemData(Prod)").then(
+    //   function (UpDateKitItemSDTCData) {
+    //     this.UpdateKitItemData = UpDateKitItemSDTCData;
+    //   }
+    // );
+
+    cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
+      NewDataForElements
+    ) {
+      this.DataType2 = NewDataForElements;
+    });
+
+    // cy.fixture("SanityPackTestData(Prod)/KitBuilderDataTypes2(Prod)").then(
+    //   function (NewDataForElements) {
+    //     this.DataType2 = NewDataForElements;
+    //   }
+    // );
+
+    cy.fixture("SanityPackTestData/NewKitItemTabsData").then(function (
+      SanityTCData
+    ) {
+      this.SData = SanityTCData;
+    });
+
+    // cy.fixture("SanityPackTestData(Prod)/NewKitItemTabsData(Prod)").then(
+    //   function (SanityTCData) {
+    //     this.SData = SanityTCData;
+    //   }
+    // );
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    cy.fixture("KitBuilderTestData/NewKitTypeData").then(function (
+      KittypeName
+    ) {
+      this.KitTypeName = KittypeName;
+    });
+    cy.fixture("KitBuilderTestData/FormViewsNameData").then(function (
+      KitTypeFormViewsNames
+    ) {
+      this.ViewName = KitTypeFormViewsNames;
+    });
+  });
+
+  it.only("Url Element data Validation", function () {
+    cy.wait(2000);
+    cy.get(".dropzone-area-button:nth-child(2)").scrollIntoView({
+      force: true,
+    });
+    cy.wait(2000);
+    cy.get("[name" + "=" + this.DataType2.Url + "]")
+      .last()
+      .scrollIntoView({ force: true });
+    cy.wait(4000);
+    var lower = this.DataType2.Url.toLowerCase();
+    //logging input data on console
+    cy.xpath("//input[@controlname='" + lower + "']")
+      .invoke('val')
+      .then(text => {
+        const url = text;
+        cy.log(url);
+      })
+    cy.wait(2000)
+    //Validating details view input data
+    cy.xpath("//input[@controlname='" + lower + "']").should("have.value", this.UpdateKitItemData.Url)
+    cy.wait(2000)
+  });
+
+
+  it.only("Text Element data Validation", function () {
+    cy.wait(2000)
+    var lower = this.DataType2.Text.toLowerCase();
+    //logging input data on console
+    cy.xpath("//input[@controlname='" + lower + "']")
+      .invoke('val')
+      .then(text => {
+        const Text = text;
+        cy.log(Text);
+      })
+    cy.wait(2000)
+    //Validating details view input data
+    cy.xpath("//input[@controlname='" + lower + "']").should("have.value", this.UpdateKitItemData.Text)
+    cy.wait(2000)
+
+  });
+
+  it('File Element data Validation', function () {
+    cy.wait(2000)
+    var lower = this.DataType2.File.toLowerCase();
+    //logging input data on console
+    cy.xpath("//div[@controlname='" + lower + "']")
+      .invoke('val')
+      .then(text => {
+        const Text = text;
+        cy.log(Text);
+      })
+    cy.get(".dropzone-area-button:nth-child(2)").should('be.visible')
+    cy.wait(2000)
+    //cy.contains(this.NewKitItemData.NewFormLibFileName).should('be.visible')
+    cy.xpath("//div[@controlname='" + lower + "']").should("have.value", this.UpdateKitItemData.NewFormLibFileName)
+    cy.wait(2000)
+  })
+
+
+  it.only("Telephone Element data Validation", function () {
+    cy.wait(2000)
+    var lower = this.DataType2.Telephone.toLowerCase();
+    //logging input data on console
+    cy.xpath("//input[@controlname='" + lower + "']")
+      .invoke('val')
+      .then(text => {
+        const Telephone = text;
+        cy.log(Telephone);
+      })
+    cy.wait(2000)
+    //Validating details view input data
+    cy.xpath("//input[@controlname='" + lower + "']").should("have.value", this.UpdateKitItemData.Telephone)
+    cy.wait(2000)
+
+  });
+
+
+  it.only("TextAera Element data Validation", function () {
+    cy.wait(2000)
+    var lower = this.DataType2.TextAera.toLowerCase();
+    //logging input data on console
+    cy.get("[name" + "=" + this.DataType2.TextAera + "]").eq(1)
+      .invoke('val')
+      .then(text => {
+        const TextAera = text;
+        cy.log(TextAera);
+      })
+    cy.wait(2000)
+    //Validating details view input data
+    cy.get('[name="TextAera"]').eq(1).should("have.value", this.UpdateKitItemData.TextAera)
+    cy.wait(2000)
+  });
+
+
+  it('Currency Element data Validation', function () {
+    cy.wait(2000)
+    var lower = this.DataType2.Currency.toLowerCase();
+    cy.log(lower)
+    //logging input data on console
+    cy.xpath("//div[@controlname='" + lower + "']")
+      .invoke('val')
+      .then(text => {
+        const currency = text;
+        cy.log(currency);
+      })
+  })
+
+  it('Measure Element data Validation', function () {
+    cy.wait(2000)
+    //Measure
+    var lower = this.DataType2.Measure.toLowerCase();
+    cy.log(lower)
+    cy.wait(2000)
+    //logging input data on console
+    cy.xpath("//div[@controlname='" + lower + "']")
+      .invoke('val')
+      .then(text => {
+        const Measure = text;
+        cy.log(Measure);
+      })
+    cy.wait(2000)
+
+  })
+
+  it.only("Email Element data Validation", function () {
+    cy.wait(2000)
+    var lower = this.DataType2.Email.toLowerCase();
+    //logging input data on console
+    cy.xpath("//input[@controlname='" + lower + "']")
+      .invoke('val')
+      .then(text => {
+        const Email = text;
+        cy.log(" Email Input box has data " + Email);
+      })
+    cy.wait(2000)
+    //Validating details view input data
+    cy.xpath("//input[@controlname='" + lower + "']").should("have.value", this.UpdateKitItemData.Email)
+    cy.wait(3000)
+
+  });
+
+  it.only("Addressline1 Element data Validation", function () {
+    cy.wait(2000)
+    cy.get('[placeholder="Street address, building, company ... "]').scrollIntoView({ force: true })
+    cy.wait(3000)
+    //logging input data on console
+    cy.get('[placeholder="Street address, building, company ... "]')
+      .invoke('val')
+      .then(text => {
+        const address1 = text;
+        cy.log(address1);
+      })
+    cy.wait(2000)
+    //Validating details view input data
+    cy.get('[placeholder="Street address, building, company ... "]')
+      .should("have.value", this.UpdateKitItemData.Addressline1)
+    cy.wait(3000)
+  });
+
+  it.only("Addressline2 Element data Validation", function () {
+    cy.wait(2000)
+    //logging input data on console
+    cy.get('[name="Address line 2."]')
+      .invoke('val')
+      .then(text => {
+        const Addressline2 = text;
+        cy.log(Addressline2);
+      })
+    cy.wait(2000)
+    //Validating details view input data
+    cy.get('[name="Address line 2."]')
+      .should("have.value", this.UpdateKitItemData.Addressline2)
+    cy.wait(3000)
+  });
+
+  it.only("City Element data Validation", function () {
+    cy.wait(2000)
+    //logging input data on console
+    cy.get('[placeholder="City"]')
+      .invoke('val')
+      .then(text => {
+        const City = text;
+        cy.log(City);
+      })
+    cy.wait(2000)
+    //Validating details view input data
+    cy.get('[placeholder="City"]')
+      .should("have.value", this.UpdateKitItemData.City)
+    cy.wait(3000)
+  });
+
+  it.only("ZipCode Element data Validation", function () {
+    cy.wait(2000)
+    cy.get('[placeholder="Zip/Postal Code"]').scrollIntoView({ force: true })
+    cy.wait(3000)
+    //logging input data on console
+    cy.get('[placeholder="Zip/Postal Code"]')
+      .invoke('val')
+      .then(text => {
+        const ZipCode = text;
+        cy.log(ZipCode);
+      })
+    cy.wait(2000)
+    //Validating details view input data
+    cy.get('[placeholder="Zip/Postal Code"]')
+      .should("have.value", this.UpdateKitItemData.ZipCode)
+    cy.wait(3000)
+  });
+
+  it("State Element data Validation", function () {
+    cy.wait(2000)
+    //logging input data on console
+    cy.get('.v-select__selection')
+      .eq(0)
+      .invoke('val')
+      .then(text => {
+        const State = text;
+        cy.log(State);
+      })
+    cy.wait(2000)
+    //Validating details view input data
+    cy.get('[placeholder="State / Province"]')
+      .should("have.value", this.UpdateKitItemData.State)
+    cy.wait(3000)
+  });
+
+  it.only("Country Element data Validation", function () {
+    cy.wait(2000)
+    //logging input data on console
+    cy.get('[placeholder="Country"]')
+      .invoke('val')
+      .then(text => {
+        const Country = text;
+        cy.log(Country);
+      })
+    cy.wait(2000)
+    //Validating details view input data
+    cy.get('[placeholder="Country"]')
+      .should("have.value", this.UpdateKitItemData.Country)
+    cy.wait(3000)
+  });
+
+  it.only("Number Element data Validation", function () {
+    cy.wait(2000)
+    var lower = this.DataType2.Number.toLowerCase();
+    //logging input data on console
+    cy.xpath("//input[@controlname='" + lower + "']")
+      .invoke('val')
+      .then(text => {
+        const Number = text;
+        cy.log(Number);
+      })
+    cy.wait(2000)
+    //Validating details view input data
+    cy.xpath("//input[@controlname='" + lower + "']")
+      .should("have.value", this.UpdateKitItemData.Number)
+    cy.wait(3000)
+  });
+
+  it.only('Time Element data Validation', function () {
+    cy.wait(2000)
+    cy.get('[placeholder="Add Time"][readonly="readonly"]').eq(0)
+      .invoke('val')
+      .then(text => {
+        const Time = text;
+        cy.log("Time is " + Time);
+      })
+    cy.wait(2000)
+    //Check in josn for LoggedTime
+    cy.get('[placeholder="Add Time"][readonly="readonly"]').eq(0)
+      .should("have.value", this.UpdateKitItemData.LoggedTime)
+    cy.wait(3000)
+  })
+
+  it.only('Date Element data Validation', function () {
+    cy.wait(2000)
+    cy.get('[placeholder=" MM / DD / YYYY"]')
+      .invoke('val')
+      .then(text => {
+        const Date = text;
+        cy.log("Date is " + Date);
+      })
+    cy.wait(2000)
+    //Check in josn for LoggedDate
+    cy.get('[placeholder=" MM / DD / YYYY"]')
+      .should("have.value", this.UpdateKitItemData.LoggedDate)
+    cy.wait(3000)
+  })
+
+  it("SelectList Element data Validation", function () {
+    cy.wait(2000)
+    var lower = this.DataType2.Number.toLowerCase();
+    //logging input data on console
+    cy.xpath("//div[contains(@class, 'v-list-item__subtitle') and contains(text(),' Australia ')]")
+      .invoke('val')
+      .then(text => {
+        const SelectList = text;
+        cy.log(SelectList);
+      })
+    cy.wait(2000)
+  });
+
+  it("RadioSelect Element data Validation", function () {
+    cy.wait(2000)
+    cy.get('.v-radio').eq(1).should('be.checked')
+    cy.wait(2000)
+  });
+
+  it.only("CheckboxSelect Element data Validation", function () {
+    cy.wait(2000)
+    //CheckboxSelect3
+    cy.get('[type="checkbox"]').eq(3).should('be.checked')
+    //CheckboxSelect4
+    cy.get('[type="checkbox"]').eq(4).should('be.checked')
+    cy.wait(3000)
+  });
+
+  it.only('UserSelector Element data Validation', function () {
+    cy.wait(2000)
+    cy.get('.imageContent').eq(0).scrollIntoView({ force: true })
+    cy.wait(4000)
+    cy.xpath('//div[@class="col item-label"]').eq(0)
+      .invoke('val')
+      .then(text => {
+        const Date = text;
+        cy.log(Date);
+      })
+    cy.wait(2000)
+    cy.contains(this.UpdateKitItemData.DUpUserSelector).should('exist')
+    cy.contains(this.UpdateKitItemData.DUpUserSelector).should('be.visible')
+    cy.wait(2000)
+  })
+
+  it.only('ContactSelector Element data Validation', function () {
+    cy.wait(2000)
+    cy.xpath('//div[@class="col item-label"]').eq(1)
+      .invoke('val')
+      .then(text => {
+        const Date = text;
+        cy.log(Date);
+      })
+    cy.wait(2000)
+    cy.contains(this.UpdateKitItemData.DUpContactSelector).should('be.visible')
+    cy.contains(this.UpdateKitItemData.DUpContactSelector).should('exist')
+    cy.wait(2000)
+  })
+
+  it.only('Assigning Element data Validation', function () {
+    cy.wait(2000)
+    cy.get('.v-btn:nth-child(1) .v-badge > .inline-svg').scrollIntoView({ force: true })
+    cy.wait(3000)
+    cy.contains(this.UpdateKitItemData.DUpAssigning).should('be.visible')
+    cy.contains(this.UpdateKitItemData.DUpAssigning).should('exist')
+    cy.wait(2000)
+
+  })
+
+  it.only('Icon Element data Validation', function () {
+    cy.wait(2000)
+    cy.get('[placeholder="Label"]')
+      .invoke('val')
+      .then(text => {
+        const IconLabel = text;
+        cy.log(IconLabel);
+      })
+    cy.wait(2000)
+    //Validating details view input data
+    cy.get('[placeholder="Label"]')
+      .should("have.value", this.UpdateKitItemData.IconLabel)
+    cy.wait(3000)
+  })
+
+  it.only('Close details view', function () {
+    cy.wait(2000)
+    //Close Kit type
+    cy.get(".subheader--button-icon-wrapper .inline-svg").click({
+      force: true,
+    });    
+    cy.wait(2000)
+  })
+
+  it.only("Sign Out for logged in user", function () {
+    //Click on admin
+    cy.get('[name="your-profile"]').click({ force: true });
+    cy.wait(2000);
+    cy.contains("Sign Out").click({ force: true });
+    cy.wait(5000);
+    //Log out validation assertion
+    cy.contains(" Log In ").should("be.visible");
+    cy.url().should("include", "/Public/Login?");
+    cy.log("User has been sign out");
   });
 });

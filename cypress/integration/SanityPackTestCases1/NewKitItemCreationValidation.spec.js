@@ -229,7 +229,6 @@ describe("New created kit item creation Validation test case", function () {
     //Validating details view input data
     cy.get('[name="TextAera"]').eq(3).should("have.value", this.NewKitItemData.TextAera)
     cy.wait(2000)
-
   });
 
 
@@ -246,14 +245,8 @@ describe("New created kit item creation Validation test case", function () {
         cy.log(currency);
       })
 
-
     cy.wait(2000)
-
-
-
     cy.wait(2000)
-
-
     cy.get('.imageContent').eq(0)
       .invoke('val')
       .then(text => {
@@ -274,7 +267,6 @@ describe("New created kit item creation Validation test case", function () {
         const currency = text;
         cy.log(currency);
       })
-
   })
 
   it('Measure Element data Validation', function () {
@@ -533,7 +525,6 @@ describe("New created kit item creation Validation test case", function () {
     cy.contains(this.NewKitItemData.AssigningName).should('be.visible')
     cy.contains(this.NewKitItemData.AssigningName).should('exist')
     cy.wait(2000)
-
   })
 
   it.only('Icon Element data Validation', function () {
@@ -599,11 +590,11 @@ describe("New created kit item creation Validation test case", function () {
     cy.wait(3000);
 
     cy.get(".contributor__name")
-      .eq(1)
+      .eq(0)
       .should("have.text", this.SData.ContributorsName);
     cy.wait(2000);
     cy.get(".contributor__name")
-      .eq(0)
+      .eq(1)
       .should("have.text", this.NewKitItemData.AssigningName);
     cy.wait(2000)
 
