@@ -337,7 +337,7 @@ describe("New kit item complete creation test case", function () {
     cy.contains(this.NewKitItemData.CheckboxSelectValue1).click({
       force: true,
     });
-  
+
     cy.contains(this.NewKitItemData.CheckboxSelectValue5).click({
       force: true,
     });
@@ -580,6 +580,12 @@ describe("New kit item complete creation test case", function () {
     //Related New Kit Item assertion
     cy.contains(this.DataType2.KitToBeRelated).should("be.visible");
     cy.wait(3000);
+
+    //related new form element visibility assertion
+    cy.get("[name" + "=" + this.DataType2.Url + "]")
+      .eq(1).should('be.visible')
+    cy.wait(2000)
+
     //Url
     cy.get("[name" + "=" + this.DataType2.Url + "]")
       .eq(1)
@@ -619,6 +625,10 @@ describe("New kit item complete creation test case", function () {
     cy.wait(1000);
 
     // Currency;
+
+
+
+
     cy.get(
       "#inspire > div.v-dialog__content.v-dialog__content--active > div > div > div > div:nth-child(2) > div.new-kit-item.v-card.v-sheet.theme--light > div > div > div > div > div.row.kit-details-wrapper--content.pb-0 > div > div > div > div > div > div > div.tab--content.col > div > div > div.v-window-item.v-window-item--active > div > div > div.row.container-details > div.fill-height.col > div > div > div.kit-control-component.kit-control-currency.px-3.col.col-sm-12.col-md-6.mb-4.px-3 > div > div.kit-control-currency--right.ma-0.pa-0.col > div > div > div.v-input__slot > div"
     )

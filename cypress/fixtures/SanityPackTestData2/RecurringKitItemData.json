@@ -4,14 +4,14 @@
     "Recurring kit itmes tabs":"Data",
 
     "RecurringFilesTab":"Fixtures",
-    "RecurringContributorsTab":"Jhon Jhon",
+    "RecurringContributorsTab":"Work Requests",
     "RecurringAddTimeEntryLable":"Recurring Time Entry",
     "RecurringAddTimeEntryDescription":"Recurring Time Entry Test case",
     "RecurringTotalHours":"3",
     "RecurringAddDescription":"We are saving time entry now for Recurring Time Entry",
-    "RecurringTimeEntryConnection":"Jojo Jojo",
+    "RecurringTimeEntryConnection":"Jerome Casanova",
     "RecurringAddComments":"Hi these are the Recurring kit item test case that is for comment testing",
-    "RecurringAddGroup":"",
+    "RecurringAddGroup":"CA",
 
 
     "RecurringitemName":"TodayItem",
@@ -53,9 +53,9 @@
     "StepperValue4":"Oppo",
     "StepperValue5":"RealMe",
 
-    "UserSelectorName":"Sam Ruddy",
+    "UserSelectorName":"Jerome Casanova",
     "ContactSelectorName":"Eric Buhring",
-    "AssigningName":"Max Max",
+    "AssigningName":"Sam Ruddy",
     
     "ExtraSmalliconSize":"Extra Small",
     "SmalliconSize":"Small",

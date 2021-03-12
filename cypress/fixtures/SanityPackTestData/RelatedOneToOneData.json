@@ -4,7 +4,7 @@
     
     "UrlNote":"all letters in lower case",
 
-    "NewKitItemUrl":"https://www.onetoonenewform.com",
+    "NewKitItemUrl":"https://www.aonetoonenewform.com",
     "NewKitItemText":"OneToOne Relation TC",
     
     "Url":"https://www.aaonetoone.com",
@@ -13,7 +13,7 @@
     "Telephone":"(343) 909-9765",
     "TextAera":"One To One Related New automation",
     "Currency":"7",
-    "Measure":"09",
+    "Measure":"9",
 
     "Email":"onetoNew@gmail.com",
     "Important Note for Email":"should be in small letters",
@@ -43,9 +43,9 @@
     "StepperValue4":"Oppo",
     "StepperValue5":"RealMe",
 
-    "UserSelectorName":"Sam Ruddy",
+    "UserSelectorName":"Jerome Casanova",
     "ContactSelectorName":"Eric Buhring",
-    "AssigningName":"Max Max",
+    "AssigningName":"Sam Ruddy",
     
     "ExtraSmalliconSize":"Extra Small",
     "SmalliconSize":"Small",
@@ -61,6 +61,11 @@
     "InspectionValue2":"2",
     "InspectionValue3":"3",
     "InspectionValue4":"4",
-    "InspectionValue5":"5"
+    "InspectionValue5":"5",
+
+    
+    "Form Element Validation":"Data-Dont modify",
+    "LoggedTime":"4:30 pm",
+    "LoggedDate":"03/24/2021"
     
 }

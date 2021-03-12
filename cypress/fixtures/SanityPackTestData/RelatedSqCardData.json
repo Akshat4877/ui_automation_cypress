@@ -4,16 +4,16 @@
     
     "UrlNote":"all letters in lower case",
 
-    "NewKitItemUrl":"https://www.sqcardnewform.com",
+    "NewKitItemUrl":"https://www.asqcardnewform.com",
     "NewKitItemText":"Square Card Relation TC",
     
-    "Url":"https://www.sqrelated.com",
+    "Url":"https://www.zsqrelated.com",
     "Text":"Sq card Related New",
     "RelNewFileName":"sass",
     "Telephone":"(245) 909-2765",
     "TextAera":"Sq Card Related New automation",
     "Currency":"87",
-    "Measure":"098",
+    "Measure":"20",
 
     "Email":"sqcardNew@gmail.com",
     "Important Note for Email":"should be in small letters",
@@ -43,9 +43,9 @@
     "StepperValue4":"Oppo",
     "StepperValue5":"RealMe",
 
-    "UserSelectorName":"Sam Ruddy",
+    "UserSelectorName":"Jerome Casanova",
     "ContactSelectorName":"Eric Buhring",
-    "AssigningName":"Max Max",
+    "AssigningName":"Sam Ruddy",
     
     "ExtraSmalliconSize":"Extra Small",
     "SmalliconSize":"Small",
@@ -61,6 +61,11 @@
     "InspectionValue2":"2",
     "InspectionValue3":"3",
     "InspectionValue4":"4",
-    "InspectionValue5":"5"
+    "InspectionValue5":"5",
+
+    
+    "Form Element Validation":"Data-Dont modify",
+    "LoggedTime":"4:30 pm",
+    "LoggedDate":"03/25/2021"
     
 }

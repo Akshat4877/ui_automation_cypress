@@ -116,6 +116,10 @@ describe("Related Control One to One test case", function () {
 
   it.only("One to One Related Control to configure Related New form", function () {
     cy.wait(1000);
+
+    //new form ele visible assertion
+    cy.get("[name" + "=" + this.DataType2.Url + "]").last().should("be.visible");
+
     //save Kit Item for empty form
     cy.get(".v-select__selections .v-btn__content").click({ force: true });
     //kit item Save Assertion for no data
@@ -350,18 +354,13 @@ describe("Related Control One to One test case", function () {
     cy.log("RadioSelect Value has been set.");
 
     //CheckboxSelect(Values coming form KitItemValues Json File)
-    cy.contains(this.RelatedKitItemData.CheckboxSelectValue1).click({
-      force: true,
-    });
+
     cy.contains(this.RelatedKitItemData.CheckboxSelectValue2).click({
       force: true,
     });
-    cy.contains(this.RelatedKitItemData.CheckboxSelectValue3).click({
-      force: true,
-    });
+
     cy.log("Checkbox Values has been set.");
 
-    cy.wait(5000);
     cy.get(".searchIcon").eq(1).scrollIntoView({ force: true });
 
     //Stepper
@@ -375,7 +374,6 @@ describe("Related Control One to One test case", function () {
     //   force: true,
     // });
 
-    cy.wait(2000);
     //UserSelector(Values coming form KitItemValues Json File)
     //Click on to open UserSelector Pop up
     cy.get(".searchIcon").eq(0).click({ force: true });
@@ -467,7 +465,7 @@ describe("Related Control One to One test case", function () {
     //Assigning creation assertion
     cy.contains("Item shared").should("be.visible");
     cy.log("Assigning added");
-    cy.wait(5000);
+
 
     //Onetoone link
     cy.get(".action-icon:nth-child(2) path").first().click({ force: true });
@@ -498,23 +496,18 @@ describe("Related Control One to One test case", function () {
     ).should("be.visible");
 
     //close the Kit Item
-    cy.wait(5000);
+    cy.wait(1000);
     //Close Kit type
     cy.get(".subheader--button-icon-wrapper path").first().click({
       force: true,
     });
     cy.contains(this.NewKitItemData.KitName).should("be.visible");
     cy.log("Related new has been Close");
-    cy.wait(5000);
+    cy.wait(10000);
   });
 
-  it.only("Validate One to One Element", function () {
-    cy.wait(2000);
-    //One to One element assetions(new form) before save kit item
-    cy.contains(this.RelatedKitItemData.Url).should("exist");
-    cy.log("Url data exist before save kit item");
-    cy.wait(5000);
 
+  it.only("New Form Save Validation", function () {
     //save Kit item(edit form) new
     cy.get(".v-select__selections .v-btn__content")
       .first()
@@ -523,19 +516,12 @@ describe("Related Control One to One test case", function () {
     cy.contains(this.NewKitItemData.KitName + " has been saved").should(
       "be.visible"
     );
-    cy.wait(5000);
+    cy.wait(2000);
 
     //Scrolling
     cy.get(".last-updated:nth-child(2) > .v-icon").scrollIntoView({
       force: true,
     });
-    cy.wait(2000);
-
-    //One to One element assetions(new form) after save kit item
-    cy.contains(this.RelatedKitItemData.Url).should("exist");
-    cy.log("Url data exist after save kit item");
-    cy.wait(5000);
-
     //save AGAIN Kit item(edit form) new
     cy.get(".v-select__selections .v-btn__content")
       .first()
@@ -544,16 +530,229 @@ describe("Related Control One to One test case", function () {
     cy.contains("Nothing to save for " + this.NewKitItemData.KitName).should(
       "be.visible"
     );
-    cy.log("There is nothing to save for Kit Item");
   });
+
+
+  it.only('Click to open created related new', function () {
+    cy.wait(1000)
+    cy.get('.last-updated:nth-child(1) > .v-icon').click({ force: true });
+
+    //Related Kit Assertion
+    cy.contains(this.DataType2.KitToBeRelated).should("be.visible");
+    //Related New form element assertion
+    cy.get("[name" + "=" + this.DataType2.Url + "]").should("be.visible");
+    cy.wait(2000);
+  })
+
+
+  it.only("Url Element data Validation", function () {
+    var lower = this.DataType2.Url.toLowerCase();
+    //Validating details view input data
+    cy.xpath("//input[@controlname='" + lower + "']").should("have.value", this.RelatedKitItemData.Url)
+  });
+
+
+  it.only("Text Element data Validation", function () {
+    var lower = this.DataType2.Text.toLowerCase();
+    //Validating details view input data
+    cy.xpath("//input[@controlname='" + lower + "']").should("have.value", this.RelatedKitItemData.Text)
+
+  });
+
+  it.only('File Element data Validation', function () {
+    var lower = this.DataType2.File.toLowerCase();
+    cy.xpath('//div[@class="drop-zone"]//div[@class="v-input__slot"]//div[@class="v-text-field__slot"]//input').eq(0)
+      .invoke('val').then((text) => {
+        expect(text.trim()).equal(this.RelatedKitItemData.RelNewFileName)
+      });
+  })
+
+
+  it.only("Telephone Element data Validation", function () {
+
+    var lower = this.DataType2.Telephone.toLowerCase();
+    //Validating details view input data
+    cy.xpath("//input[@controlname='" + lower + "']").should("have.value", this.RelatedKitItemData.Telephone)
+
+  });
+
+
+  it.only("TextAera Element data Validation", function () {
+
+    var lower = this.DataType2.TextAera.toLowerCase();
+    //Validating details view input data
+    cy.get('[name="TextAera"]').eq(1).should("have.value", this.RelatedKitItemData.TextAera)
+
+  });
+
+  it.only('Currency Element data Validation', function () {
+    var lower = this.DataType2.Currency.toLowerCase();
+    //Assertion Validation for currency
+    cy.xpath('//div[@class="kit-control-currency--right ma-0 pa-0 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
+      .next('input').should("have.value", this.RelatedKitItemData.Currency)
+  })
+
+  it.only('Measure Element data Validation', function () {
+    var lower = this.DataType2.Currency.toLowerCase();
+    //Assertion Validation for currency
+    cy.xpath('//div[@class="kit-control-measure--left ma-0 pa-0 pr-2 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
+      .next('input').should("have.value", this.RelatedKitItemData.Measure)
+    cy.wait(3000)
+  })
+
+  it.only("Email Element data Validation", function () {
+    var lower = this.DataType2.Email.toLowerCase();
+    //Validating details view input data
+    cy.xpath("//input[@controlname='" + lower + "']").should("have.value", this.RelatedKitItemData.Email)
+
+  });
+
+  it.only("Addressline1 Element data Validation", function () {
+    //Validating details view input data
+    cy.get('[placeholder="Street address, building, company ... "]').eq(0)
+      .should("have.value", this.RelatedKitItemData.Addressline1)
+
+  });
+
+  it.only("Addressline2 Element data Validation", function () {
+
+    //Validating details view input data
+    cy.get('[name="Address line 2."]')
+      .should("have.value", this.RelatedKitItemData.Addressline2)
+
+  });
+
+  it.only("City Element data Validation", function () {
+
+    //Validating details view input data
+    cy.get('[placeholder="City"]')
+      .should("have.value", this.RelatedKitItemData.City)
+
+  });
+
+  it.only("ZipCode Element data Validation", function () {
+
+    //Validating details view input data
+    cy.get('[placeholder="Zip/Postal Code"]').eq(0)
+      .should("have.value", this.RelatedKitItemData.ZipCode)
+
+  });
+
+  it.only("State Element data Validation", function () {
+    cy.xpath('//div[@class="v-select__slot"]//div[@class="v-select__selections"]//div[@class="v-select__selection v-select__selection--comma"]')
+      .eq(0)
+      .invoke('text').then((text) => {
+        expect(text.trim()).equal(this.RelatedKitItemData.State)
+      })
+  });
+
+  it.only("Country Element data Validation", function () {
+    //Validating details view input data
+    cy.get('[placeholder="Country"]')
+      .should("have.value", this.RelatedKitItemData.Country)
+
+  });
+
+  it.only("Number Element data Validation", function () {
+
+    var lower = this.DataType2.Number.toLowerCase();
+    //Validating details view input data
+    cy.xpath("//input[@controlname='" + lower + "']")
+      .should("have.value", this.RelatedKitItemData.Number)
+
+  });
+
+  it.only('Time Element data Validation', function () {
+    //Check in josn for LoggedTime
+    cy.get('[placeholder="Add Time"][readonly="readonly"]').eq(0)
+      .should("have.value", this.RelatedKitItemData.LoggedTime)
+  })
+
+  it.only('Date Element data Validation', function () {
+
+    //Check in josn for LoggedDate
+    cy.get('[placeholder=" MM / DD / YYYY"]').eq(0)
+      .should("have.value", this.RelatedKitItemData.LoggedDate)
+
+  })
+
+  it("SelectList Element data Validation", function () {
+    cy.wait(2000)
+    var lower = this.DataType2.Number.toLowerCase();
+    //logging input data on console
+    cy.xpath("//div[contains(@class, 'v-list-item__subtitle') and contains(text(),' Australia ')]")
+      .invoke('val')
+      .then(text => {
+        const SelectList = text;
+        cy.log(SelectList);
+      })
+  });
+
+  it("RadioSelect Element data Validation", function () {
+    cy.wait(2000)
+    cy.get('.v-radio').eq(1).should('be.checked')
+    cy.wait(2000)
+  });
+
+  it.only("CheckboxSelect Element data Validation", function () {
+    cy.wait(2000)
+    //CheckboxSelect1
+    cy.get('[type="checkbox"]').eq(2).should('be.checked')
+    cy.wait(3000)
+  });
+
+  it.only('UserSelector Element data Validation', function () {
+
+    //scroll to user selector
+    cy.get('.imageContent').eq(0).scrollIntoView({ force: true })
+    cy.wait(1000)
+    cy.xpath('//div[@controlname="userSelector"]//div[@class="col item-label"]').children('div').invoke('text').then((text) => {
+      expect(text.trim()).equal(this.RelatedKitItemData.UserSelectorName)
+    });
+  })
+
+  it.only('ContactSelector Element data Validation', function () {
+
+    cy.xpath('//div[@controlname="contactSelector"]//div[@class="col item-label"]').children('div').invoke('text').then((text) => {
+      expect(text.trim()).equal(this.RelatedKitItemData.ContactSelectorName)
+    });
+  })
+
+  it.only('Assigning Element data Validation', function () {
+    var lower = this.DataType2.Assigning.toLowerCase();
+    cy.get('.v-btn:nth-child(1) .v-badge > .inline-svg').eq(0).scrollIntoView({ force: true })
+
+    //json value assertion
+    cy.xpath('//div[@controlname="assigning"]//div[@class="item-label col"]').children('div').invoke('text')
+      .then((text) => {
+        expect(text.trim()).equal(this.RelatedKitItemData.AssigningName)
+      });
+  })
+
+  it.only('Icon Element data Validation', function () {
+
+    //Validating details view input data
+    cy.get('[placeholder="Label"]')
+      .should("have.value", this.RelatedKitItemData.IconLabel)
+
+  })
+
+  it.only('Close the related new form', function () {
+
+    //close the Kit Item
+    cy.wait(2000);
+    //Close Kit type
+    cy.get(".subheader--button-icon-wrapper path").first().click({
+      force: true,
+    });
+    cy.contains(this.NewKitItemData.KitName).should("be.visible");
+    cy.log("Related new has been Close");
+  })
 
   it.only("Deletion one to one element for new form", function () {
     //Click on cross to delete value
-    cy.wait(3000);
     cy.get(".last-updated:nth-child(2) > .v-icon").click({ force: true });
-    cy.wait(2000);
     cy.contains(" Are you sure you want to discard?").should("be.visible");
-    cy.wait(2000);
     cy.contains(" Discard ").click({ force: true });
     cy.contains(
       "Relation on " +
@@ -570,19 +769,14 @@ describe("Related Control One to One test case", function () {
     cy.get(".action-icon:nth-child(2) > .inline-svg").scrollIntoView({
       force: true,
     });
-    cy.wait(3000);
+
     //One to One element assetions(new form)
     cy.contains(this.RelatedKitItemData.Url).should("not.exist");
     cy.log("Data has been deleted");
-    cy.wait(3000);
     //Again save Kit item(new form)
     cy.get(".v-select__selections .v-btn__content")
       .first()
       .click({ force: true });
-    //kit item Save Assertion after delete elemets
-    cy.log(this.DataType2.KitToBeRelated + " related new has been Saved");
-    cy.log("Save Kit Item after delete relation elements");
-    cy.wait(2000);
   });
 
   it.only("Link Existing Item for OneToOne Related Control", function () {
@@ -612,8 +806,6 @@ describe("Related Control One to One test case", function () {
       this.NewKitItemData.KitName +
       " linked "
     ).should("be.visible");
-
-    cy.wait(2000);
   });
 
   it.only("Validate Link Item elements for OneToOne", function () {
@@ -631,10 +823,6 @@ describe("Related Control One to One test case", function () {
     cy.contains(
       this.DataType2.Text + ":" + " " + this.RelatedKitItemData.Text
     ).should("exist");
-
-    // cy.contains(
-    //   this.DataType2.TextAera + ":" + " " + this.RelatedKitItemData.TextAera
-    // ).should("exist");
 
     cy.log("Linked item exist for one to one related control");
 

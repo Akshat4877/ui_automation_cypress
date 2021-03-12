@@ -6,21 +6,18 @@ describe("Update Related New for OneToMany Related Control", function () {
     // cy.viewport(1280, 720);
     const lp = new LoginPage();
     const slp = new SanityLoginPage();
-    //slp.visitCityComTest();
     slp.nvdTest()
     //slp.TmProd();
-
 
     //Handling Alert
     cy.on("window:confirm", () => {
       cy.log("Alert has been Handled");
     });
-
     //Login Assertions
     cy.contains(" Log In ").should("be.visible");
     //Enter credentials
     lp.EnterEmail("propertymanagement@commonareas.work.dev");
-    //lp.EnterEmail("citycom@commonareas.work.dev");
+
     //lp.EnterEmail("sam@armyspy.com");
     lp.EnterPassword("1234567Aa");
     lp.Submit();
@@ -36,7 +33,6 @@ describe("Update Related New for OneToMany Related Control", function () {
       "jwtAccessToken"
     );
 
-    cy.wait(10000);
   });
 
   this.beforeEach("KitType Data", function () {
@@ -115,13 +111,11 @@ describe("Update Related New for OneToMany Related Control", function () {
     cy.contains(this.NewKitItemData.KitName).scrollIntoView({
       force: true,
     });
-    cy.wait(5000);
     //Open KitType from left paneal
     cy.contains(this.NewKitItemData.KitName).click({
       force: true,
     });
     cy.log("Kit Type has been OPened");
-    cy.wait(5000);
     //Click on First kit item of kit type to open edit view
     cy.log("Kit Item Detail View has been Opened");
     cy.wait(3000);
@@ -144,22 +138,18 @@ describe("Update Related New for OneToMany Related Control", function () {
   });
 
   it.only("Updation in One To Many Related New", function () {
-    cy.wait(2000);
-
     //Scrolling to one to many
-    cy.get(".ca-item").eq(1).scrollIntoView({ force: true });
-    cy.wait(3000);
     cy.get(
       ".grid-body:nth-child(1) > td:nth-child(1) > .v-list-item__subtitle"
     ).scrollIntoView({ force: true });
+    cy.get(".ca-item").eq(1).scrollIntoView({ force: true });
     //Assertion
     cy.contains("Total 1 items").should("be.visible");
-    cy.wait(2000);
+
     //Click on created one to many kit item
     cy.get(
       ".grid-body:nth-child(1) > td:nth-child(1) > .v-list-item__subtitle"
     ).click({ force: true });
-
     cy.wait(10000);
 
     //Url
@@ -187,16 +177,15 @@ describe("Update Related New for OneToMany Related Control", function () {
     //Click on Discard
     cy.get(".mb-4:nth-child(1) .v-btn__content").click({ force: true });
     cy.log("Existing file has been deleted");
-    cy.wait(2000);
+    cy.wait(1000);
     //Click on file link again
     cy.get(".link-icon--green > path").first().click({ force: true });
-    cy.wait(3000);
     //give file name to select
-    cy.contains(this.UpdateKitItemData.UpdateFileName).click({ force: true });
+    cy.contains(this.UpdateKitItemData.UpdateFileName).click({
+      force: true,
+    })
     cy.log("New file has been uploaded");
-
     //Click on save file
-    cy.wait(2000);
     cy.get(
       ".container-search > .pop-up--header > .pop-up--header--right > .button-pop-ups--size > .v-btn__content"
     ).click({ force: true });
@@ -218,38 +207,29 @@ describe("Update Related New for OneToMany Related Control", function () {
       .clear({ force: true })
       .type(this.UpdateKitItemData.TextAera);
     cy.log("TextAera Updated");
-    cy.wait(3000);
+    cy.wait(1000);
 
     //Slider;
     //Firing Alert pop for manual action
-    cy.log("User need to do something").then(() => {
-      alert("Set Slider value by clicking slider Bar");
-    });
-    cy.log(
-      "Firing Alert pop for manual action to Set Slider value by clicking slider Bar"
-    );
-    cy.wait(10000);
+    // cy.log("User need to do something").then(() => {
+    //   alert("Set Slider value by clicking slider Bar");
+    // });
+    // cy.log(
+    //   "Firing Alert pop for manual action to Set Slider value by clicking slider Bar"
+    // );
+    // cy.wait(10000);
 
-    // Currency;
-    cy.get(
-      "#inspire > div.v-dialog__content.v-dialog__content--active > div > div > div > div:nth-child(2) > div.new-kit-item.v-card.v-sheet.theme--light > div > div > div > div > div.row.kit-details-wrapper--content.pb-0 > div > div > div > div > div > div > div.tab--content.col > div > div > div.v-window-item.v-window-item--active > div > div > div.row.container-details > div.fill-height.col > div > div > div.kit-control-component.kit-control-currency.px-3.col.col-sm-12.col-md-6.mb-4.px-3 > div > div.kit-control-currency--right.ma-0.pa-0.col > div > div > div.v-input__slot > div"
-    )
-      .eq(0)
-      .click({ force: true })
-      .type(this.UpdateKitItemData.Currency);
-    cy.log("Currnecy Updated");
+    //Currency
+    cy.xpath('//div[@class="kit-control-currency--right ma-0 pa-0 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
+      .next('input').clear().type(this.UpdateKitItemData.Currency);
+    cy.log("Currency Updated");
     cy.wait(1000);
 
     //Measure
-    cy.get(
-      "#inspire > div.v-dialog__content.v-dialog__content--active > div > div > div > div:nth-child(2) > div.new-kit-item.v-card.v-sheet.theme--light > div > div > div > div > div.row.kit-details-wrapper--content.pb-0 > div > div > div > div > div > div > div.tab--content.col > div > div > div.v-window-item.v-window-item--active > div > div > div.row.container-details > div.fill-height.col > div > div > div.kit-control-component.kit-control-measure.px-3.col.col-sm-12.col-md-6.mb-4.px-3 > div > div.kit-control-measure--left.ma-0.pa-0.pr-2.col > div > div > div.v-input__slot > div"
-    )
-      .eq(0)
-      .click({ force: true })
-      .type(this.UpdateKitItemData.Measure);
+    cy.xpath('//div[@class="kit-control-measure--left ma-0 pa-0 pr-2 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
+      .next('input').clear().type(this.UpdateKitItemData.Measure);
     cy.log("Measure Updated");
-
-    cy.wait(2000);
+    cy.wait(1000);
 
     //Email;
     cy.get("[name" + "=" + this.DataType2.Email + "]")
@@ -258,6 +238,10 @@ describe("Update Related New for OneToMany Related Control", function () {
       .type(this.UpdateKitItemData.Email);
     cy.log("Email Updated");
     cy.wait(1000);
+
+    //scroll
+    cy.get('[placeholder="Street address, building, company ... "]')
+      .eq(0).scrollIntoView({ force: true })
 
     //Address
     cy.get('[placeholder="Street address, building, company ... "]')
@@ -312,12 +296,6 @@ describe("Update Related New for OneToMany Related Control", function () {
     cy.wait(3000);
 
     //Time Data Element
-    //Click on cross to delete Time
-    //  cy.get(
-    //    ".v-input__slot > .v-input__append-inner > .v-input__icon--clear > .v-icon"
-    //  )
-    //    .first()
-    //    .click({ force: true });
     cy.wait(1000);
     //Click on Time to appear time pop up
     cy.get('[placeholder="Add Time"][type="text"]')
@@ -339,7 +317,6 @@ describe("Update Related New for OneToMany Related Control", function () {
       "//div[contains(@class,'v-dialog v-dialog--active')]//button[1]"
     ).click({ force: true });
     cy.log("Time has been Updated");
-    cy.wait(2000);
 
     //Date Data Element
     //Click on Date to appear Date pop up
@@ -355,7 +332,7 @@ describe("Update Related New for OneToMany Related Control", function () {
     cy.wait(2000);
     //Click on OK to save Date
     cy.xpath("//span[contains(text(),'OK')]").first().click({ force: true });
-    cy.wait(2000);
+    cy.wait(1000);
 
     //Toggle
     cy.get(".sync-switch .v-input--selection-controls__ripple").first().click({
@@ -375,60 +352,25 @@ describe("Update Related New for OneToMany Related Control", function () {
     cy.contains(this.UpdateKitItemData.SelectListValue).click({ force: true });
     cy.log("SelectList Value has been Updated.");
 
-    cy.wait(4000);
-
     cy.contains(this.DataType2.StepperName).scrollIntoView({
       force: true,
     });
-    cy.wait(3000);
+    cy.wait(1000);
 
     //RadioSelect
     cy.contains(this.UpdateKitItemData.RadioSelectValue).click({ force: true });
     cy.log("RadioSelect Value has been set.");
-    cy.wait(3000);
+    cy.wait(1000);
 
     //CheckboxSelect(Values coming form KitItemValues Json File)
     cy.contains(this.UpdateKitItemData.CheckboxSelectValue1).click({
       force: true,
     });
-    cy.contains(this.UpdateKitItemData.CheckboxSelectValue2).click({
-      force: true,
-    });
-    cy.contains(this.UpdateKitItemData.CheckboxSelectValue3).click({
-      force: true,
-    });
-    cy.log("UnChecking existing Values.");
-    cy.wait(2000);
-    cy.contains(this.UpdateKitItemData.CheckboxSelectValue4).click({
-      force: true,
-    });
-    cy.contains(this.UpdateKitItemData.CheckboxSelectValue5).click({
-      force: true,
-    });
-    cy.log("Checkbox Values updated.");
-    cy.wait(3000);
-
-    // //save Kit Item
-    // cy.get(".v-select__selections .v-btn__content").click({ force: true });
-    // cy.contains(this.NewKitItemData.KitName + " has been saved").should(
-    //   "be.visible"
-    // );
-    cy.log(this.NewKitItemData.KitName + "Kit Type has been Saved");
-    cy.log("Partially saving new form");
-    cy.wait(5000);
 
     //Stepper
     //getting value form different json file
     cy.contains(this.UpdateKitItemData.StepperValue4).click({ force: true });
     cy.log("Stepper Value has been set.");
-
-    cy.wait(2000);
-    //.v-stepper__step:nth-child(1/3/5/7/9)
-    // cy.get(".v-stepper__step:nth-child(5) > .v-stepper__step__step").click({
-    //   force: true,
-    // });
-
-    cy.wait(2000);
 
     //Click on cross to user selector
     cy.get(
@@ -441,7 +383,7 @@ describe("Update Related New for OneToMany Related Control", function () {
     //cy.get(".searchIcon").eq(7).click({ force: true });
     cy.contains(this.UpdateKitItemData.UserSelectorName).click({ force: true });
     cy.log("UserSelect Updated");
-    cy.wait(3000);
+    cy.wait(1000)
 
     //Click on cross to contact selector
     cy.get(
@@ -456,7 +398,6 @@ describe("Update Related New for OneToMany Related Control", function () {
       force: true,
     });
     cy.log("ContactSelecto Updated");
-    cy.wait(4000);
 
     //getting value form different json file
     cy.wait(2000);
@@ -466,7 +407,6 @@ describe("Update Related New for OneToMany Related Control", function () {
     )
       .first()
       .scrollIntoView({ force: true });
-    cy.wait(4000);
     //Icon
     //Click on + icon of ICON Element
     // cy.get(
@@ -493,11 +433,11 @@ describe("Update Related New for OneToMany Related Control", function () {
     )
       .first()
       .click({ force: true });
-    cy.wait(2000);
+
     cy.contains(this.UpdateKitItemData.ExtraSmalliconSize).click({
       force: true,
     });
-    cy.wait(2000);
+
     //IconLable
     cy.get('[placeholder="Label"]')
       .first()
@@ -509,7 +449,6 @@ describe("Update Related New for OneToMany Related Control", function () {
       force: true,
     });
 
-    cy.wait(3000);
     //child 1 for 1st value &&&& child 2 for 2nd value-child 3 for 3rd value......
     //"These are the index value of div child":"use according to select inspection value",
 
@@ -531,18 +470,14 @@ describe("Update Related New for OneToMany Related Control", function () {
       .eq(2)
       .click({ force: true });
     //Click on to open Assigning
-    cy.wait(7000);
-    cy.get(
-      ".v-list-item:nth-child(1) > .list-item-search > .v-list-item__title"
-    ).click({ force: true });
-    //cy.contains(this.UpdateKitItemData.RelAssigningName).click({ force: true });
-    cy.wait(3000);
+    cy.wait(4000);
+    cy.contains(this.UpdateKitItemData.AssigningName).click({ force: true });
+
     //Click on to save
     cy.get(".button-pop-ups--size > .v-btn__content").click({ force: true });
     //Assigning creation assertion
     cy.contains("Item shared").should("be.visible");
     cy.log("Assigning added");
-    cy.wait(5000);
 
     //save related new
     cy.get(".v-select__selections .v-btn__content")
@@ -556,77 +491,237 @@ describe("Update Related New for OneToMany Related Control", function () {
       this.DataType2.KitToBeRelated +
       " related new has been Saved with updation"
     );
-
-    //close the Kit Item
-    cy.wait(5000);
-    //Close Kit type
+    //close the related new Kit Item
     cy.get(".subheader--button-icon-wrapper path").first().click({
       force: true,
     });
     cy.contains(this.NewKitItemData.KitName).should("be.visible");
     cy.log("After updation Related New has been Close");
-    cy.wait(5000);
+
   });
 
-  it.only("Validate Updated elements for OneToMany control", function () {
-    cy.wait(3000);
+  it.only('Click to open related new', function () {
 
+    cy.wait(4000)
+    cy.get('.grid-body > td:nth-child(1) > .v-list-item__subtitle').click({ force: true });
+    //Related Kit Assertion
+    cy.contains(this.DataType2.KitToBeRelated).should("be.visible");
+    //Related New form element assertion
+    cy.wait(4000);
+  })
+
+  it.only("Url Element data Validation", function () {
+    var lower = this.DataType2.Url.toLowerCase();
+    //Validating details view input data
+    cy.xpath("//input[@controlname='" + lower + "']").should("have.value", this.UpdateKitItemData.Url)
+  });
+
+
+  it.only("Text Element data Validation", function () {
+    var lower = this.DataType2.Text.toLowerCase();
+    //Validating details view input data
+    cy.xpath("//input[@controlname='" + lower + "']").should("have.value", this.UpdateKitItemData.Text)
+  });
+
+  it.only('File Element data Validation', function () {
+    var lower = this.DataType2.File.toLowerCase();
+    cy.xpath('//div[@class="drop-zone"]//div[@class="v-input__slot"]//div[@class="v-text-field__slot"]//input')
+      .invoke('val').then((text) => {
+        expect(text.trim()).equal(this.UpdateKitItemData.UpdateFileName)
+      });
+  })
+
+
+  it.only("Telephone Element data Validation", function () {
+    var lower = this.DataType2.Telephone.toLowerCase();
+    //Validating details view input data
+    cy.xpath("//input[@controlname='" + lower + "']").should("have.value", this.UpdateKitItemData.Telephone)
+
+  });
+
+
+  it.only("TextAera Element data Validation", function () {
+    var lower = this.DataType2.TextAera.toLowerCase();
+    //Validating details view input data
+    cy.get("[name" + "=" + this.DataType2.TextAera + "]").eq(1).should("have.value", this.UpdateKitItemData.TextAera)
+  });
+
+  it.only('Currency Element data Validation', function () {
+
+    var lower = this.DataType2.Currency.toLowerCase();
+    cy.xpath('//div[@class="kit-control-currency--right ma-0 pa-0 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
+      .next('input').should("have.value", this.UpdateKitItemData.Currency)
+
+  })
+
+  it.only('Measure Element data Validation', function () {
+
+    var lower = this.DataType2.Currency.toLowerCase();
+    cy.xpath('//div[@class="kit-control-measure--left ma-0 pa-0 pr-2 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
+      .next('input').should("have.value", this.UpdateKitItemData.Measure)
+  })
+
+  it.only("Email Element data Validation", function () {
+    var lower = this.DataType2.Email.toLowerCase();
+
+    //Validating details view input data
+    cy.xpath("//input[@controlname='" + lower + "']").should("have.value", this.UpdateKitItemData.Email)
+
+
+  });
+
+  it.only("Addressline1 Element data Validation", function () {
+
+    cy.get('[placeholder="Street address, building, company ... "]').eq(0).scrollIntoView({ force: true })
+    //Validating details view input data
+    cy.get('[placeholder="Street address, building, company ... "]').eq(0)
+      .should("have.value", this.UpdateKitItemData.Addressline1)
+
+  });
+
+  it.only("Addressline2 Element data Validation", function () {
+    //Validating details view input data
+    cy.get('[name="Address line 2."]')
+      .should("have.value", this.UpdateKitItemData.Addressline2)
+  });
+
+  it.only("City Element data Validation", function () {
+    //Validating details view input data
+    cy.get('[placeholder="City"]')
+      .should("have.value", this.UpdateKitItemData.City)
+  });
+
+  it.only("ZipCode Element data Validation", function () {
+
+    cy.get('[placeholder="Zip/Postal Code"]').eq(0).scrollIntoView({ force: true })
+    //Validating details view input data
+    cy.get('[placeholder="Zip/Postal Code"]').eq(0)
+      .should("have.value", this.UpdateKitItemData.ZipCode)
+
+  });
+
+  it.only("State Element data Validation", function () {
+
+    cy.xpath('//div[@class="v-select__slot"]//div[@class="v-select__selections"]//div[@class="v-select__selection v-select__selection--comma"]')
+      .eq(0)
+      .invoke('text').then((text) => {
+        expect(text.trim()).equal(this.UpdateKitItemData.State)
+      })
+  });
+
+  it.only("Country Element data Validation", function () {
+    //Validating details view input data
+    cy.get('[placeholder="Country"]')
+      .should("have.value", this.UpdateKitItemData.Country)
+  });
+
+  it.only("Number Element data Validation", function () {
+
+    var lower = this.DataType2.Number.toLowerCase();
+    //Validating details view input data
+    cy.xpath("//input[@controlname='" + lower + "']")
+      .should("have.value", this.UpdateKitItemData.Number)
+
+  });
+
+  it.only('Time Element data Validation', function () {
+
+    //Check in josn for LoggedTime
+    cy.get('[placeholder="Add Time"][readonly="readonly"]').eq(0)
+      .should("have.value", this.UpdateKitItemData.LoggedTime)
+
+  })
+
+  it.only('Date Element data Validation', function () {
+
+    //Check in josn for LoggedDate
+    cy.get('[placeholder=" MM / DD / YYYY"]').eq(0)
+      .should("have.value", this.UpdateKitItemData.LoggedDate)
+
+  })
+
+  it("SelectList Element data Validation", function () {
+
+    var lower = this.DataType2.Number.toLowerCase();
+    //logging input data on console
+    cy.xpath("//div[contains(@class, 'v-list-item__subtitle') and contains(text(),' Australia ')]")
+      .invoke('val')
+      .then(text => {
+        const SelectList = text;
+        cy.log(SelectList);
+      })
+  });
+
+  it("RadioSelect Element data Validation", function () {
+    cy.wait(2000)
+    cy.get('.v-radio').eq(1).should('be.checked')
+    cy.wait(2000)
+  });
+
+  it.only("CheckboxSelect Element data Validation", function () {
+    //CheckboxSelect1
+    cy.get('[type="checkbox"]').eq(1).should('be.checked')
+    cy.get('[type="checkbox"]').eq(3).should('be.checked')
+  });
+
+  it.only('UserSelector Element data Validation', function () {
+    //scroll to user selector
+    cy.get('.imageContent').eq(0).scrollIntoView({ force: true })
+    cy.wait(1000)
+    cy.xpath('//div[@controlname="userSelector"]//div[@class="col item-label"]').children('div').invoke('text').then((text) => {
+      expect(text.trim()).equal(this.UpdateKitItemData.DUpUserSelector)
+    });
+
+  })
+
+  it.only('ContactSelector Element data Validation', function () {
+    cy.xpath('//div[@controlname="contactSelector"]//div[@class="col item-label"]').children('div').invoke('text').then((text) => {
+      expect(text.trim()).equal(this.UpdateKitItemData.DUpContactSelector)
+    });
+
+  })
+
+  it.only('Assigning Element data Validation', function () {
+    var lower = this.DataType2.Assigning.toLowerCase();
+    cy.get('.v-btn:nth-child(1) .v-badge > .inline-svg').eq(0).scrollIntoView({ force: true })
+
+    //json value assertion
+    cy.xpath('//div[@controlname="' + lower + '"]//div[@class="item-label col"]').children('div').invoke('text')
+      .then((text) => {
+        expect(text.trim()).equal(this.UpdateKitItemData.DUpAssigning)
+      });
+  })
+
+  it.only('Icon Element data Validation', function () {
+    //Validating details view input data
+    cy.get('[placeholder="Label"]')
+      .should("have.value", this.UpdateKitItemData.IconLabel)
+  })
+
+  it.only('Close the related kit item', function () {
+
+    cy.wait(1000)
+    cy.get(".subheader--button-icon-wrapper path").first().click({
+      force: true,
+    });
+    cy.contains(this.NewKitItemData.KitName).should("be.visible");
+
+  })
+
+  it.only("Details View form Saving Validation", function () {
+    cy.wait(1000);
     //Scrolling to one to many
     cy.get(".ca-item").eq(1).scrollIntoView({ force: true });
     //Assertion
     cy.contains("Total 1 items").should("be.visible");
-    cy.wait(3000);
-
-    //Related element existance asseritons
-    cy.contains(this.UpdateKitItemData.Url).should("exist");
-    cy.contains(this.UpdateKitItemData.Text).should("exist");
-    cy.contains(this.UpdateKitItemData.Telephone).should("exist");
-    cy.wait(1000);
-    cy.contains(this.UpdateKitItemData.TextAera).should("exist");
-    cy.contains(this.UpdateKitItemData.Email).should("exist");
-    cy.log("OneToMany Updated  elements has been exist");
-    cy.wait(4000);
     //Click to save kit item
-    cy.get(".navi-bar-dropdown:nth-child(2) .v-btn").click({ force: true });
+    cy.get(".navi-bar-dropdown:nth-child(2) .v-btn").first().click({ force: true });
     // kit item Save Assertion
     cy.contains("Nothing to save for " + this.NewKitItemData.KitName).should(
       "be.visible"
     );
   });
 
-  it.only("Link Existing OneToMany Related Kit Item", function () {
-    cy.wait(2000);
-
-    //Scroll
-    cy.get(".ca-item").eq(1).scrollIntoView({ force: true });
-    //Scroll
-    cy.get(".ca-item").eq(0).click({ force: true });
-    cy.wait(5000);
-
-    cy.get("div:nth-child(3) > div > .row:nth-child(1) .item-check").click({
-      force: true,
-    });
-    cy.wait(1000);
-    cy.get(
-      "div:nth-child(3) > div > .row:nth-child(2) > .d-flex .item-check"
-    ).click({ force: true });
-    cy.wait(1000);
-    //Click on select btn
-    cy.get(".button-pop-ups > .v-btn__content").first().click({ force: true });
-
-    cy.contains(
-      "Relation on " +
-      this.DataType2.OneToManyRelation +
-      " for " +
-      this.NewKitItemData.KitName +
-      " linked "
-    ).should("be.visible");
-    //Assertion
-    cy.contains("Total 3 items").should("be.visible");
-
-    cy.log("Existing item linked");
-    cy.wait(3000);
-  });
 
   it.only("OneToMany Related New", function () {
     //OnetoMany Kit item deletion
@@ -634,51 +729,16 @@ describe("Update Related New for OneToMany Related Control", function () {
     //Scroll
     cy.get(".ca-item").eq(1).scrollIntoView({ force: true });
 
-    //Firing Alert pop for manual action
-    cy.log("User need to do something").then(() => {
-      alert(
-        "Scroll Horizontal Scroll Bar to look on delete icon OneToMany Relation Elements"
-      );
-    });
-    cy.log(
-      "Firing Alert pop for manual action to scroll horizontal scroll Bar"
-    );
-    cy.wait(10000);
-
-    //ONe to Many added deletion
-    cy.wait(3000);
-    //Click on delete icon
-    cy.get(".btn-manage path").eq(0).click({ force: true });
-    cy.wait(2000);
-    //Delete pop up assertion
-    cy.contains(" Are you sure you want to discard?").should("be.visible");
-    cy.wait(2000);
-    cy.get(".mb-4:nth-child(1) .v-btn__content").click({ force: true });
-    //Delete assertion
-    cy.contains(
-      "Relation on " +
-      this.DataType2.OneToManyRelation +
-      " for " +
-      this.NewKitItemData.KitName +
-      " Deleted"
-    ).should("be.visible");
-    cy.wait(2000);
-
-    //Assertion
-    cy.contains("Total 2 items").should("be.visible");
-    cy.wait(4000);
-
     //Click on New item(Open related new-OneToMnay)
     cy.get(".ca-item")
       .eq(1)
       .scrollIntoView({ force: true })
       .click({ force: true });
-    cy.wait(5000);
     //New Item Assertion
     cy.contains("New Item created").should("be.visible");
     //Related Kit Assertion
     cy.contains(this.DataType2.KitToBeRelate).should("be.visible");
-    cy.wait(4000);
+    cy.wait(10000);
 
     //Create OneToMany RelatedNew
     cy.wait(2000);
@@ -699,14 +759,13 @@ describe("Update Related New for OneToMany Related Control", function () {
       .eq(0)
       .click({ force: true });
     //cy.get(".link-icon--green > path").last().click({ force: true });
-    cy.wait(3000);
+    cy.wait(1000);
     //give file name to select
     cy.contains(this.RelatedKitItemData.RelNewFileName).click({
       force: true,
     });
     //Click on save file
-    cy.wait(2000);
-
+    cy.wait(1000);
     cy.get(
       ".container-search > .pop-up--header > .pop-up--header--right > .button-pop-ups--size > .v-btn__content"
     ).click({ force: true });
@@ -728,13 +787,13 @@ describe("Update Related New for OneToMany Related Control", function () {
 
     //Slider;
     //Firing Alert pop for manual action
-    cy.log("User need to do something").then(() => {
-      alert("Set Slider value by clicking slider Bar");
-    });
-    cy.log(
-      "Firing Alert pop for manual action to Set Slider value by clicking slider Bar"
-    );
-    cy.wait(10000);
+    // cy.log("User need to do something").then(() => {
+    //   alert("Set Slider value by clicking slider Bar");
+    // });
+    // cy.log(
+    //   "Firing Alert pop for manual action to Set Slider value by clicking slider Bar"
+    // );
+    // cy.wait(10000);
 
     // Currency;
     cy.get(
@@ -745,7 +804,6 @@ describe("Update Related New for OneToMany Related Control", function () {
       .type(this.RelatedKitItemData.Currency);
 
     //Measure
-
     cy.get(
       "#inspire > div.v-dialog__content.v-dialog__content--active > div > div > div > div:nth-child(2) > div.new-kit-item.v-card.v-sheet.theme--light > div > div > div > div > div.row.kit-details-wrapper--content.pb-0 > div > div > div > div > div > div > div.tab--content.col > div > div > div.v-window-item.v-window-item--active > div > div > div.row.container-details > div.fill-height.col > div > div > div.kit-control-component.kit-control-measure.px-3.col.col-sm-12.col-md-6.mb-4.px-3 > div > div.kit-control-measure--left.ma-0.pa-0.pr-2.col > div > div > div.v-input__slot > div"
     )
@@ -758,6 +816,10 @@ describe("Update Related New for OneToMany Related Control", function () {
       .eq(1)
       .type(this.RelatedKitItemData.Email);
     cy.wait(1000);
+
+    //scroll
+    cy.get('[placeholder="Street address, building, company ... "]')
+      .eq(0).scrollIntoView({ force: true })
 
     //Address
     cy.get('[placeholder="Street address, building, company ... "]')
@@ -806,7 +868,7 @@ describe("Update Related New for OneToMany Related Control", function () {
     cy.wait(1000);
     //Select hour value
     cy.xpath(
-      "//div[contains(@class,'v-dialog v-dialog--active')]//span[7]"
+      "//div[contains(@class,'v-dialog v-dialog--active')]//span[5]"
     ).click({ force: true });
     cy.wait(1000);
     //Select Value of miniutes
@@ -827,13 +889,13 @@ describe("Update Related New for OneToMany Related Control", function () {
       .eq(0)
       .click({ force: true });
     //Select Date
-    cy.xpath("//div[@class='v-btn__content'][contains(text(),'25')]")
+    cy.xpath("//div[@class='v-btn__content'][contains(text(),'22')]")
       .first()
       .click({ force: true });
     cy.wait(2000);
     //Click on OK to save Date
     cy.xpath("//span[contains(text(),'OK')]").first().click({ force: true });
-    cy.wait(2000);
+    cy.wait(1000);
 
     //Toggle
     cy.get(".sync-switch .v-input--selection-controls__ripple").eq(0).click({
@@ -841,7 +903,7 @@ describe("Update Related New for OneToMany Related Control", function () {
     });
 
     //Click on DropDown of SelectList
-    cy.wait(3000);
+    cy.wait(1000);
     cy.get(
       "div > div > div.v-input__slot > div.v-select__slot > div.v-input__append-inner"
     )
@@ -855,7 +917,7 @@ describe("Update Related New for OneToMany Related Control", function () {
     cy.contains(this.DataType2.StepperName).scrollIntoView({
       force: true,
     });
-    cy.wait(3000);
+    cy.wait(1000);
 
     //RadioSelect
     cy.contains(this.RelatedKitItemData.RadioSelectValue).click({
@@ -864,13 +926,11 @@ describe("Update Related New for OneToMany Related Control", function () {
     cy.log("RadioSelect Value has been set.");
 
     //CheckboxSelect(Values coming form KitItemValues Json File)
-    cy.contains(this.RelatedKitItemData.CheckboxSelectValue1).click({
+    cy.contains(this.RelatedKitItemData.CheckboxSelectValue2).click({
       force: true,
     });
-
     cy.log("Checkbox Values has been set.");
 
-    cy.wait(5000);
     cy.get(".searchIcon").eq(1).scrollIntoView({ force: true });
 
     //Stepper
@@ -878,23 +938,21 @@ describe("Update Related New for OneToMany Related Control", function () {
     cy.contains(this.RelatedKitItemData.StepperValue4).click({ force: true });
     cy.log("Stepper Value has been set.");
 
-    cy.wait(2000);
     //.v-stepper__step:nth-child(1/3/5/7/9)
     // cy.get(".v-stepper__step:nth-child(5) > .v-stepper__step__step").click({
     //   force: true,
     // });
 
-    cy.wait(2000);
     //UserSelector(Values coming form KitItemValues Json File)
     //Click on to open UserSelector Pop up
     cy.get(".searchIcon").eq(0).click({ force: true });
-    cy.wait(3000);
+    cy.wait(4000);
 
     cy.contains(this.RelatedKitItemData.UserSelectorName).click({
       force: true,
     });
     cy.log("UserSelect added");
-    cy.wait(3000);
+    cy.wait(1000);
 
     //ContactSelector(Values coming form KitItemValues Json File)
     //Click on to open ContactSelector Pop up
@@ -910,7 +968,6 @@ describe("Update Related New for OneToMany Related Control", function () {
     cy.wait(4000);
 
     //getting value form different json file
-    cy.wait(2000);
     //Icon
     //Click on + icon of ICON Element
     cy.get(".v-btn--depressed > .v-btn__content > .inline-svg > path")
@@ -918,7 +975,6 @@ describe("Update Related New for OneToMany Related Control", function () {
       .click({
         force: true,
       });
-    cy.wait(2000);
     //Click on Icon Tittle and  select Icon logo
     //Give numeric no from 1 in child(1,2,3...)
     cy.get(".thumb-container:nth-child(4) .selected-icon").click({
@@ -927,7 +983,7 @@ describe("Update Related New for OneToMany Related Control", function () {
     cy.wait(2000);
     //Icon Save
     cy.get(".button-pop-ups").first().click({ force: true });
-    cy.wait(2000);
+    cy.wait(1000);
 
     //IcozSize
     cy.get(
@@ -935,9 +991,9 @@ describe("Update Related New for OneToMany Related Control", function () {
     )
       .eq(0)
       .click({ force: true });
-    cy.wait(2000);
+    cy.wait(1000);
     cy.contains(this.RelatedKitItemData.LargeiconSize).click({ force: true });
-    cy.wait(2000);
+    cy.wait(1000);
     //IconLable
     cy.get('[placeholder="Label"]')
       .eq(0)
@@ -949,7 +1005,6 @@ describe("Update Related New for OneToMany Related Control", function () {
       force: true,
     });
 
-    cy.wait(3000);
     //child 1 for 1st value &&&& child 2 for 2nd value-child 3 for 3rd value......
     //"These are the index value of div child":"use according to select inspection value",
     cy.get(
@@ -960,7 +1015,7 @@ describe("Update Related New for OneToMany Related Control", function () {
       .eq(0)
       .click({ force: true });
 
-    cy.wait(3000);
+    cy.wait(1000);
     //Assigning
     //Click on to open Assigning Pop up-Also working
 
@@ -968,17 +1023,16 @@ describe("Update Related New for OneToMany Related Control", function () {
     cy.get(
       " div.kit-control-component.kit-control-assigning.pr-3.col.col-sm-12.col-md-6.mb-4.px-3.col-sm-12.col-md-6.mb-4.px-3:nth-child(26) span.searchRel div.v-input.searchSelectNone.v-input--is-readonly.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-select div.v-input__control div.v-input__slot > div.v-select__slot:nth-child(2)"
     ).click({ force: true });
-    cy.wait(7000);
+    cy.wait(4000);
     //Click on to select the Assigning
     //cy.get(".list-item-search").first().click({ force: true });
     cy.contains(this.RelatedKitItemData.AssigningName).click({ force: true });
-    cy.wait(3000);
+    cy.wait(2000);
     //Click on to save
     cy.get(".button-pop-ups--size > .v-btn__content").click({ force: true });
     //Assigning creation assertion
     cy.contains("Item shared").should("be.visible");
     cy.log("Assigning added");
-    cy.wait(5000);
 
     //Click on to link onetoone
     cy.get(".action-icon:nth-child(2) path").eq(0).click({ force: true });
@@ -993,7 +1047,7 @@ describe("Update Related New for OneToMany Related Control", function () {
     cy.get(
       ".row:nth-child(1) > .d-flex > .list-item-col-left > .v-avatar:nth-child(1) svg"
     ).click({ force: true });
-    cy.wait(7000);
+    cy.wait(5000);
 
     //save related new
     cy.get(".v-select__selections .v-btn__content")
@@ -1015,15 +1069,245 @@ describe("Update Related New for OneToMany Related Control", function () {
     ).should("be.visible");
 
     //close the Kit Item
-    cy.wait(5000);
-    //Close Kit type
     cy.get(".subheader--button-icon-wrapper path").first().click({
       force: true,
     });
     cy.contains(this.NewKitItemData.KitName).should("be.visible");
     cy.log("Related new has been Close");
     cy.log("Related New kit item create for OneToMany Relation");
-    cy.wait(5000);
+  });
+
+  it.only('Click to Validate created related new', function () {
+
+    cy.get(
+      ".grid-body:nth-child(2) > td:nth-child(1) > .v-list-item__subtitle"
+    ).click({ force: true })
+
+  })
+
+  it.only("Url Element data Validation", function () {
+    var lower = this.DataType2.Url.toLowerCase();
+    //Validating details view input data
+    cy.xpath("//input[@controlname='" + lower + "']").should("have.value", this.RelatedKitItemData.Url)
+  });
+
+
+  it.only("Text Element data Validation", function () {
+    var lower = this.DataType2.Text.toLowerCase();
+    //Validating details view input data
+    cy.xpath("//input[@controlname='" + lower + "']").should("have.value", this.RelatedKitItemData.Text)
+
+  });
+
+  it.only('File Element data Validation', function () {
+    var lower = this.DataType2.File.toLowerCase();
+    cy.xpath('//div[@class="drop-zone"]//div[@class="v-input__slot"]//div[@class="v-text-field__slot"]//input').eq(0)
+      .invoke('val').then((text) => {
+        expect(text.trim()).equal(this.RelatedKitItemData.RelNewFileName)
+      });
+  })
+
+
+  it.only("Telephone Element data Validation", function () {
+
+    var lower = this.DataType2.Telephone.toLowerCase();
+    //Validating details view input data
+    cy.xpath("//input[@controlname='" + lower + "']").should("have.value", this.RelatedKitItemData.Telephone)
+
+  });
+
+
+  it.only("TextAera Element data Validation", function () {
+    var lower = this.DataType2.TextAera.toLowerCase();
+    //Validating details view input data
+    cy.get('[name="TextAera"]').eq(1).should("have.value", this.RelatedKitItemData.TextAera)
+
+  });
+
+  it.only('Currency Element data Validation', function () {
+    var lower = this.DataType2.Currency.toLowerCase();
+    //Assertion Validation for currency
+    cy.xpath('//div[@class="kit-control-currency--right ma-0 pa-0 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
+      .next('input').should("have.value", this.RelatedKitItemData.Currency)
+  })
+
+  it.only('Measure Element data Validation', function () {
+    var lower = this.DataType2.Currency.toLowerCase();
+    //Assertion Validation for currency
+    cy.xpath('//div[@class="kit-control-measure--left ma-0 pa-0 pr-2 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
+      .next('input').should("have.value", this.RelatedKitItemData.Measure)
+    cy.wait(3000)
+  })
+
+  it.only("Email Element data Validation", function () {
+    var lower = this.DataType2.Email.toLowerCase();
+    //Validating details view input data
+    cy.xpath("//input[@controlname='" + lower + "']").should("have.value", this.RelatedKitItemData.Email)
+
+  });
+
+  it.only("Addressline1 Element data Validation", function () {
+    //Validating details view input data
+    cy.get('[placeholder="Street address, building, company ... "]').eq(0)
+      .should("have.value", this.RelatedKitItemData.Addressline1)
+
+  });
+
+  it.only("Addressline2 Element data Validation", function () {
+
+    //Validating details view input data
+    cy.get('[name="Address line 2."]')
+      .should("have.value", this.RelatedKitItemData.Addressline2)
+
+  });
+
+  it.only("City Element data Validation", function () {
+
+    //Validating details view input data
+    cy.get('[placeholder="City"]')
+      .should("have.value", this.RelatedKitItemData.City)
+
+  });
+
+  it.only("ZipCode Element data Validation", function () {
+
+    //Validating details view input data
+    cy.get('[placeholder="Zip/Postal Code"]').eq(0)
+      .should("have.value", this.RelatedKitItemData.ZipCode)
+
+  });
+
+  it.only("State Element data Validation", function () {
+    cy.xpath('//div[@class="v-select__slot"]//div[@class="v-select__selections"]//div[@class="v-select__selection v-select__selection--comma"]')
+      .eq(0)
+      .invoke('text').then((text) => {
+        expect(text.trim()).equal(this.RelatedKitItemData.State)
+      })
+  });
+
+  it.only("Country Element data Validation", function () {
+    //Validating details view input data
+    cy.get('[placeholder="Country"]')
+      .should("have.value", this.RelatedKitItemData.Country)
+
+  });
+
+  it.only("Number Element data Validation", function () {
+
+    var lower = this.DataType2.Number.toLowerCase();
+    //Validating details view input data
+    cy.xpath("//input[@controlname='" + lower + "']")
+      .should("have.value", this.RelatedKitItemData.Number)
+
+  });
+
+  it.only('Time Element data Validation', function () {
+    //Check in josn for LoggedTime
+    cy.get('[placeholder="Add Time"][readonly="readonly"]').eq(0)
+      .should("have.value", this.RelatedKitItemData.LoggedTime)
+  })
+
+  it.only('Date Element data Validation', function () {
+
+    //Check in josn for LoggedDate
+    cy.get('[placeholder=" MM / DD / YYYY"]').eq(0)
+      .should("have.value", this.RelatedKitItemData.LoggedDate)
+
+  })
+
+  it("SelectList Element data Validation", function () {
+    cy.wait(2000)
+    var lower = this.DataType2.Number.toLowerCase();
+    //logging input data on console
+    cy.xpath("//div[contains(@class, 'v-list-item__subtitle') and contains(text(),' Australia ')]")
+      .invoke('val')
+      .then(text => {
+        const SelectList = text;
+        cy.log(SelectList);
+      })
+    cy.wait(2000)
+
+    cy.wait(3000)
+  });
+
+  it("RadioSelect Element data Validation", function () {
+    cy.wait(2000)
+    cy.get('.v-radio').eq(1).should('be.checked')
+    cy.wait(2000)
+  });
+
+  it.only("CheckboxSelect Element data Validation", function () {
+
+    //CheckboxSelect1
+    cy.get('[type="checkbox"]').eq(2).should('be.checked')
+  });
+
+  it.only('UserSelector Element data Validation', function () {
+
+    //scroll to user selector
+    cy.get('.imageContent').eq(0).scrollIntoView({ force: true })
+    cy.wait(1000)
+    cy.xpath('//div[@controlname="userSelector"]//div[@class="col item-label"]').children('div').invoke('text').then((text) => {
+      expect(text.trim()).equal(this.RelatedKitItemData.UserSelectorName)
+    });
+  })
+
+  it.only('ContactSelector Element data Validation', function () {
+
+    cy.xpath('//div[@controlname="contactSelector"]//div[@class="col item-label"]').children('div').invoke('text').then((text) => {
+      expect(text.trim()).equal(this.RelatedKitItemData.ContactSelectorName)
+    });
+  })
+
+  it.only('Assigning Element data Validation', function () {
+    var lower = this.DataType2.Assigning.toLowerCase();
+    cy.get('.v-btn:nth-child(1) .v-badge > .inline-svg').eq(0).scrollIntoView({ force: true })
+
+    //json value assertion
+    cy.xpath('//div[@controlname="' + lower + '"]//div[@class="item-label col"]').children('div').invoke('text')
+      .then((text) => {
+        expect(text.trim()).equal(this.RelatedKitItemData.AssigningName)
+      });
+  })
+
+  it.only('Icon Element data Validation', function () {
+
+    //Validating details view input data
+    cy.get('[placeholder="Label"]')
+      .should("have.value", this.RelatedKitItemData.IconLabel)
+  })
+
+  it.only('Close the related kit item', function () {
+    cy.wait(1000)
+    cy.get(".subheader--button-icon-wrapper path").first().click({
+      force: true,
+    });
+    cy.contains(this.NewKitItemData.KitName).should("be.visible");
+  })
+
+  it.only("Link Existing OneToMany Related Kit Item", function () {
+    //Scroll
+    cy.get(".ca-item").eq(1).scrollIntoView({ force: true });
+    //Scroll
+    cy.get(".ca-item").eq(0).click({ force: true });
+    cy.wait(2000);
+
+    cy.get("div:nth-child(3) > div > .row:nth-child(1) .item-check").click({
+      force: true,
+    });
+    //Click on select btn
+    cy.get(".button-pop-ups > .v-btn__content").first().click({ force: true });
+
+    cy.contains(
+      "Relation on " +
+      this.DataType2.OneToManyRelation +
+      " for " +
+      this.NewKitItemData.KitName +
+      " linked "
+    ).should("be.visible");
+    //Assertion
+    cy.contains("Total 3 items").should("be.visible");
+    cy.log("Existing item linked");
   });
 
   it.only("Validate Related New", function () {

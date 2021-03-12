@@ -2,12 +2,12 @@
 
     "Note":"Url and email all should be in lower case",
 
-    "KitName":"Validation",
-    "NewKitItemUrl":"https://www.onetomanyform.com",
+    "KitName":"BaseTesting",
+    "NewKitItemUrl":"https://www.aonetomanyform.com",
     "NewKitItemText":"One To Many Relation TC",
 
     
-    "Url":"https://www.onetomany.com",
+    "Url":"https://www.zonetomany.com",
     "Text":"One to Many Related New",
     "RelNewFileName":"Fixtures",
     "Telephone":"(982) 999-2495",
@@ -43,9 +43,9 @@
     "StepperValue4":"Oppo",
     "StepperValue5":"RealMe",
     
-    "UserSelectorName":"Sam Ruddy",
+    "UserSelectorName":"Jerome Casanova",
     "ContactSelectorName":"Eric Buhring",
-    "AssigningName":"Max Max",
+    "AssigningName":"Sam Ruddy",
     
     "ExtraSmalliconSize":"Extra Small",
     "SmalliconSize":"Small",
@@ -61,6 +61,12 @@
     "InspectionValue2":"2",
     "InspectionValue3":"3",
     "InspectionValue4":"4",
-    "InspectionValue5":"5"
+    "InspectionValue5":"5",
+
+
+    
+    "Form Element Validation":"Data-Dont modify",
+    "LoggedTime":"4:30 pm",
+    "LoggedDate":"03/22/2021"
     
 }

@@ -7,9 +7,9 @@ describe("Related Control Square Card test case", function () {
     // cy.viewport(1280, 720);
     const lp = new LoginPage();
     const slp = new SanityLoginPage();
-     //slp.visitCityComTest();
-     slp.nvdTest()
-     //slp.TmProd();
+    //slp.visitCityComTest();
+    slp.nvdTest()
+    //slp.TmProd();
 
     //Handling Alert
     cy.on("window:confirm", () => {
@@ -35,8 +35,6 @@ describe("Related Control Square Card test case", function () {
       "refreshToken",
       "jwtAccessToken"
     );
-
-    cy.wait(10000);
   });
 
   this.beforeEach("KitType Data", function () {
@@ -116,27 +114,25 @@ describe("Related Control Square Card test case", function () {
 
   it.only("Square Card Related Control to configure Related New form", function () {
     cy.wait(1000);
+    //new form ele visible assertion
+    cy.get("[name" + "=" + this.DataType2.Url + "]").last().should("be.visible");
     //save Kit Item for empty form
     cy.get(".v-select__selections .v-btn__content").click({ force: true });
     //kit item Save Assertion for no data
     cy.contains("Nothing to save for " + this.NewKitItemData.KitName).should(
       "be.visible"
     );
-    cy.wait(3000);
-    cy.log("With No data new kit item saved successfully ");
-    cy.wait(2000);
+
 
     //Url
     cy.get("[name" + "=" + this.DataType2.Url + "]")
       .last()
       .type(this.RelatedKitItemData.NewKitItemUrl);
-    cy.wait(2000);
 
     //Text
     cy.get("[name" + "=" + this.DataType2.Text + "]")
       .last()
       .type(this.RelatedKitItemData.NewKitItemText);
-    cy.wait(3000);
 
     //Scroll
     cy.get(".ca-item").eq(3).scrollIntoView({ force: true });
@@ -151,9 +147,14 @@ describe("Related Control Square Card test case", function () {
     cy.contains("New Item created").should("be.visible");
     //Related Kit Assertion
     cy.contains(this.DataType2.CardKitToBeRelated).should("be.visible");
-    cy.wait(4000);
+    cy.wait(5000)
 
-    //save related new with no data
+    //related new form element visible assertion
+    cy.get("[name" + "=" + this.DataType2.Url + "]")
+      .eq(1).should('be.visible')
+    cy.wait(1000)
+
+    //save square card related new with no data
     cy.get(".v-select__selections .v-btn__content")
       .first()
       .click({ force: true });
@@ -161,12 +162,9 @@ describe("Related Control Square Card test case", function () {
     cy.contains(
       "Nothing to save for " + this.DataType2.CardKitToBeRelated
     ).should("be.visible");
-    cy.wait(3000);
-    cy.log("With No data Related New kit item saved successfully ");
-    cy.wait(2000);
+
 
     //Enter data in Related New form
-    cy.wait(2000);
     //Url
     cy.get("[name" + "=" + this.DataType2.Url + "]")
       .eq(1)
@@ -213,13 +211,13 @@ describe("Related Control Square Card test case", function () {
 
     //Slider;
     //Firing Alert pop for manual action
-    cy.log("User need to do something").then(() => {
-      alert("Set Slider value by clicking slider Bar");
-    });
-    cy.log(
-      "Firing Alert pop for manual action to Set Slider value by clicking slider Bar"
-    );
-    cy.wait(10000);
+    // cy.log("User need to do something").then(() => {
+    //   alert("Set Slider value by clicking slider Bar");
+    // });
+    // cy.log(
+    //   "Firing Alert pop for manual action to Set Slider value by clicking slider Bar"
+    // );
+    // cy.wait(4000);
 
     // Currency;
     cy.get(
@@ -246,7 +244,7 @@ describe("Related Control Square Card test case", function () {
 
     //scroll
     cy.get('[placeholder="Street address, building, company ... "]')
-    .eq(0).scrollIntoView({force:true})
+      .eq(0).scrollIntoView({ force: true })
     cy.wait(3000)
 
     //Address
@@ -316,7 +314,7 @@ describe("Related Control Square Card test case", function () {
     )
       .eq(0)
       .click({ force: true });
-      cy.wait(2000)
+    cy.wait(2000)
     //Select Date
     cy.xpath("//div[@class='v-btn__content'][contains(text(),'25')]")
       .first()
@@ -350,18 +348,12 @@ describe("Related Control Square Card test case", function () {
     cy.log("RadioSelect Value has been set.");
 
     //CheckboxSelect(Values coming form KitItemValues Json File)
-    cy.contains(this.RelatedKitItemData.CheckboxSelectValue1).click({
-      force: true,
-    });
-    cy.contains(this.RelatedKitItemData.CheckboxSelectValue2).click({
-      force: true,
-    });
     cy.contains(this.RelatedKitItemData.CheckboxSelectValue3).click({
       force: true,
     });
     cy.log("Checkbox Values has been set.");
 
-    cy.wait(5000);
+
     cy.get(".searchIcon").eq(1).scrollIntoView({ force: true });
 
     //Stepper
@@ -375,7 +367,7 @@ describe("Related Control Square Card test case", function () {
     //   force: true,
     // });
 
-    cy.wait(2000);
+
     //UserSelector(Values coming form KitItemValues Json File)
     //Click on to open UserSelector Pop up
     cy.get(".searchIcon").eq(0).click({ force: true });
@@ -443,8 +435,8 @@ describe("Related Control Square Card test case", function () {
     //"These are the index value of div child":"use according to select inspection value",
     cy.get(
       "div.v-slide-group__wrapper > div > span:nth-child(" +
-        this.RelatedKitItemData.InspectionValue2 +
-        ") > span"
+      this.RelatedKitItemData.InspectionValue2 +
+      ") > span"
     )
       .eq(0)
       .click({ force: true });
@@ -455,7 +447,7 @@ describe("Related Control Square Card test case", function () {
 
     //Click on to open Assigning Pop up
     cy.get(".searchIcon").eq(2).click({ force: true });
-    cy.wait(7000);
+    cy.wait(3000);
     //Click on to select the Assigning
     //cy.get(".list-item-search").first().click({ force: true });
     cy.contains(this.RelatedKitItemData.AssigningName).click({ force: true });
@@ -464,12 +456,11 @@ describe("Related Control Square Card test case", function () {
     cy.get(".button-pop-ups--size > .v-btn__content").click({ force: true });
     //Assigning creation assertion
     cy.contains("Item shared").should("be.visible");
-    cy.log("Assigning added");
-    cy.wait(5000);
+    cy.log("Assigning added")
 
     //Onetoone link
     cy.get(".action-icon:nth-child(2) path").first().click({ force: true });
-    cy.wait(5000);
+    cy.wait(2000);
     //OneToOne
     cy.get(
       ".row:nth-child(1) > .d-flex > .list-item-col-left > .v-avatar:nth-child(1) svg"
@@ -478,69 +469,42 @@ describe("Related Control Square Card test case", function () {
 
     //save related new
     cy.get(".v-select__selections .v-btn__content")
-      .first()
+      .eq(0)
       .click({ force: true });
     //Related kit item Save Assertion
     cy.contains(this.DataType2.CardKitToBeRelated + " has been saved").should(
       "be.visible"
     );
-    cy.log(this.DataType2.CardKitToBeRelated + " related new has been Saved");
 
     //Related kit item created assertion
     cy.contains(
       " Relation on " +
-        this.DataType2.SquareCardName +
-        " for " +
-        this.NewKitItemData.KitName +
-        " created"
+      this.DataType2.SquareCardName +
+      " for " +
+      this.NewKitItemData.KitName +
+      " created"
     ).should("be.visible");
 
     //close the Kit Item
-    cy.wait(5000);
-    //Close Kit type
     cy.get(".subheader--button-icon-wrapper path").first().click({
       force: true,
     });
     cy.contains(this.NewKitItemData.KitName).should("be.visible");
     cy.log("Related new has been Close");
-    cy.wait(5000);
+    cy.wait(10000);
   });
 
-  it.only("Validate Square Card element on new form", function () {
+
+  it.only("New Form Save Validation", function () {
     cy.get(".btn-load .inline-svg").eq(1).scrollIntoView({ force: true });
-    cy.wait(5000);
+    cy.wait(2000)
     //Assertion
+    //Refresh Sqcard item
+    cy.get(".btn-load .inline-svg").eq(1).click({ force: true });
     cy.get(".px-2:nth-child(1) .inline-svg").should("exist");
     cy.contains("Total 1 items").should("be.visible");
 
-    cy.log("Existing item linked");
-    cy.wait(3000);
-    //Square card element assetions before kit item saved(new form)
-    cy.contains(
-      this.DataType2.Url + ":" + " " + this.RelatedKitItemData.Url
-    ).should("be.visible");
-    cy.log("Url data exist");
-    cy.wait(1000);
-
-    cy.contains(
-      this.DataType2.Text + ":" + " " + this.RelatedKitItemData.Text
-    ).should("be.visible");
-    cy.log("Text data exist");
-    cy.wait(1000);
-
-    cy.contains(
-      this.DataType2.TextAera + ":" + " " + this.RelatedKitItemData.TextAera
-    ).should("be.visible");
-    cy.wait(1000);
-    cy.log("TextAera data exist");
-
-    cy.log(
-      "Square card added elemets exists(kit item(new form) not saved yet)"
-    );
-
-    cy.wait(4000);
-
-    //save Kit item(edit form) new
+    //save Kit item(New form)
     cy.get(".v-select__selections .v-btn__content")
       .first()
       .click({ force: true });
@@ -548,44 +512,10 @@ describe("Related Control Square Card test case", function () {
     cy.contains(this.NewKitItemData.KitName + " has been saved").should(
       "be.visible"
     );
+  });
 
-    cy.wait(4000);
 
-    cy.contains(
-      this.DataType2.Url + ":" + " " + this.RelatedKitItemData.Url
-    ).scrollIntoView({ force: true });
-    cy.wait(4000);
-
-    //Refresh Sqcard item
-    cy.get(".btn-load .inline-svg").eq(1).click({ force: true });
-    cy.log("Refresh again after save kit item");
-    cy.wait(4000);
-
-    //Square card element assetions After kit item saved(new form)
-    //Assertion
-    cy.get(".px-2:nth-child(1) .inline-svg").should("exist");
-    cy.contains("Total 1 items").should("be.visible");
-    cy.wait(1000);
-    cy.contains(
-      this.DataType2.Url + ":" + " " + this.RelatedKitItemData.Url
-    ).should("be.visible");
-    cy.log("Url data exist");
-    cy.wait(1000);
-
-    cy.contains(
-      this.DataType2.Text + ":" + " " + this.RelatedKitItemData.Text
-    ).should("be.visible");
-    cy.log("Text data exist");
-    cy.wait(1000);
-
-    cy.contains(
-      this.DataType2.TextAera + ":" + " " + this.RelatedKitItemData.TextAera
-    ).should("be.visible");
-    cy.wait(1000);
-    cy.log("TextAera data exist");
-
-    cy.log("Square card added elemets exists after kit item(new form) saved");
-    cy.wait(3000);
+  it.only('Click to open created related new', function () {
 
     //Again save Kit item(new form)
     cy.get(".v-select__selections .v-btn__content")
@@ -595,37 +525,242 @@ describe("Related Control Square Card test case", function () {
     cy.contains("Nothing to save for " + this.NewKitItemData.KitName).should(
       "be.visible"
     );
-    cy.log("There is nothing to save for Kit Item");
-  });
-
-  it.only("Deletion square card elements for new form", function () {
+    cy.wait(1000)
     //Click on 3dots of square card
     cy.get(".pr-0").click({ force: true });
-    cy.wait(1000);
     //Assertion
     cy.contains(" Edit Item ").should("be.visible");
     cy.contains(" Delete Item ").should("be.visible");
+    cy.contains(" Edit Item ").click({ force: true })
+    //Related Kit Assertion
+    cy.contains(this.DataType2.CardKitToBeRelated).should("be.visible");
+    //Related New form element assertion
+    cy.get("[name" + "=" + this.DataType2.Url + "]").should("be.visible");
     cy.wait(2000);
+  })
+
+  it.only("Url Element data Validation", function () {
+    var lower = this.DataType2.Url.toLowerCase();
+    //Validating details view input data
+    cy.xpath("//input[@controlname='" + lower + "']").should("have.value", this.RelatedKitItemData.Url)
+  });
+
+
+  it.only("Text Element data Validation", function () {
+    var lower = this.DataType2.Text.toLowerCase();
+    //Validating details view input data
+    cy.xpath("//input[@controlname='" + lower + "']").should("have.value", this.RelatedKitItemData.Text)
+
+  });
+
+  it.only('File Element data Validation', function () {
+    var lower = this.DataType2.File.toLowerCase();
+    cy.xpath('//div[@class="drop-zone"]//div[@class="v-input__slot"]//div[@class="v-text-field__slot"]//input').eq(0)
+      .invoke('val').then((text) => {
+        expect(text.trim()).equal(this.RelatedKitItemData.RelNewFileName)
+      });
+  })
+
+
+  it.only("Telephone Element data Validation", function () {
+
+    var lower = this.DataType2.Telephone.toLowerCase();
+    //Validating details view input data
+    cy.xpath("//input[@controlname='" + lower + "']").should("have.value", this.RelatedKitItemData.Telephone)
+
+  });
+
+
+  it.only("TextAera Element data Validation", function () {
+
+    var lower = this.DataType2.TextAera.toLowerCase();
+    //Validating details view input data
+    cy.get('[name="TextAera"]').eq(1).should("have.value", this.RelatedKitItemData.TextAera)
+
+  });
+
+  it.only('Currency Element data Validation', function () {
+    var lower = this.DataType2.Currency.toLowerCase();
+    //Assertion Validation for currency
+    cy.xpath('//div[@class="kit-control-currency--right ma-0 pa-0 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
+      .next('input').should("have.value", this.RelatedKitItemData.Currency)
+  })
+
+  it.only('Measure Element data Validation', function () {
+    var lower = this.DataType2.Currency.toLowerCase();
+    //Assertion Validation for currency
+    cy.xpath('//div[@class="kit-control-measure--left ma-0 pa-0 pr-2 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
+      .next('input').should("have.value", this.RelatedKitItemData.Measure)
+  })
+
+  it.only("Email Element data Validation", function () {
+    var lower = this.DataType2.Email.toLowerCase();
+    //Validating details view input data
+    cy.xpath("//input[@controlname='" + lower + "']").should("have.value", this.RelatedKitItemData.Email)
+
+  });
+
+  it.only("Addressline1 Element data Validation", function () {
+    //Validating details view input data
+    cy.get('[placeholder="Street address, building, company ... "]').eq(0)
+      .should("have.value", this.RelatedKitItemData.Addressline1)
+
+  });
+
+  it.only("Addressline2 Element data Validation", function () {
+
+    //Validating details view input data
+    cy.get('[name="Address line 2."]')
+      .should("have.value", this.RelatedKitItemData.Addressline2)
+
+  });
+
+  it.only("City Element data Validation", function () {
+
+    //Validating details view input data
+    cy.get('[placeholder="City"]')
+      .should("have.value", this.RelatedKitItemData.City)
+
+  });
+
+  it.only("ZipCode Element data Validation", function () {
+
+    //Validating details view input data
+    cy.get('[placeholder="Zip/Postal Code"]').eq(0)
+      .should("have.value", this.RelatedKitItemData.ZipCode)
+
+  });
+
+  it.only("State Element data Validation", function () {
+    cy.xpath('//div[@class="v-select__slot"]//div[@class="v-select__selections"]//div[@class="v-select__selection v-select__selection--comma"]')
+      .eq(0)
+      .invoke('text').then((text) => {
+        expect(text.trim()).equal(this.RelatedKitItemData.State)
+      })
+  });
+
+  it.only("Country Element data Validation", function () {
+    //Validating details view input data
+    cy.get('[placeholder="Country"]')
+      .should("have.value", this.RelatedKitItemData.Country)
+
+  });
+
+  it.only("Number Element data Validation", function () {
+
+    var lower = this.DataType2.Number.toLowerCase();
+    //Validating details view input data
+    cy.xpath("//input[@controlname='" + lower + "']")
+      .should("have.value", this.RelatedKitItemData.Number)
+
+  });
+
+  it.only('Time Element data Validation', function () {
+    //Check in josn for LoggedTime
+    cy.get('[placeholder="Add Time"][readonly="readonly"]').eq(0)
+      .should("have.value", this.RelatedKitItemData.LoggedTime)
+  })
+
+  it.only('Date Element data Validation', function () {
+
+    //Check in josn for LoggedDate
+    cy.get('[placeholder=" MM / DD / YYYY"]').eq(0)
+      .should("have.value", this.RelatedKitItemData.LoggedDate)
+
+  })
+
+  it("SelectList Element data Validation", function () {
+    cy.wait(2000)
+    var lower = this.DataType2.Number.toLowerCase();
+    //logging input data on console
+    cy.xpath("//div[contains(@class, 'v-list-item__subtitle') and contains(text(),' Australia ')]")
+      .invoke('val')
+      .then(text => {
+        const SelectList = text;
+        cy.log(SelectList);
+      })
+  });
+
+  it("RadioSelect Element data Validation", function () {
+    cy.wait(2000)
+    cy.get('.v-radio').eq(1).should('be.checked')
+    cy.wait(2000)
+  });
+
+  it.only("CheckboxSelect Element data Validation", function () {
+    //CheckboxSelect3
+    cy.get('[type="checkbox"]').eq(3).should('be.checked')
+
+  });
+
+  it.only('UserSelector Element data Validation', function () {
+
+    //scroll to user selector
+    cy.get('.imageContent').eq(0).scrollIntoView({ force: true })
+    cy.wait(1000)
+    cy.xpath('//div[@controlname="userSelector"]//div[@class="col item-label"]').children('div').invoke('text').then((text) => {
+      expect(text.trim()).equal(this.RelatedKitItemData.UserSelectorName)
+    });
+  })
+
+  it.only('ContactSelector Element data Validation', function () {
+
+    cy.xpath('//div[@controlname="contactSelector"]//div[@class="col item-label"]').children('div').invoke('text').then((text) => {
+      expect(text.trim()).equal(this.RelatedKitItemData.ContactSelectorName)
+    });
+  })
+
+  it.only('Assigning Element data Validation', function () {
+    var lower = this.DataType2.Assigning.toLowerCase();
+    cy.get('.v-btn:nth-child(1) .v-badge > .inline-svg').eq(0).scrollIntoView({ force: true })
+
+    //json value assertion
+    cy.xpath('//div[@controlname="assigning"]//div[@class="item-label col"]').children('div').invoke('text')
+      .then((text) => {
+        expect(text.trim()).equal(this.RelatedKitItemData.AssigningName)
+      });
+  })
+
+  it.only('Icon Element data Validation', function () {
+
+    //Validating details view input data
+    cy.get('[placeholder="Label"]')
+      .should("have.value", this.RelatedKitItemData.IconLabel)
+
+  })
+
+  it.only('Close the related new form', function () {
+    //close the Kit Item
+    cy.wait(2000);
+    //Close Kit type
+    cy.get(".subheader--button-icon-wrapper path").first().click({
+      force: true,
+    });
+    cy.contains(this.NewKitItemData.KitName).should("be.visible");
+    cy.log("Related new has been Close");
+  })
+
+  it("Deletion square card elements for new form", function () {
+    //Click on 3dots of square card
+    cy.get(".pr-0").click({ force: true });
+    //Assertion
+    cy.contains(" Edit Item ").should("be.visible");
+    cy.contains(" Delete Item ").should("be.visible");
     cy.contains(" Delete Item ").click({ force: true });
-    cy.wait(2000);
     //cy.get('.v-list-item:nth-child(2) > .v-list-item__title').click();
     cy.contains(" Are you sure you want to discard?").should("be.visible");
     cy.wait(2000);
     cy.contains(" Discard ").click({ force: true });
     cy.contains(
       "Relation on " +
-        this.DataType2.SquareCardName +
-        " for " +
-        this.NewKitItemData.KitName +
-        " Deleted"
+      this.DataType2.SquareCardName +
+      " for " +
+      this.NewKitItemData.KitName +
+      " Deleted"
     ).should("be.visible");
-    cy.wait(2000);
-    //Delete assertion
-    //cy.contains("Total 0 items").should("be.visible");
-    cy.wait(2000);
   });
 
-  it.only("Deletion Validation of added Square Card elements", function () {
+  it("Deletion Validation of added Square Card elements", function () {
     cy.wait(2000);
     //No added value assertion
     cy.get(".msg-no-results")
@@ -634,39 +769,16 @@ describe("Related Control Square Card test case", function () {
     cy.log("Square Card Relation control has no elements");
     cy.wait(1000);
 
-    //Delete assertion
-    //cy.contains("Total 0 items").should("be.visible");
-    cy.wait(2000);
-
-    // //Square card NOT element assetions after delete
-    // cy.contains(
-    //   this.DataType2.Url + ":" + " " + this.RelatedKitItemData.Url
-    // ).should("not.be.visible");
-    // cy.log("Url data element DELETED");
-    // cy.wait(1000);
-
-    // cy.contains(
-    //   this.DataType2.Text + ":" + " " + this.RelatedKitItemData.Text
-    // ).should("not.be.visible");
-    // cy.log("Text data element DELETED");
-    // cy.wait(1000);
-
-    // cy.contains(
-    //   this.DataType2.TextAera + ":" + " " + this.RelatedKitItemData.TextAera
-    // ).should("not.be.visible");
-    // cy.wait(1000);
-    // cy.log("TextAera data element DELETED");
-
     cy.log("Square card added elemets has been DETETED");
     cy.wait(3000);
     //Again save Kit item(new form)
     cy.get(".v-select__selections .v-btn__content")
       .first()
       .click({ force: true });
-    //kit item Save Assertion after delete elemets
-    cy.log(this.DataType2.CardKitToBeRelated + " related new has been Saved");
-    cy.log("Save Kit Item after delete relation elements");
-    cy.wait(4000);
+    //kit item Save Assertion for nothing
+    cy.contains("Nothing to save for " + this.NewKitItemData.KitName).should(
+      "be.visible"
+    );
   });
 
   it.only("Link Existing Item for Square Card Related Control", function () {
@@ -680,17 +792,17 @@ describe("Related Control Square Card test case", function () {
     cy.contains(this.ViewName.SearchView).should("be.visible");
     //Selct the to be linked kit item
     cy.get(".thumb-selected-icon").eq(0).click();
-    cy.get(".thumb-selected-icon").eq(1).click();
+    //cy.get(".thumb-selected-icon").eq(1).click();
     cy.wait(2000);
     //Click on select btn
     cy.get(".button-pop-ups > .v-btn__content").click({ force: true });
 
     cy.contains(
       "Relation on " +
-        this.DataType2.SquareCardName +
-        " for " +
-        this.NewKitItemData.KitName +
-        " linked "
+      this.DataType2.SquareCardName +
+      " for " +
+      this.NewKitItemData.KitName +
+      " linked "
     ).should("be.visible");
     //Assertion for link item
     cy.get(".px-2:nth-child(1) .inline-svg").should("exist");
@@ -698,48 +810,35 @@ describe("Related Control Square Card test case", function () {
 
     //Delete assertion
     cy.contains("Total 2 items").should("be.visible");
-    cy.wait(2000);
-
     cy.log("Existing item linked");
-    cy.wait(3000);
+
   });
 
   it.only("Deletion Link Item", function () {
-    cy.wait(3000);
-
     cy.get(".btn-load .inline-svg").eq(1).scrollIntoView({ force: true });
-    cy.wait(3000);
-
     //Click on three dots on linked square card
-    //Click on created one to many kit item
-    cy.get(".px-2:nth-child(2) .inline-svg").click({ force: true });
-    cy.wait(2000);
+    cy.get(".px-2:nth-child(1) .inline-svg").click({ force: true });
     //Assertion
     cy.contains(" Edit Item ").should("be.visible");
     cy.contains(" Delete Item ").should("be.visible");
-    cy.wait(2000);
     cy.contains(" Delete Item ").click({ force: true });
-    cy.wait(2000);
     //cy.get('.v-list-item:nth-child(2) > .v-list-item__title').click();
     cy.contains(" Are you sure you want to discard?").should("be.visible");
-    cy.wait(2000);
     cy.contains(" Discard ").click({ force: true });
     cy.contains(
       "Relation on " +
-        this.DataType2.SquareCardName +
-        " for " +
-        this.NewKitItemData.KitName +
-        " Deleted"
+      this.DataType2.SquareCardName +
+      " for " +
+      this.NewKitItemData.KitName +
+      " Deleted"
     ).should("be.visible");
-    cy.wait(2000);
+
   });
 
   it.only("Validate Link Item elements for square card", function () {
-    cy.wait(3000);
 
+    //scroll
     cy.get(".btn-load .inline-svg").eq(1).scrollIntoView({ force: true });
-    cy.wait(5000);
-
     //Assertion
     //Delete assertion
     cy.contains("Total 1 items").should("be.visible");
@@ -755,8 +854,6 @@ describe("Related Control Square Card test case", function () {
     cy.contains("Nothing to save for " + this.NewKitItemData.KitName).should(
       "be.visible"
     );
-    cy.log("There is nothing to save for Kit Item");
 
-    cy.wait(4000);
   });
 });
