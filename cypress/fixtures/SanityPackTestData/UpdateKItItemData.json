@@ -24,8 +24,10 @@
 
     "SelectListValue":"Venacura",
     
-
     "RadioSelectValue":"SR5",
+
+    "StepperValue":"RealMe",
+    "InspectionValue":"Zapare",
 
     "CheckboxSelectValue1":"CheckboxSelect1",
     "CheckboxSelectValue2":"CheckboxSelect2",
@@ -33,11 +35,6 @@
     "CheckboxSelectValue4":"CheckboxSelect4",
     "CheckboxSelectValue5":"CheckboxSelect5",
 
-    "StepperValue1":"Jio",
-    "StepperValue2":"Moto",
-    "StepperValue3":"Note",
-    "StepperValue4":"Oppo",
-    "StepperValue5":"RealMe",
 
     "UserSelectorName":"Common Areas Support",
     "ContactSelectorName":"Ethan Thomas",
@@ -55,14 +52,6 @@
     "ExtraLargeiconSize":"Extra Large",
 
     "IconLabel":"update",
-
-    "These are the index value of div child":"use according to select inspection value",
-    "1st for 1st value":"2nd for 2nd value and so on...",
-    "InspectionValue1":"1",
-    "InspectionValue2":"2",
-    "InspectionValue3":"3",
-    "InspectionValue4":"4",
-    "InspectionValue5":"5",
 
     "Form Element Validation":"Data",
     "LoggedTime":"5:25 pm",
@@ -96,7 +85,7 @@
     "TimeValue":"04:30 PM",
     "DateValue":"10/31/2020",
     "ToggleStatus":"True",
-    "StepperValue":"Oppo",
+    "StepperValuee":"Oppo",
     "InspectionName":"C++",
     
 

@@ -354,16 +354,9 @@ describe("New kit item complete creation test case", function () {
 
     //Stepper
     //getting value form different json file
-    cy.contains(this.NewKitItemData.StepperValue4).click({ force: true });
+    cy.contains(this.NewKitItemData.StepperValue).click({ force: true });
     cy.log("Stepper Value has been set.");
 
-    cy.wait(2000);
-    //.v-stepper__step:nth-child(1/3/5/7/9)
-    // cy.get(".v-stepper__step:nth-child(5) > .v-stepper__step__step").click({
-    //   force: true,
-    // });
-
-    cy.wait(2000);
     //UserSelector(Values coming form KitItemValues Json File)
     //Click on to open UserSelector Pop up
     cy.get(".searchIcon").eq(0).click({ force: true });
@@ -418,22 +411,14 @@ describe("New kit item complete creation test case", function () {
     //IconLable
     cy.get('[placeholder="Label"]').type(this.NewKitItemData.IconLabel);
 
-    //Inspection(Values coming form KitItemValues Json File)
     //Inspection
-    cy.contains(this.DataType2.Inspection).scrollIntoView({
-      force: true,
-    });
+    cy.get('.v-btn:nth-child(1) .v-badge > .inline-svg')
+      .scrollIntoView({ force: true })
+    cy.wait(1000)
+    cy.xpath("//*[contains(text(),'" + this.NewKitItemData.InspectionValue + "')]//div[@class='v-avatar v-avatar--left']")
+      .click({ force: true })
+    cy.wait(1000);
 
-    cy.wait(3000);
-    //child 1 for 1st value &&&& child 2 for 2nd value-child 3 for 3rd value......
-    //"These are the index value of div child":"use according to select inspection value",
-    cy.get(
-      "div.v-slide-group__wrapper > div > span:nth-child(" +
-      this.NewKitItemData.InspectionValue2 +
-      ") > span"
-    ).click({ force: true });
-
-    cy.wait(3000);
     //Assigning
     //Click on to open Assigning Pop up-Also working
     cy.get(".searchIcon > .inline-svg > path").last().click({ force: true });
@@ -707,16 +692,8 @@ describe("New kit item complete creation test case", function () {
 
     //Stepper
     //getting value form different json file
-    cy.contains(this.UpdateKitItemData.StepperValue4).click({ force: true });
+    cy.contains(this.UpdateKitItemData.StepperValue).click({ force: true });
     cy.log("Stepper Value has been set.");
-
-    cy.wait(2000);
-    //.v-stepper__step:nth-child(1/3/5/7/9)
-    // cy.get(".v-stepper__step:nth-child(5) > .v-stepper__step__step").click({
-    //   force: true,
-    // });
-
-    cy.wait(2000);
 
     //Click on cross to user selector
     cy.get(
@@ -784,19 +761,12 @@ describe("New kit item complete creation test case", function () {
       .type(this.UpdateKitItemData.IconLabel);
 
     //Inspection
-    cy.contains(this.DataType2.Inspection).scrollIntoView({
-      force: true,
-    });
-
-    cy.wait(3000);
-    //child 1 for 1st value &&&& child 2 for 2nd value-child 3 for 3rd value......
-    //"These are the index value of div child":"use according to select inspection value",
-    cy.get(
-      ".v-chip:nth-child(" +
-      this.UpdateKitItemData.InspectionValue5 +
-      ") > .v-chip__content"
-    ).click({ force: true });
-    cy.wait(2000);
+    cy.get('.v-btn:nth-child(1) .v-badge > .inline-svg')
+      .scrollIntoView({ force: true })
+    cy.wait(1000)
+    cy.xpath("//*[contains(text(),'" + this.NewKitItemData.InspectionValue + "')]//div[@class='v-avatar v-avatar--left']")
+      .click({ force: true })
+    cy.wait(1000);
 
     //Click on cross to delete Assigning
     cy.get(
@@ -1066,19 +1036,17 @@ describe("New view updation validation test case", function () {
   });
 
   it.only('Currency Element data Validation', function () {
-    var lower = this.DataType2.Currency.toLowerCase();
+    var currency = this.DataType2.Currency.toLowerCase();
     //Assertion Validation for currency
-    cy.xpath('//div[@class="kit-control-currency--right ma-0 pa-0 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
+    cy.xpath('//div[@class="kit-control-' + currency + '--right ma-0 pa-0 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
       .next('input').should("have.value", this.UpdateKitItemData.Currency)
   })
 
   it.only('Measure Element data Validation', function () {
-
-    var lower = this.DataType2.Currency.toLowerCase();
+    var measure = this.DataType2.Measure.toLowerCase();
     //Assertion Validation for currency
-    cy.xpath('//div[@class="kit-control-measure--left ma-0 pa-0 pr-2 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
+    cy.xpath('//div[@class="kit-control-' + measure + '--left ma-0 pa-0 pr-2 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
       .next('input').should("have.value", this.UpdateKitItemData.Measure)
-
   })
 
   it.only("Email Element data Validation", function () {
@@ -1163,18 +1131,13 @@ describe("New view updation validation test case", function () {
 
   })
 
-  it("SelectList Element data Validation", function () {
-
-    var lower = this.DataType2.Number.toLowerCase();
-    //logging input data on console
-    cy.xpath("//div[contains(@class, 'v-list-item__subtitle') and contains(text(),' Australia ')]")
-      .invoke('val')
-      .then(text => {
-        const SelectList = text;
-        cy.log(SelectList);
-      })
-
-  });
+  it.only("SelectList Element data Validation", function () {
+    var selectList = this.DataType2.SelectListName.toLowerCase();
+    cy.xpath('//div[@controlname="selectList"]//div[@class="v-list-item__subtitle"]')
+      .invoke('text').then((text) => {
+        expect(text.trim()).equal(this.UpdateKitItemData.SelectListValue)
+      });
+  })
 
   it("RadioSelect Element data Validation", function () {
     cy.wait(2000)
@@ -1187,12 +1150,17 @@ describe("New view updation validation test case", function () {
     cy.get('[type="checkbox"]').eq(3).should('be.checked')
     //CheckboxSelect4
     cy.get('[type="checkbox"]').eq(4).should('be.checked')
+  });
 
+  it.only('Stepper Element data Validation', function () {
+    var stepper = this.DataType2.StepperName.toLowerCase();
+    cy.xpath('//div[@controlname="' + stepper + '"]//div[@class="v-stepper__header"]//div[@class="v-stepper__step v-stepper__step--inactive v-stepper__step--complete"]//div[@class="v-list-item__subtitle"]')
+      .invoke('text').then((text) => {
+        expect(text.trim()).equal(this.UpdateKitItemData.StepperValue)
+      })
   });
 
   it.only('UserSelector Element data Validation', function () {
-
-
     cy.get('.imageContent').eq(0).scrollIntoView({ force: true })
     cy.wait(1000)
     cy.xpath('//div[@controlname="userSelector"]//div[@class="col item-label"]').eq(0).children('div').invoke('text').then((text) => {
@@ -1211,12 +1179,20 @@ describe("New view updation validation test case", function () {
     var lower = this.DataType2.Assigning.toLowerCase();
     cy.get('.v-btn:nth-child(1) .v-badge > .inline-svg').scrollIntoView({ force: true })
     //json value assertion
-    cy.xpath('//div[@controlname="'+lower+'"]//div[@class="item-label col"]').eq(0).children('div').invoke('text')
+    cy.xpath('//div[@controlname="' + lower + '"]//div[@class="item-label col"]').eq(0).children('div').invoke('text')
       .then((text) => {
         expect(text.trim()).equal(this.UpdateKitItemData.DUpAssigning)
       });
-
   })
+
+  it.only('Inspection Element data Validation', function () {
+    var inspection = this.DataType2.InspectionName.toLowerCase();
+    cy.xpath('//div[@controlname="' + inspection + '"]//div[@class="v-slide-group__content"]').children('span.v-chip--active')
+      .invoke('text').then((text) => {
+        expect(text.trim()).equal(this.UpdateKitItemData.InspectionValue)
+      });
+  });
+
 
   it.only('Icon Element data Validation', function () {
     //Validating details view input data

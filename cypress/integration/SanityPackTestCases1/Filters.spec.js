@@ -7,9 +7,8 @@ describe("TableList KitItem Filter", function () {
     /// cy.viewport(1280, 720);
     const lp = new LoginPage();
     const slp = new SanityLoginPage();
-    //slp.visitCityComTest();
-    cy.visit("https://nvd.ca-test.com/Public/Login?ReturnUrl=%2F");
-    //cy.visit("https://tm.commonareas.io/Public/Login?ReturnUrl=%2F");
+    slp.nvdTest()
+    //slp.TmProd()
 
     //Handling Alert
     cy.on("window:confirm", () => {
@@ -20,7 +19,6 @@ describe("TableList KitItem Filter", function () {
     cy.contains(" Log In ").should("be.visible");
     //Enter credentials
     lp.EnterEmail("propertymanagement@commonareas.work.dev");
-    //lp.EnterEmail("citycom@commonareas.work.dev");
     //lp.EnterEmail("sam@armyspy.com");
     lp.EnterPassword("1234567Aa");
     lp.Submit();
@@ -35,8 +33,6 @@ describe("TableList KitItem Filter", function () {
       "refreshToken",
       "jwtAccessToken"
     );
-
-    cy.wait(10000);
   });
 
   this.beforeEach("KitType Data", function () {
@@ -100,20 +96,19 @@ describe("TableList KitItem Filter", function () {
     const lp = new LoginPage();
     //Assertion
     cy.title().should("eq", "Common Areas");
-    cy.wait(10000);
     //Click on Hamburger Icon
     lp.HMBIcon();
     cy.contains(this.NewKitItemData.KitName).scrollIntoView({
       force: true,
     });
-    cy.wait(5000);
+    cy.wait(3000);
     //Open KitType from left paneal
     cy.contains(this.NewKitItemData.KitName).click({ force: true });
     cy.log("Kit type opened from left pannel");
-    cy.wait(10000);
+    cy.wait(3000);
   });
 
-  it("Filter Url Element", function () {
+  it.only("Filter Url Element", function () {
     //Page Object
     const lp = new LoginPage();
     lp.FilterIcon();
@@ -130,20 +125,18 @@ describe("TableList KitItem Filter", function () {
     cy.wait(1000);
     cy.contains("Apply Filters").click({ force: true });
     cy.get(".filter-tag").should("be.visible");
-    cy.wait(10000);
     //Assertion
     cy.contains(
       this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
     ).should("be.visible");
-    cy.wait(2000);
+    cy.wait(10000);
     //Click on created kit item
-    cy.get(".list-item--title").click({ force: true });
-    cy.wait(3000);
-
-    cy.get("[name" + "=" + this.DataType2.Url + "]")
-      .last()
-      .scrollIntoView({ force: true });
-    cy.wait(3000);
+    cy.get('.list-item--title').first().click({ force: true });
+    cy.wait(1000);
+    var lower = this.DataType2.Url.toLowerCase();
+    //Validating details view input data
+    cy.xpath("//input[@controlname='" + lower + "']")
+      .should("have.value", this.NewKitItemData.Url)
 
     //Close Kit type
     cy.get(".subheader--button-icon-wrapper .inline-svg").click({
@@ -151,14 +144,11 @@ describe("TableList KitItem Filter", function () {
     });
     cy.log(this.NewKitItemData.KitName + "Kit item has been Close");
     cy.contains(" Recently Viewed ").should("be.visible");
-    cy.wait(5000);
-
     //Click on cross icon to remove filter
     cy.get(".inline-svg:nth-child(3) > path").click({ force: true });
-    cy.wait(5000);
   });
 
-  it("Filter Text Element", function () {
+  it.only("Filter Text Element", function () {
     //Page Object
     const lp = new LoginPage();
     lp.FilterIcon();
@@ -174,33 +164,37 @@ describe("TableList KitItem Filter", function () {
     cy.wait(1000);
     cy.contains("Apply Filters").click({ force: true });
     cy.get(".filter-tag").should("be.visible");
-    cy.wait(10000);
 
+    //created kit item assertion
+    cy.contains(
+      this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
+    ).should('be.visible')
     //Click on created kit item
     cy.contains(
       this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
     ).click({ force: true });
-    cy.wait(5000);
 
     cy.get("[name" + "=" + this.DataType2.Text + "]")
       .last()
       .scrollIntoView({ force: true });
-    cy.wait(3000);
 
+    var lower = this.DataType2.Text.toLowerCase();
+    //Validating details view input data
+    cy.xpath("//input[@controlname='" + lower + "']")
+      .should("have.value", this.NewKitItemData.Text)
+    cy.wait(1000);
     //Close Kit type
     cy.get(".subheader--button-icon-wrapper .inline-svg").click({
       force: true,
     });
     cy.log(this.NewKitItemData.KitName + "Kit item has been Close");
     cy.contains(" Recently Viewed ").should("be.visible");
-    cy.wait(5000);
-
     //Click on cross icon to remove filer
     cy.get(".inline-svg:nth-child(3) > path").click({ force: true });
-    cy.wait(5000);
+    cy.wait(1000);
   });
 
-  it("Filter Telephone Element", function () {
+  it.only("Filter Telephone Element", function () {
     //Page Object
     const lp = new LoginPage();
     lp.FilterIcon();
@@ -216,18 +210,29 @@ describe("TableList KitItem Filter", function () {
     cy.wait(1000);
     cy.contains("Apply Filters").click({ force: true });
     cy.get(".filter-tag").should("be.visible");
-    cy.wait(10000);
 
+    //created kit item assertion
+    cy.contains(
+      this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
+    ).should('be.visible')
+    //Click on created kit item
+    cy.contains(
+      this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
+    ).should('be.visible')
     //Click on created kit item
     cy.contains(
       this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
     ).click({ force: true });
-    cy.wait(5000);
 
     cy.get("[name" + "=" + this.DataType2.Telephone + "]")
       .last()
       .scrollIntoView({ force: true });
-    cy.wait(3000);
+    cy.wait(1000);
+    var lower = this.DataType2.Telephone.toLowerCase();
+    //Validating details view input data
+    cy.xpath("//input[@controlname='" + lower + "']")
+      .should("have.value", this.NewKitItemData.Telephone)
+    cy.wait(1000);
 
     //Close Kit type
     cy.get(".subheader--button-icon-wrapper .inline-svg").click({
@@ -235,14 +240,13 @@ describe("TableList KitItem Filter", function () {
     });
     cy.log(this.NewKitItemData.KitName + "Kit item has been Close");
     cy.contains(" Recently Viewed ").should("be.visible");
-    cy.wait(5000);
 
     //Click on cross icon to remove filer
     cy.get(".inline-svg:nth-child(3) > path").click({ force: true });
-    cy.wait(5000);
+    cy.wait(1000);
   });
 
-  it("Filter TextAera Element", function () {
+  it.only("Filter TextAera Element", function () {
     //Page Object
     const lp = new LoginPage();
     lp.FilterIcon();
@@ -258,18 +262,26 @@ describe("TableList KitItem Filter", function () {
     cy.wait(1000);
     cy.contains("Apply Filters").click({ force: true });
     cy.get(".filter-tag").should("be.visible");
-    cy.wait(10000);
+    //created kit item assertion
+    cy.contains(
+      this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
+    ).should('be.visible')
 
     //Click on created kit item
     cy.contains(
       this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
     ).click({ force: true });
-    cy.wait(5000);
 
     cy.get("[name" + "=" + this.DataType2.TextAera + "]")
       .last()
       .scrollIntoView({ force: true });
-    cy.wait(3000);
+    cy.wait(1000);
+
+    var lower = this.DataType2.TextAera.toLowerCase();
+    //Validating details view input data
+    cy.get('[name="TextAera"]').last()
+      .should("have.value", this.NewKitItemData.TextAera)
+    cy.wait(1000)
 
     //Close Kit type
     cy.get(".subheader--button-icon-wrapper .inline-svg").click({
@@ -277,11 +289,8 @@ describe("TableList KitItem Filter", function () {
     });
     cy.log(this.NewKitItemData.KitName + "Kit item has been Close");
     cy.contains(" Recently Viewed ").should("be.visible");
-    cy.wait(5000);
-
     //Click on cross icon to remove filer
     cy.get(".inline-svg:nth-child(3) > path").click({ force: true });
-    cy.wait(5000);
   });
 
   it("Validate the Filter for Slider Element", function () {
@@ -330,7 +339,7 @@ describe("TableList KitItem Filter", function () {
     cy.wait(5000);
   });
 
-  it.only("Validate the Filter for Currency Element", function () {
+  it("Validate the Filter for Currency Element", function () {
     //Page Object
     const lp = new LoginPage();
 
@@ -422,7 +431,7 @@ describe("TableList KitItem Filter", function () {
     cy.wait(5000);
   });
 
-  it("Validate the Filter Email Element", function () {
+  it.only("Validate the Filter Email Element", function () {
     //Page Object
     const lp = new LoginPage();
     lp.FilterIcon();
@@ -438,18 +447,27 @@ describe("TableList KitItem Filter", function () {
     cy.wait(1000);
     cy.contains("Apply Filters").click({ force: true });
     cy.get(".filter-tag").should("be.visible");
-    cy.wait(10000);
+    cy.wait(3000);
 
+    //Assertion
+    cy.contains(
+      this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
+    ).should('be.visible')
     //Click on created kit item
     cy.contains(
       this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
     ).click({ force: true });
-    cy.wait(5000);
 
+    //scroll
     cy.get("[name" + "=" + this.DataType2.Email + "]")
       .last()
       .scrollIntoView({ force: true });
-    cy.wait(3000);
+    //Data existance assertion
+    var lower = this.DataType2.Email.toLowerCase();
+    //Validating details view input data
+    cy.xpath("//input[@controlname='" + lower + "']")
+      .should("have.value", this.NewKitItemData.Email)
+    cy.wait(1000)
 
     //Close Kit type
     cy.get(".subheader--button-icon-wrapper .inline-svg").click({
@@ -457,11 +475,9 @@ describe("TableList KitItem Filter", function () {
     });
     cy.log(this.NewKitItemData.KitName + "Kit item has been Close");
     cy.contains(" Recently Viewed ").should("be.visible");
-    cy.wait(5000);
-
     //Click on cross icon to remove filer
     cy.get(".inline-svg:nth-child(3) > path").click({ force: true });
-    cy.wait(5000);
+    cy.wait(1000);
   });
 
   it("Validate the Filter Address Element", function () {

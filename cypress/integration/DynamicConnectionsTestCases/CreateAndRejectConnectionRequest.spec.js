@@ -1,5 +1,6 @@
 import SignUpPage from "../PageObject/SignUpPage";
 import LoginPage from "../PageObject/LoginPage";
+import SanityLoginPage from "../PageObject/SanityLoginPage";
 
 describe("Login for new User than Create A new Connection and Reject the Request ", function () {
   this.beforeEach(
@@ -66,8 +67,8 @@ describe("Login for new User than Create A new Connection and Reject the Request
 
   it.only("Creating a new Connection ", function () {
     const lp = new LoginPage();
-    lp.visitServiceTest();
-    lp.EnterEmail("kstanley@commonareas.work.dev");
+    slp.nvdTest()
+    lp.EnterEmail("propertymanagement@commonareas.work.dev");
     lp.EnterPassword("1234567Aa");
     //cy.eyesCheckWindow("Logging into the application");
     lp.Submit();
@@ -95,7 +96,7 @@ describe("Login for new User than Create A new Connection and Reject the Request
     //Click on Save btn
     cy.get(".button-pop-ups--size").click();
     cy.log("Connection Request has been sent successfully");
-    cy.wait(10000);
+    cy.wait(0000);
   });
 
   it.only("Login into the AppLication for Reject the Request", function () {
@@ -137,7 +138,7 @@ describe("Login for new User than Create A new Connection and Reject the Request
     //Assertion
     cy.wait(3000);
     //cy.eyesCheckWindow("NO Connections here");
-    cy.contains("Kali Stanley").should("not.be.visible");
+    //cy.contains("Kali Stanley").should("not.be.visible");
     cy.contains(
       "\n\t\t\t\t\t\t\t\tDrummond Realty Trust\n\t\t\t\t\t\t\t"
     ).should("not.be.visible");

@@ -18,11 +18,10 @@
     "State":"Alaska",
     "ZipCode":"2133",
     "Country":"United States",
-    "Number":"09",
+    "Number":"5",
 
     "SelectListValue":"India",
     
-
     "RadioSelectValue":"SR2",
 
     "CheckboxSelectValue1":"CheckboxSelect1",
@@ -31,11 +30,8 @@
     "CheckboxSelectValue4":"CheckboxSelect4",
     "CheckboxSelectValue5":"CheckboxSelect5",
 
-    "StepperValue1":"Jio",
-    "StepperValue2":"Moto",
-    "StepperValue3":"Note",
-    "StepperValue4":"Oppo",
-    "StepperValue5":"RealMe",
+    "StepperValue":"Jio",
+    "InspectionValue":"Java",
     
     "UserSelectorName":"Jerome Casanova",
     "ContactSelectorName":"Eric Buhring",
@@ -48,14 +44,6 @@
     "ExtraLargeiconSize":"Extra Large",
 
     "IconLabel":"sanity",
-
-    "These are the index value of div child":"use according to select inspection value",
-    "1st for 1st value":"2nd for 2nd value and so on...",
-    "InspectionValue1":"1",
-    "InspectionValue2":"2",
-    "InspectionValue3":"3",
-    "InspectionValue4":"4",
-    "InspectionValue5":"5",
 
     "Form Element Validation":"Data-Dont modify",
     "LoggedTime":"4:30 pm",
@@ -89,7 +77,7 @@
     "TimeValue":"04:30 PM",
     "DateValue":"10/31/2020",
     "ToggleStatus":"True",
-    "StepperValue":"Oppo",
+    "StepperValuee":"Oppo",
     "InspectionName":"C++",
     
 

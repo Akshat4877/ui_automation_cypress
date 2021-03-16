@@ -111,8 +111,8 @@ describe("Update created kit item test case", function () {
     cy.contains(this.NewKitItemData.KitName).click({
       force: true,
     });
+    cy.wait(3000)
     cy.log("Kit Type has been OPened");
-
     //Click on First kit item of kit type to open edit view
     cy.log("Kit Item Detail View has been Opened");
     //Validation assertion for details view
@@ -139,7 +139,6 @@ describe("Update created kit item test case", function () {
       .clear()
       .type(this.UpdateKitItemData.Url);
     cy.log("Url Updated");
-    cy.wait(1000);
 
     //Text
     cy.get("[name" + "=" + this.DataType2.Text + "]")
@@ -147,27 +146,23 @@ describe("Update created kit item test case", function () {
       .clear()
       .type(this.UpdateKitItemData.Text);
     cy.log("Text Updated");
-    cy.wait(1000);
 
     //File
     //Click on to remove existing file
     cy.get(".dropzone-area-button:nth-child(2)").click({ force: true });
-    cy.wait(1000);
     //Discard validation
     cy.contains(" Are you sure you want to discard?").should("be.visible");
+    cy.wait(1000)
     //Click on Discard
     cy.get(".mb-4:nth-child(1) .v-btn__content").click({ force: true });
     cy.log("Existing file has been deleted");
-    cy.wait(2000);
     //Click on file link again
     cy.get(".link-icon--green > path").click({ force: true });
-    cy.wait(3000);
     //give file name to select
     cy.contains(this.UpdateKitItemData.UpdateFileName).click({ force: true });
     cy.log("New file has been uploaded");
 
     //Click on save file
-    cy.wait(2000);
     cy.get(
       ".container-search > .pop-up--header > .pop-up--header--right > .button-pop-ups--size > .v-btn__content"
     ).click({ force: true });
@@ -181,7 +176,6 @@ describe("Update created kit item test case", function () {
       .clear()
       .type(this.UpdateKitItemData.Telephone);
     cy.log("Telephone Updated");
-    cy.wait(1000);
 
     //TextAera
     cy.get("[name" + "=" + this.DataType2.TextAera + "]")
@@ -189,15 +183,6 @@ describe("Update created kit item test case", function () {
       .clear()
       .type(this.UpdateKitItemData.TextAera);
     cy.log("TextAera Updated");
-    cy.wait(3000);
-
-    //Click to save
-    cy.get(".navi-bar-dropdown:nth-child(2) .v-btn").click({ force: true });
-    cy.contains(this.NewKitItemData.KitName + " has been saved").should(
-      "be.visible"
-    );
-    cy.log("Paritally saved deatils views");
-    cy.wait(2000);
 
     //Email scrolling
     cy.get("[name" + "=" + this.DataType2.TextAera + "]")
@@ -214,7 +199,7 @@ describe("Update created kit item test case", function () {
     //Measure
     cy.xpath('//div[@class="kit-control-measure--left ma-0 pa-0 pr-2 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
       .next('input').clear().type(this.UpdateKitItemData.Measure);
-    
+
     cy.log("Measure Updated");
     cy.wait(1000);
 
@@ -225,6 +210,14 @@ describe("Update created kit item test case", function () {
       .type(this.UpdateKitItemData.Email);
     cy.log("Email Updated");
     cy.wait(1000);
+
+    //Click to save
+    cy.get(".navi-bar-dropdown:nth-child(2) .v-btn").click({ force: true });
+    cy.contains(this.NewKitItemData.KitName + " has been saved").should(
+      "be.visible"
+    );
+    cy.log("Paritally saved deatils views");
+    cy.wait(2000);
 
     //scroll
     cy.get('[placeholder="Street address, building, company ... "]')
@@ -271,15 +264,7 @@ describe("Update created kit item test case", function () {
       .clear()
       .type(this.UpdateKitItemData.Number);
     cy.log("Number Updated");
-    cy.wait(3000);
 
-    //Click to save
-    cy.get(".navi-bar-dropdown:nth-child(2) .v-btn").click({ force: true });
-    cy.contains(this.NewKitItemData.KitName + " has been saved").should(
-      "be.visible"
-    );
-    cy.log("Paritally saved deatils views");
-    cy.wait(5000);
 
     //Time to scrolling
     cy.get("[name" + "=" + this.DataType2.Number + "]")
@@ -327,10 +312,9 @@ describe("Update created kit item test case", function () {
     cy.xpath("//div[@class='v-btn__content'][contains(text(),'25')]")
       .first()
       .click({ force: true });
-    cy.wait(2000);
+    cy.wait(1000);
     //Click on OK to save Date
     cy.xpath("//span[contains(text(),'OK')]").first().click({ force: true });
-    cy.wait(2000);
 
     //Toggle
     cy.get(".sync-switch .v-input--selection-controls__ripple").click({
@@ -338,22 +322,18 @@ describe("Update created kit item test case", function () {
     });
     cy.log("Toggle updated");
 
-    cy.wait(3000);
     //Click on DropDown of SelectList
     cy.get(
       " div.row.container-details div.fill-height.col div.container.details-wrapper.fill-height div.row.kit-related-form.pa-6 div.kit-control-component.row-component.px-3.col.col-sm-12.col-md-6.mb-4.px-3.col-sm-12.col-md-6.mb-4.px-3:nth-child(17) div.v-input.kit-control-select-list.layout-alignment.v-input--is-label-active.v-input--is-dirty.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-select div.v-input__control div.v-input__slot div.v-select__slot:nth-child(2) div.v-input__append-inner:nth-child(3) div.v-input__icon.v-input__icon--append > i.v-icon.notranslate.material-icons.theme--light"
     ).click({ force: true });
-    cy.wait(2000);
     //SelectList Value(Values coming form KitItemValues Json File)
     cy.contains(this.UpdateKitItemData.SelectListValue).click({ force: true });
     cy.log("SelectList Value has been Updated.");
 
-    cy.wait(4000);
-
     //RadioSelect
     cy.contains(this.UpdateKitItemData.RadioSelectValue).click({ force: true });
     cy.log("RadioSelect Value has been set.");
-    cy.wait(3000);
+    cy.wait(1000);
 
     //CheckboxSelect(Values coming form KitItemValues Json File)
     cy.contains(this.UpdateKitItemData.CheckboxSelectValue1).click({
@@ -367,17 +347,8 @@ describe("Update created kit item test case", function () {
       force: true,
     });
     cy.log("Checkbox Values updated.");
-    cy.wait(3000);
 
-    //Click to save
-    cy.get(".navi-bar-dropdown:nth-child(2) .v-btn").click({ force: true });
-    cy.contains(this.NewKitItemData.KitName + " has been saved").should(
-      "be.visible"
-    );
-    cy.log("Paritally saved deatils views");
-    cy.wait(2000);
-
-    cy.wait(3000);
+    cy.wait(1000);
     cy.get("[name" + "=" + this.DataType2.Stepper + "]")
       .last()
       .scrollIntoView({
@@ -385,7 +356,8 @@ describe("Update created kit item test case", function () {
       });
 
     //Stepper
-    cy.contains(this.UpdateKitItemData.StepperValue3).click({ force: true });
+    cy.contains(this.UpdateKitItemData.StepperValue).click({ force: true });
+    cy.wait(1000)
     //Click on cross to user selector of details view
     cy.get("span > div > div > div.v-input__slot > div.v-select__slot")
       .eq(5)
@@ -396,7 +368,7 @@ describe("Update created kit item test case", function () {
     //cy.get(".searchIcon").eq(7).click({ force: true });
     cy.contains(this.UpdateKitItemData.DUpUserSelector).click({ force: true });
     cy.log("UserSelect Updated");
-    cy.wait(3000);
+    cy.wait(1000);
 
     //Click on cross to contact selector of details View
     cy.get("span > div > div > div.v-input__slot > div.v-select__slot")
@@ -410,29 +382,26 @@ describe("Update created kit item test case", function () {
       force: true,
     });
     cy.log("ContactSelecto Updated");
-    cy.wait(4000);
+    cy.wait(1000);
 
     //Scroll to Inspection
     cy.get(".v-btn:nth-child(1) .v-badge > .inline-svg").scrollIntoView({
       force: true,
     });
-    cy.wait(5000);
+    cy.wait(1000);
 
     //Icon
     //Click on + icon of ICON Element
     cy.get(".v-btn__content > img").click({
       force: true,
     });
-    cy.wait(2000);
     //Click on Icon Tittle and  select Icon logo
     //Give numeric no from 1 in child(1,2,3...)
     cy.get(".thumb-container:nth-child(4) .selected-icon").click({
       force: true,
     });
-    cy.wait(2000);
     //Icon Save
     cy.get(".button-pop-ups").first().click({ force: true });
-    cy.wait(2000);
 
     //IcozSize
     cy.get('[placeholder="Label"]').scrollIntoView({ force: true });
@@ -445,26 +414,18 @@ describe("Update created kit item test case", function () {
     cy.contains(this.UpdateKitItemData.ExtraSmalliconSize).click({
       force: true,
     });
-    cy.wait(2000);
     //IconLable
     cy.get('[placeholder="Label"]')
       .clear()
       .type(this.UpdateKitItemData.IconLabel);
 
     //Inspection
-    cy.contains(this.DataType2.Inspection).scrollIntoView({
-      force: true,
-    });
-
-    cy.wait(3000);
-    //child 1 for 1st value &&&& child 2 for 2nd value-child 3 for 3rd value......
-    //"These are the index value of div child":"use according to select inspection value",
-    cy.get(
-      ".v-chip:nth-child(" +
-      this.UpdateKitItemData.InspectionValue4 +
-      ") > .v-chip__content"
-    ).click({ force: true });
-    cy.wait(2000);
+    cy.get('.v-btn:nth-child(1) .v-badge > .inline-svg')
+      .scrollIntoView({ force: true })
+    cy.wait(1000)
+    cy.xpath("//*[contains(text(),'" + this.UpdateKitItemData.InspectionValue + "')]//div[@class='v-avatar v-avatar--left']")
+      .click({ force: true })
+    cy.wait(1000);
 
     //Click on cross to delete Assigning
     cy.get("span > div > div > div.v-input__slot > div.v-select__slot")
@@ -477,13 +438,12 @@ describe("Update created kit item test case", function () {
 
     //updated assigning
     cy.contains(this.UpdateKitItemData.DUpAssigning).click({ force: true });
-    cy.wait(3000);
+    cy.wait(1000);
     //Click on to save
     cy.get(".button-pop-ups--size > .v-btn__content").click({ force: true });
     //Assigning creation assertion
     cy.contains("Item shared").should("be.visible");
     cy.log("Assigning added");
-    cy.wait(5000);
 
     //Click to save
     cy.get(".navi-bar-dropdown:nth-child(2) .v-btn").click({ force: true });
@@ -493,25 +453,20 @@ describe("Update created kit item test case", function () {
     cy.log(
       this.NewKitItemData.KitName + "Kit Type has been Saved with updation"
     );
-
-
     cy.log("updated Kit item updated and exist in Kit Item List View ");
-    cy.wait(2000);
+    cy.wait(1000);
   });
 
   it.only("File Tab", function () {
-    cy.wait(3000);
-
     //Files Tab
     cy.contains("Files").click({ force: true });
-    cy.wait(2000);
     //Click on Library
     cy.contains("Choose From Library").click({ force: true });
-    cy.wait(3000);
+    cy.wait(1000);
     //give file name to select
     cy.contains(this.DetailViewData.DetailViewFileName).click({ force: true });
     //cy.get(".thumb-container:nth-child(2) .item-check").click({ force: true });
-    cy.wait(2000);
+    cy.wait(1000);
     //Click on save file
     cy.get(".button-pop-ups--size > .v-btn__content")
       .first()
@@ -519,20 +474,19 @@ describe("Update created kit item test case", function () {
     //Assertion validation
     cy.contains("File saved").should("be.visible");
     cy.log("File uploaded");
-    cy.wait(3000);
+    cy.wait(1000);
   });
 
   it.only("Add a pin on Map", function () {
     //Map Tab
     cy.contains(" Map ").click({ force: true });
-    cy.wait(4000);
     //Click on Map
     cy.get(
       ".vue-map-container:nth-child(2) .gm-style > div:nth-child(1) > div:nth-child(3)"
     ).click({ force: true });
     cy.contains("Add a Pin").click({ force: true });
     cy.contains(" Pin has been added successfully.").should("be.visible");
-    cy.wait(3000);
+    cy.wait(1000);
   });
 
   it('Set to "Address" control on Map', function () {
@@ -592,25 +546,18 @@ describe("Update created kit item test case", function () {
     cy.contains(this.NewKitItemData.KitName + " has been saved").should(
       "be.visible"
     );
-    cy.wait(3000);
+    cy.wait(1000);
   });
 
   it.only("Contributors Tab", function () {
     //Contributors Tab
     cy.contains(" Contributors ").click({ force: true });
-    cy.wait(3000);
+    cy.wait(1000);
     //Click on Add for Contributors
     cy.get(".addBtn:nth-child(2) > .v-btn__content").click({ force: true });
     //Assertion validation
     cy.contains(" Connections ").should("be.visible");
-
-    cy.wait(2000);
     cy.contains("Coordinator").click({ force: true });
-    cy.wait(4000);
-    //Select Name
-    // cy.get(
-    //   ".v-list-item:nth-child(1) .v-input--selection-controls__ripple"
-    // ).click({ force: true });
     cy.contains(this.DetailViewData.ContributorsName).click({ force: true });
     //Click on Save
     cy.get(".button-pop-ups--size > .v-btn__content")
@@ -619,7 +566,7 @@ describe("Update created kit item test case", function () {
     //creation Assertion validation
     cy.contains("Item shared").should("be.visible");
     cy.log("Contributor added");
-    cy.wait(4000);
+    cy.wait(1000);
   });
 
   it.only("Time Entries Tab", function () {
@@ -662,7 +609,7 @@ describe("Update created kit item test case", function () {
     cy.get(
       "div:nth-child(2) > div:nth-child(1) > span > div > div > div.v-input__slot > div.v-select__slot > div.v-input__append-inner > div"
     ).click({ force: true });
-    cy.wait(4000);
+    cy.wait(2000);
     //Assertion validation
     cy.contains("Connection").should("be.visible");
     cy.wait(2000);
@@ -678,54 +625,46 @@ describe("Update created kit item test case", function () {
     //Assertion validation
     cy.contains(" Time Entry details saved ").should("be.visible");
     cy.log("Time Entry details saved");
-    cy.wait(4000);
+    cy.wait(1000);
   });
 
   it.only("Comments Tab", function () {
     //Comments Tab
     cy.contains("Comments ").click({ force: true });
-    cy.wait(2000);
     cy.get('[name="addComment"]').type(this.DetailViewData.AddComments);
-    cy.wait(2000);
     cy.contains(" SAVE ").click({ force: true });
     //Assertion validation
     cy.contains(" New Comment added ").should("be.visible");
     cy.log("Comment has been added");
-    cy.wait(4000);
   });
 
   it.only("Groups Tab", function () {
     //Groups Tab
     cy.contains(" Groups ").click({ force: true });
-    cy.wait(2000);
     //Click on Add for Grops
     cy.get(".details-wrapper > .col > .ml-0 > .v-btn__content").click({
       force: true,
     });
     //Assertion validation
     cy.contains(" Groups ").should("be.visible");
-    cy.wait(2000);
     cy.contains(this.DetailViewData.AddGroup).click({ force: true });
     //Assertion validation
     cy.contains(this.DetailViewData.AddGroup).should("be.visible");
-    cy.wait(2000);
+    cy.wait(1000);
   });
 
   it.only("Common Plan", function () {
     //Click on common plan tab
     cy.contains(" Common Plans ").click({ force: true });
-
     //Click on Add Icon
     cy.get(
       " div.tab--content.col div.v-window.tab-content-wrapper.v-item-group.theme--light.v-tabs-items div.v-window__container div.v-window-item.v-window-item--active:nth-child(7) div.wrapper-tabs-content.v-card.v-sheet.theme--light div.v-card__text.kit-documents.fill-height div.row.container-details.fluid.fill-height.kit-details-space-planner.pa-8 div.details-wrapper.fill-height.col div.pr-4.col-sm-12.col:nth-child(2) div.fill-height div.container.xs12.mt-2.container--fluid.grid-list-lg div.row.justify-space-between:nth-child(1) div.col-md-5.col-lg-3.col-12 div.space-planner-card--add-new.hidden-sm-and-down.mb-2.v-card.v-sheet.v-sheet--tile.theme--light div.row.space-planner-card-container.pa-2.card-align.align-center div.d-flex.col.col-12 button.button-w-borders.ml-4.addBtn.v-btn.v-btn--flat.v-btn--text.theme--light.v-size--default > span.v-btn__content"
     ).click({ force: true });
     cy.log("Common Plan Board has been Opened");
-    cy.wait(2000);
     //Common plan board assertion
     cy.contains(" Layout ").should("be.visible");
     cy.contains(" Schedule ").should("be.visible");
     cy.contains(" View ").should("be.visible");
-
     //Creating Plan
     cy.get('[placeholder="Plan Name"]').type(
       this.DetailViewData.CommonPlanName
@@ -736,19 +675,16 @@ describe("Update created kit item test case", function () {
     });
     cy.log("Common Plan created and Saved");
     cy.contains("Plan created").should("be.visible");
-    cy.wait(2000);
+    cy.wait(1000);
     //Exit the Plan
     cy.get(".new-kit-space-planner-wrapper__exit path").click({ force: true });
     cy.log("Taken Exit form Layout Mode");
-    cy.wait(2000);
     cy.contains(this.DetailViewData.CommonPlanName).should("be.visible");
     cy.log("Common Plan Created");
-    cy.wait(3000);
+    cy.wait(1000);
   });
 
   it.only("Copy and Delete Common Plan", function () {
-    cy.wait(3000);
-
     //Click on copy plan
     cy.get(".space-planner-card--action-icon > .icon").click();
     cy.contains("Plan created").should("be.visible");
@@ -767,7 +703,7 @@ describe("Update created kit item test case", function () {
     cy.wait(1000);
 
     cy.contains(" Layout ").click({ force: true });
-    cy.wait(4000);
+    cy.wait(1000)
     //Exit the Plan
     cy.get(".new-kit-space-planner-wrapper__exit path").click({ force: true });
     cy.log("Taken Exit form Layout Mode");
@@ -789,20 +725,17 @@ describe("Update created kit item test case", function () {
     // cy.contains("Copy of " + this.DetailViewData.CommonPlanName).should(
     //   "not.be.visible"
     // );
-    cy.wait(3000)
+    cy.wait(1000)
   });
 
   it.only('Close details view', function () {
-
-    cy.wait(2000)
     //Close Kit type
     cy.get(".subheader--button-icon-wrapper .inline-svg").click({
       force: true,
     });
     cy.log(this.NewKitItemData.KitName + "Kit item has been Close");
     cy.contains(" Recently Viewed ").should("be.visible");
-    cy.wait(5000);
-
+    cy.wait(2000);
     //Update kit item assertion
     cy.contains(
       this.DataType2.Url + ":" + " " + this.UpdateKitItemData.Url
@@ -951,16 +884,16 @@ describe("Details view updation validation test case", function () {
 
   it.only('Currency Element data Validation', function () {
 
-    var lower = this.DataType2.Currency.toLowerCase();
-    cy.xpath('//div[@class="kit-control-currency--right ma-0 pa-0 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
+    var currency = this.DataType2.Currency.toLowerCase();
+    cy.xpath('//div[@class="kit-control-' + currency + '--right ma-0 pa-0 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
       .next('input').should("have.value", this.UpdateKitItemData.Currency)
 
   })
 
   it.only('Measure Element data Validation', function () {
 
-    var lower = this.DataType2.Currency.toLowerCase();
-    cy.xpath('//div[@class="kit-control-measure--left ma-0 pa-0 pr-2 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
+    var measure = this.DataType2.Measure.toLowerCase();
+    cy.xpath('//div[@class="kit-control-' + measure + '--left ma-0 pa-0 pr-2 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
       .next('input').should("have.value", this.UpdateKitItemData.Measure)
   })
 
@@ -1043,17 +976,13 @@ describe("Details view updation validation test case", function () {
 
   })
 
-  it("SelectList Element data Validation", function () {
-
-    var lower = this.DataType2.Number.toLowerCase();
-    //logging input data on console
-    cy.xpath("//div[contains(@class, 'v-list-item__subtitle') and contains(text(),' Australia ')]")
-      .invoke('val')
-      .then(text => {
-        const SelectList = text;
-        cy.log(SelectList);
-      })
-  });
+  it.only("SelectList Element data Validation", function () {
+    var selectList = this.DataType2.SelectListName.toLowerCase();
+    cy.xpath('//div[@controlname="selectList"]//div[@class="v-list-item__subtitle"]')
+      .invoke('text').then((text) => {
+        expect(text.trim()).equal(this.UpdateKitItemData.SelectListValue)
+      });
+  })
 
   it("RadioSelect Element data Validation", function () {
     cy.wait(2000)
@@ -1065,6 +994,14 @@ describe("Details view updation validation test case", function () {
     //CheckboxSelect1
     cy.get('[type="checkbox"]').eq(4).should('be.checked')
     cy.get('[type="checkbox"]').eq(6).should('be.checked')
+  });
+
+  it.only('Stepper Element data Validation', function () {
+    var stepper = this.DataType2.StepperName.toLowerCase();
+    cy.xpath('//div[@controlname="' + stepper + '"]//div[@class="v-stepper__header"]//div[@class="v-stepper__step v-stepper__step--inactive v-stepper__step--complete"]//div[@class="v-list-item__subtitle"]')
+      .invoke('text').then((text) => {
+        expect(text.trim()).equal(this.UpdateKitItemData.StepperValue)
+      })
   });
 
   it.only('UserSelector Element data Validation', function () {
@@ -1085,15 +1022,23 @@ describe("Details view updation validation test case", function () {
   })
 
   it.only('Assigning Element data Validation', function () {
-    var lower = this.DataType2.Assigning.toLowerCase();
+    var assigning = this.DataType2.Assigning.toLowerCase();
     cy.get('.v-btn:nth-child(1) .v-badge > .inline-svg').scrollIntoView({ force: true })
 
     //json value assertion
-    cy.xpath('//div[@controlname="assigning"]//div[@class="item-label col"]').children('div').invoke('text')
+    cy.xpath('//div[@controlname="' + assigning + '"]//div[@class="item-label col"]').children('div').invoke('text')
       .then((text) => {
         expect(text.trim()).equal(this.UpdateKitItemData.DUpAssigning)
       });
   })
+
+  it.only('Inspection Element data Validation', function () {
+    var inspection = this.DataType2.InspectionName.toLowerCase();
+    cy.xpath('//div[@controlname="' + inspection + '"]//div[@class="v-slide-group__content"]').children('span.v-chip--active')
+      .invoke('text').then((text) => {
+        expect(text.trim()).equal(this.UpdateKitItemData.InspectionValue)
+      });
+  });
 
   it.only('Icon Element data Validation', function () {
     //Validating details view input data

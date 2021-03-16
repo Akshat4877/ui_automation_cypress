@@ -292,7 +292,7 @@ describe("Related Control One to Many test case", function () {
     //Select Value of miniutes
     cy.xpath("//span[contains(text(),'30')]").first().click({ force: true });
     //Click on PM
-    cy.xpath("//div[contains(text(),'PM')]").click({ force: true });
+    cy.xpath("//div[contains(text(),'PM')]").first().click({ force: true });
     //Click on OK to save date
     cy.xpath(
       "//div[contains(@class,'v-dialog v-dialog--active')]//button[1]"
@@ -346,7 +346,7 @@ describe("Related Control One to Many test case", function () {
 
     //Stepper
     //getting value form different json file
-    cy.contains(this.RelatedKitItemData.StepperValue4).click({ force: true });
+    cy.contains(this.RelatedKitItemData.StepperValue).click({ force: true });
     cy.log("Stepper Value has been set.");
 
 
@@ -400,21 +400,13 @@ describe("Related Control One to Many test case", function () {
       .eq(0)
       .type(this.RelatedKitItemData.IconLabel);
 
-    //Inspection(Values coming form KitItemValues Json File)
     //Inspection
-    cy.contains(this.DataType2.Inspection).scrollIntoView({
-      force: true,
-    });
-
-    //child 1 for 1st value &&&& child 2 for 2nd value-child 3 for 3rd value......
-    //"These are the index value of div child":"use according to select inspection value",
-    cy.get(
-      "div.v-slide-group__wrapper > div > span:nth-child(" +
-      this.RelatedKitItemData.InspectionValue2 +
-      ") > span"
-    )
-      .eq(0)
-      .click({ force: true });
+    cy.get('.v-btn:nth-child(1) .v-badge > .inline-svg').first()
+      .scrollIntoView({ force: true })
+    cy.wait(1000)
+    cy.xpath("//*[contains(text(),'" + this.RelatedKitItemData.InspectionValue + "')]//div[@class='v-avatar v-avatar--left']").first()
+      .click({ force: true })
+    cy.wait(1000);
 
     //Assigning
     //Click on to open Assigning Pop up-Also working
@@ -512,7 +504,6 @@ describe("Related Control One to Many test case", function () {
   });
 
   it.only('Click to open related new', function () {
-
     cy.wait(2000)
     cy.get('.grid-body > td:nth-child(1) > .v-list-item__subtitle').click({ force: true });
     //Related Kit Assertion
@@ -527,7 +518,6 @@ describe("Related Control One to Many test case", function () {
     //Validating details view input data
     cy.xpath("//input[@controlname='" + lower + "']").should("have.value", this.RelatedKitItemData.Url)
   });
-
 
   it.only("Text Element data Validation", function () {
     var lower = this.DataType2.Text.toLowerCase();
@@ -544,34 +534,29 @@ describe("Related Control One to Many test case", function () {
       });
   })
 
-
   it.only("Telephone Element data Validation", function () {
     var lower = this.DataType2.Telephone.toLowerCase();
     //Validating details view input data
     cy.xpath("//input[@controlname='" + lower + "']").should("have.value", this.RelatedKitItemData.Telephone)
-
   });
 
-
   it.only("TextAera Element data Validation", function () {
-
     var lower = this.DataType2.TextAera.toLowerCase();
     //Validating details view input data
     cy.get('[name="TextAera"]').eq(1).should("have.value", this.RelatedKitItemData.TextAera)
-
   });
 
   it.only('Currency Element data Validation', function () {
-    var lower = this.DataType2.Currency.toLowerCase();
+    var currency = this.DataType2.Currency.toLowerCase();
     //Assertion Validation for currency
-    cy.xpath('//div[@class="kit-control-currency--right ma-0 pa-0 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
+    cy.xpath('//div[@class="kit-control-' + currency + '--right ma-0 pa-0 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
       .next('input').should("have.value", this.RelatedKitItemData.Currency)
   })
 
   it.only('Measure Element data Validation', function () {
-    var lower = this.DataType2.Currency.toLowerCase();
+    var measure = this.DataType2.Measure.toLowerCase();
     //Assertion Validation for currency
-    cy.xpath('//div[@class="kit-control-measure--left ma-0 pa-0 pr-2 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
+    cy.xpath('//div[@class="kit-control-' + measure + '--left ma-0 pa-0 pr-2 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
       .next('input').should("have.value", this.RelatedKitItemData.Measure)
   })
 
@@ -579,38 +564,30 @@ describe("Related Control One to Many test case", function () {
     var lower = this.DataType2.Email.toLowerCase();
     //Validating details view input data
     cy.xpath("//input[@controlname='" + lower + "']").should("have.value", this.RelatedKitItemData.Email)
-
   });
 
   it.only("Addressline1 Element data Validation", function () {
     //Validating details view input data
     cy.get('[placeholder="Street address, building, company ... "]').eq(0)
       .should("have.value", this.RelatedKitItemData.Addressline1)
-
   });
 
   it.only("Addressline2 Element data Validation", function () {
-
     //Validating details view input data
     cy.get('[name="Address line 2."]')
       .should("have.value", this.RelatedKitItemData.Addressline2)
-
   });
 
   it.only("City Element data Validation", function () {
-
     //Validating details view input data
     cy.get('[placeholder="City"]')
       .should("have.value", this.RelatedKitItemData.City)
-
   });
 
   it.only("ZipCode Element data Validation", function () {
-
     //Validating details view input data
     cy.get('[placeholder="Zip/Postal Code"]').eq(0)
       .should("have.value", this.RelatedKitItemData.ZipCode)
-
   });
 
   it.only("State Element data Validation", function () {
@@ -625,16 +602,13 @@ describe("Related Control One to Many test case", function () {
     //Validating details view input data
     cy.get('[placeholder="Country"]')
       .should("have.value", this.RelatedKitItemData.Country)
-
   });
 
   it.only("Number Element data Validation", function () {
-
     var lower = this.DataType2.Number.toLowerCase();
     //Validating details view input data
     cy.xpath("//input[@controlname='" + lower + "']")
       .should("have.value", this.RelatedKitItemData.Number)
-
   });
 
   it.only('Time Element data Validation', function () {
@@ -644,25 +618,18 @@ describe("Related Control One to Many test case", function () {
   })
 
   it.only('Date Element data Validation', function () {
-
     //Check in josn for LoggedDate
     cy.get('[placeholder=" MM / DD / YYYY"]').eq(0)
       .should("have.value", this.RelatedKitItemData.LoggedDate)
-
   })
 
-  it("SelectList Element data Validation", function () {
-    cy.wait(2000)
-    var lower = this.DataType2.Number.toLowerCase();
-    //logging input data on console
-    cy.xpath("//div[contains(@class, 'v-list-item__subtitle') and contains(text(),' Australia ')]")
-      .invoke('val')
-      .then(text => {
-        const SelectList = text;
-        cy.log(SelectList);
-      })
-   
-  });
+  it.only("SelectList Element data Validation", function () {
+    var selectList = this.DataType2.SelectListName.toLowerCase();
+    cy.xpath('//div[@controlname="selectList"]//div[@class="v-list-item__subtitle"]')
+      .invoke('text').then((text) => {
+        expect(text.trim()).equal(this.RelatedKitItemData.SelectListValue)
+      });
+  })
 
   it("RadioSelect Element data Validation", function () {
     cy.wait(2000)
@@ -675,8 +642,15 @@ describe("Related Control One to Many test case", function () {
     cy.get('[type="checkbox"]').eq(3).should('be.checked')
   });
 
-  it.only('UserSelector Element data Validation', function () {
+  it.only('Stepper Element data Validation', function () {
+    var stepper = this.DataType2.StepperName.toLowerCase();
+    cy.xpath('//div[@controlname="' + stepper + '"]//div[@class="v-stepper__header"]//div[@class="v-stepper__step v-stepper__step--inactive v-stepper__step--complete"]//div[@class="v-list-item__subtitle"]')
+      .invoke('text').then((text) => {
+        expect(text.trim()).equal(this.RelatedKitItemData.StepperValue)
+      })
+  });
 
+  it.only('UserSelector Element data Validation', function () {
     //scroll to user selector
     cy.get('.imageContent').eq(0).scrollIntoView({ force: true })
     cy.wait(1000)
@@ -686,7 +660,6 @@ describe("Related Control One to Many test case", function () {
   })
 
   it.only('ContactSelector Element data Validation', function () {
-
     cy.xpath('//div[@controlname="contactSelector"]//div[@class="col item-label"]').children('div').invoke('text').then((text) => {
       expect(text.trim()).equal(this.RelatedKitItemData.ContactSelectorName)
     });
@@ -695,7 +668,6 @@ describe("Related Control One to Many test case", function () {
   it.only('Assigning Element data Validation', function () {
     var lower = this.DataType2.Assigning.toLowerCase();
     cy.get('.v-btn:nth-child(1) .v-badge > .inline-svg').eq(0).scrollIntoView({ force: true })
-
     //json value assertion
     cy.xpath('//div[@controlname="assigning"]//div[@class="item-label col"]').children('div').invoke('text')
       .then((text) => {
@@ -703,17 +675,22 @@ describe("Related Control One to Many test case", function () {
       });
   })
 
-  it.only('Icon Element data Validation', function () {
+  it.only('Inspection Element data Validation', function () {
+    var inspection = this.DataType2.InspectionName.toLowerCase();
+    cy.xpath('//div[@controlname="' + inspection + '"]//div[@class="v-slide-group__content"]').children('span.v-chip--active')
+      .invoke('text').then((text) => {
+        expect(text.trim()).equal(this.RelatedKitItemData.InspectionValue)
+      });
+  });
 
+  it.only('Icon Element data Validation', function () {
     //Validating details view input data
     cy.get('[placeholder="Label"]')
       .should("have.value", this.RelatedKitItemData.IconLabel)
-
   })
 
 
   it.only('Close the related new form', function () {
-
     //close the Kit Item
     cy.wait(2000);
     //Close Kit type
