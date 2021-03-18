@@ -135,6 +135,16 @@ describe("New created kit item creation Validation test case", function () {
   });
 
 
+  it.only('RadioSelect Element data Validation', function () {
+    //json value assertion
+    cy.xpath('//div[@controlname="radioSelect"]//div[@class="v-input__slot"]//div[@class="v-radio theme--light v-item--active"]//div[@class="v-list-item__content"]')
+      .invoke('text')
+      .then((text) => {
+        cy.log(text)
+        expect(text.trim()).contains(this.NewKitItemData.RadioSelectValue)
+      });
+  })
+
   it.only("Url Element data Validation", function () {
     var lower = this.DataType2.Url.toLowerCase();
     //Validating details view input data
@@ -238,16 +248,19 @@ describe("New created kit item creation Validation test case", function () {
   });
 
   it.only('Time Element data Validation', function () {
+    //json value assertion
     cy.get('[placeholder="Add Time"][readonly="readonly"]').eq(1)
       .should("have.value", this.NewKitItemData.LoggedTime)
   })
 
   it.only('Date Element data Validation', function () {
+    //json value assertion
     cy.get('[placeholder=" MM / DD / YYYY"]')
       .should("have.value", this.NewKitItemData.LoggedDate)
   })
 
   it.only("SelectList Element data Validation", function () {
+    //json value assertion
     var selectList = this.DataType2.SelectListName.toLowerCase();
     cy.xpath('//div[@controlname="selectList"]//div[@class="v-list-item__subtitle"]')
       .invoke('text').then((text) => {
@@ -255,17 +268,26 @@ describe("New created kit item creation Validation test case", function () {
       });
   })
 
-  it("RadioSelect Element data Validation", function () {
-    cy.get('.v-radio').eq(1).should('be.checked')
-  });
+  it.only('RadioSelect Element data Validation', function () {
+    var radio = this.DataType2.RadioSelectValue.toLowerCase();
+    //json value assertion
+    cy.xpath('//div[@controlname="radioSelect"]//div[@class="v-input__slot"]//div[@class="v-radio theme--light v-item--active"]//div[@class="v-list-item__content"]')
+      .invoke('text')
+      .then((text) => {
+        cy.log(text)
+        expect(text.trim()).contains(this.NewKitItemData.RadioSelectValue)
+      });
+  })
 
   it.only("CheckboxSelect Element data Validation", function () {
     //CheckboxSelect1
+    //json value assertion
     cy.get('[type="checkbox"]').eq(3).should('be.checked')
     cy.get('[type="checkbox"]').last().should('be.checked')
   });
 
   it.only('Stepper Element data Validation', function () {
+    //json value assertion
     var stepper = this.DataType2.StepperName.toLowerCase();
     cy.xpath('//div[@controlname="' + stepper + '"]//div[@class="v-stepper__header"]//div[@class="v-stepper__step v-stepper__step--inactive v-stepper__step--complete"]//div[@class="v-list-item__subtitle"]')
       .invoke('text').then((text) => {
@@ -277,12 +299,14 @@ describe("New created kit item creation Validation test case", function () {
     //scroll to user selector
     cy.get('.imageContent').eq(0).scrollIntoView({ force: true })
     cy.wait(1000)
+    //json value assertion
     cy.xpath('//div[@controlname="userSelector"]//div[@class="col item-label"]').children('div').invoke('text').then((text) => {
       expect(text.trim()).equal(this.NewKitItemData.UserSelectorName)
     });
   })
 
   it.only('ContactSelector Element data Validation', function () {
+    //json value assertion
     cy.xpath('//div[@controlname="contactSelector"]//div[@class="col item-label"]').children('div').invoke('text').then((text) => {
       expect(text.trim()).equal(this.NewKitItemData.ContactSelectorName)
     });
@@ -299,6 +323,7 @@ describe("New created kit item creation Validation test case", function () {
   })
 
   it.only('Inspection Element data Validation', function () {
+    //json value assertion
     var inspection = this.DataType2.InspectionName.toLowerCase();
     cy.xpath('//div[@controlname="' + inspection + '"]//div[@class="v-slide-group__content"]').children('span.v-chip--active')
       .invoke('text').then((text) => {
@@ -308,6 +333,7 @@ describe("New created kit item creation Validation test case", function () {
 
   it.only('Icon Element data Validation', function () {
     //Validating details view input data
+    //json value assertion
     cy.get('[placeholder="Label"]')
       .should("have.value", this.NewKitItemData.IconLabel)
   })

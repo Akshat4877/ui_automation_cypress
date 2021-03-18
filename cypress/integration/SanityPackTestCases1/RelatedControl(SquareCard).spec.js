@@ -616,11 +616,16 @@ describe("Related Control Square Card test case", function () {
       });
   })
 
-  it("RadioSelect Element data Validation", function () {
-    cy.wait(2000)
-    cy.get('.v-radio').eq(1).should('be.checked')
-    cy.wait(2000)
-  });
+  it.only('RadioSelect Element data Validation', function () {
+    var radio = this.DataType2.RadioSelectName.toLowerCase();
+    //json value assertion
+    cy.xpath('//div[@controlname="radioSelect"]//div[@class="v-input__slot"]//div[@class="v-radio theme--light v-item--active"]//div[@class="v-list-item__content"]')
+      .invoke('text')
+      .then((text) => {
+        cy.log(text)
+        expect(text.trim()).contains(this.RelatedKitItemData.RadioSelectValue)
+      });
+  })
 
   it.only("CheckboxSelect Element data Validation", function () {
     //CheckboxSelect3

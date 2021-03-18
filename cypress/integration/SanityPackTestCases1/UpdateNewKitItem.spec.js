@@ -522,7 +522,6 @@ describe("New kit item complete creation test case", function () {
       .scrollIntoView({ force: true });
 
     //Currency;
-
     cy.xpath('//div[@class="kit-control-currency--right ma-0 pa-0 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
       .next('input').clear().type(this.UpdateKitItemData.Currency);
     cy.log("Currency Updated");
@@ -732,16 +731,14 @@ describe("New kit item complete creation test case", function () {
     cy.get(".v-btn__content > img").click({
       force: true,
     });
-    cy.wait(2000);
     //Click on Icon Tittle and  select Icon logo
     //Give numeric no from 1 in child(1,2,3...)
     cy.get(".thumb-container:nth-child(4) .selected-icon").click({
       force: true,
     });
-    cy.wait(2000);
+
     //Icon Save
     cy.get(".button-pop-ups").first().click({ force: true });
-    cy.wait(2000);
 
     //IcozSize
     cy.get('[placeholder="Label"]').scrollIntoView({ force: true });
@@ -754,7 +751,6 @@ describe("New kit item complete creation test case", function () {
     cy.contains(this.UpdateKitItemData.ExtraSmalliconSize).click({
       force: true,
     });
-    cy.wait(2000);
     //IconLable
     cy.get('[placeholder="Label"]')
       .clear()
@@ -774,7 +770,7 @@ describe("New kit item complete creation test case", function () {
     ).click({ force: true });
     //Click on to open Assigning
     cy.wait(5000);
-    cy.contains(this.UpdateKitItemData.AssigningName).click({ force: true });
+    cy.contains(this.UpdateKitItemData.Assigning).click({ force: true });
     cy.wait(3000);
     //Click on to save
     cy.get(".button-pop-ups--size > .v-btn__content").click({ force: true });
@@ -1067,11 +1063,9 @@ describe("New view updation validation test case", function () {
   });
 
   it.only("Addressline2 Element data Validation", function () {
-
     //Validating details view input data
     cy.get('[name="Address line 2."]')
       .should("have.value", this.UpdateKitItemData.Addressline2)
-
   });
 
   it.only("City Element data Validation", function () {
@@ -1082,16 +1076,13 @@ describe("New view updation validation test case", function () {
   });
 
   it.only("ZipCode Element data Validation", function () {
-
     cy.get('[placeholder="Zip/Postal Code"]').scrollIntoView({ force: true })
     //Validating details view input data
     cy.get('[placeholder="Zip/Postal Code"]')
       .should("have.value", this.UpdateKitItemData.ZipCode)
-
   });
 
   it.only("State Element data Validation", function () {
-
     cy.xpath('//div[@class="v-select__slot"]//div[@class="v-select__selections"]//div[@class="v-select__selection v-select__selection--comma"]')
       .eq(0)
       .invoke('text').then((text) => {
@@ -1100,11 +1091,9 @@ describe("New view updation validation test case", function () {
   });
 
   it.only("Country Element data Validation", function () {
-
     //Validating details view input data
     cy.get('[placeholder="Country"]')
       .should("have.value", this.UpdateKitItemData.Country)
-
   });
 
   it.only("Number Element data Validation", function () {
@@ -1112,23 +1101,18 @@ describe("New view updation validation test case", function () {
     //Validating details view input data
     cy.xpath("//input[@controlname='" + lower + "']")
       .should("have.value", this.UpdateKitItemData.Number)
-
   });
 
   it.only('Time Element data Validation', function () {
-
     //Check in josn for LoggedTime
     cy.get('[placeholder="Add Time"][readonly="readonly"]').eq(0)
       .should("have.value", this.UpdateKitItemData.LoggedTime)
-
   })
 
   it.only('Date Element data Validation', function () {
-
     //Check in josn for LoggedDate
     cy.get('[placeholder=" MM / DD / YYYY"]')
       .should("have.value", this.UpdateKitItemData.LoggedDate)
-
   })
 
   it.only("SelectList Element data Validation", function () {
@@ -1139,11 +1123,13 @@ describe("New view updation validation test case", function () {
       });
   })
 
-  it("RadioSelect Element data Validation", function () {
-    cy.wait(2000)
-    cy.get('.v-radio').eq(1).should('be.checked')
-    cy.wait(2000)
-  });
+  it.only("SelectList Element data Validation", function () {
+    var selectList = this.DataType2.SelectListName.toLowerCase();
+    cy.xpath('//div[@controlname="selectList"]//div[@class="v-list-item__subtitle"]')
+      .invoke('text').then((text) => {
+        expect(text.trim()).equal(this.UpdateKitItemData.SelectListValue)
+      });
+  })
 
   it.only("CheckboxSelect Element data Validation", function () {
     //CheckboxSelect3
@@ -1181,7 +1167,7 @@ describe("New view updation validation test case", function () {
     //json value assertion
     cy.xpath('//div[@controlname="' + lower + '"]//div[@class="item-label col"]').eq(0).children('div').invoke('text')
       .then((text) => {
-        expect(text.trim()).equal(this.UpdateKitItemData.DUpAssigning)
+        expect(text.trim()).equal(this.UpdateKitItemData.Assigning)
       });
   })
 

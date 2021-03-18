@@ -461,7 +461,7 @@ describe("Update Related New for OneToMany Related Control", function () {
       .click({ force: true });
     //Click on to open Assigning
     cy.wait(4000);
-    cy.contains(this.UpdateKitItemData.AssigningName).click({ force: true });
+    cy.contains(this.UpdateKitItemData.Assigning).click({ force: true });
 
     //Click on to save
     cy.get(".button-pop-ups--size > .v-btn__content").click({ force: true });
@@ -536,7 +536,6 @@ describe("Update Related New for OneToMany Related Control", function () {
   });
 
   it.only('Currency Element data Validation', function () {
-
     var currency = this.DataType2.Currency.toLowerCase();
     cy.xpath('//div[@class="kit-control-' + currency + '--right ma-0 pa-0 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
       .next('input').should("have.value", this.UpdateKitItemData.Currency)
@@ -544,7 +543,6 @@ describe("Update Related New for OneToMany Related Control", function () {
   })
 
   it.only('Measure Element data Validation', function () {
-
     var measure = this.DataType2.Measure.toLowerCase();
     cy.xpath('//div[@class="kit-control-' + measure + '--left ma-0 pa-0 pr-2 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
       .next('input').should("have.value", this.UpdateKitItemData.Measure)
@@ -635,11 +633,16 @@ describe("Update Related New for OneToMany Related Control", function () {
       });
   })
 
-  it("RadioSelect Element data Validation", function () {
-    cy.wait(2000)
-    cy.get('.v-radio').eq(1).should('be.checked')
-    cy.wait(2000)
-  });
+  it.only('RadioSelect Element data Validation', function () {
+    var radio = this.DataType2.RadioSelectName.toLowerCase();
+    //json value assertion
+    cy.xpath('//div[@controlname="radioSelect"]//div[@class="v-input__slot"]//div[@class="v-radio theme--light v-item--active"]//div[@class="v-list-item__content"]')
+      .invoke('text')
+      .then((text) => {
+        cy.log(text)
+        expect(text.trim()).contains(this.UpdateKitItemData.RadioSelectValue)
+      });
+  })
 
   it.only("CheckboxSelect Element data Validation", function () {
     //CheckboxSelect1
@@ -679,7 +682,7 @@ describe("Update Related New for OneToMany Related Control", function () {
     //json value assertion
     cy.xpath('//div[@controlname="' + lower + '"]//div[@class="item-label col"]').children('div').invoke('text')
       .then((text) => {
-        expect(text.trim()).equal(this.UpdateKitItemData.DUpAssigning)
+        expect(text.trim()).equal(this.UpdateKitItemData.Assigning)
       });
   })
 
@@ -1213,11 +1216,16 @@ describe("Update Related New for OneToMany Related Control", function () {
       });
   })
 
-  it("RadioSelect Element data Validation", function () {
-    cy.wait(2000)
-    cy.get('.v-radio').eq(1).should('be.checked')
-    cy.wait(2000)
-  });
+  it.only('RadioSelect Element data Validation', function () {
+    var radio = this.DataType2.RadioSelectName.toLowerCase();
+    //json value assertion
+    cy.xpath('//div[@controlname="radioSelect"]//div[@class="v-input__slot"]//div[@class="v-radio theme--light v-item--active"]//div[@class="v-list-item__content"]')
+      .invoke('text')
+      .then((text) => {
+        cy.log(text)
+        expect(text.trim()).contains(this.RelatedKitItemData.RadioSelectValue)
+      });
+  })
 
   it.only("CheckboxSelect Element data Validation", function () {
     //CheckboxSelect1

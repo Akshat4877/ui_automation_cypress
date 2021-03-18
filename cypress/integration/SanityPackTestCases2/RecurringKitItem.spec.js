@@ -9,12 +9,11 @@ describe("Recurring New kit item creation test case", function () {
     const slp = new SanityLoginPage();
     slp.nvdTest()
     //slp.TmProd();
-
     //Handling Alert
+    
     cy.on("window:confirm", () => {
       cy.log("Alert has been Handled");
     });
-
     //Login Assertions
     cy.contains(" Log In ").should("be.visible");
     //Enter credentials
@@ -33,8 +32,6 @@ describe("Recurring New kit item creation test case", function () {
       "refreshToken",
       "jwtAccessToken"
     );
-
-    cy.wait(10000);
   });
 
   this.beforeEach("KitType Data", function () {
@@ -59,9 +56,6 @@ describe("Recurring New kit item creation test case", function () {
     ) {
       this.NewKitItemData = SanityTCData;
     });
-
-
-
     cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
       NewDataForElements
     ) {
@@ -90,36 +84,32 @@ describe("Recurring New kit item creation test case", function () {
   });
 
   it.only("Open Recurring Items", function () {
-    cy.wait(10000);
     const lp = new LoginPage();
     //Assertion
-    //cy.title().should("eq", "Common Areas");
+    cy.title().should("eq", "Common Areas");
     lp.PlusIcon();
-    //debugger;
     //Click on Recurring Item icon
-    cy.wait(3000);
+    cy.wait(1000);
     //This is class to open searched kit type by clicking + iocn
     cy.contains(" Recurring Items ").click({ force: true });
     //Assertion
     cy.contains(" New Schedule created ").should("be.visible");
-    cy.wait(3000);
+    cy.wait(1000);
     //Assertions
     cy.contains(" Detail ").should("be.visible");
     cy.contains(" Recurring Items ").should("be.visible");
     //Assertion
     cy.log("Recurring Pop up has been Opened");
-    cy.wait(2000);
+    cy.wait(1000);
     //Recurring schedule name
     cy.get('[name="Name"]').type(this.NewKitItemData.RecurringitemName);
   });
 
   it.only("Create Recurring New Kit Item", function () {
     const KTP = new KitTypePage();
-    cy.wait(2000);
-
     //Click on to add kit item
     cy.contains(" Recurring Items ").click({ force: true });
-    cy.wait(2000);
+    cy.wait(1000);
     //Click on Add Btn
     cy.get(".col > .scheduled-action-item-card-add-new .v-btn__content").click({
       force: true,
@@ -132,46 +122,36 @@ describe("Recurring New kit item creation test case", function () {
     cy.wait(3000);
     //This is class to open searched kit type by clicking + iocn
     cy.get(".truncate-special").first().click({ force: true });
-    cy.wait(3000);
+    cy.wait(1000);
     //Assertion
     cy.contains("New Item created").should("be.visible");
     cy.log("New Item created and Kit Type has been Opened");
-    cy.wait(3000);
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //Creating Recurring kit item
-
     //save Kit Item for empty form
     cy.get(".v-select__selections .v-btn__content").click({ force: true });
     //kit item Save Assertion for no data
     cy.contains("Nothing to save for " + this.NewKitItemData.KitName).should(
       "be.visible"
     );
-    cy.wait(3000);
+    cy.wait(1000);
     cy.log("With No data new kit item saved successfully ");
     //Url
     cy.get("[name" + "=" + this.DataType2.Url + "]")
       .last()
       .type(this.NewKitItemData.Url);
-    cy.wait(1000);
 
     //Text
     cy.get("[name" + "=" + this.DataType2.Text + "]")
       .last()
       .type(this.NewKitItemData.Text);
-    cy.wait(1000);
 
     //File
     cy.get(".link-icon--green > path").click({ force: true });
-    cy.wait(3000);
     //give file name to select
     cy.contains(this.NewKitItemData.NewFormLibFileName).click({ force: true });
-    // cy.get(".thumb-container:nth-child(5) .selected-icon").click({
-    //   force: true,
-    // });
-    //Click on save file
-    cy.wait(2000);
     cy.get(
       ".container-search > .pop-up--header > .pop-up--header--right > .button-pop-ups--size > .v-btn__content"
     ).click({ force: true });
@@ -183,22 +163,11 @@ describe("Recurring New kit item creation test case", function () {
     cy.get("[name" + "=" + this.DataType2.Telephone + "]")
       .last()
       .type(this.NewKitItemData.Telephone);
-    cy.wait(1000);
 
     //TextAera
     cy.get("[name" + "=" + this.DataType2.TextAera + "]")
       .last()
       .type(this.NewKitItemData.TextAera);
-    cy.wait(1000);
-
-    // //save Kit Item
-    // cy.get(".v-select__selections .v-btn__content").click({ force: true });
-    // cy.contains(this.NewKitItemData.KitName + " has been saved").should(
-    //   "be.visible"
-    // );
-    // cy.log(this.NewKitItemData.KitName + "Kit Type has been Saved");
-    // cy.log("Partially saving new form");
-    // cy.wait(5000);
 
     //Slider;
     //Firing Alert pop for manual action
@@ -208,9 +177,9 @@ describe("Recurring New kit item creation test case", function () {
     cy.log(
       "Firing Alert pop for manual action to Set Slider value by clicking slider Bar"
     );
-    cy.wait(10000);
+    cy.wait(5000);
 
-    // Currency;
+    //Currency;
     cy.get(
       "#inspire > div.v-dialog__content.v-dialog__content--active > div > div > div > div:nth-child(2) > div.new-kit-item.v-card.v-sheet.theme--light > div > div > div > div > div.row.kit-details-wrapper--content.pb-0 > div > div > div > div > div > div > div.tab--content.col > div > div > div.v-window-item.v-window-item--active > div > div > div.row.container-details > div.fill-height.col > div > div > div.kit-control-component.kit-control-currency.px-3.col.col-sm-12.col-md-6.mb-4.px-3 > div > div.kit-control-currency--right.ma-0.pa-0.col > div > div > div.v-input__slot > div"
     )
@@ -218,7 +187,6 @@ describe("Recurring New kit item creation test case", function () {
       .type(this.NewKitItemData.Currency);
 
     //Measure
-
     cy.get(
       "#inspire > div.v-dialog__content.v-dialog__content--active > div > div > div > div:nth-child(2) > div.new-kit-item.v-card.v-sheet.theme--light > div > div > div > div > div.row.kit-details-wrapper--content.pb-0 > div > div > div > div > div > div > div.tab--content.col > div > div > div.v-window-item.v-window-item--active > div > div > div.row.container-details > div.fill-height.col > div > div > div.kit-control-component.kit-control-measure.px-3.col.col-sm-12.col-md-6.mb-4.px-3 > div > div.kit-control-measure--left.ma-0.pa-0.pr-2.col > div > div > div.v-input__slot > div"
     )
@@ -229,12 +197,11 @@ describe("Recurring New kit item creation test case", function () {
     cy.get("[name" + "=" + this.DataType2.Email + "]")
       .last()
       .type(this.NewKitItemData.Email);
-    cy.wait(1000);
 
     //scroll
     cy.get('[placeholder="Street address, building, company ... "]')
       .scrollIntoView({ force: true })
-    cy.wait(3000)
+    cy.wait(2000)
 
     //Address
     cy.get('[placeholder="Street address, building, company ... "]').type(
@@ -265,7 +232,6 @@ describe("Recurring New kit item creation test case", function () {
     cy.get("[name" + "=" + this.DataType2.Number + "]")
       .last()
       .type(this.NewKitItemData.Number);
-    cy.wait(1000);
 
     //Time Data Element
     //Click on Time to appear time pop up
@@ -298,7 +264,7 @@ describe("Recurring New kit item creation test case", function () {
     cy.wait(2000);
     //Click on OK to save Date
     cy.xpath("//span[contains(text(),'OK')]").first().click({ force: true });
-    cy.wait(2000);
+    cy.wait(1000);
 
     //Toggle
     cy.get(".sync-switch .v-input--selection-controls__ripple").click({
@@ -325,27 +291,14 @@ describe("Recurring New kit item creation test case", function () {
     cy.contains(this.NewKitItemData.CheckboxSelectValue1).click({
       force: true,
     });
-
-
-    cy.log("Checkbox Values has been set.");
-    cy.wait(2000);
-
-    cy.wait(5000);
-    cy.get(".searchIcon").eq(1).scrollIntoView({ force: true });
-
+    cy.wait(1000)
     //Stepper
     //getting value form different json file
-    cy.contains(this.NewKitItemData.StepperValue1).click({ force: true });
+    cy.contains(this.NewKitItemData.StepperValue).click({ force: true });
     cy.log("Stepper Value has been set.");
 
+    cy.get(".searchIcon").eq(1).scrollIntoView({ force: true });
     cy.wait(2000);
-    //.v-stepper__step:nth-child(1/3/5/7/9)
-    // cy.get(".v-stepper__step:nth-child(5) > .v-stepper__step__step").click({
-    //   force: true,
-    // });
-
-    cy.wait(2000);
-    //UserSelector(Values coming form KitItemValues Json File)
     //Click on to open UserSelector Pop up
     cy.get(".searchIcon").eq(0).click({ force: true });
     cy.wait(3000);
@@ -365,7 +318,6 @@ describe("Recurring New kit item creation test case", function () {
     cy.wait(4000);
 
     //getting value form different json file
-    cy.wait(2000);
     //Icon
     //Click on + icon of ICON Element
     cy.get(".v-btn--depressed > .v-btn__content > .inline-svg > path")
@@ -373,17 +325,13 @@ describe("Recurring New kit item creation test case", function () {
       .click({
         force: true,
       });
-    cy.wait(2000);
     //Click on Icon Tittle and  select Icon logo
     //Give numeric no from 1 in child(1,2,3...)
     cy.get(".thumb-container:nth-child(1) .selected-icon").click({
       force: true,
     });
-    cy.wait(2000);
     //Icon Save
     cy.get(".button-pop-ups").first().click({ force: true });
-    cy.wait(2000);
-
     //IcozSize
     cy.get(
       "div.row.wrapper-kit-control.align-center > div > div.fill-height.border-right.col.col-4 > div > div > div.v-input__slot > div.v-select__slot > div.v-input__append-inner > div"
@@ -391,48 +339,37 @@ describe("Recurring New kit item creation test case", function () {
       .last()
       .click({ force: true });
     cy.contains(this.NewKitItemData.LargeiconSize).click({ force: true });
-    cy.wait(2000);
     //IconLable
     cy.get('[placeholder="Label"]').type(this.NewKitItemData.IconLabel);
 
-    //Inspection(Values coming form KitItemValues Json File)
     //Inspection
-    cy.contains(this.DataType2.Inspection).scrollIntoView({
-      force: true,
-    });
-
-    cy.wait(3000);
-    //child 1 for 1st value &&&& child 2 for 2nd value-child 3 for 3rd value......
-    //"These are the index value of div child":"use according to select inspection value",
-    cy.get(
-      "div.v-slide-group__wrapper > div > span:nth-child(" +
-      this.NewKitItemData.InspectionValue1 +
-      ") > span"
-    ).click({ force: true });
-
-    cy.wait(3000);
+    cy.get('.v-btn:nth-child(1) .v-badge > .inline-svg')
+      .scrollIntoView({ force: true })
+    cy.wait(1000)
+    cy.xpath("//*[contains(text(),'" + this.NewKitItemData.InspectionValue + "')]//div[@class='v-avatar v-avatar--left']")
+      .click({ force: true })
+    cy.wait(1000);
     //Assigning
     //Click on to open Assigning Pop up-Also working
     cy.get(".searchIcon > .inline-svg > path").last().click({ force: true });
-
+    cy.contains('Coordinator').click({ force: true })
+    cy.contains('Contributor').click({ force: true })
     //Click on to open Assigning Pop up
     cy.get(".searchIcon").eq(2).click({ force: true });
-    cy.wait(7000);
+    cy.wait(4000);
     //Click on to select the Assigning
     //cy.get(".list-item-search").first().click({ force: true });
     cy.contains(this.NewKitItemData.AssigningName).click({ force: true });
-    cy.wait(3000);
+    cy.wait(2000);
     //Click on to save
     cy.get(".button-pop-ups--size > .v-btn__content").click({ force: true });
     //Assigning creation assertion
     cy.contains("Item shared").should("be.visible");
     cy.log("Assigning added");
-    cy.wait(5000);
 
     ///////////////////////////////////////////////////////////////////////////////////////////
 
     //Link Onetomany
-
     cy.wait(3000);
     //Click on New Item for one to Many Related Control
     cy.get(".ca-item").eq(0).scrollIntoView({ force: true });
@@ -478,7 +415,6 @@ describe("Recurring New kit item creation test case", function () {
     /////////////////////////////////////////////////////////////////////////////////////////////////
 
     //Link OnetoOne
-    cy.wait(2000);
     cy.get(".action-icon:nth-child(2) > .inline-svg").scrollIntoView({
       force: true,
     });
@@ -552,18 +488,12 @@ describe("Recurring New kit item creation test case", function () {
   });
 
   it.only("Files Tab", function () {
-    cy.wait(3000);
-
     //Files Tab
     cy.contains("Files").click({ force: true });
-    cy.wait(2000);
     //Click on Library
     cy.contains("Choose From Library").click({ force: true });
-    cy.wait(3000);
     //give file name to select
     cy.contains(this.NewKitItemData.RecurringFilesTab).click({ force: true });
-    //cy.get(".thumb-container:nth-child(2) .item-check").click({ force: true });
-    cy.wait(2000);
     //Click on save file
     cy.get(".button-pop-ups--size > .v-btn__content")
       .first()
@@ -571,23 +501,24 @@ describe("Recurring New kit item creation test case", function () {
     //Assertion validation
     cy.contains("File saved").should("be.visible");
     cy.log("File uploaded");
-    cy.wait(3000);
+    cy.wait(1000);
   });
 
   it.only("Add a pin on Map", function () {
     //Map Tab
     cy.contains(" Map ").click({ force: true });
-    cy.wait(4000);
+    cy.wait(2000);
     //Click on Map
     cy.get(
       ".vue-map-container:nth-child(2) .gm-style > div:nth-child(1) > div:nth-child(3)"
     ).click({ force: true });
     cy.contains("Add a Pin").click({ force: true });
     //cy.contains("Pin has been created successfully.").should("be.visible");
-    cy.wait(3000);
+    cy.wait(1000);
   });
 
-  it.only("Link Existing Relation On Map", function () {
+
+  it("Link Existing Relation On Map", function () {
     //Click on Map tab
     // cy.contains(" Map ").click({ force: true });
     // cy.wait(2000);
@@ -630,18 +561,14 @@ describe("Recurring New kit item creation test case", function () {
   it.only("Contributors Tab", function () {
     //Contributors Tab
     cy.contains(" Contributors ").click({ force: true });
-    cy.wait(3000);
     //Click on Add for Contributors
     cy.get(".addBtn:nth-child(2) > .v-btn__content").click({ force: true });
-    cy.wait(2000);
+    cy.wait(1000);
     //Assertion validation
     cy.contains(" Connections ").should("be.visible");
-    cy.wait(2000);
-
-    cy.wait(2000);
     //Click on contribytors checkbox
     cy.contains("Contributor").click({ force: true });
-    cy.wait(4000);
+    cy.wait(1000);
     //Select Name
     cy.contains(this.NewKitItemData.RecurringContributorsTab).click({
       force: true,
@@ -653,7 +580,7 @@ describe("Recurring New kit item creation test case", function () {
     //creation Assertion validation
     cy.contains("Item shared").should("be.visible");
     cy.log("Contributor added");
-    cy.wait(4000);
+    cy.wait(1000);
   });
 
   it.only("Time Entries Tab", function () {
@@ -692,17 +619,17 @@ describe("Recurring New kit item creation test case", function () {
     cy.wait(1000);
     cy.xpath("//span[contains(text(),'OK')]").first().click({ force: true });
     cy.wait(2000);
-    // //Click on Time Entry for
-    // cy.get(
-    //   "div:nth-child(2) > div:nth-child(1) > span > div > div > div.v-input__slot > div.v-select__slot > div.v-input__append-inner > div"
-    // ).click({ force: true });
-    // cy.wait(4000);
-    // //Assertion validation
-    // cy.contains("Connection").should("be.visible");
-    // cy.wait(2000);
-    // cy.contains(this.NewKitItemData.RecurringTimeEntryConnection).click({
-    //   force: true,
-    // });
+    //Click on Time Entry for
+    cy.get(
+      "div:nth-child(2) > div:nth-child(1) > span > div > div > div.v-input__slot > div.v-select__slot > div.v-input__append-inner > div"
+    ).click({ force: true });
+    cy.wait(4000);
+    //Assertion validation
+    cy.contains("Connection").should("be.visible");
+    cy.wait(2000);
+    cy.contains(this.NewKitItemData.RecurringTimeEntryConnection).click({
+      force: true,
+    });
     cy.wait(1000);
     cy.get('[placeholder="Add a Description"]').type(
       this.NewKitItemData.RecurringAddDescription
@@ -714,40 +641,33 @@ describe("Recurring New kit item creation test case", function () {
     //Assertion validation
     cy.contains(" Time Entry details saved ").should("be.visible");
     cy.log("Time Entry details saved");
-    cy.wait(4000);
+    cy.wait(2000);
   });
 
   it.only("Comments Tab", function () {
     //Comments Tab
     cy.contains("Comments ").click({ force: true });
-    cy.wait(2000);
     cy.get('[name="addComment"]').type(
       this.NewKitItemData.RecurringAddComments
     );
-    cy.wait(2000);
     cy.contains(" SAVE ").click({ force: true });
     //Assertion validation
     cy.contains(" New Comment added ").should("be.visible");
     cy.log("Comment has been added");
-    cy.wait(4000);
   });
 
   it.only("Groups Tab", function () {
     //Groups Tab
     cy.contains(" Groups ").click({ force: true });
-    cy.wait(2000);
-    // //Click on Add for Grops
-    // cy.get(".details-wrapper > .col > .ml-0 > .v-btn__content").click({
-    //   force: true,
-    // });
-    // //Assertion validation
-    // cy.contains(" Groups ").should("be.visible");
-    // cy.wait(2000);
-    // cy.contains(this.NewKitItemData.RecurringAddGroup).click({ force: true });
-    // //Assertion validation
-    // cy.contains(this.NewKitItemData.RecurringAddGroup).should("be.visible");
-    // cy.wait(2000);
-    //save Kit Item
+    //Click on Add for Grops
+    cy.get(".details-wrapper > .col > .ml-0 > .v-btn__content").click({
+      force: true,
+    });
+    //Assertion validation
+    cy.contains(" Groups ").should("be.visible");
+    cy.contains(this.NewKitItemData.RecurringAddGroup).click({ force: true });
+    //Assertion validation
+    cy.contains(this.NewKitItemData.RecurringAddGroup).should("be.visible");
 
     //save Kit Item
     cy.get(".v-select__selections .v-btn__content").click({ force: true });
@@ -786,7 +706,7 @@ describe("Recurring New kit item creation test case", function () {
     cy.log(
       "Firing Alert pop for manual action to Set the Recurring Item Executing Date"
     );
-    cy.wait(10000);
+    cy.wait(5000);
 
     cy.get('[placeholder="Schedule Start Time"]').click({ force: true });
     cy.wait(1000);
@@ -796,18 +716,16 @@ describe("Recurring New kit item creation test case", function () {
     cy.log(
       "Firing Alert pop for manual action to Set the Recurring Item Executing Time"
     );
-    cy.wait(15000);
+    cy.wait(5000);
     //Save the recurring schedule
     cy.get(".ca-button-green:nth-child(2) > .v-btn__content").click({
       force: true,
     });
     cy.contains(" Schedule saved ").should("be.visible");
-    cy.wait(2000);
+    cy.wait(1000);
     //Close the recurring pop up
-    cy.get(
-      ".fill-height > .v-btn > .v-btn__content > .inline-svg > path"
-    ).click({ force: true });
-    cy.wait(3000);
+    cy.get('.base-layout-second-header > .row .inline-svg').first().click();
+    cy.wait(1000);
   });
 
   it.only("Left pannel recurring item validation", function () {

@@ -91,23 +91,6 @@ describe("TableList KitItem Filter", function () {
     });
   });
 
-  it.only("Open Created Kit type As ListView KitItem", function () {
-    //Page Object
-    const lp = new LoginPage();
-    //Assertion
-    cy.title().should("eq", "Common Areas");
-    //Click on Hamburger Icon
-    lp.HMBIcon();
-    cy.contains(this.NewKitItemData.KitName).scrollIntoView({
-      force: true,
-    });
-    cy.wait(3000);
-    //Open KitType from left paneal
-    cy.contains(this.NewKitItemData.KitName).click({ force: true });
-    cy.log("Kit type opened from left pannel");
-    cy.wait(3000);
-  });
-
   it.only("Filter Url Element", function () {
     //Page Object
     const lp = new LoginPage();
@@ -129,7 +112,7 @@ describe("TableList KitItem Filter", function () {
     cy.contains(
       this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
     ).should("be.visible");
-    cy.wait(10000);
+    cy.wait(3000);
     //Click on created kit item
     cy.get('.list-item--title').first().click({ force: true });
     cy.wait(1000);
@@ -315,7 +298,7 @@ describe("TableList KitItem Filter", function () {
     cy.wait(2000);
     cy.contains("Apply Filters").click({ force: true });
     cy.get(".filter-tag").should("be.visible");
-    cy.wait(10000);
+    cy.wait(3000);
 
     //Click on created kit item
     cy.contains(
@@ -361,7 +344,7 @@ describe("TableList KitItem Filter", function () {
     cy.wait(2000);
     cy.contains("Apply Filters").click({ force: true });
     cy.get(".filter-tag").should("be.visible");
-    cy.wait(10000);
+    cy.wait(3000);
 
     //Click on created kit item
     cy.contains(
@@ -407,7 +390,7 @@ describe("TableList KitItem Filter", function () {
     cy.wait(2000);
     cy.contains("Apply Filters").click({ force: true });
     cy.get(".filter-tag").should("be.visible");
-    cy.wait(10000);
+    cy.wait(3000);
 
     //Click on created kit item
     cy.contains(
@@ -480,7 +463,7 @@ describe("TableList KitItem Filter", function () {
     cy.wait(1000);
   });
 
-  it("Validate the Filter Address Element", function () {
+  it.only("Validate the Filter Address Element", function () {
     //Page Object
     const lp = new LoginPage();
     //Filter Address by Addressline1
@@ -494,22 +477,28 @@ describe("TableList KitItem Filter", function () {
     cy.get("[name" + "=" + this.DataType2.Address + "]")
       .last()
       .type(this.NewKitItemData.Addressline1);
-
     cy.wait(1000);
     cy.contains("Apply Filters").click({ force: true });
     cy.get(".filter-tag").should("be.visible");
-    cy.wait(10000);
+    //created kit item assertion
+    cy.contains(
+      this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
+    ).should('be.visible')
 
     //Click on created kit item
     cy.contains(
       this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
     ).click({ force: true });
-    cy.wait(5000);
 
     cy.get(
       '[placeholder="Street address, building, company ... "]'
     ).scrollIntoView({ force: true });
-    cy.wait(3000);
+    cy.wait(1000);
+
+    //Validating details view input data
+    cy.get('[placeholder="Street address, building, company ... "]')
+      .should("have.value", this.NewKitItemData.Addressline1)
+    cy.wait(1000)
 
     //Close Kit type
     cy.get(".subheader--button-icon-wrapper .inline-svg").click({
@@ -517,14 +506,13 @@ describe("TableList KitItem Filter", function () {
     });
     cy.log(this.NewKitItemData.KitName + "Kit item has been Close");
     cy.contains(" Recently Viewed ").should("be.visible");
-    cy.wait(5000);
 
     //Click on cross icon to remove filer
     cy.get(".inline-svg:nth-child(3) > path").click({ force: true });
-    cy.wait(5000);
+    cy.wait(1000);
   });
 
-  it("Validate the Filter for Addressline2 Element", function () {
+  it.only("Validate the Filter for Addressline2 Element", function () {
     //Page Object
     const lp = new LoginPage();
     //Filter Address by Addressline2
@@ -538,37 +526,40 @@ describe("TableList KitItem Filter", function () {
     cy.get("[name" + "=" + this.DataType2.Address + "]")
       .last()
       .type(this.NewKitItemData.Addressline2);
-
     cy.wait(1000);
     cy.contains("Apply Filters").click({ force: true });
     cy.get(".filter-tag").should("be.visible");
-    cy.wait(10000);
+    //created kit item assertion
+    cy.contains(
+      this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
+    ).should('be.visible')
 
     //Click on created kit item
     cy.contains(
       this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
     ).click({ force: true });
-    cy.wait(5000);
 
     cy.get(
       '[placeholder="Street address, building, company ... "]'
     ).scrollIntoView({ force: true });
-    cy.wait(3000);
+    cy.wait(1000);
 
+    //Validating details view input data
+    cy.get('[name="Address line 2."]')
+      .should("have.value", this.NewKitItemData.Addressline2)
+    cy.wait(1000)
     //Close Kit type
     cy.get(".subheader--button-icon-wrapper .inline-svg").click({
       force: true,
     });
     cy.log(this.NewKitItemData.KitName + "Kit item has been Close");
     cy.contains(" Recently Viewed ").should("be.visible");
-    cy.wait(5000);
-
     //Click on cross icon to remove filer
     cy.get(".inline-svg:nth-child(3) > path").click({ force: true });
-    cy.wait(5000);
+    cy.wait(1000);
   });
 
-  it("Validate the Filter for City Element", function () {
+  it.only("Validate the Filter for City Element", function () {
     //Page Object
     const lp = new LoginPage();
     //Filter Address by City
@@ -586,18 +577,26 @@ describe("TableList KitItem Filter", function () {
     cy.wait(1000);
     cy.contains("Apply Filters").click({ force: true });
     cy.get(".filter-tag").should("be.visible");
-    cy.wait(10000);
+    //created kit item assertion
+    cy.contains(
+      this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
+    ).should('be.visible')
 
     //Click on created kit item
     cy.contains(
       this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
     ).click({ force: true });
-    cy.wait(5000);
+    cy.wait(1000);
 
     cy.get(
       '[placeholder="Street address, building, company ... "]'
     ).scrollIntoView({ force: true });
-    cy.wait(3000);
+    cy.wait(1000);
+
+    //Validating details view input data
+    cy.get('[placeholder="City"]')
+      .should("have.value", this.NewKitItemData.City)
+    cy.wait(1000);
 
     //Close Kit type
     cy.get(".subheader--button-icon-wrapper .inline-svg").click({
@@ -605,14 +604,12 @@ describe("TableList KitItem Filter", function () {
     });
     cy.log(this.NewKitItemData.KitName + "Kit item has been Close");
     cy.contains(" Recently Viewed ").should("be.visible");
-    cy.wait(5000);
-
     //Click on cross icon to remove filer
     cy.get(".inline-svg:nth-child(3) > path").click({ force: true });
-    cy.wait(5000);
+    cy.wait(1000);
   });
 
-  it("Validate the Filter for State Element", function () {
+  it.only("Validate the Filter for State Element", function () {
     //Page Object
     const lp = new LoginPage();
     //Filter Address by State
@@ -626,22 +623,30 @@ describe("TableList KitItem Filter", function () {
     cy.get("[name" + "=" + this.DataType2.Address + "]")
       .last()
       .type(this.NewKitItemData.State);
-
     cy.wait(1000);
     cy.contains("Apply Filters").click({ force: true });
     cy.get(".filter-tag").should("be.visible");
-    cy.wait(10000);
+    //created kit item assertion
+    cy.contains(
+      this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
+    ).should('be.visible')
 
     //Click on created kit item
     cy.contains(
       this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
     ).click({ force: true });
-    cy.wait(5000);
-
+    cy.wait(1000);
+    //scroll
     cy.get(
       '[placeholder="Street address, building, company ... "]'
     ).scrollIntoView({ force: true });
-    cy.wait(3000);
+    cy.wait(1000);
+    //Data Assertion in details view
+    cy.get('[placeholder="Zip/Postal Code"]').scrollIntoView({ force: true })
+    //Validating details view input data
+    cy.get('[placeholder="Zip/Postal Code"]')
+      .should("have.value", this.NewKitItemData.ZipCode);
+    cy.wait(1000)
 
     //Close Kit type
     cy.get(".subheader--button-icon-wrapper .inline-svg").click({
@@ -649,14 +654,12 @@ describe("TableList KitItem Filter", function () {
     });
     cy.log(this.NewKitItemData.KitName + "Kit item has been Close");
     cy.contains(" Recently Viewed ").should("be.visible");
-    cy.wait(5000);
-
     //Click on cross icon to remove filer
     cy.get(".inline-svg:nth-child(3) > path").click({ force: true });
-    cy.wait(5000);
+    cy.wait(1000);
   });
 
-  it("Validate the Filter for ZipCode Element", function () {
+  it.only("Validate the Filter for ZipCode Element", function () {
     //Page Object
     const lp = new LoginPage();
     //Filter Address by ZipCode
@@ -674,18 +677,28 @@ describe("TableList KitItem Filter", function () {
     cy.wait(1000);
     cy.contains("Apply Filters").click({ force: true });
     cy.get(".filter-tag").should("be.visible");
-    cy.wait(10000);
+    //created kit item assertion
+    cy.contains(
+      this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
+    ).should('be.visible')
 
     //Click on created kit item
     cy.contains(
       this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
     ).click({ force: true });
-    cy.wait(5000);
+    cy.wait(1000);
 
     cy.get(
       '[placeholder="Street address, building, company ... "]'
     ).scrollIntoView({ force: true });
-    cy.wait(3000);
+    cy.wait(1000);
+
+    cy.xpath('//div[@class="v-select__slot"]//div[@class="v-select__selections"]//div[@class="v-select__selection v-select__selection--comma"]')
+      .eq(0)
+      .invoke('text').then((text) => {
+        expect(text.trim()).equal(this.NewKitItemData.State)
+      })
+    cy.wait(1000)
 
     //Close Kit type
     cy.get(".subheader--button-icon-wrapper .inline-svg").click({
@@ -700,7 +713,7 @@ describe("TableList KitItem Filter", function () {
     cy.wait(5000);
   });
 
-  it("Validate the Filter for Country Element", function () {
+  it.only("Validate the Filter for Country Element", function () {
     //Page Object
     const lp = new LoginPage();
     //Filter Address by Country
@@ -718,18 +731,26 @@ describe("TableList KitItem Filter", function () {
     cy.wait(1000);
     cy.contains("Apply Filters").click({ force: true });
     cy.get(".filter-tag").should("be.visible");
-    cy.wait(10000);
+    //created kit item assertion
+    cy.contains(
+      this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
+    ).should('be.visible')
 
     //Click on created kit item
     cy.contains(
       this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
     ).click({ force: true });
-    cy.wait(5000);
+    cy.wait(1000);
 
     cy.get(
       '[placeholder="Street address, building, company ... "]'
     ).scrollIntoView({ force: true });
-    cy.wait(3000);
+    cy.wait(1000);
+
+    //Validating details view input data
+    cy.get('[placeholder="Country"]')
+      .should("have.value", this.NewKitItemData.Country)
+    cy.wait(1000)
 
     //Close Kit type
     cy.get(".subheader--button-icon-wrapper .inline-svg").click({
@@ -737,11 +758,9 @@ describe("TableList KitItem Filter", function () {
     });
     cy.log(this.NewKitItemData.KitName + "Kit item has been Close");
     cy.contains(" Recently Viewed ").should("be.visible");
-    cy.wait(5000);
-
     //Click on cross icon to remove filer
     cy.get(".inline-svg:nth-child(3) > path").click({ force: true });
-    cy.wait(5000);
+    cy.wait(1000);
   });
 
   it("Validate the Filter for Number Element", function () {
@@ -766,7 +785,10 @@ describe("TableList KitItem Filter", function () {
     cy.wait(2000);
     cy.contains("Apply Filters").click({ force: true });
     cy.get(".filter-tag").should("be.visible");
-    cy.wait(10000);
+    //created kit item assertion
+    cy.contains(
+      this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
+    ).should('be.visible')
 
     //Click on created kit item
     cy.contains(
@@ -790,7 +812,7 @@ describe("TableList KitItem Filter", function () {
     cy.wait(5000);
   });
 
-  it("Validate the Filter Time Element", function () {
+  it.only("Validate the Filter Time Element", function () {
     //Page Object
     const lp = new LoginPage();
     lp.FilterIcon();
@@ -822,16 +844,23 @@ describe("TableList KitItem Filter", function () {
 
     cy.contains("Apply Filters").click({ force: true });
     cy.get(".filter-tag").should("be.visible");
-    cy.wait(10000);
+    //created kit item assertion
+    cy.contains(
+      this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
+    ).should('be.visible')
 
     //Click on created kit item
     cy.contains(
       this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
     ).click({ force: true });
-    cy.wait(5000);
-
+    cy.wait(2000);
     cy.get('[placeholder="Zip/Postal Code"]').scrollIntoView({ force: true });
-    cy.wait(3000);
+    cy.wait(2000);
+
+    //json value assertion
+    cy.get('[placeholder="Add Time"][readonly="readonly"]').eq(1)
+      .should("have.value", this.NewKitItemData.LoggedTime)
+    cy.wait(1000)
 
     //Close Kit type
     cy.get(".subheader--button-icon-wrapper .inline-svg").click({
@@ -839,14 +868,12 @@ describe("TableList KitItem Filter", function () {
     });
     cy.log(this.NewKitItemData.KitName + "Kit item has been Close");
     cy.contains(" Recently Viewed ").should("be.visible");
-    cy.wait(5000);
-
     //Click on cross icon to remove filer
     cy.get(".inline-svg:nth-child(3) > path").click({ force: true });
-    cy.wait(5000);
+    cy.wait(1000);
   });
 
-  it("Validate the Filter Date Element", function () {
+  it.only("Validate the Filter Date Element", function () {
     //Page Object
     const lp = new LoginPage();
 
@@ -860,7 +887,7 @@ describe("TableList KitItem Filter", function () {
     cy.wait(2000);
     cy.get('[placeholder="Add Date"][type="text"]').click({ force: true });
     //Select Date
-    cy.xpath("//div[@class='v-btn__content'][contains(text(),'30')]")
+    cy.xpath("//div[@class='v-btn__content'][contains(text(),'22')]")
       .first()
       .click({ force: true });
     cy.wait(2000);
@@ -870,16 +897,23 @@ describe("TableList KitItem Filter", function () {
 
     cy.contains("Apply Filters").click({ force: true });
     cy.get(".filter-tag").should("be.visible");
-    cy.wait(10000);
+    //created kit item assertion
+    cy.contains(
+      this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
+    ).should('be.visible')
 
     //Click on created kit item
     cy.contains(
       this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
     ).click({ force: true });
-    cy.wait(5000);
 
     cy.get('[placeholder="Zip/Postal Code"]').scrollIntoView({ force: true });
-    cy.wait(3000);
+    cy.wait(2000);
+
+    //json value assertion
+    cy.get('[placeholder=" MM / DD / YYYY"]')
+      .should("have.value", this.NewKitItemData.LoggedDate)
+    cy.wait(1000)
 
     //Close Kit type
     cy.get(".subheader--button-icon-wrapper .inline-svg").click({
@@ -887,11 +921,9 @@ describe("TableList KitItem Filter", function () {
     });
     cy.log(this.NewKitItemData.KitName + "Kit item has been Close");
     cy.contains(" Recently Viewed ").should("be.visible");
-    cy.wait(5000);
-
     //Click on cross icon to remove filer
     cy.get(".inline-svg:nth-child(3) > path").click({ force: true });
-    cy.wait(5000);
+    cy.wait(1000);
   });
 
   it("Validate the Filter Toggle(True) Element", function () {
@@ -918,7 +950,7 @@ describe("TableList KitItem Filter", function () {
 
     cy.contains("Apply Filters").click({ force: true });
     cy.get(".filter-tag").should("be.visible");
-    cy.wait(10000);
+    cy.wait(3000);
 
     //Click on created kit item
     cy.contains(
@@ -970,7 +1002,7 @@ describe("TableList KitItem Filter", function () {
 
     cy.contains("Apply Filters").click({ force: true });
     cy.get(".filter-tag").should("be.visible");
-    cy.wait(10000);
+    cy.wait(3000);
 
     //Click on created kit item
     cy.get(".list-item--title").first().click({ force: true });
@@ -991,10 +1023,9 @@ describe("TableList KitItem Filter", function () {
     cy.wait(5000);
   });
 
-  it("Validate the Filter SelectList Element", function () {
+  it.only("Validate the Filter SelectList Element", function () {
     //Page Object
     const lp = new LoginPage();
-
     lp.FilterIcon();
     cy.log("Kit type filters has been opened");
     cy.wait(3000);
@@ -1012,35 +1043,37 @@ describe("TableList KitItem Filter", function () {
     cy.wait(2000);
     //SelectList filter value
     cy.contains(this.NewKitItemData.SelectListValue).click({ force: true });
-
     cy.wait(2000);
 
     cy.get("[name" + "=" + this.DataType2.Telephone + "]")
       .last()
       .scrollIntoView({ force: true })
       .click({ force: true });
-
-    //Click on Apply filters dropdown
-    // cy.xpath(
-    //   "//i[text()='arrow_drop_down' and @class='v-icon notranslate material-icons theme--light primary--text']"
-    // ).click({ force: true });
-    cy.wait(2000);
-
-    // cy.xpath(
-    //   "//div[text()='Apply Filters' and @class='v-list-item__title']"
-    // ).click({ force: true });
     cy.wait(2000);
 
     cy.contains("Apply Filters").click({ force: true });
-    cy.wait(5000);
     cy.get(".filter-tag").should("be.visible");
-    cy.wait(10000);
+    cy.wait(3000);
 
     //Click on created kit item
-    cy.get(".list-item--title").first().click({ force: true });
-    cy.wait(5000);
+    cy.contains(
+      this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
+    ).click({ force: true });
+    cy.wait(2000);
+    //scroll
     cy.get('[placeholder="Zip/Postal Code"]').scrollIntoView({ force: true });
     cy.wait(3000);
+    //scroll
+    cy.xpath('//div[@controlname="selectList"]//div[@class="v-list-item__subtitle"]')
+      .scrollIntoView({ force: true })
+    cy.wait(1000)
+
+    var selectList = this.DataType2.SelectListName.toLowerCase();
+    cy.xpath('//div[@controlname="selectList"]//div[@class="v-list-item__subtitle"]')
+      .invoke('text').then((text) => {
+        expect(text.trim()).equal(this.NewKitItemData.SelectListValue)
+      });
+    cy.wait(2000)
 
     //Close Kit type
     cy.get(".subheader--button-icon-wrapper .inline-svg").click({
@@ -1048,17 +1081,14 @@ describe("TableList KitItem Filter", function () {
     });
     cy.log(this.NewKitItemData.KitName + "Kit item has been Close");
     cy.contains(" Recently Viewed ").should("be.visible");
-    cy.wait(5000);
-
     //Click on cross icon to remove filer
     cy.get(".filter-tag-content path").click({ force: true });
-    cy.wait(5000);
+    cy.wait(1000);
   });
 
-  it("Validate the Filter RadioSelect Element", function () {
+  it.only("Validate the Filter RadioSelect Element", function () {
     //Page Object
     const lp = new LoginPage();
-
     lp.FilterIcon();
     cy.log("Kit type filters has been opened");
     cy.wait(3000);
@@ -1076,7 +1106,6 @@ describe("TableList KitItem Filter", function () {
     cy.wait(2000);
     //RadioSelect filter value
     cy.contains(this.NewKitItemData.RadioSelectValue).click({ force: true });
-
     cy.wait(2000);
     //Click on Apply filters dropdown
     cy.get(
@@ -1087,15 +1116,28 @@ describe("TableList KitItem Filter", function () {
     cy.wait(2000);
 
     cy.contains("Apply Filters").click({ force: true });
-    cy.wait(5000);
+    cy.wait(2000);
     cy.get(".filter-tag").should("be.visible");
-    cy.wait(10000);
+    cy.wait(3000);
 
     //Click on created kit item
-    cy.get(".list-item--title").first().click({ force: true });
-    cy.wait(5000);
+    cy.contains(
+      this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
+    ).click({ force: true });
+    cy.wait(2000);
     cy.get('[placeholder="Zip/Postal Code"]').scrollIntoView({ force: true });
     cy.wait(3000);
+    //scroll
+    cy.xpath('//div[@controlname="radioSelect"]//div[@class="v-input__slot"]//div[@class="v-radio theme--light v-item--active"]//div[@class="v-list-item__content"]')
+      .scrollIntoView({ force: true })
+    cy.wait(1000)
+    //json value assertion
+    cy.xpath('//div[@controlname="radioSelect"]//div[@class="v-input__slot"]//div[@class="v-radio theme--light v-item--active"]//div[@class="v-list-item__content"]')
+      .invoke('text')
+      .then((text) => {
+        cy.log(text)
+        expect(text.trim()).contains(this.NewKitItemData.RadioSelectValue)
+      });
 
     //Close Kit type
     cy.get(".subheader--button-icon-wrapper .inline-svg").click({
@@ -1103,17 +1145,14 @@ describe("TableList KitItem Filter", function () {
     });
     cy.log(this.NewKitItemData.KitName + "Kit item has been Close");
     cy.contains(" Recently Viewed ").should("be.visible");
-    cy.wait(5000);
-
     //Click on cross icon to remove filer
     cy.get(".filter-tag-content path").click({ force: true });
-    cy.wait(5000);
+    cy.wait(2000);
   });
 
-  it("Validate the Filter CheckboxSelect Element", function () {
+  it.only("Validate the Filter CheckboxSelect Element", function () {
     //Page Object
     const lp = new LoginPage();
-
     lp.FilterIcon();
     cy.log("Kit type filters has been opened");
     cy.wait(3000);
@@ -1128,11 +1167,10 @@ describe("TableList KitItem Filter", function () {
     ).click({ force: true });
     cy.wait(2000);
     //CheckboxSelect filter value(Values coming form KitItemValues Json File)
-    cy.contains(this.NewKitItemData.CheckboxSelectValue1).click({
+    cy.contains(this.NewKitItemData.CheckboxSelectValue2).click({
       force: true,
     });
-
-    cy.wait(2000);
+    cy.wait(1000);
     //Click on Apply filters dropdown
     cy.get(
       "div.d-flex.align-center.justify-end.col.app-secondary-header-left--buttons.fill-height.gray-divider div.row.left_panel_menu.filter.row.button-left--border.second-header-left--buton.button-left--border div.sticky-dropdown div.wrapper-content.col:nth-child(2) div.row.full-width.fill-height div.form.tools-padding.left_panel_body.col.left_column.col div.row.flex-nowrap.flex-column.fill-height div.buttons.col.pl-4 div.apply-clear-wrapper.navi-bar div.navi-bar-dropdown.navi-bar__actions.navi-bar-action-dropdown.col div.v-input.ca-button-green.v-input--hide-details.v-input--is-label-active.v-input--is-dirty.theme--light.v-text-field.v-text-field--single-line.v-text-field--is-booted.v-select.v-autocomplete.v-overflow-btn.v-overflow-btn--segmented div.v-input__control div.v-input__slot div.v-select__slot div.v-input__append-inner:nth-child(2) > div.v-input__icon.v-input__icon--append"
@@ -1140,46 +1178,42 @@ describe("TableList KitItem Filter", function () {
       force: true,
     });
     cy.wait(2000);
-
     cy.contains("Apply Filters").click({ force: true });
-    cy.wait(5000);
+    cy.wait(2000);
     cy.get(".filter-tag").should("be.visible");
-    cy.wait(10000);
+    cy.wait(3000);
     //Click on created kit item
     cy.contains(
       this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
     ).click({ force: true });
-    cy.wait(3000);
-    //Click on created kit item
-    cy.wait(5000);
+    cy.wait(2000);
     cy.get('[placeholder="Zip/Postal Code"]').scrollIntoView({ force: true });
-    cy.wait(3000);
+    cy.wait(1000);
 
+    //CheckboxSelect validation
+    cy.get('[type="checkbox"]').eq(4).should('be.checked')
+    cy.wait(2000)
     //Close Kit type
     cy.get(".subheader--button-icon-wrapper .inline-svg").click({
       force: true,
     });
     cy.log(this.NewKitItemData.KitName + "Kit item has been Close");
     cy.contains(" Recently Viewed ").should("be.visible");
-    cy.wait(5000);
-
     //Click on cross icon to remove filer
     cy.get(".filter-tag-content path").click({ force: true });
-    cy.wait(5000);
+    cy.wait(1000);
   });
 
-  it("Validate the Filter Stepper Element", function () {
+  it.only("Validate the Filter Stepper Element", function () {
     //Page Object
     const lp = new LoginPage();
-
     lp.FilterIcon();
     cy.log("Kit type filters has been opened");
-    cy.wait(3000);
     //Validation for Filer Elements
     cy.contains(this.DataType2.Stepper).scrollIntoView({
       force: true,
     });
-    cy.wait(3000);
+    cy.wait(1000);
     //Click on Stepper dropdown
     cy.get(
       " div.v-input.kit-control-select-list.layout-alignment.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-select.v-select--is-multi div.v-input__control div.v-input__slot > div.v-select__slot:nth-child(2)"
@@ -1188,48 +1222,55 @@ describe("TableList KitItem Filter", function () {
       .click({ force: true });
     cy.wait(2000);
     //Stepper filter value
-    cy.contains(this.NewKitItemData.StepperValue1).click({ force: true });
-
+    cy.contains(this.NewKitItemData.StepperValue).click({ force: true });
     cy.wait(2000);
 
     cy.contains("Apply Filters").click({ force: true });
     cy.wait(5000);
     cy.get(".filter-tag").should("be.visible");
-    cy.wait(10000);
+    cy.wait(3000);
     //Click on created kit item
     cy.contains(
       this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
     ).click({ force: true });
-    cy.wait(3000);
+    cy.wait(2000);
     //Scroll to stepper
     cy.get(".ca-item").eq(0).scrollIntoView({ force: true });
-    cy.wait(5000);
+    cy.wait(1000)
+    //json value assertion
+    var stepper = this.DataType2.StepperName.toLowerCase();
+    cy.xpath('//div[@controlname="' + stepper + '"]//div[@class="v-stepper__header"]//div[@class="v-stepper__step v-stepper__step--inactive v-stepper__step--complete"]//div[@class="v-list-item__subtitle"]')
+      .scrollIntoView({ force: true })
+    cy.wait(1000)
 
+    //json value assertion
+    var stepper = this.DataType2.StepperName.toLowerCase();
+    cy.xpath('//div[@controlname="' + stepper + '"]//div[@class="v-stepper__header"]//div[@class="v-stepper__step v-stepper__step--inactive v-stepper__step--complete"]//div[@class="v-list-item__subtitle"]')
+      .invoke('text').then((text) => {
+        expect(text.trim()).equal(this.NewKitItemData.StepperValue)
+      })
+    cy.wait(1000)
     //Close Kit type
     cy.get(".subheader--button-icon-wrapper .inline-svg").click({
       force: true,
     });
     cy.log(this.NewKitItemData.KitName + "Kit item has been Close");
     cy.contains(" Recently Viewed ").should("be.visible");
-    cy.wait(5000);
 
     //Click on cross icon to remove filer
     cy.get(".filter-tag-content path").click({ force: true });
-    cy.wait(5000);
+    cy.wait(1000);
   });
 
-  it("Validate the Filter Inspection Element", function () {
+  it.only("Validate the Filter Inspection Element", function () {
     //Page Object
     const lp = new LoginPage();
-
     lp.FilterIcon();
     cy.log("Kit type filters has been opened");
-    cy.wait(3000);
     //Validation for Filer Elements
     cy.get('[placeholder="Created On"][type="text"]').scrollIntoView({
       force: true,
     });
-    cy.wait(3000);
     //Click on Inspection dropdown
     cy.get(
       " div.v-input.kit-control-select-list.layout-alignment.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-select.v-select--is-multi div.v-input__control div.v-input__slot > div.v-select__slot:nth-child(2)"
@@ -1238,39 +1279,32 @@ describe("TableList KitItem Filter", function () {
       .click({ force: true });
     cy.wait(2000);
     //Inpection filter value(need to be set in json)
-    cy.contains(this.NewKitItemData.InspectionFilterValue).click({
-      force: true,
-    });
+    cy.xpath('//*[contains(@class, "v-list-item v-list-item--link theme--light")]//*[text() =" ' + this.NewKitItemData.InspectionValue + ' "]')
+      .click({ force: true })
 
     cy.wait(2000);
-    //Click on Apply filters dropdown
-    // cy.get(
-    //   "div.d-flex.align-center.justify-end.col.app-secondary-header-left--buttons.fill-height.gray-divider div.row.left_panel_menu.filter.row.button-left--border.second-header-left--buton.button-left--border div.sticky-dropdown div.wrapper-content.col:nth-child(2) div.row.full-width.fill-height div.form.tools-padding.left_panel_body.col.left_column.col div.row.flex-nowrap.flex-column.fill-height div.buttons.col.pl-4 div.apply-clear-wrapper.navi-bar div.navi-bar-dropdown.navi-bar__actions.navi-bar-action-dropdown.col div.v-input.ca-button-green.v-input--hide-details.v-input--is-label-active.v-input--is-dirty.theme--light.v-text-field.v-text-field--single-line.v-text-field--is-booted.v-select.v-autocomplete.v-overflow-btn.v-overflow-btn--segmented div.v-input__control div.v-input__slot div.v-select__slot div.v-input__append-inner:nth-child(2) > div.v-input__icon.v-input__icon--append"
-    // ).click({
-    //   force: true,
-    // });
-    // cy.wait(2000);
-    // //Click on apply filters text in dropdown
-    // cy.get(
-    //   " div.v-menu__content.theme--light.v-menu__content--fixed.menuable__content__active.v-autocomplete__content.navi-bar-dropdown-menu.kit-item-filter-actions-dropdown:nth-child(2) div.v-select-list.v-card.theme--light div.v-list.v-sheet.v-sheet--tile.theme--light div.v-list-item.primary--text.v-list-item--active.v-list-item--link.theme--light:nth-child(1) > div.v-list-item__content"
-    // ).click({ force: true });
-    cy.wait(2000);
-
     cy.contains("Apply Filters").click({ force: true });
     cy.wait(5000);
     cy.get(".filter-tag").should("be.visible");
-    cy.wait(10000);
+    cy.wait(3000);
 
     //Click on created kit item
     cy.contains(
       this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
     ).click({ force: true });
-    cy.wait(5000);
+    cy.wait(2000);
     //Scroll to Inspection
     cy.get(".v-btn:nth-child(1) .v-badge > .inline-svg").scrollIntoView({
       force: true,
     });
-    cy.wait(5000);
+    cy.wait(1000);
+    //json value assertion
+    var inspection = this.DataType2.InspectionName.toLowerCase();
+    cy.xpath('//div[@controlname="' + inspection + '"]//div[@class="v-slide-group__content"]').children('span.v-chip--active')
+      .invoke('text').then((text) => {
+        expect(text.trim()).equal(this.NewKitItemData.InspectionValue)
+      });
+    cy.wait(2000)
 
     //Close Kit type
     cy.get(".subheader--button-icon-wrapper .inline-svg").click({
@@ -1278,67 +1312,80 @@ describe("TableList KitItem Filter", function () {
     });
     cy.log(this.NewKitItemData.KitName + "Kit item has been Close");
     cy.contains(" Recently Viewed ").should("be.visible");
-    cy.wait(5000);
-
     //Click on cross icon to remove filer
     cy.get(".filter-tag-content path").click({ force: true });
-    cy.wait(5000);
+    cy.wait(1000);
   });
 
-  it("Validate the Filter for UserSelector Element", function () {
+  it.only("Validate the Filter for UserSelector Element", function () {
     //Page Object
     const lp = new LoginPage();
-
     lp.FilterIcon();
     cy.log("Kit type filters has been opened");
-    cy.wait(3000);
     cy.contains(this.DataType2.UserSelector).scrollIntoView({
       force: true,
     });
-    cy.wait(3000);
     //Click on UserSelect link to open userselect list popup
-    cy.get(
-      " div.v-input.searchSelectNone.v-input--is-readonly.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-select div.v-input__control div.v-input__slot > div.v-select__slot:nth-child(2)"
-    )
-      .eq(0)
-      .click({ force: true });
-    cy.contains(" Users ").should("be.visible");
-    cy.wait(2000);
+    // cy.get(
+    //   " div.v-input.searchSelectNone.v-input--is-readonly.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-select div.v-input__control div.v-input__slot > div.v-select__slot:nth-child(2)"
+    // )
+    cy.xpath(
+      '//span[@class="searchRel"]//div[@class="v-select__slot"]//div[@class="v-select__selections"]'
+    ).eq(0).click({ force: true });
 
+    cy.contains(" Users ").should("be.visible");
+    cy.wait(1000);
+    cy.xpath('//*[text() ="Search"]').click({ force: true })
+    cy.xpath('//*[text() ="Search"]').next('input').type(`${this.NewKitItemData.UserSelectorName}{enter}`)
     //select userselector value
     cy.contains(this.NewKitItemData.UserSelectorName).click({ force: true });
-
     cy.wait(2000);
-
     cy.contains("Apply Filters").click({ force: true });
     cy.get(".filter-tag").should("be.visible");
-    cy.wait(10000);
+    cy.wait(2000);
 
     //Click on created kit item
     cy.contains(
       this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
     ).click({ force: true });
     cy.wait(3000);
-    //Scroll to stepper
-    cy.get(
-      "div.v-window.tab-content-wrapper.v-item-group.theme--light.v-tabs-items div.v-window__container div.v-window-item.v-window-item--active:nth-child(1) div.wrapper-tabs-content.v-card.v-sheet.theme--light div.v-card__text.kit-documents.fill-height div.row.container-details div.fill-height.col div.container.details-wrapper.fill-height div.row.kit-related-form.pa-6 div.kit-control-component.kit-control-component--item-picker.px-3.col.col-sm-12.col-md-6.mb-4.px-3.col-sm-12.col-md-6.mb-4.px-3:nth-child(22) span.searchRel div.v-input.searchSelectNone.v-input--is-label-active.v-input--is-dirty.v-input--is-readonly.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-select div.v-input__control div.v-input__slot div.v-select__slot:nth-child(2) div.v-select__selections:nth-child(2) div.imageContent:nth-child(1) > div.row.control-item-picker"
-    ).scrollIntoView({ force: true });
-    cy.wait(5000);
-
+    //scroll to user selector
+    cy.get('.imageContent').eq(0).scrollIntoView({ force: true })
+    cy.wait(1000)
+    //json value assertion
+    cy.xpath('//div[@controlname="userSelector"]//div[@class="col item-label"]').children('div').invoke('text').then((text) => {
+      expect(text.trim()).equal(this.NewKitItemData.UserSelectorName)
+    });
+    cy.wait(1000)
     //Close Kit type
     cy.get(".subheader--button-icon-wrapper .inline-svg").click({
       force: true,
     });
     cy.log(this.NewKitItemData.KitName + "Kit item has been Close");
     cy.contains(" Recently Viewed ").should("be.visible");
-    cy.wait(5000);
-
     //Click on cross icon to remove filer
     cy.get(".inline-svg:nth-child(3) > path").click({ force: true });
-    cy.wait(5000);
+    cy.wait(1000);
   });
 
-  it("Validate the Filter for ContactSelector Element", function () {
+  it.only("Open Created Kit type As ListView KitItem", function () {
+    //Page Object
+    const lp = new LoginPage();
+    //Assertion
+    cy.title().should("eq", "Common Areas");
+    //Click on Hamburger Icon
+    lp.HMBIcon();
+    cy.contains(this.NewKitItemData.KitName).scrollIntoView({
+      force: true,
+    });
+    cy.wait(3000);
+    //Open KitType from left paneal
+    cy.contains(this.NewKitItemData.KitName).click({ force: true });
+    cy.log("Kit type opened from left pannel");
+    cy.wait(3000);
+  });
+
+  it.only("Validate the Filter for ContactSelector Element", function () {
     //Page Object
     const lp = new LoginPage();
 
@@ -1349,32 +1396,34 @@ describe("TableList KitItem Filter", function () {
       force: true,
     });
     cy.wait(4000);
-    //Click on ContactSelector link to open ContactSelector list popup
-    cy.get(
-      " div.v-input.searchSelectNone.v-input--is-readonly.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-select div.v-input__control div.v-input__slot > div.v-select__slot:nth-child(2)"
-    )
-      .eq(1)
-      .click({ force: true });
+    cy.xpath(
+      '//span[@class="searchRel"]//div[@class="v-select__slot"]//div[@class="v-select__selections"]'
+    ).eq(1).click({ force: true });
     cy.contains(" Connection ").should("be.visible");
-    cy.wait(2000);
-
+    cy.wait(3000)
     //select ContactSelector value
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').next('input').type(`${this.NewKitItemData.ContactSelectorName}{enter}`)
     cy.contains(this.NewKitItemData.ContactSelectorName).click({ force: true });
-
     cy.wait(2000);
-
     cy.contains("Apply Filters").click({ force: true });
     cy.get(".filter-tag").should("be.visible");
-    cy.wait(10000);
+    cy.wait(3000);
 
     //Click on created kit item
     cy.contains(
       this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
     ).click({ force: true });
     cy.wait(3000);
-    //Scroll to stepper
-    cy.get(".btn-load .inline-svg").last().scrollIntoView({ force: true });
-    cy.wait(5000);
+    //scroll to user selector
+    cy.get('.imageContent').eq(0).scrollIntoView({ force: true })
+    cy.wait(1000)
+    //json value assertion
+    cy.xpath('//div[@controlname="contactSelector"]//div[@class="col item-label"]').children('div').invoke('text').then((text) => {
+      expect(text.trim()).equal(this.NewKitItemData.ContactSelectorName)
+    });
+    cy.wait(1000)
 
     //Close Kit type
     cy.get(".subheader--button-icon-wrapper .inline-svg").click({
@@ -1382,85 +1431,74 @@ describe("TableList KitItem Filter", function () {
     });
     cy.log(this.NewKitItemData.KitName + "Kit item has been Close");
     cy.contains(" Recently Viewed ").should("be.visible");
-    cy.wait(5000);
-
     //Click on cross icon to remove filer
     cy.get(".inline-svg:nth-child(3) > path").click({ force: true });
-    cy.wait(5000);
+    cy.wait(3000);
   });
 
-  it("Validate the Filter for Assigning Element", function () {
+  it.only("Validate the Filter for Assigning Element", function () {
     //Page Object
     const lp = new LoginPage();
-
     lp.FilterIcon();
     cy.log("Kit type filters has been opened");
-    cy.wait(3000);
     cy.contains(this.DataType2.Assigning).scrollIntoView({
       force: true,
     });
-    cy.wait(3000);
     //Click on Assigning link to open Assigning list popup
-    cy.get(
-      " div.v-input.searchSelectNone.v-input--is-readonly.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-select div.v-input__control div.v-input__slot > div.v-select__slot:nth-child(2)"
-    )
-      .eq(2)
-      .click({ force: true });
+    cy.xpath(
+      '//span[@class="searchRel"]//div[@class="v-select__slot"]//div[@class="v-select__selections"]'
+    ).eq(2).click({ force: true });
     cy.contains(" Connection ").should("be.visible");
-    cy.wait(2000);
-
+    cy.wait(3000);
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input').type(`${this.NewKitItemData.AssigningName}{enter}`)
     //select Assigning value
     cy.contains(this.NewKitItemData.AssigningName).click({ force: true });
-
     cy.wait(2000);
-
     cy.contains("Apply Filters").click({ force: true });
     cy.get(".filter-tag").should("be.visible");
-    cy.wait(10000);
-
+    cy.wait(3000);
     //Click on created kit item
     cy.contains(
       this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
     ).click({ force: true });
-    cy.wait(5000);
-    //Scroll to Assigning
-    cy.get(
-      "div.v-window.tab-content-wrapper.v-item-group.theme--light.v-tabs-items div.v-window__container div.v-window-item.v-window-item--active:nth-child(1) div.wrapper-tabs-content.v-card.v-sheet.theme--light div.v-card__text.kit-documents.fill-height div.row.container-details div.fill-height.col div.container.details-wrapper.fill-height div.row.kit-related-form.pa-6 div.kit-control-component.kit-control-component--item-picker.px-3.col.col-sm-12.col-md-6.mb-4.px-3.col-sm-12.col-md-6.mb-4.px-3:nth-child(22) span.searchRel div.v-input.searchSelectNone.v-input--is-label-active.v-input--is-dirty.v-input--is-readonly.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-select div.v-input__control div.v-input__slot div.v-select__slot:nth-child(2) div.v-select__selections:nth-child(2) div.imageContent:nth-child(1) > div.row.control-item-picker"
-    ).scrollIntoView({ force: true });
-    cy.wait(5000);
-
+    cy.wait(3000);
+    //validation
+    var lower = this.DataType2.Assigning.toLowerCase();
+    cy.get('.v-btn:nth-child(1) .v-badge > .inline-svg').scrollIntoView({ force: true })
+    //json value assertion
+    cy.xpath('//div[@controlname="assigning"]//div[@class="item-label col"]').children('div').invoke('text')
+      .then((text) => {
+        expect(text.trim()).equal(this.NewKitItemData.AssigningName)
+      });
+    cy.wait(2000)
     //Close Kit type
     cy.get(".subheader--button-icon-wrapper .inline-svg").click({
       force: true,
     });
     cy.log(this.NewKitItemData.KitName + "Kit item has been Close");
     cy.contains(" Recently Viewed ").should("be.visible");
-    cy.wait(5000);
-
     //Click on cross icon to remove filer
     cy.get(".inline-svg:nth-child(3) > path").click({ force: true });
-    cy.wait(5000);
+    cy.wait(3000);
   });
 
-  it("Validate the Default Filter for KitItemID", function () {
+  it.only("Validate the Default Filter for KitItemID", function () {
     //Page Object
     const lp = new LoginPage();
-
     lp.FilterIcon();
     cy.log("Kit type filters has been opened");
-    cy.wait(3000);
     cy.get('[placeholder="Created On"][type="text"]').scrollIntoView({
       force: true,
     });
-    cy.wait(3000);
     cy.get('[placeholder="Item Id"]')
       .first()
       .type(this.NewKitItemData.KitItemID);
     cy.wait(2000);
     cy.contains("Apply Filters").click({ force: true });
     cy.get(".filter-tag").should("be.visible");
-    cy.wait(10000);
-
+    cy.wait(3000);
     //Click on created kit item
     cy.get(".list-item--title").click({ force: true });
     cy.wait(3000);
@@ -1473,23 +1511,19 @@ describe("TableList KitItem Filter", function () {
       "have.text",
       this.NewKitItemData.KitName + " " + "#" + this.NewKitItemData.KitItemID
     );
-    cy.wait(5000);
-
+    cy.wait(2000);
     //Close Kit type
     cy.get(".subheader--button-icon-wrapper .inline-svg").click({
       force: true,
     });
-    cy.wait(3000);
-
     //Click on cross icon to remove filer
     cy.get(".inline-svg:nth-child(3) > path").click({ force: true });
-    cy.wait(5000);
+    cy.wait(1000);
   });
 
-  it("Validate the default Filter for Created By Element", function () {
+  it.only("Validate the default Filter for Created By Element", function () {
     //Page Object
     const lp = new LoginPage();
-
     lp.FilterIcon();
     cy.log("Kit type filters has been opened");
     cy.wait(3000);
@@ -1498,29 +1532,22 @@ describe("TableList KitItem Filter", function () {
     });
     cy.wait(3000);
     //Click on CreatedBy link to open CreatedBy list popup
-    cy.get(
-      " div.v-input.searchSelectNone.v-input--is-readonly.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-select div.v-input__control div.v-input__slot > div.v-select__slot:nth-child(2)"
-    )
-      .eq(3)
-      .click({ force: true });
+    cy.xpath(
+      '//span[@class="searchRel"]//div[@class="v-select__slot"]//div[@class="v-select__selections"]'
+    ).eq(3).click({ force: true });
     cy.contains(" Users ").should("be.visible");
     cy.wait(2000);
-
     //select CreatedBy value
     cy.contains(this.NewKitItemData.CreatedBy).click({ force: true });
-
     cy.wait(2000);
-
     cy.contains("Apply Filters").click({ force: true });
     cy.get(".filter-tag").should("be.visible");
-    cy.wait(10000);
-
     //Click on cross icon to remove filer
     cy.get(".inline-svg:nth-child(3) > path").click({ force: true });
-    cy.wait(5000);
+    cy.wait(1000);
   });
 
-  it("Validate the Default Filter for Modified By", function () {
+  it.only("Validate the Default Filter for Modified By", function () {
     //Page Object
     const lp = new LoginPage();
 
@@ -1532,11 +1559,9 @@ describe("TableList KitItem Filter", function () {
     });
     cy.wait(3000);
     //Click on ModifiedBy link to open ModifiedBy list popup
-    cy.get(
-      " div.v-input.searchSelectNone.v-input--is-readonly.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-select div.v-input__control div.v-input__slot > div.v-select__slot:nth-child(2)"
-    )
-      .eq(4)
-      .click({ force: true });
+    cy.xpath(
+      '//span[@class="searchRel"]//div[@class="v-select__slot"]//div[@class="v-select__selections"]'
+    ).eq(4).click({ force: true });
     cy.contains(" Users ").should("be.visible");
     cy.wait(2000);
 
@@ -1547,17 +1572,16 @@ describe("TableList KitItem Filter", function () {
 
     cy.contains("Apply Filters").click({ force: true });
     cy.get(".filter-tag").should("be.visible");
-    cy.wait(10000);
+    cy.wait(3000);
 
     //Click on cross icon to remove filer
     cy.get(".inline-svg:nth-child(3) > path").click({ force: true });
     cy.wait(5000);
   });
 
-  it("Validate the Default Filter for Created On", function () {
+  it.only("Validate the Default Filter for Created On", function () {
     //Page Object
     const lp = new LoginPage();
-
     lp.FilterIcon();
     cy.log("Kit type filters has been opened");
     cy.wait(3000);
@@ -1574,18 +1598,18 @@ describe("TableList KitItem Filter", function () {
       alert("Select the Created On Date for kit item");
     });
     cy.log("User will select created on date");
-    cy.wait(10000);
+    cy.wait(3000);
 
     cy.contains("Apply Filters").click({ force: true });
     cy.get(".filter-tag").should("be.visible");
-    cy.wait(10000);
+    cy.wait(3000);
 
     //Click on cross icon to remove filer
     cy.get(".inline-svg:nth-child(3) > path").click({ force: true });
     cy.wait(5000);
   });
 
-  it("Validate the Default Filter for Modified On", function () {
+  it.only("Validate the Default Filter for Modified On", function () {
     //Page Object
     const lp = new LoginPage();
 
@@ -1605,11 +1629,11 @@ describe("TableList KitItem Filter", function () {
       alert("Select the Modified On Date for kit item");
     });
     cy.log("User will select Modified on date");
-    cy.wait(10000);
+    cy.wait(3000);
 
     cy.contains("Apply Filters").click({ force: true });
     cy.get(".filter-tag").should("be.visible");
-    cy.wait(10000);
+    cy.wait(3000);
 
     //Click on cross icon to remove filer
     cy.get(".inline-svg:nth-child(3) > path").click({ force: true });

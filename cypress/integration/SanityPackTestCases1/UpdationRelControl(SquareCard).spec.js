@@ -466,7 +466,7 @@ describe("Update Related New fot Square Card Related Control", function () {
     cy.contains('Coordinator').click({ force: true })
     cy.contains('Contributor').click({ force: true })
     cy.wait(1000)
-    cy.contains(this.UpdateKitItemData.DUpAssigning).click({ force: true });
+    cy.contains(this.UpdateKitItemData.Assigning).click({ force: true });
     cy.wait(1000);
     //Click on to save
     cy.get(".button-pop-ups--size > .v-btn__content").click({ force: true });
@@ -627,19 +627,15 @@ describe("Update Related New fot Square Card Related Control", function () {
   });
 
   it.only('Time Element data Validation', function () {
-
     //Check in josn for LoggedTime
     cy.get('[placeholder="Add Time"][readonly="readonly"]').eq(0)
       .should("have.value", this.UpdateKitItemData.LoggedTime)
-
   })
 
   it.only('Date Element data Validation', function () {
-
     //Check in josn for LoggedDate
     cy.get('[placeholder=" MM / DD / YYYY"]').eq(0)
       .should("have.value", this.UpdateKitItemData.LoggedDate)
-
   })
 
   it.only("SelectList Element data Validation", function () {
@@ -650,9 +646,16 @@ describe("Update Related New fot Square Card Related Control", function () {
       });
   })
 
-  it("RadioSelect Element data Validation", function () {
-    cy.get('.v-radio').eq(1).should('be.checked')
-  });
+  it.only('RadioSelect Element data Validation', function () {
+    var radio = this.DataType2.RadioSelectName.toLowerCase();
+    //json value assertion
+    cy.xpath('//div[@controlname="radioSelect"]//div[@class="v-input__slot"]//div[@class="v-radio theme--light v-item--active"]//div[@class="v-list-item__content"]')
+      .invoke('text')
+      .then((text) => {
+        cy.log(text)
+        expect(text.trim()).contains(this.UpdateKitItemData.RadioSelectValue)
+      });
+  })
 
   it.only("CheckboxSelect Element data Validation", function () {
     cy.get('[type="checkbox"]').eq(2).should('be.checked')
@@ -691,7 +694,7 @@ describe("Update Related New fot Square Card Related Control", function () {
     //json value assertion
     cy.xpath('//div[@controlname="' + lower + '"]//div[@class="item-label col"]').children('div').invoke('text')
       .then((text) => {
-        expect(text.trim()).equal(this.UpdateKitItemData.DUpAssigning)
+        expect(text.trim()).equal(this.UpdateKitItemData.Assigning)
       });
   })
 
@@ -1152,19 +1155,15 @@ describe("Update Related New fot Square Card Related Control", function () {
   });
 
   it.only("City Element data Validation", function () {
-
     //Validating details view input data
     cy.get('[placeholder="City"]')
       .should("have.value", this.RelatedKitItemData3.City)
-
   });
 
   it.only("ZipCode Element data Validation", function () {
-
     //Validating details view input data
     cy.get('[placeholder="Zip/Postal Code"]').eq(0)
       .should("have.value", this.RelatedKitItemData3.ZipCode)
-
   });
 
   it.only("State Element data Validation", function () {
@@ -1196,11 +1195,9 @@ describe("Update Related New fot Square Card Related Control", function () {
   })
 
   it.only('Date Element data Validation', function () {
-
     //Check in josn for LoggedDate
     cy.get('[placeholder=" MM / DD / YYYY"]').eq(0)
       .should("have.value", this.RelatedKitItemData3.LoggedDate)
-
   })
 
   it.only("SelectList Element data Validation", function () {
@@ -1211,11 +1208,16 @@ describe("Update Related New fot Square Card Related Control", function () {
       });
   })
 
-  it("RadioSelect Element data Validation", function () {
-    cy.wait(2000)
-    cy.get('.v-radio').eq(1).should('be.checked')
-    cy.wait(2000)
-  });
+  it.only('RadioSelect Element data Validation', function () {
+    var radio = this.DataType2.RadioSelectName.toLowerCase();
+    //json value assertion
+    cy.xpath('//div[@controlname="radioSelect"]//div[@class="v-input__slot"]//div[@class="v-radio theme--light v-item--active"]//div[@class="v-list-item__content"]')
+      .invoke('text')
+      .then((text) => {
+        cy.log(text)
+        expect(text.trim()).contains(this.RelatedKitItemData3.RadioSelectValue)
+      });
+  })
 
   it.only("CheckboxSelect Element data Validation", function () {
     //CheckboxSelect1
