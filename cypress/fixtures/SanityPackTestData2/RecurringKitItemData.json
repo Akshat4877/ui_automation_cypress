@@ -10,7 +10,7 @@
     "RecurringTotalHours":"3",
     "RecurringAddDescription":"We are saving time entry now for Recurring Time Entry",
     "RecurringTimeEntryConnection":"Jerome Casanova",
-    "RecurringAddComments":"Hi these are the Recurring kit item test case that is for comment testing",
+    "RecurringAddComments":"Comment testing for recurring kit item",
     "RecurringAddGroup":"CA",
 
 
@@ -59,6 +59,9 @@
     "LargeiconSize":"Large",
     "ExtraLargeiconSize":"Extra Large",
 
-    "IconLabel":"recurring"
+    "IconLabel":"recurring",
+
+    "LoggedTime":"4:30 pm",
+    "LoggedDate":"03/25/2021"
 
 }

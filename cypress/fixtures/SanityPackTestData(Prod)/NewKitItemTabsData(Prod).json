@@ -1,14 +1,14 @@
 {
     
     "FileTabFileName":"Screenshot_6",
-    "ContributorsName":"Amit Kumar",
+    "ContributorsName":"Harman Ss",
     "AddTimeEntryLable":"Work",
     "AddTimeEntryDescription":"Test Cases",
     "TotalHours":"8",
     "AddDescription":"We are saving time entry now",
-    "TimeEntryConnection":"Ranveer K",
-    "AddComments":"ABCDEFG HIJK LMNOPQ RSTU VWXYZ",
-    "AddGroup":"CA Prod 12"
+    "TimeEntryConnection":"Ranveer Kumar",
+    "AddComments":"This is comment testing on new view on Prod env",
+    "AddGroup":"Test Group"
     
 }
 

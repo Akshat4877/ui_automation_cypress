@@ -18,7 +18,7 @@ describe("New created kit item creation Validation test case", function () {
 
     //Enter credentials
     //lp.EnterEmail("sam@armyspy.com");
-    lp.EnterEmail("propertymanagement@commonareas.work.dev");
+    lp.EnterEmail("ema@mailinator.com");
 
     lp.EnterPassword("1234567Aa");
     lp.Submit();
@@ -45,6 +45,10 @@ describe("New created kit item creation Validation test case", function () {
       "refreshToken",
       "jwtAccessToken"
     );
+
+    cy.fixture("SanityPackTestData2/KitItemId").then(function (ItemID) {
+      this.KitItemId = ItemID;
+    });
 
     cy.fixture("KitTypeTestData/NewKitItemDataValues").then(function (
       KitDataEle
@@ -97,44 +101,8 @@ describe("New created kit item creation Validation test case", function () {
     });
   });
 
-  it.only("Click on list view and select kit type to Validate", function () {
-    const lp = new LoginPage();
-    //Click on Hamburger Icon
-    lp.HMBIcon();
-    cy.contains(this.NewKitItemData.KitName).scrollIntoView({
-      force: true,
-    });
-    cy.wait(2000)
-    //scroll to Open KitType from left panel
-    cy.contains(this.NewKitItemData.KitName).scrollIntoView({ force: true })
-    //Open KitType from left panel
-    cy.contains(this.NewKitItemData.KitName).click({
-      force: true,
-    });
-    cy.wait(2000)
-    cy.log("Kit Type has been OPened");
-    //Click on First kit item of kit type to open edit view
-    cy.log("Kit Item Detail View has been Opened");
-    //Validation assertion for details view
-    cy.get(".kits-landing--header-title").should(
-      "have.text",
-      " Recently Viewed "
-    );
 
-    //Created kit type existance assertion
-    cy.contains(
-      this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
-    ).should("exist");
-    cy.log("Created New Kit Item has been Exist");
-    //Click on created kit item
-    cy.contains(
-      this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
-    ).click({ force: true });
-    //element visible validation
-    cy.wait(3000)
-  });
-
-  it.only('Getting Kit Item ID', function () {
+  it('Getting Kit Item ID', function () {
     cy.wait(2000)
     //geting kit item id
     cy.xpath('//div[@class="truncate align-center d-none d-sm-flex col"]')

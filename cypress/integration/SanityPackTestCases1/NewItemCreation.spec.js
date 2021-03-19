@@ -7,7 +7,6 @@ describe("New kit item complete creation test case", function () {
     // cy.viewport(1280, 720);
     const lp = new LoginPage();
     const slp = new SanityLoginPage();
-    //slp.propmanagementcoreTest();
     slp.nvdTest()
     //slp.TmProd();
 
@@ -20,7 +19,6 @@ describe("New kit item complete creation test case", function () {
     cy.contains(" Log In ").should("be.visible");
     //Enter credentials
     lp.EnterEmail("propertymanagement@commonareas.work.dev");
-    //lp.EnterEmail("PropMgmtCoreSupport@commonareas.work.dev");
     //lp.EnterEmail("sam@armyspy.com");
     lp.EnterPassword("1234567Aa");
     lp.Submit();
@@ -340,7 +338,6 @@ describe("New kit item complete creation test case", function () {
     //ContactSelector(Values coming form KitItemValues Json File)
     //Click on to open ContactSelector Pop up
     cy.get(".searchIcon").eq(1).click({ force: true });
-
     cy.wait(4000);
     cy.contains(this.NewKitItemData.ContactSelectorName).click({ force: true });
     cy.log("ContactSelecto added");
@@ -397,6 +394,11 @@ describe("New kit item complete creation test case", function () {
     //click on checkboxes
     cy.contains('Coordinator').click({ force: true })
     cy.contains('Contributor').click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.NewKitItemData.AssigningName}{enter}`)
     cy.wait(1000)
 
     cy.contains(this.NewKitItemData.AssigningName).click({ force: true });
@@ -782,6 +784,21 @@ describe("New kit item complete creation test case", function () {
     //element visible validation
     cy.wait(4000)
   });
+
+  it.only('Getting Kit Item ID', function () {
+    cy.wait(2000)
+    //geting kit item id
+    cy.xpath('//div[@class="truncate align-center d-none d-sm-flex col"]')
+      .invoke('text').then((KitItemId) => {
+        cy.log(KitItemId).writeFile(
+          "cypress/fixtures/SanityPackTestData2/KitItemId.json",
+          {
+            ItemID: KitItemId,
+          }
+        );
+      })
+    cy.wait(1000)
+  })
 
   it.only("Url Element data Validation", function () {
     var lower = this.DataType2.Url.toLowerCase();

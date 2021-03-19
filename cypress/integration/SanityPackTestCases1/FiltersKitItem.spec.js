@@ -7,8 +7,8 @@ describe("New kit item creation test case", function () {
     // cy.viewport(1280, 720);
     const lp = new LoginPage();
     const slp = new SanityLoginPage();
-    slp.nvdTest()
-    //slp.TmProd()
+    //slp.nvdTest()
+    slp.TmProd()
     //Handling Alert
     cy.on("window:confirm", () => {
       cy.log("Alert has been Handled");
@@ -17,8 +17,8 @@ describe("New kit item creation test case", function () {
     //Login Assertions
     cy.contains(" Log In ").should("be.visible");
     //Enter credentials
-    lp.EnterEmail("propertymanagement@commonareas.work.dev");
-    //lp.EnterEmail("sam@armyspy.com");
+    //lp.EnterEmail("propertymanagement@commonareas.work.dev");
+    lp.EnterEmail("sam@armyspy.com");
     lp.EnterPassword("1234567Aa");
     lp.Submit();
     cy.log("User has been Logged In into the application");
@@ -45,29 +45,29 @@ describe("New kit item creation test case", function () {
       "jwtAccessToken"
     );
 
-    cy.fixture("SanityPackTestData/FiltersKitItemData").then(function (
-      KitDataEle
-    ) {
-      this.NewKitItemData = KitDataEle;
-    });
+    // cy.fixture("SanityPackTestData/FiltersKitItemData").then(function (
+    //   KitDataEle
+    // ) {
+    //   this.NewKitItemData = KitDataEle;
+    // });
 
-    // cy.fixture("SanityPackTestData(Prod)/FiltersKitItemData(Prod)").then(
-    //   function (KitDataEle) {
-    //     this.NewKitItemData = KitDataEle;
-    //   }
-    // );
+    cy.fixture("SanityPackTestData(Prod)/FiltersKitItemData(Prod)").then(
+      function (KitDataEle) {
+        this.NewKitItemData = KitDataEle;
+      }
+    );
 
-    cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
-      NewDataForElements
-    ) {
-      this.DataType2 = NewDataForElements;
-    });
+    // cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
+    //   NewDataForElements
+    // ) {
+    //   this.DataType2 = NewDataForElements;
+    // });
 
-    // cy.fixture("SanityPackTestData(Prod)/KitBuilderDataTypes2(Prod)").then(
-    //   function (NewDataForElements) {
-    //     this.DataType2 = NewDataForElements;
-    //   }
-    // );
+    cy.fixture("SanityPackTestData(Prod)/KitBuilderDataTypes2(Prod)").then(
+      function (NewDataForElements) {
+        this.DataType2 = NewDataForElements;
+      }
+    );
 
     //////////////////////////////////////////////////////////////////////////////////
 
@@ -233,7 +233,7 @@ describe("New kit item creation test case", function () {
     cy.xpath("//span[contains(text(),'30')]").first().click({ force: true });
     cy.wait(1000);
     //Click on PM
-    cy.xpath("//div[contains(text(),'PM')]").click({ force: true });
+    cy.xpath("//div[contains(text(),'PM')]").first().click({ force: true });
     //Click on OK to save date
     cy.xpath(
       "//div[contains(@class,'v-dialog v-dialog--active')]//button[1]"
@@ -338,11 +338,15 @@ describe("New kit item creation test case", function () {
     cy.get(".searchIcon > .inline-svg > path").last().click({ force: true });
     //Click on to open Assigning Pop up
     cy.get(".searchIcon").eq(2).click({ force: true });
-    cy.wait(3000);
     cy.contains('Coordinator').click({ force: true })
     cy.contains('Assignee').click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.NewKitItemData.AssigningName}{enter}`)
+    cy.wait(1000)
     //Click on to select the Assigning
-    //cy.get(".list-item-search").first().click({ force: true });
     cy.contains(this.NewKitItemData.AssigningName).click({ force: true });
     cy.wait(1000);
     //Click on to save

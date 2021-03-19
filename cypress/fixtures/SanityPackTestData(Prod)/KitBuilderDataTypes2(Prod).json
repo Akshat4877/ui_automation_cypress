@@ -73,7 +73,7 @@
     "InspectionValue5":"Zapare",
 
     "OneToOneRelation":"BaseOneToOne",
-    "KitToBeRelate":"RelatedKit",
+    "KitToBeRelate":"Extension",
     "OneToOneRelatedNew":"RelatedNewView",
     "OneToOneRelatedEdit":"RelatedEditView",
     "OneToOneMapView":"MapView",
@@ -83,7 +83,7 @@
 
     
     "OneToManyRelation":"BaseNRelation",
-    "KitToBeRelated":"RelatedKit",
+    "KitToBeRelated":"Extension",
     "OneToManyRelatedNew":"RelatedNewView",
     "OneToManyRelatedEdit":"RelatedEditView",
     "OneToManyMapView":"MapView",
@@ -97,7 +97,7 @@
 
      
     "SquareCardName":"BaseSquareCard",
-    "CardKitToBeRelated":"RelatedKit",
+    "CardKitToBeRelated":"Extension",
     "CardRelatedNew":"RelatedNewView",
     "CardRelatedEdit":"RelatedEditView",
     "CardMapView":"MapView",
