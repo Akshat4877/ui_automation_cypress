@@ -409,7 +409,7 @@ describe("Update Related New fot OneToOne Related Control", function () {
     cy.wait(4000);
     //Click on to open UserSelector Pop up
     //cy.get(".searchIcon").eq(7).click({ force: true });
-    cy.contains(this.UpdateKitItemData.UserSelectorName).click({ force: true });
+    cy.contains(this.UpdateKitItemData.UserSelector).click({ force: true });
     cy.log("UserSelect Updated");
     cy.wait(1000);
     //Click on cross to contact selector
@@ -421,7 +421,7 @@ describe("Update Related New fot OneToOne Related Control", function () {
     cy.wait(4000);
     // //Click on to open ContactSelector Pop up
     // cy.get(".searchIcon").eq(8).click({ force: true });
-    cy.contains(this.UpdateKitItemData.ContactSelectorName).click({
+    cy.contains(this.UpdateKitItemData.ContactSelector).click({
       force: true,
     });
     cy.log("ContactSelecto Updated");
@@ -485,10 +485,14 @@ describe("Update Related New fot OneToOne Related Control", function () {
       .click({ force: true });
     //Click on to open Assigning
     cy.wait(4000);
-    cy.get(
-      ".v-list-item:nth-child(1) > .list-item-search > .v-list-item__title"
-    ).click({ force: true });
-
+    // cy.get(
+    //   ".v-list-item:nth-child(1) > .list-item-search > .v-list-item__title"
+    // ).click({ force: true });
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.UpdateKitItemData.Assigning}{enter}`)
+    cy.wait(3000)
     cy.contains(this.UpdateKitItemData.Assigning).click({ force: true });
     cy.wait(1000);
     //Click on to save
@@ -684,14 +688,14 @@ describe("Update Related New fot OneToOne Related Control", function () {
     cy.get('.imageContent').eq(0).scrollIntoView({ force: true })
     cy.wait(1000)
     cy.xpath('//div[@controlname="userSelector"]//div[@class="col item-label"]').children('div').invoke('text').then((text) => {
-      expect(text.trim()).equal(this.UpdateKitItemData.DUpUserSelector)
+      expect(text.trim()).equal(this.UpdateKitItemData.UserSelector)
     });
 
   })
 
   it.only('ContactSelector Element data Validation', function () {
     cy.xpath('//div[@controlname="contactSelector"]//div[@class="col item-label"]').children('div').invoke('text').then((text) => {
-      expect(text.trim()).equal(this.UpdateKitItemData.DUpContactSelector)
+      expect(text.trim()).equal(this.UpdateKitItemData.ContactSelector)
     });
 
   })
@@ -1035,7 +1039,11 @@ describe("Update Related New fot OneToOne Related Control", function () {
     // ).click({ force: true });
     cy.wait(4000);
     //Click on to select the Assigning
-    //cy.get(".list-item-search").first().click({ force: true });
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.RelatedKitItemData2.AssigningName}{enter}`)
+    cy.wait(3000)
     cy.contains(this.RelatedKitItemData2.AssigningName).click({ force: true });
     cy.wait(3000);
     //Click on to save

@@ -389,16 +389,13 @@ describe("New kit item complete creation test case", function () {
       .click({
         force: true,
       });
-    cy.wait(2000);
     //Click on Icon Tittle and  select Icon logo
     //Give numeric no from 1 in child(1,2,3...)
     cy.get(".thumb-container:nth-child(1) .selected-icon").click({
       force: true,
     });
-    cy.wait(2000);
     //Icon Save
     cy.get(".button-pop-ups").click({ force: true });
-    cy.wait(2000);
 
     //IcozSize
     cy.get(
@@ -701,7 +698,7 @@ describe("New kit item complete creation test case", function () {
     cy.wait(4000);
     //Click on to open UserSelector Pop up
     //cy.get(".searchIcon").eq(7).click({ force: true });
-    cy.contains(this.UpdateKitItemData.UserSelectorName).click({ force: true });
+    cy.contains(this.UpdateKitItemData.UserSelector).click({ force: true });
     cy.log("UserSelect Updated");
     cy.wait(3000);
 
@@ -712,7 +709,7 @@ describe("New kit item complete creation test case", function () {
     cy.wait(4000);
     // //Click on to open ContactSelector Pop up
     // cy.get(".searchIcon").eq(8).click({ force: true });
-    cy.contains(this.UpdateKitItemData.ContactSelectorName).click({
+    cy.contains(this.UpdateKitItemData.ContactSelector).click({
       force: true,
     });
     cy.log("ContactSelecto Updated");
@@ -760,7 +757,7 @@ describe("New kit item complete creation test case", function () {
     cy.get('.v-btn:nth-child(1) .v-badge > .inline-svg')
       .scrollIntoView({ force: true })
     cy.wait(1000)
-    cy.xpath("//*[contains(text(),'" + this.NewKitItemData.InspectionValue + "')]//div[@class='v-avatar v-avatar--left']")
+    cy.xpath("//*[contains(text(),'" + this.UpdateKitItemData.InspectionValue + "')]//div[@class='v-avatar v-avatar--left']")
       .click({ force: true })
     cy.wait(1000);
 
@@ -770,6 +767,11 @@ describe("New kit item complete creation test case", function () {
     ).click({ force: true });
     //Click on to open Assigning
     cy.wait(5000);
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.UpdateKitItemData.Assigning}{enter}`)
+    cy.wait(3000)
     cy.contains(this.UpdateKitItemData.Assigning).click({ force: true });
     cy.wait(3000);
     //Click on to save
@@ -1150,14 +1152,14 @@ describe("New view updation validation test case", function () {
     cy.get('.imageContent').eq(0).scrollIntoView({ force: true })
     cy.wait(1000)
     cy.xpath('//div[@controlname="userSelector"]//div[@class="col item-label"]').eq(0).children('div').invoke('text').then((text) => {
-      expect(text.trim()).equal(this.UpdateKitItemData.DUpUserSelector)
+      expect(text.trim()).equal(this.UpdateKitItemData.UserSelector)
     });
 
   })
 
   it.only('ContactSelector Element data Validation', function () {
     cy.xpath('//div[@controlname="contactSelector"]//div[@class="col item-label"]').eq(0).children('div').invoke('text').then((text) => {
-      expect(text.trim()).equal(this.UpdateKitItemData.DUpContactSelector)
+      expect(text.trim()).equal(this.UpdateKitItemData.ContactSelector)
     });
   })
 

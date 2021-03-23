@@ -339,11 +339,11 @@ describe("Update created kit item test case", function () {
     cy.contains(this.UpdateKitItemData.CheckboxSelectValue1).click({
       force: true,
     });
-    cy.contains(this.UpdateKitItemData.CheckboxSelectValue2).click({
+    cy.contains(this.UpdateKitItemData.CheckboxSelectValue5).click({
       force: true,
     });
 
-    cy.contains(this.UpdateKitItemData.CheckboxSelectValue4).click({
+    cy.contains(this.UpdateKitItemData.CheckboxSelectValue2).click({
       force: true,
     });
     cy.log("Checkbox Values updated.");
@@ -366,7 +366,7 @@ describe("Update created kit item test case", function () {
     cy.wait(4000);
     //Click on to open UserSelector Pop up
     //cy.get(".searchIcon").eq(7).click({ force: true });
-    cy.contains(this.UpdateKitItemData.DUpUserSelector).click({ force: true });
+    cy.contains(this.UpdateKitItemData.UserSelector).click({ force: true });
     cy.log("UserSelect Updated");
     cy.wait(1000);
 
@@ -378,7 +378,7 @@ describe("Update created kit item test case", function () {
     cy.wait(4000);
     // //Click on to open ContactSelector Pop up
     // cy.get(".searchIcon").eq(8).click({ force: true });
-    cy.contains(this.UpdateKitItemData.DUpContactSelector).click({
+    cy.contains(this.UpdateKitItemData.ContactSelector).click({
       force: true,
     });
     cy.log("ContactSelecto Updated");
@@ -433,11 +433,13 @@ describe("Update created kit item test case", function () {
       .click({ force: true });
     //Click on to open Assigning
     cy.wait(5000);
-    //cy.get('.v-list-item:nth-child(1) .v-input--selection-controls__ripple')
-    //.click({ force: true });
-
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.UpdateKitItemData.Assigning}{enter}`)
+    cy.wait(3000)
     //updated assigning
-    cy.contains(this.UpdateKitItemData.DUpAssigning).click({ force: true });
+    cy.contains(this.UpdateKitItemData.Assigning).click({ force: true });
     cy.wait(1000);
     //Click on to save
     cy.get(".button-pop-ups--size > .v-btn__content").click({ force: true });
@@ -649,7 +651,7 @@ describe("Update created kit item test case", function () {
     cy.contains(" Groups ").should("be.visible");
     cy.contains(this.DetailViewData.AddGroup).click({ force: true });
     //Assertion validation
-    cy.contains(this.DetailViewData.AddGroup).should("be.visible");
+    //cy.contains(this.DetailViewData.AddGroup).should("be.visible");
     cy.wait(1000);
   });
 
@@ -928,16 +930,13 @@ describe("Details view updation validation test case", function () {
   });
 
   it.only("ZipCode Element data Validation", function () {
-
     cy.get('[placeholder="Zip/Postal Code"]').scrollIntoView({ force: true })
     //Validating details view input data
     cy.get('[placeholder="Zip/Postal Code"]')
       .should("have.value", this.UpdateKitItemData.ZipCode)
-
   });
 
   it.only("State Element data Validation", function () {
-
     cy.xpath('//div[@class="v-select__slot"]//div[@class="v-select__selections"]//div[@class="v-select__selection v-select__selection--comma"]')
       .eq(0)
       .invoke('text').then((text) => {
@@ -952,28 +951,22 @@ describe("Details view updation validation test case", function () {
   });
 
   it.only("Number Element data Validation", function () {
-
     var lower = this.DataType2.Number.toLowerCase();
     //Validating details view input data
     cy.xpath("//input[@controlname='" + lower + "']")
       .should("have.value", this.UpdateKitItemData.Number)
-
   });
 
   it.only('Time Element data Validation', function () {
-
     //Check in josn for LoggedTime
     cy.get('[placeholder="Add Time"][readonly="readonly"]').eq(1)
       .should("have.value", this.UpdateKitItemData.LoggedTime)
-
   })
 
   it.only('Date Element data Validation', function () {
-
     //Check in josn for LoggedDate
     cy.get('[placeholder=" MM / DD / YYYY"]')
       .should("have.value", this.UpdateKitItemData.LoggedDate)
-
   })
 
   it.only("SelectList Element data Validation", function () {
@@ -984,16 +977,20 @@ describe("Details view updation validation test case", function () {
       });
   })
 
-  it("RadioSelect Element data Validation", function () {
-    cy.wait(2000)
-    cy.get('.v-radio').eq(1).should('be.checked')
-    cy.wait(2000)
-  });
+  it.only('RadioSelect Element data Validation', function () {
+    var radio = this.DataType2.RadioSelectName.toLowerCase();
+    //json value assertion
+    cy.xpath('//div[@controlname="radioSelect"]//div[@class="v-input__slot"]//div[@class="v-radio theme--light v-item--active"]//div[@class="v-list-item__content"]')
+      .invoke('text')
+      .then((text) => {
+        cy.log(text)
+        expect(text.trim()).contains(this.UpdateKitItemData.RadioSelectValue)
+      });
+  })
 
   it.only("CheckboxSelect Element data Validation", function () {
-    //CheckboxSelect1
+    //CheckboxSelect2
     cy.get('[type="checkbox"]').eq(4).should('be.checked')
-    cy.get('[type="checkbox"]').eq(6).should('be.checked')
   });
 
   it.only('Stepper Element data Validation', function () {
@@ -1009,14 +1006,14 @@ describe("Details view updation validation test case", function () {
     cy.get('.imageContent').eq(0).scrollIntoView({ force: true })
     cy.wait(1000)
     cy.xpath('//div[@controlname="userSelector"]//div[@class="col item-label"]').children('div').invoke('text').then((text) => {
-      expect(text.trim()).equal(this.UpdateKitItemData.DUpUserSelector)
+      expect(text.trim()).equal(this.UpdateKitItemData.UserSelector)
     });
 
   })
 
   it.only('ContactSelector Element data Validation', function () {
     cy.xpath('//div[@controlname="contactSelector"]//div[@class="col item-label"]').children('div').invoke('text').then((text) => {
-      expect(text.trim()).equal(this.UpdateKitItemData.DUpContactSelector)
+      expect(text.trim()).equal(this.UpdateKitItemData.ContactSelector)
     });
 
   })
@@ -1028,7 +1025,7 @@ describe("Details view updation validation test case", function () {
     //json value assertion
     cy.xpath('//div[@controlname="' + assigning + '"]//div[@class="item-label col"]').children('div').invoke('text')
       .then((text) => {
-        expect(text.trim()).equal(this.UpdateKitItemData.DUpAssigning)
+        expect(text.trim()).equal(this.UpdateKitItemData.Assigning)
       });
   })
 

@@ -378,6 +378,10 @@ describe("Recurring New kit item creation test case", function () {
     ).click({ force: true });
     cy.wait(4000);
     //Click on to select the Assigning
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.NewKitItemData.Assigning}{enter}`)
     cy.contains(this.NewKitItemData.Assigning).click({ force: true });
     cy.wait(3000);
     //Click on to save

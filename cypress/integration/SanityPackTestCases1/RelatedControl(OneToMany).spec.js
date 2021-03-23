@@ -415,7 +415,12 @@ describe("Related Control One to Many test case", function () {
     cy.get(".searchIcon").eq(2).click({ force: true });
     cy.wait(3000);
     //Click on to select the Assigning
-    //cy.get(".list-item-search").first().click({ force: true });
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.RelatedKitItemData.AssigningName}{enter}`)
+    cy.wait(3000)
     cy.contains(this.RelatedKitItemData.AssigningName).click({ force: true });
     cy.wait(1000);
     //Click on to save
@@ -631,11 +636,16 @@ describe("Related Control One to Many test case", function () {
       });
   })
 
-  it("RadioSelect Element data Validation", function () {
-    cy.wait(2000)
-    cy.get('.v-radio').eq(1).should('be.checked')
-    cy.wait(2000)
-  });
+  it.only('RadioSelect Element data Validation', function () {
+    var radio = this.DataType2.RadioSelectName.toLowerCase();
+    //json value assertion
+    cy.xpath('//div[@controlname="radioSelect"]//div[@class="v-input__slot"]//div[@class="v-radio theme--light v-item--active"]//div[@class="v-list-item__content"]')
+      .invoke('text')
+      .then((text) => {
+        cy.log(text)
+        expect(text.trim()).contains(this.RelatedKitItemData.RadioSelectValue)
+      });
+  })
 
   it.only("CheckboxSelect Element data Validation", function () {
     //CheckboxSelect1

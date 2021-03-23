@@ -2,7 +2,7 @@
 
     "Change Kit Name":"For Prod , to be automated in Test NewKItItemDataValues.json",
     "Also Change":"Related Kit Name VerificationTestCasesData-KitBuilderDataTypes2.json",
-    "KitName":"Building Areas",
+    "KitName":"BuildingAreas",
     "Url":"https://www.prod.com",
     "Text":"Production",
     "NewFormLibFileName":"Screenshot_2",
@@ -37,7 +37,7 @@
     
     "UserSelectorName":"Kat Vonnorights",
     "ContactSelectorName":"Aaron Seabaugh",
-    "AssigningName":"Akshat Akshat",
+    "AssigningName":"Mack Ss",
     
     "ExtraSmalliconSize":"Extra Small",
     "SmalliconSize":"Small",
@@ -46,6 +46,10 @@
     "ExtraLargeiconSize":"Extra Large",
 
     "IconLabel":"Prod",
+
+    "Form Element Validation":"Data-Dont modify",
+    "LoggedTime":"4:30 pm",
+    "LoggedDate":"03/22/2021",
 
     
     

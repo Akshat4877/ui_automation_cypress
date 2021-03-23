@@ -78,7 +78,7 @@ describe("Update Connection Details", function () {
     cy.wait(10000);
   });
 
-  it.only("Accept Connection Request", function () {
+  it("Accept Connection Request", function () {
     //PageObjects
     const sp = new SignUpPage();
     const lp = new LoginPage();

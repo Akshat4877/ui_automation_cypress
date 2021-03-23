@@ -6,13 +6,12 @@ describe("Details View tabs test case", function () {
     // cy.viewport(1280, 720);
     const lp = new LoginPage();
     const slp = new SanityLoginPage();
-    slp.visitCityComTest();
-
+    slp.nvdTest()
+    //slp.TmProd()
     //Handling Alert
     cy.on("window:confirm", () => {
       cy.log("Alert has been Handled");
     });
-
     //Login Assertions
     cy.contains(" Log In ").should("be.visible");
     //Enter credentials
@@ -31,7 +30,6 @@ describe("Details View tabs test case", function () {
       "jwtAccessToken"
     );
 
-    cy.wait(10000);
   });
 
   this.beforeEach("Fixtures file data", function () {
@@ -90,7 +88,6 @@ describe("Details View tabs test case", function () {
       force: true,
     });
     cy.log("Kit Type has been OPened");
-    cy.wait(5000);
     //Click on First kit item of kit type to open edit view
     cy.log("Kit Item Detail View has been Opened");
     cy.wait(3000);
@@ -109,12 +106,11 @@ describe("Details View tabs test case", function () {
     cy.contains(
       this.DataType2.Url + ":" + " " + this.DetailViewData.UrlData
     ).click({ force: true });
-    cy.wait(5000);
+    cy.wait(2000);
   });
 
   it("File Tab", function () {
     cy.wait(3000);
-
     //Files Tab
     cy.contains("Files").click({ force: true });
     cy.wait(2000);
@@ -201,10 +197,10 @@ describe("Details View tabs test case", function () {
     //Link existing item assertion
     cy.contains(
       " Relation on " +
-        this.DataType2.OneToManyRelation +
-        " for " +
-        this.NewKitItemData.KitName +
-        " linked"
+      this.DataType2.OneToManyRelation +
+      " for " +
+      this.NewKitItemData.KitName +
+      " linked"
     ).should("be.visible");
     cy.contains(this.NewKitItemData.KitName + " has been saved").should(
       "be.visible"
@@ -325,10 +321,10 @@ describe("Details View tabs test case", function () {
     //Related kit item created assertion
     cy.contains(
       " Relation on " +
-        this.DataType2.OneToManyRelation +
-        " for " +
-        this.NewKitItemData.KitName +
-        " created"
+      this.DataType2.OneToManyRelation +
+      " for " +
+      this.NewKitItemData.KitName +
+      " created"
     ).should("be.visible");
     //Parent kit type save assertion
     cy.contains(this.NewKitItemData.KitName + " has been saved").should(

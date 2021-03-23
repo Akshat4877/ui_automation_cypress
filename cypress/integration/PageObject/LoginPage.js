@@ -84,7 +84,7 @@ class LoginPage {
   HMBIcon() {
 
     const btn = cy.get(".v-btn__content > .theme--dark");
-    btn.click({ force: true });
+    btn.first().click({ force: true });
   }
 
   ConnectionIcon() {

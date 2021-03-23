@@ -10,7 +10,7 @@ describe("Recurring New kit item creation test case", function () {
     slp.nvdTest()
     //slp.TmProd();
     //Handling Alert
-    
+
     cy.on("window:confirm", () => {
       cy.log("Alert has been Handled");
     });
@@ -358,7 +358,11 @@ describe("Recurring New kit item creation test case", function () {
     cy.get(".searchIcon").eq(2).click({ force: true });
     cy.wait(4000);
     //Click on to select the Assigning
-    //cy.get(".list-item-search").first().click({ force: true });
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.NewKitItemData.Assigning}{enter}`)
+    cy.wait(3000)
     cy.contains(this.NewKitItemData.AssigningName).click({ force: true });
     cy.wait(2000);
     //Click on to save

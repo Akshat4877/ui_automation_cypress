@@ -36,14 +36,9 @@
     "CheckboxSelectValue5":"CheckboxSelect5",
 
 
-    "UserSelectorName":"Common Areas Support",
-    "ContactSelectorName":"Ethan Thomas",
+    "UserSelector":"Common Areas Support",
+    "ContactSelector":"Ethan Thomas",
     "Assigning":"Sam Ruddy",
-    
-
-    "DUpUserSelector":"Common Areas Support",
-    "DUpContactSelector":"Ethan Thomas",
-    "DUpAssigning":"Sam Ruddy",
     
     "ExtraSmalliconSize":"Extra Small",
     "SmalliconSize":"Small",

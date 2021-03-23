@@ -7,8 +7,8 @@ describe("TableList KitItem Filter", function () {
     /// cy.viewport(1280, 720);
     const lp = new LoginPage();
     const slp = new SanityLoginPage();
-    //slp.nvdTest()
-    slp.TmProd()
+    slp.nvdTest()
+    //slp.TmProd()
 
     //Handling Alert
     cy.on("window:confirm", () => {
@@ -18,8 +18,8 @@ describe("TableList KitItem Filter", function () {
     //Login Assertions
     cy.contains(" Log In ").should("be.visible");
     //Enter credentials
-    //lp.EnterEmail("propertymanagement@commonareas.work.dev");
-    lp.EnterEmail("sam@armyspy.com");
+    lp.EnterEmail("propertymanagement@commonareas.work.dev");
+    //lp.EnterEmail("sam@armyspy.com");
     lp.EnterPassword("1234567Aa");
     lp.Submit();
     cy.log("User has been Logged In into the application");
@@ -46,29 +46,29 @@ describe("TableList KitItem Filter", function () {
       "jwtAccessToken"
     );
 
-    // cy.fixture("SanityPackTestData/FiltersKitItemData").then(function (
-    //   KitDataEle
-    // ) {
-    //   this.NewKitItemData = KitDataEle;
-    // });
+    cy.fixture("SanityPackTestData/FiltersKitItemData").then(function (
+      KitDataEle
+    ) {
+      this.NewKitItemData = KitDataEle;
+    });
 
-    cy.fixture("SanityPackTestData(Prod)/FiltersKitItemData(Prod)").then(
-      function (KitDataEle) {
-        this.NewKitItemData = KitDataEle;
-      }
-    );
+    // cy.fixture("SanityPackTestData(Prod)/FiltersKitItemData(Prod)").then(
+    //   function (KitDataEle) {
+    //     this.NewKitItemData = KitDataEle;
+    //   }
+    // );
 
-    // cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
-    //   NewDataForElements
-    // ) {
-    //   this.DataType2 = NewDataForElements;
-    // });
+    cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
+      NewDataForElements
+    ) {
+      this.DataType2 = NewDataForElements;
+    });
 
-    cy.fixture("SanityPackTestData(Prod)/KitBuilderDataTypes2(Prod)").then(
-      function (NewDataForElements) {
-        this.DataType2 = NewDataForElements;
-      }
-    );
+    // cy.fixture("SanityPackTestData(Prod)/KitBuilderDataTypes2(Prod)").then(
+    //   function (NewDataForElements) {
+    //     this.DataType2 = NewDataForElements;
+    //   }
+    // );
 
     //////////////////////////////////////////////////////////////////////////////////
 
@@ -122,14 +122,14 @@ describe("TableList KitItem Filter", function () {
     cy.get(".filter-tag").should("be.visible");
     cy.wait(5000)
 
-    cy.xpath('//div[@class="row-list-item-details--content py-2 justify-center col col-10 truncate-wrapper"]//div[@class="v-list-item__subtitle truncate list-item--title"]')
-      .then(KitItem => {
-        const KitItemCount = Cypress.$(KitItem).length;
-        expect(KitItem).to.have.length(KitItemCount);
-        cy.log(expect(KitItem).to.have.length(KitItemCount));
-      })
+    // cy.xpath('//div[@class="row-list-item-details--content py-2 justify-center col col-10 truncate-wrapper"]//div[@class="v-list-item__subtitle truncate list-item--title"]')
+    //   .then(KitItem => {
+    //     const KitItemCount = Cypress.$(KitItem).length;
+    //     expect(KitItem).to.have.length(KitItemCount);
+    //     cy.log(expect(KitItem).to.have.length(KitItemCount));
+    //   })
 
-      cy.wait(30000)
+    //cy.wait(30000)
 
     //Assertion
     cy.contains(
@@ -154,7 +154,7 @@ describe("TableList KitItem Filter", function () {
     cy.get(".inline-svg:nth-child(3) > path").click({ force: true });
 
 
-    cy.wait(50000)
+    //cy.wait(50000)
 
 
   });
@@ -1432,7 +1432,7 @@ describe("TableList KitItem Filter", function () {
     //select ContactSelector value
     cy.xpath('//*[text() ="Search"]').first().click({ force: true })
     cy.wait(1000)
-    cy.xpath('//*[text() ="Search"]').next('input').type(`${this.NewKitItemData.ContactSelectorName}{enter}`)
+    cy.xpath('//*[text() ="Search"]').first().next('input').type(`${this.NewKitItemData.ContactSelectorName}{enter}`)
     cy.contains(this.NewKitItemData.ContactSelectorName).click({ force: true });
     cy.wait(2000);
     cy.contains("Apply Filters").click({ force: true });

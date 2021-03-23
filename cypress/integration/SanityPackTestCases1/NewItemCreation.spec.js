@@ -4,7 +4,6 @@ import SanityLoginPage from "../PageObject/SanityLoginPage";
 
 describe("New kit item complete creation test case", function () {
   this.beforeAll(function () {
-    // cy.viewport(1280, 720);
     const lp = new LoginPage();
     const slp = new SanityLoginPage();
     slp.nvdTest()
@@ -349,7 +348,6 @@ describe("New kit item complete creation test case", function () {
     });
 
     //getting value form different json file
-
     //Icon
     //Click on + icon of ICON Element
     cy.get(".v-btn--depressed > .v-btn__content > .inline-svg > path")
@@ -389,8 +387,6 @@ describe("New kit item complete creation test case", function () {
     cy.get(".searchIcon").eq(2).click({ force: true });
     cy.wait(4000);
     //Click on to select the Assigning
-    //cy.get(".list-item-search").first().click({ force: true });
-
     //click on checkboxes
     cy.contains('Coordinator').click({ force: true })
     cy.contains('Contributor').click({ force: true })
@@ -399,7 +395,7 @@ describe("New kit item complete creation test case", function () {
     cy.wait(1000)
     cy.xpath('//*[text() ="Search"]').first().next('input')
       .type(`${this.NewKitItemData.AssigningName}{enter}`)
-    cy.wait(1000)
+    cy.wait(3000)
 
     cy.contains(this.NewKitItemData.AssigningName).click({ force: true });
     //Click on to save
@@ -786,7 +782,7 @@ describe("New kit item complete creation test case", function () {
   });
 
   it.only('Getting Kit Item ID', function () {
-    cy.wait(2000)
+    cy.wait(3000)
     //geting kit item id
     cy.xpath('//div[@class="truncate align-center d-none d-sm-flex col"]')
       .invoke('text').then((KitItemId) => {

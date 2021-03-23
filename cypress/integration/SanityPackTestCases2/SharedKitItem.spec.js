@@ -1,13 +1,14 @@
 import LoginPage from "../PageObject/LoginPage";
+import SignUpPage from "../PageObject/SignUpPage";
 import SanityLoginPage from "../PageObject/SanityLoginPage";
 
 describe("New created kit item creation Validation test case", function () {
   this.beforeAll(function () {
-    // cy.viewport(1280, 720);
+    //cy.viewport(1280, 720);
     const lp = new LoginPage();
     const slp = new SanityLoginPage();
     slp.nvdTest()
-    //slp.TmProd();
+    //slp.TmProd()
     //Handling Alert
     cy.on("window:confirm", () => {
       cy.log("Alert has been Handled");
@@ -15,9 +16,8 @@ describe("New created kit item creation Validation test case", function () {
 
     //Login Assertions
     cy.contains(" Log In ").should("be.visible");
-
     //Enter credentials
-    //lp.EnterEmail("sam@armyspy.com");
+    //lp.EnterEmail("mack2@mailinator.com");
     lp.EnterEmail("ema@mailinator.com");
 
     lp.EnterPassword("1234567Aa");
@@ -46,9 +46,7 @@ describe("New created kit item creation Validation test case", function () {
       "jwtAccessToken"
     );
 
-    cy.fixture("SanityPackTestData2/KitItemId").then(function (ItemID) {
-      this.KitItemId = ItemID;
-    });
+
 
     cy.fixture("KitTypeTestData/NewKitItemDataValues").then(function (
       KitDataEle
@@ -88,6 +86,10 @@ describe("New created kit item creation Validation test case", function () {
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    cy.fixture("SanityPackTestData2/KitItemId").then(function (ItemID) {
+      this.KitItemId = ItemID;
+    });
+
     cy.fixture("KitBuilderTestData/NewKitTypeData").then(function (
       KittypeName
     ) {
@@ -102,19 +104,11 @@ describe("New created kit item creation Validation test case", function () {
   });
 
 
-  it('Getting Kit Item ID', function () {
+  it.only('Click on Shared Kit Item', function () {
     cy.wait(2000)
-    //geting kit item id
-    cy.xpath('//div[@class="truncate align-center d-none d-sm-flex col"]')
-      .invoke('text').then((KitItemId) => {
-        cy.log(KitItemId).writeFile(
-          "cypress/fixtures/SanityPackTestData2/KitItemId.json",
-          {
-            ItemID: KitItemId,
-          }
-        );
-      })
-    cy.wait(2000)
+    cy.log(this.KitItemId.ItemID)
+    cy.xpath('//*[contains(@class, "v-list-item__subtitle truncate")]//*[text()="' + this.KitItemId.ItemID + '"]')
+      .click({ force: true })
   })
 
   it.only("Url Element data Validation", function () {
@@ -148,7 +142,7 @@ describe("New created kit item creation Validation test case", function () {
   it.only("TextAera Element data Validation", function () {
     var lower = this.DataType2.TextAera.toLowerCase();
     //Validating details view input data
-    cy.get('[name="TextAera"]').eq(3).should("have.value", this.NewKitItemData.TextAera)
+    cy.get('[name="TextAera"]').eq(1).should("have.value", this.NewKitItemData.TextAera)
 
   });
 
@@ -221,7 +215,7 @@ describe("New created kit item creation Validation test case", function () {
 
   it.only('Time Element data Validation', function () {
     //json value assertion
-    cy.get('[placeholder="Add Time"][readonly="readonly"]').eq(1)
+    cy.get('[placeholder="Add Time"]').eq(1)
       .should("have.value", this.NewKitItemData.LoggedTime)
   })
 
@@ -254,7 +248,7 @@ describe("New created kit item creation Validation test case", function () {
   it.only("CheckboxSelect Element data Validation", function () {
     //CheckboxSelect1
     //json value assertion
-    cy.get('[type="checkbox"]').eq(3).should('be.checked')
+    cy.get('[type="checkbox"]').eq(1).should('be.checked')
     cy.get('[type="checkbox"]').last().should('be.checked')
   });
 
@@ -313,7 +307,7 @@ describe("New created kit item creation Validation test case", function () {
   it.only("Group tab data Validation in details view", function () {
     //Click on group
     cy.contains("Groups").click({ force: true });
-    cy.contains(this.SData.AddGroup).should("be.visible");
+    cy.contains(this.SData.AddGroup).should("not.exist");
 
     cy.log("Added group exist");
   });
@@ -344,20 +338,6 @@ describe("New created kit item creation Validation test case", function () {
 
   });
 
-  it.only("Contributors tab data Validation in details view", function () {
-    cy.contains("Contributors").click({ force: true })
-
-    cy.get(".contributor__name")
-      .eq(0)
-      .should("have.text", this.SData.ContributorsName);
-
-    cy.get(".contributor__name")
-      .eq(2)
-      .should("have.text", this.NewKitItemData.AssigningName);
-    cy.log("Added Contributors exist");
-
-  });
-
   it.only("Files tab data Validation in details view", function () {
     cy.contains("Files").click({ force: true });
     cy.contains(this.NewKitItemData.NewFormLibFileName).should("be.visible");
@@ -365,5 +345,36 @@ describe("New created kit item creation Validation test case", function () {
     cy.log("Uploaded files exist");
 
   });
+
+  it.only("Contributors tab data Validation in details view", function () {
+    cy.contains("Contributors").click({ force: true })
+    cy.contains(this.SData.ContributorsName).should('be.visible')
+    cy.contains(this.NewKitItemData.AssigningName).should('be.visible')
+  });
 });
 
+
+describe("Email Notification Shared Activity", function () {
+  this.beforeEach(
+    "Internal User Credentials",
+    function () {
+
+      cy.fixture("SanityPackTestData2/SharedUserCredentials").then(function (KitDataEle) {
+        this.Credentials = KitDataEle;
+      });
+
+    });
+
+  it.only("Verifying Email Notification Shared Kit Item Activity for Internal User ", function () {
+    //PageObject
+    const sp = new SignUpPage();
+    sp.mailinatorSite();
+    cy.url().should("include", "mailinator.com");
+    sp.EnterMailinatorEmail(this.Credentials.InternalUser);
+    cy.log("User Email has been Entered");
+    //Click on Go
+    sp.Go();
+    cy.wait(10000);
+    cy.contains("New BuildingAreas").click({ force: true });
+  });
+});

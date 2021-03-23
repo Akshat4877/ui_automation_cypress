@@ -406,7 +406,12 @@ describe("Related Control Square Card test case", function () {
     cy.get(".searchIcon").eq(2).click({ force: true });
     cy.wait(3000);
     //Click on to select the Assigning
-    //cy.get(".list-item-search").first().click({ force: true });
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.RelatedKitItemData.AssigningName}{enter}`);
+    cy.wait(3000)
     cy.contains(this.RelatedKitItemData.AssigningName).click({ force: true });
     cy.wait(3000);
     //Click on to save

@@ -385,7 +385,7 @@ describe("Update Related New fot Square Card Related Control", function () {
     cy.wait(4000);
     //Click on to open UserSelector Pop up
     //cy.get(".searchIcon").eq(7).click({ force: true });
-    cy.contains(this.UpdateKitItemData.UserSelectorName).click({ force: true });
+    cy.contains(this.UpdateKitItemData.UserSelector).click({ force: true });
     cy.log("UserSelect Updated");
     cy.wait(1000);
 
@@ -398,7 +398,7 @@ describe("Update Related New fot Square Card Related Control", function () {
     cy.wait(4000);
     // //Click on to open ContactSelector Pop up
     // cy.get(".searchIcon").eq(8).click({ force: true });
-    cy.contains(this.UpdateKitItemData.ContactSelectorName).click({
+    cy.contains(this.UpdateKitItemData.ContactSelector).click({
       force: true,
     });
     cy.log("ContactSelecto Updated");
@@ -461,11 +461,15 @@ describe("Update Related New fot Square Card Related Control", function () {
       .click({ force: true });
     //Click on to open Assigning
     cy.wait(4000);
-
     //click on checkboxes
     cy.contains('Coordinator').click({ force: true })
     cy.contains('Contributor').click({ force: true })
     cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.UpdateKitItemData.Assigning}{enter}`)
+    cy.wait(3000)
     cy.contains(this.UpdateKitItemData.Assigning).click({ force: true });
     cy.wait(1000);
     //Click on to save
@@ -675,14 +679,14 @@ describe("Update Related New fot Square Card Related Control", function () {
     cy.get('.imageContent').eq(0).scrollIntoView({ force: true })
     cy.wait(1000)
     cy.xpath('//div[@controlname="userSelector"]//div[@class="col item-label"]').children('div').invoke('text').then((text) => {
-      expect(text.trim()).equal(this.UpdateKitItemData.DUpUserSelector)
+      expect(text.trim()).equal(this.UpdateKitItemData.UserSelector)
     });
 
   })
 
   it.only('ContactSelector Element data Validation', function () {
     cy.xpath('//div[@controlname="contactSelector"]//div[@class="col item-label"]').children('div').invoke('text').then((text) => {
-      expect(text.trim()).equal(this.UpdateKitItemData.DUpContactSelector)
+      expect(text.trim()).equal(this.UpdateKitItemData.ContactSelector)
     });
 
   })
@@ -1002,17 +1006,17 @@ describe("Update Related New fot Square Card Related Control", function () {
     //Assigning
     //Click on to open Assigning Pop up
     cy.get(".searchIcon").eq(2).click({ force: true });
-    // cy.get(
-    //   " div.kit-control-component.kit-control-assigning.pr-3.col.col-sm-12.col-md-6.mb-4.px-3.col-sm-12.col-md-6.mb-4.px-3:nth-child(26) span.searchRel div.v-input.searchSelectNone.v-input--is-readonly.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-select div.v-input__control div.v-input__slot > div.v-select__slot:nth-child(2)"
-    // ).click({ force: true });
     cy.wait(4000);
     //Click on to select the Assigning
-    //cy.get(".list-item-search").first().click({ force: true });
-
     //click on checkboxes
     cy.contains('Assignee').click({ force: true })
     cy.contains('Contributor').click({ force: true })
-
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.RelatedKitItemData3.AssigningName}{enter}`)
+    cy.wait(3000)
     cy.contains(this.RelatedKitItemData3.AssigningName).click({ force: true });
     cy.wait(1000);
     //Click on to save
@@ -1320,8 +1324,8 @@ describe("Update Related New fot Square Card Related Control", function () {
     //Click on created one to many kit item
     cy.get(".px-2:nth-child(2) .inline-svg").click({ force: true });
     //Assertion
-    cy.contains(" Edit Item ").should("be.visible");
-    cy.contains(" Delete Item ").should("be.visible");
+    //cy.contains(" Edit Item ").should("be.visible");
+    //cy.contains(" Delete Item ").should("be.visible");
     cy.wait(1000);
     cy.contains(" Delete Item ").click({ force: true });
     cy.wait(2000);
