@@ -1,29 +1,34 @@
 {
 
+     
+    "Url Note":"all in small letters",
 
-    "KitName":"BaseTesting",
-    "Url":"https://www.updated.com",
-    "Text":"Calender updated",
-    "Telephone":"(123) 123-9999",
-    "TextAera":"Calender active schedule updated",
-    "Currency":"19",
-    "Measure":"29",
+    "Url":"https://www.aaupdated.com",
+    "Text":"updated",
+    "UpdateFileName":"Screenshot_6",
+    "Telephone":"(897) 765-2905",
+    "TextAera":"sanity automation updated",
+    "SliderValue":"50",
+    "Currency":"10",
+    "Measure":"20",
 
     "Email":"updated@yahoo.com",
     "Important Note for Email":"should be in small letters",
 
-    "Addressline1":"updated Way",
-    "Addressline2":"Oak updated",
-    "City":"Grand Island updated",
-    "State":"Alaska",
-    "ZipCode":"9999",
+    "Addressline1":"Address1 Updated",
+    "Addressline2":"AddressLine Updated",
+    "City":"City Updated",
+    "State":"Arizona",
+    "ZipCode":"4877",
     "Country":"United States",
-    "Number":"9",
+    "Number":"4",
 
-    "SelectListValue":" Australia ",
+    "SelectListValue":"Venacura",
     
+    "RadioSelectValue":"SR5",
 
-    "RadioSelectValue":"SR1",
+    "StepperValue":"RealMe",
+    "InspectionValue":"Zapare",
 
     "CheckboxSelectValue1":"CheckboxSelect1",
     "CheckboxSelectValue2":"CheckboxSelect2",
@@ -31,15 +36,10 @@
     "CheckboxSelectValue4":"CheckboxSelect4",
     "CheckboxSelectValue5":"CheckboxSelect5",
 
-    "StepperValue1":"Jio",
-    "StepperValue2":"Moto",
-    "StepperValue3":"Note",
-    "StepperValue4":"Oppo",
-    "StepperValue5":"RealMe",
 
-    "UserSelectorName":"Common Areas Support",
-    "ContactSelectorName":"Akshat Akshat",
-    "AssigningName":"Max Max",
+    "UserSelector":"Common Areas Support",
+    "ContactSelector":"Ethan Thomas",
+    "Assigning":"Sam Ruddy",
     
     "ExtraSmalliconSize":"Extra Small",
     "SmalliconSize":"Small",
@@ -47,14 +47,21 @@
     "LargeiconSize":"Large",
     "ExtraLargeiconSize":"Extra Large",
 
-    "IconLabel":"updated",
+    "IconLabel":"update",
 
-    "These are the index value of div child":"use according to select inspection value",
-    "1st for 1st value":"2nd for 2nd value and so on...",
-    "InspectionValue1":"1",
-    "InspectionValue2":"2",
-    "InspectionValue3":"3",
-    "InspectionValue4":"4",
-    "InspectionValue5":"5"
+    "Form Element Validation":"Data",
+    "LoggedTime":"5:25 pm",
+    "LoggedDate":"03/25/2021"
 
+    
+    
+
+
+
+    
+
+    
+
+
+    
 }

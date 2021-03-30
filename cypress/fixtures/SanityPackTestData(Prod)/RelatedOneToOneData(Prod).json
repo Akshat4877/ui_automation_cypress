@@ -4,32 +4,35 @@
     
     "UrlNote":"all letters in lower case",
 
-    "NewKitItemUrl":"https://www.onetoonenewform.com",
+    "NewKitItemUrl":"https://www.aonetoonenewform.com",
     "NewKitItemText":"OneToOne Relation TC",
     
-    "Url":"https://www.onetoone.com",
+    "Url":"https://www.aaonetoone.com",
     "Text":"One2One Related New",
     "RelNewFileName":"Screenshot_6",
-    "Telephone":"(343) 909-9765",
+    "Telephone":"(343) 909-2222",
     "TextAera":"One To One Related New automation",
+    "SliderValue":"50",
     "Currency":"2",
-    "Measure":"3",
+    "Measure":"2",
 
     "Email":"onetoNew@gmail.com",
     "Important Note for Email":"should be in small letters",
 
-    "Addressline1":"Romrog WayOne",
-    "Addressline2":"One Way",
-    "City":"Grand Island One",
+    "Addressline1":"Romrog One way",
+    "Addressline2":"One Island",
+    "City":"Grand  One",
     "State":"Alaska",
-    "ZipCode":"13233",
+    "ZipCode":"1323",
     "Country":"United States",
-    "Number":"4",
+    "Number":"2",
 
     "SelectListValue":"Bangla",
     
-
     "RadioSelectValue":"SR2",
+
+    "StepperValue":"Moto",
+    "InspectionValue":"Java",
 
     "CheckboxSelectValue1":"CheckboxSelect1",
     "CheckboxSelectValue2":"CheckboxSelect2",
@@ -37,16 +40,10 @@
     "CheckboxSelectValue4":"CheckboxSelect4",
     "CheckboxSelectValue5":"CheckboxSelect5",
 
-    "StepperValue1":"Jio",
-    "StepperValue2":"Moto",
-    "StepperValue3":"Note",
-    "StepperValue4":"Oppo",
-    "StepperValue5":"RealMe",
 
-    "UserSelectorName":"ravi Negi",
-    "ContactSelectorName":"Ranveer K",
-    "AssigningName":"Hobbs Shaw",
-    
+    "UserSelectorName":"Kat Vonnorights",
+    "ContactSelectorName":"Aaron Seabaugh",
+    "AssigningName":"Mack Ss",
     
     "ExtraSmalliconSize":"Extra Small",
     "SmalliconSize":"Small",
@@ -54,14 +51,11 @@
     "LargeiconSize":"Large",
     "ExtraLargeiconSize":"Extra Large",
 
-    "IconLabel":"Onetoone",
+    "IconLabel":"Prod OneToday",
 
-    "These are the index value of div child":"use according to select inspection value",
-    "1st for 1st value":"2nd for 2nd value and so on...",
-    "InspectionValue1":"1",
-    "InspectionValue2":"2",
-    "InspectionValue3":"3",
-    "InspectionValue4":"4",
-    "InspectionValue5":"5"
+    
+    "Form Element Validation":"Data-Dont modify",
+    "LoggedTime":"4:30 pm",
+    "LoggedDate":"03/24/2021"
     
 }

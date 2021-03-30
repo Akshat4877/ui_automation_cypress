@@ -4,10 +4,8 @@ import SanityLoginPage from "../PageObject/SanityLoginPage";
 
 describe("New kit item complete creation test case", function () {
   this.beforeAll(function () {
-    // cy.viewport(1280, 720);
     const lp = new LoginPage();
     const slp = new SanityLoginPage();
-    //slp.visitCityComTest();
     slp.nvdTest()
     //slp.TmProd();
 
@@ -18,9 +16,8 @@ describe("New kit item complete creation test case", function () {
 
     //Login Assertions
     cy.contains(" Log In ").should("be.visible");
-     //Enter credentials
+    //Enter credentials
     lp.EnterEmail("propertymanagement@commonareas.work.dev");
-    //lp.EnterEmail("citycom@commonareas.work.dev");
     lp.EnterPassword("1234567Aa");
     lp.Submit();
     cy.log("User has been Logged In into the application");
@@ -34,8 +31,6 @@ describe("New kit item complete creation test case", function () {
       "refreshToken",
       "jwtAccessToken"
     );
-
-    cy.wait(10000);
   });
 
   this.beforeEach("KitType Data", function () {
@@ -91,7 +86,7 @@ describe("New kit item complete creation test case", function () {
     //   this.SectionDataType = SectionDataForElements;
     // });
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     cy.fixture("KitBuilderTestData/FormViewsNameData").then(function (
       KitTypeFormViewsNames
@@ -99,23 +94,22 @@ describe("New kit item complete creation test case", function () {
       this.ViewName = KitTypeFormViewsNames;
     });
 
-    
+
   });
 
   it.only("Navigating to created Kit type ", function () {
-    cy.wait(10000);
     const lp = new LoginPage();
     const KTP = new KitTypePage();
     //Assertion
-    //cy.title().should("eq", "Common Areas");
+    cy.title().should("eq", "Common Areas");
     lp.PlusIcon();
     //debugger;
     //Click on To open Kit Type
     KTP.SearchKitType(this.SectionEleData.SectionKitName);
-    cy.wait(3000);
+    cy.wait(1000);
     //This is class to open searched kit type by clicking + iocn
     cy.get(".truncate-special").first().click({ force: true });
-    cy.wait(3000);
+    cy.wait(1000);
     //Assertion
     cy.contains("New Item created").should("be.visible");
     cy.log("New Item created and Kit Type has been Opened");
@@ -124,41 +118,32 @@ describe("New kit item complete creation test case", function () {
   it.only("Create New Kit Item with all the fields", function () {
     const lp = new LoginPage();
     cy.wait(2000);
-
     //New kit item elements loading assertion
     cy.get("[name" + "=" + this.DataType2.Url + "]")
       .last().should('be.visible')
-      cy.wait(2000)
+    cy.wait(2000)
     //save Kit Item for empty form
     cy.get(".v-select__selections .v-btn__content").click({ force: true });
     //kit item Save Assertion for no data
     cy.contains(
       "Nothing to save for " + this.SectionEleData.SectionKitName
     ).should("be.visible");
-    cy.wait(3000);
     cy.log("With No data new kit item saved successfully ");
     //Url
     cy.get("[name" + "=" + this.DataType2.Url + "]")
       .last()
       .type(this.NewKitItemData.Url);
-    cy.wait(1000);
 
     //Text
     cy.get("[name" + "=" + this.DataType2.Text + "]")
       .last()
       .type(this.NewKitItemData.Text);
-    cy.wait(1000);
 
     //File
     cy.get(".link-icon--green > path").first().click({ force: true });
-    cy.wait(3000);
     //give file name to select
     cy.contains(this.NewKitItemData.NewFormLibFileName).click({ force: true });
-    // cy.get(".thumb-container:nth-child(5) .selected-icon").click({
-    //   force: true,
-    // });
     //Click on save file
-    cy.wait(2000);
     cy.get(
       ".container-search > .pop-up--header > .pop-up--header--right > .button-pop-ups--size > .v-btn__content"
     ).click({ force: true });
@@ -170,23 +155,17 @@ describe("New kit item complete creation test case", function () {
     cy.get("[name" + "=" + this.DataType2.Telephone + "]")
       .last()
       .type(this.NewKitItemData.Telephone);
-    cy.wait(1000);
 
     //TextAera
     cy.get("[name" + "=" + this.DataType2.TextAera + "]")
       .last()
       .type(this.NewKitItemData.TextAera);
-    cy.wait(3000);
 
-    //Slider;
-    //Firing Alert pop for manual action
-    cy.log("User need to do something").then(() => {
-      alert("Set Slider value by clicking slider Bar");
-    });
-    cy.log(
-      "Firing Alert pop for manual action to Set Slider value by clicking slider Bar"
-    );
-    cy.wait(10000);
+    //Slider
+    cy.xpath('//div[@class="v-slider v-slider--horizontal theme--light"]//div[@class="v-slider__track-container"]')
+      .eq(0)
+      .invoke('val', this.NewKitItemData.SliderValue)
+      .trigger('change').click({ force: true })
 
     // Currency;
     cy.get(
@@ -196,7 +175,6 @@ describe("New kit item complete creation test case", function () {
       .type(this.NewKitItemData.Currency);
 
     //Measure
-
     cy.get(
       "#inspire > div.v-dialog__content.v-dialog__content--active > div > div > div > div:nth-child(2) > div.new-kit-item.v-card.v-sheet.theme--light > div > div > div > div > div.row.kit-details-wrapper--content.pb-0 > div > div > div > div > div > div > div.tab--content.col > div > div > div.v-window-item.v-window-item--active > div > div > div.row.container-details > div.fill-height.col > div > div > div.kit-control-component.kit-control-measure.px-3.col.col-sm-12.col-md-6.mb-4.px-3 > div > div.kit-control-measure--left.ma-0.pa-0.pr-2.col > div > div > div.v-input__slot > div"
     )
@@ -207,12 +185,11 @@ describe("New kit item complete creation test case", function () {
     cy.get("[name" + "=" + this.DataType2.Email + "]")
       .last()
       .type(this.NewKitItemData.Email);
-    cy.wait(1000);
 
     cy.get(
       '[placeholder="Street address, building, company ... "]'
-    ).first().scrollIntoView({force:true})
-    cy.wait(3000)
+    ).first().scrollIntoView({ force: true })
+    cy.wait(2000)
 
     //Address
     cy.get(
@@ -247,13 +224,11 @@ describe("New kit item complete creation test case", function () {
     cy.get('[placeholder="Zip/Postal Code"]')
       .first()
       .type(this.NewKitItemData.ZipCode);
-    cy.wait(1000);
 
     //Number
     cy.get("[name" + "=" + this.DataType2.Number + "]")
       .last()
       .type(this.NewKitItemData.Number);
-    cy.wait(3000);
 
     //Time Data Element
     //Click on Time to appear time pop up
@@ -276,22 +251,21 @@ describe("New kit item complete creation test case", function () {
       "//div[contains(@class,'v-dialog v-dialog--active')]//button[1]"
     ).click({ force: true });
 
-    // //Date Data Element
-    // //Click on Date to appear Date pop up
-    // cy.get(
-    //   "div.v-input.no-bottom.date-picker-text-field.date-picker-text-field-direct.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-text-field--placeholder > div > div.v-input__slot > div.v-input__prepend-inner > i"
-    // )
-    //   .first()
-    //   .click({ force: true });
-    //   cy.wait(3000)
-    // //Select Date
-    // cy.xpath("//div[@class='v-btn__content'][contains(text(),'30')]")
-    //   .first()
-    //   .click({ force: true });
-    // cy.wait(2000);
-    // //Click on OK to save Date
-    // cy.xpath("//span[contains(text(),'OK')]").first().click({ force: true });
-    // cy.wait(2000);
+    //Date Data Element
+    //Click on Date to appear Date pop up
+    cy.get(
+      "div.v-input.no-bottom.date-picker-text-field.date-picker-text-field-direct.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-text-field--placeholder > div > div.v-input__slot > div.v-input__prepend-inner > i"
+    ).eq(0)
+      .click({ force: true });
+    cy.wait(3000)
+    //Select Date
+    cy.xpath("//div[@class='v-btn__content'][contains(text(),'30')]")
+      .first()
+      .click({ force: true });
+    cy.wait(2000);
+    //Click on OK to save Date
+    cy.xpath("//span[contains(text(),'OK')]").first().click({ force: true });
+    cy.wait(2000);
 
     //Toggle
     cy.get(".sync-switch .v-input--selection-controls__ripple").first().click({
@@ -299,13 +273,11 @@ describe("New kit item complete creation test case", function () {
     });
 
     //Click on DropDown of SelectList
-    cy.wait(3000);
     cy.get(
       "div > div > div.v-input__slot > div.v-select__slot > div.v-input__append-inner"
     )
       .eq(4)
       .click({ force: true });
-    cy.wait(2000);
     //SelectList Value(Values coming form KitItemValues Json File)
     cy.contains(this.NewKitItemData.SelectListValue).click({ force: true });
     cy.log("SelectList Value has been set.");
@@ -325,43 +297,32 @@ describe("New kit item complete creation test case", function () {
       force: true,
     });
     cy.log("Checkbox Values has been set.");
-    cy.wait(2000);
-
-    cy.wait(5000);
-    cy.get(".searchIcon").eq(1).scrollIntoView({ force: true });
 
     //Stepper
     //getting value form different json file
     cy.contains(this.NewKitItemData.StepperValue4).click({ force: true });
     cy.log("Stepper Value has been set.");
 
-    cy.wait(2000);
-    //.v-stepper__step:nth-child(1/3/5/7/9)
-    // cy.get(".v-stepper__step:nth-child(5) > .v-stepper__step__step").click({
-    //   force: true,
-    // });
-
-    cy.wait(2000);
     //UserSelector(Values coming form KitItemValues Json File)
     //Click on to open UserSelector Pop up
+    cy.get(".searchIcon").eq(1).scrollIntoView({ force: true });
+    cy.wait(2000)
     cy.get(".searchIcon").eq(0).click({ force: true });
     cy.wait(3000);
 
     cy.contains(this.NewKitItemData.UserSelectorName).click({ force: true });
     cy.log("UserSelect added");
-    cy.wait(3000);
+    cy.wait(1000);
 
     //ContactSelector(Values coming form KitItemValues Json File)
     //Click on to open ContactSelector Pop up
     cy.get(".searchIcon").eq(1).click({ force: true });
-
     cy.wait(4000);
     cy.contains(this.NewKitItemData.ContactSelectorName).click({ force: true });
     cy.log("ContactSelecto added");
-    cy.wait(4000);
+    cy.wait(1000);
 
     //getting value form different json file
-    cy.wait(2000);
     //Icon
     //Click on + icon of ICON Element
     cy.get(".v-btn--depressed > .v-btn__content > .inline-svg > path")
@@ -369,16 +330,13 @@ describe("New kit item complete creation test case", function () {
       .click({
         force: true,
       });
-    cy.wait(2000);
     //Click on Icon Tittle and  select Icon logo
     //Give numeric no from 1 in child(1,2,3...)
     cy.get(".thumb-container:nth-child(1) .selected-icon").click({
       force: true,
     });
-    cy.wait(2000);
     //Icon Save
     cy.get(".button-pop-ups").first().click({ force: true });
-    cy.wait(2000);
 
     //IcozSize
     cy.get(
@@ -387,7 +345,6 @@ describe("New kit item complete creation test case", function () {
       .first()
       .click({ force: true });
     cy.contains(this.NewKitItemData.LargeiconSize).click({ force: true });
-    cy.wait(2000);
     //IconLable
     cy.get('[placeholder="Label"]').first().type(this.NewKitItemData.IconLabel);
 
@@ -397,27 +354,19 @@ describe("New kit item complete creation test case", function () {
       force: true,
     });
 
-    cy.wait(3000);
-    //child 1 for 1st value &&&& child 2 for 2nd value-child 3 for 3rd value......
-    //"These are the index value of div child":"use according to select inspection value",
-    cy.get(
-      "div.v-slide-group__wrapper > div > span:nth-child(" +
-        this.NewKitItemData.InspectionValue2 +
-        ") > span"
-    )
-      .first()
-      .click({ force: true });
-
-    cy.wait(3000);
-    //Assigning
-    //Click on to open Assigning Pop up-Also working
-    //cy.get(".searchIcon > .inline-svg > path").last().click({ force: true });
+    //Inspection
+    cy.get('.v-btn:nth-child(1) .v-badge > .inline-svg').eq(0)
+      .scrollIntoView({ force: true })
+    cy.wait(1000)
+    cy.xpath("//*[contains(text(),'" + this.NewKitItemData.InspectionValue + "')]//div[@class='v-avatar v-avatar--left']")
+      .eq(0)
+      .click({ force: true })
+    cy.wait(1000);
 
     //Click on to open Assigning Pop up
     cy.get(".searchIcon").eq(2).click({ force: true });
-    cy.wait(7000);
+    cy.wait(3000);
     //Click on to select the Assigning
-    //cy.get(".list-item-search").first().click({ force: true });
     cy.contains(this.NewKitItemData.AssigningName).click({ force: true });
     cy.wait(3000);
     //Click on to save
@@ -425,7 +374,6 @@ describe("New kit item complete creation test case", function () {
     //Assigning creation assertion
     cy.contains("Item shared").should("be.visible");
     cy.log("Assigning added");
-    cy.wait(5000);
 
     //Click on to link existing item(onetoone)
     cy.get(".action-icon:nth-child(2) > .inline-svg")
@@ -440,7 +388,6 @@ describe("New kit item complete creation test case", function () {
       ".row:nth-child(1) > .d-flex > .list-item-col-left > .v-avatar:nth-child(1) svg"
     ).first().click({ force: true });
     cy.wait(4000)
-
     //save Kit Item
     cy.get(".v-select__selections .v-btn__content").click({ force: true });
     cy.contains(this.SectionEleData.SectionKitName + " has been saved").should(
@@ -452,29 +399,22 @@ describe("New kit item complete creation test case", function () {
   it.only("Section Elements Configuration", function () {
     const lp = new LoginPage();
     cy.wait(2000);
-
     //Url
     cy.get("[name" + "=" + this.SectionDataType.Url2 + "]")
       .last()
       .type(this.SectionEleData.Url);
-    cy.wait(1000);
 
     //Text
     cy.get("[name" + "=" + this.SectionDataType.Text2 + "]")
       .last()
       .type(this.SectionEleData.Text);
-    cy.wait(1000);
 
     //File
     cy.get(".link-icon--green > path").last().click({ force: true });
     cy.wait(3000);
     //give file name to select
     cy.contains(this.SectionEleData.File).click({ force: true });
-    // cy.get(".thumb-container:nth-child(5) .selected-icon").click({
-    //   force: true,
-    // });
     //Click on save file
-    cy.wait(2000);
     cy.get(
       ".container-search > .pop-up--header > .pop-up--header--right > .button-pop-ups--size > .v-btn__content"
     ).click({ force: true });
@@ -486,28 +426,22 @@ describe("New kit item complete creation test case", function () {
     cy.get("[name" + "=" + this.SectionDataType.Telephone2 + "]")
       .last()
       .type(this.SectionEleData.Telephone);
-    cy.wait(1000);
 
     //scroll
     cy.get("[name" + "=" + this.SectionDataType.TextAera2 + "]")
-      .last().scrollIntoView({force:true})
-      cy.wait(2000)
+      .last().scrollIntoView({ force: true })
+    cy.wait(2000)
 
     //TextAera
     cy.get("[name" + "=" + this.SectionDataType.TextAera2 + "]")
       .last()
       .type(this.SectionEleData.TextAera);
-    cy.wait(3000);
 
-    //Slider;
-    //Firing Alert pop for manual action
-    cy.log("User need to do something").then(() => {
-      alert("Set Slider value by clicking slider Bar");
-    });
-    cy.log(
-      "Firing Alert pop for manual action to Set Slider value by clicking slider Bar"
-    );
-    cy.wait(10000);
+    //Slider
+    cy.xpath('//div[@class="v-slider v-slider--horizontal theme--light"]//div[@class="v-slider__track-container"]')
+      .eq(1)
+      .invoke('val', this.NewKitItemData.SliderValue)
+      .trigger('change').click({ force: true })
 
     // Currency;
     cy.get(
@@ -533,7 +467,7 @@ describe("New kit item complete creation test case", function () {
 
     cy.get(
       '[placeholder="Street address, building, company ... "]'
-    ).last().scrollIntoView({force:true})
+    ).last().scrollIntoView({ force: true })
     cy.wait(3000)
 
     //Address
@@ -575,7 +509,6 @@ describe("New kit item complete creation test case", function () {
     cy.get("[name" + "=" + this.SectionDataType.Number2 + "]")
       .last()
       .type(this.SectionEleData.Number);
-    cy.wait(3000);
 
     //Time Data Element
     //Click on Time to appear time pop up
@@ -619,13 +552,11 @@ describe("New kit item complete creation test case", function () {
     });
 
     //Click on DropDown of SelectList
-    cy.wait(3000);
     cy.get(
       "div > div > div.v-input__slot > div.v-select__slot > div.v-input__append-inner"
     )
       .eq(14)
       .click({ force: true });
-    cy.wait(2000);
     //SelectList Value(Values coming form KitItemValues Json File)
     cy.contains(this.SectionEleData.SelectListValue).click({ force: true });
     cy.log("SelectList Value has been set.");
@@ -645,7 +576,6 @@ describe("New kit item complete creation test case", function () {
       force: true,
     });
     cy.log("Checkbox Values has been set.");
-    cy.wait(4000);
 
     ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -666,10 +596,10 @@ describe("New kit item complete creation test case", function () {
 
     cy.contains(
       "Relation on " +
-        this.SectionDataType.OneToManyRelation +
-        " for " +
-        this.SectionEleData.SectionKitName +
-        " linked "
+      this.SectionDataType.OneToManyRelation +
+      " for " +
+      this.SectionEleData.SectionKitName +
+      " linked "
     ).should("be.visible");
     //Assertion
     cy.contains("Total 2 items").should("be.visible");
@@ -707,7 +637,7 @@ describe("New kit item complete creation test case", function () {
     cy.wait(4000);
     cy.contains(this.SectionEleData.ContactSelectorName).click({ force: true });
     cy.log("ContactSelecto added");
-    cy.wait(4000);
+    cy.wait(1000);
 
     ///////////////////////////////////////////////////////////////////////
 
@@ -719,17 +649,16 @@ describe("New kit item complete creation test case", function () {
     //Search List view pop up assertion
     cy.contains(" Related Items ").should("be.visible");
     //Select item to be linked kit item
-    cy.wait(2000);
     cy.get(
       ".row:nth-child(1) > .d-flex > .list-item-col-left > .v-avatar:nth-child(1) svg"
     ).first().click({ force: true });
     //Linking assertion
     cy.contains(
       "Relation on " +
-        this.SectionDataType.OneToOneRelation +
-        " for " +
-        this.SectionEleData.SectionKitName +
-        " linked "
+      this.SectionDataType.OneToOneRelation +
+      " for " +
+      this.SectionEleData.SectionKitName +
+      " linked "
     ).should("be.visible");
 
     //Scroll
@@ -757,10 +686,10 @@ describe("New kit item complete creation test case", function () {
 
     cy.contains(
       "Relation on " +
-        this.SectionDataType.SquareCardName +
-        " for " +
-        this.SectionEleData.SectionKitName +
-        " linked "
+      this.SectionDataType.SquareCardName +
+      " for " +
+      this.SectionEleData.SectionKitName +
+      " linked "
     ).should("be.visible");
     //Assertion
     //cy.contains("Total 2 items").should("be.visible");
@@ -778,16 +707,13 @@ describe("New kit item complete creation test case", function () {
       .click({
         force: true,
       });
-    cy.wait(2000);
     //Click on Icon Tittle and  select Icon logo
     //Give numeric no from 1 in child(1,2,3...)
     cy.get(".thumb-container:nth-child(5) .selected-icon").click({
       force: true,
     });
-    cy.wait(2000);
     //Icon Save
     cy.get(".button-pop-ups").first().click({ force: true });
-    cy.wait(2000);
 
     //IcozSize
     cy.get(
@@ -796,32 +722,23 @@ describe("New kit item complete creation test case", function () {
       .last()
       .click({ force: true });
     cy.contains(this.SectionEleData.ExtraLargeiconSize).click({ force: true });
-    cy.wait(2000);
     //IconLable
     cy.get('[placeholder="Label"]').last().type(this.NewKitItemData.IconLabel);
 
-    cy.wait(3000);
-    cy.get(".searchIcon").last().scrollIntoView({ force: true });
-    //child 1 for 1st value &&&& child 2 for 2nd value-child 3 for 3rd value......
-    //"These are the index value of div child":"use according to select inspection value",
-    cy.get(
-      "div.v-slide-group__wrapper > div > span:nth-child(" +
-        this.SectionEleData.InspectionValue3 +
-        ") > span"
-    )
-      .last()
-      .click({ force: true });
+    //Inspection
+    cy.get('.v-btn:nth-child(1) .v-badge > .inline-svg').eq(1)
+      .scrollIntoView({ force: true })
+    cy.wait(1000)
+    cy.xpath("//*[contains(text(),'" + this.NewKitItemData.InspectionValue + "')]//div[@class='v-avatar v-avatar--left']")
+      .eq(1)
+      .click({ force: true })
+    cy.wait(1000);
 
-    cy.wait(3000);
-    //Assigning
-    //Click on to open Assigning Pop up-Also working
-    //cy.get(".searchIcon > .inline-svg > path").last().click({ force: true });
 
     //Click on to open Assigning Pop up
     cy.get(".searchIcon").last().click({ force: true });
-    cy.wait(7000);
+    cy.wait(3000);
     //Click on to select the Assigning
-    //cy.get(".list-item-search").first().click({ force: true });
     cy.contains(this.SectionEleData.AssigningName).click({ force: true });
     cy.wait(3000);
     //Click on to save
@@ -829,8 +746,6 @@ describe("New kit item complete creation test case", function () {
     //Assigning creation assertion
     cy.contains("Item shared").should("be.visible");
     cy.log("Assigning added");
-    cy.wait(5000);
-
     //save Kit Item
     cy.get(".v-select__selections .v-btn__content").click({ force: true });
     cy.contains(this.SectionEleData.SectionKitName + " has been saved").should(

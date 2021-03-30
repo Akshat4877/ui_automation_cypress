@@ -5,10 +5,12 @@ describe("Email Notification Shared Activity", function () {
     "Internal User Credentials",
     function () {
 
-      cy.fixture("SanityPackTestData2/SharedUserCredentials").then(function (KitDataEle) {
-        this.Credentials = KitDataEle;
+      cy.fixture("SanityPackTestData2/SharedUserCredentials").then(function (InternalUser) {
+        this.Credentials = InternalUser;
       });
-
+      // cy.fixture("SanityPackTestData2/SharedUserCredentials").then(function (ExternallUser) {
+      //   this.Credentials = ExternallUser;
+      // });
     });
 
   it.only("Verifying Email Notification Shared Kit Item Activity for Internal User ", function () {

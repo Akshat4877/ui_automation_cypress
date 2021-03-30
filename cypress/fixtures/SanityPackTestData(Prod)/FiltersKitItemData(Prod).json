@@ -1,30 +1,28 @@
 {
 
-    "KitName":"Building Areas",
-    "Url":"https://www.filters.com",
-    "Text":"Filter text data",
+    "KitName":"BuildingAreas",
+    "Url":"https://www.filter.com",
+    "Text":"filter",
     "NewFormLibFileName":"Screenshot_12",
-    "Telephone":"(345) 123-9999",
-    "TextAera":"Filter automation",
+    "Telephone":"(982) 999-2495",
+    "TextAera":"filter automation",
     "Currency":"2",
-    "Measure":"4",
+    "Measure":"3",
 
-    "Email":"filters@yahoo.com",
+    "Email":"filter@yahoo.com",
     "Important Note for Email":"should be in small letters",
 
-    "Addressline1":"Filter Way",
-    "Addressline2":"Oak Filter",
-    "City":"Grand Island Filter",
+    "Addressline1":"Romrog filter Way",
+    "Addressline2":"Oak Way filter",
+    "City":"Grand Island filter",
     "State":"Bihar",
-    "ZipCode":"4877",
+    "ZipCode":"2133",
     "Country":"India",
-    "Number":"3",
+    "Number":"1",
 
-    "SelectListValue":"Australia",
-    "RadioSelectValue":"SR1",
-
-    "StepperValue":"Jio",
-    "InspectionValue":"Java",
+    "SelectListValue":"India",
+    
+    "RadioSelectValue":"SR2",
 
     "CheckboxSelectValue1":"CheckboxSelect1",
     "CheckboxSelectValue2":"CheckboxSelect2",
@@ -32,15 +30,13 @@
     "CheckboxSelectValue4":"CheckboxSelect4",
     "CheckboxSelectValue5":"CheckboxSelect5",
 
-    "StepperValue1":"Jio",
-    "StepperValue2":"Moto",
-    "StepperValue3":"Note",
-    "StepperValue4":"Oppo",
-    "StepperValue5":"RealMe",
-
+    "StepperValue":"Jio",
+    "InspectionValue":"Java",
+    
+    
     "UserSelectorName":"Kat Vonnorights",
     "ContactSelectorName":"Aaron Seabaugh",
-    "AssigningName":"Akshat Akshat",
+    "AssigningName":"Mack Ss",
     
     "ExtraSmalliconSize":"Extra Small",
     "SmalliconSize":"Small",
@@ -48,22 +44,15 @@
     "LargeiconSize":"Large",
     "ExtraLargeiconSize":"Extra Large",
 
-    "IconLabel":"Filters",
+    "IconLabel":"Prod Filter",
 
-    "InspectionFilterValue":"Cdot",
-
-    "For Filter value":"change as per user",
-    "CreatedBy":"Mack Ss",
-    "ModifiedBy":"Mack Ss",
-    "KitItemID":"3",
-    "SliderrValue":"3"
-    
+    "Form Element Validation":"Data-Dont modify",
+    "LoggedTime":"4:30 pm",
+    "LoggedDate":"03/22/2021",
+    "KitItemID":"141",
+    "CreatedBy":"Ema Ema",
+    "ModifiedBy":"Ema Ema"
 
     
-    
-
-   
-
-
     
 }

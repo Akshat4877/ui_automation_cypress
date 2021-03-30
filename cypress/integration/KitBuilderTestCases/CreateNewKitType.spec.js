@@ -1,17 +1,25 @@
 import LoginPage from "../PageObject/LoginPage";
 import KitBuilderPage from "../PageObject/KitBuilderPage";
+import SanityLoginPage from "../PageObject/SanityLoginPage";
 
 describe("Create New Kit type ", function () {
   this.beforeAll(function () {
-    //Page Object
+    // cy.viewport(1280, 720);
     const lp = new LoginPage();
-    lp.visitCityComTest();
-    //cy.visit('https://tm.commonareas.io/Public/Login?ReturnUrl=%2F')
+    const slp = new SanityLoginPage();
+    //slp.nvdTest()
+    slp.TmProd();
+
+    //Handling Alert
+    cy.on("window:confirm", () => {
+      cy.log("Alert has been Handled");
+    });
+
     //Login Assertions
     cy.contains(" Log In ").should("be.visible");
     //Enter credentials
-    lp.EnterEmail("citycom@commonareas.work.dev");
-    //lp.EnterEmail("sam@armyspy.com");
+    //lp.EnterEmail("propertymanagement@commonareas.work.dev");
+    lp.EnterEmail("sam@armyspy.com");
     lp.EnterPassword("1234567Aa");
     lp.Submit();
     cy.log("User has been Logged In into the application");
@@ -25,7 +33,6 @@ describe("Create New Kit type ", function () {
       "refreshToken",
       "jwtAccessToken"
     );
-    cy.wait(50000);
   });
 
   this.beforeEach("Fixtures file data", function () {
@@ -57,8 +64,8 @@ describe("Create New Kit type ", function () {
     cy.wait(5000);
     cy.title().should("eq", "Common Areas");
     cy.wait(5000);
-    lp.visitCityComTestKitBuilder();
-    //cy.visit('https://tm.commonareas.io/ClientAdmin/KitBuilder#/')
+    lp.NVDTestKitBuilder();
+    cy.visit('https://tm.commonareas.io/ClientAdmin/KitBuilder#/')
     cy.log("User in Kit Builder");
     kb.ClickOnCreateNewKit();
     //Create Kit type Pop Up Window Assertion

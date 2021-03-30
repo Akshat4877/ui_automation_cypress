@@ -6,6 +6,7 @@
     "NewFormLibFileName":"Screenshot_12",
     "Telephone":"(982) 999-2495",
     "TextAera":"sanity automation",
+    "SliderValue":"50",
     "Currency":"9",
     "Measure":"8",
 
@@ -73,7 +74,7 @@
     "These values need to add manual for validate Table List View Result Ele UI Validation":"true",
     "Important note for Values":"Pls add value in same format that i did",
     "FileValue":"11615",
-    "SliderValue":"46",
+    "SliderValuee":"46",
     "TimeValue":"04:30 PM",
     "DateValue":"10/31/2020",
     "ToggleStatus":"True",

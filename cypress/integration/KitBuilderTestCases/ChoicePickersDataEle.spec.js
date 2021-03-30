@@ -1,16 +1,26 @@
 import LoginPage from "../PageObject/LoginPage";
 import KitBuilderPage from "../PageObject/KitBuilderPage";
 import KitBuilderDataTypes from "../PageObject/KitBuilderDataTypes";
+import SanityLoginPage from "../PageObject/SanityLoginPage";
+
 
 describe("Choice Pickers Section Data Elements Configuration", function () {
   this.beforeAll(function () {
-    //Page Object
     const lp = new LoginPage();
-    lp.visitCityComTest();
+    const slp = new SanityLoginPage();
+    slp.nvdTest()
+    //slp.TmProd();
+
+    //Handling Alert
+    cy.on("window:confirm", () => {
+      cy.log("Alert has been Handled");
+    });
+
     //Login Assertions
-    cy.contains(" Log In ").should("be.visible")
+    cy.contains(" Log In ").should("be.visible");
     //Enter credentials
-    lp.EnterEmail("citycom@commonareas.work.dev");
+    lp.EnterEmail("propertymanagement@commonareas.work.dev");
+    //lp.EnterEmail("sam@armyspy.com");
     lp.EnterPassword("1234567Aa");
     lp.Submit();
     cy.log("User has been Logged In into the application");
@@ -24,8 +34,6 @@ describe("Choice Pickers Section Data Elements Configuration", function () {
       "refreshToken",
       "jwtAccessToken"
     );
-
-    cy.wait(10000);
   });
 
   this.beforeEach("Fixtures file data", function () {
@@ -68,7 +76,7 @@ describe("Choice Pickers Section Data Elements Configuration", function () {
     cy.wait(5000);
     cy.title().should("eq", "Common Areas");
     cy.wait(5000);
-    lp.visitCityComTestKitBuilder();
+    lp.NVDTestKitBuilder();
     cy.log("User entered in kit builder");
     cy.wait(3000);
     //Open Craeted Kit Type
@@ -156,7 +164,7 @@ describe("Choice Pickers Section Data Elements Configuration", function () {
 
   it("Kit Builder Save and Publish", function () {
     //Kit Builder Save
-    cy.get(".ca-button-green:nth-child(1)").click({ force: true });
+    cy.get(".mr-2:nth-child(2) > .v-btn__content").click({ force: true });
     //save assertion closed
     cy.get(".v-btn__content > .theme--dark").click({ multiple: true });
     cy.log("Kit builder(New Form) has been Saved");

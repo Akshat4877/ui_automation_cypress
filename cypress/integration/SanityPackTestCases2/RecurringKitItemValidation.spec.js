@@ -50,7 +50,7 @@ describe("Triggered Recurring KitItem Validation Test Case", function () {
             this.NewKitItemData = KitDataEle;
         });
 
-        // cy.fixture("SanityPackTestData(Prod)/RecurringKitItemData(Prod)").then(
+        // cy.fixture("SanityPackTestData2(Prod)/RecurringKitItemData(Prod)").then(
         //   function (KitDataEle) {
         //     this.NewKitItemData = KitDataEle;
         //   }
@@ -140,8 +140,16 @@ describe("Triggered Recurring KitItem Validation Test Case", function () {
         var lower = this.DataType2.TextAera.toLowerCase();
         //Validating details view input data
         cy.get('[name="TextAera"]').eq(3).should("have.value", this.NewKitItemData.TextAera)
-
     });
+
+    it.only("Slider Element data Validation", function () {
+        //Validation for True Value 
+        cy.xpath('//div[@class="v-input v-input--is-label-active v-input--is-dirty theme--light v-input__slider"]//div[@class="v-slider v-slider--horizontal theme--light"]//input')
+            .invoke('val').then((text) => {
+                cy.log(text)
+                expect(text).equal(this.NewKitItemData.SliderValue)
+            })
+    })
 
     it.only('Currency Element data Validation', function () {
         var currency = this.DataType2.Currency.toLowerCase();
@@ -221,6 +229,11 @@ describe("Triggered Recurring KitItem Validation Test Case", function () {
         cy.get('[placeholder=" MM / DD / YYYY"]')
             .should("have.value", this.NewKitItemData.LoggedDate)
     })
+
+    it.only("Toggle Element data Validation", function () {
+        cy.xpath('//div[@class="pl-3 col"]//div[@class="v-input--selection-controls__input"]//input')
+            .should('have.attr', 'aria-checked', 'true')
+    });
 
     it.only("SelectList Element data Validation", function () {
         //json value assertion

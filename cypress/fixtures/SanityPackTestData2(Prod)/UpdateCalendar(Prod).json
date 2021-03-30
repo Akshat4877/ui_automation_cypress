@@ -6,7 +6,7 @@
     "Url":"https://www.aaupdated.com",
     "Text":"updated",
     "UpdateFileName":"Screenshot_6",
-    "Telephone":"(897) 765-9999",
+    "Telephone":"(897) 765-2905",
     "TextAera":"sanity automation updated",
     "SliderValue":"50",
     "Currency":"10",
@@ -24,6 +24,7 @@
     "Number":"4",
 
     "SelectListValue":"Venacura",
+    
     "RadioSelectValue":"SR5",
 
     "StepperValue":"RealMe",
@@ -46,9 +47,21 @@
     "LargeiconSize":"Large",
     "ExtraLargeiconSize":"Extra Large",
 
-    "IconLabel":"Prod update",
+    "IconLabel":"update",
 
     "Form Element Validation":"Data",
     "LoggedTime":"5:25 pm",
     "LoggedDate":"03/25/2021"
+
+    
+    
+
+
+
+    
+
+    
+
+
+    
 }

@@ -1,29 +1,28 @@
 {
 
-    "RecurringitemName":"TodayItem",
 
-
-    
     "Recurring kit itmes tabs":"Data",
 
     "RecurringFilesTab":"Fixtures",
-    "RecurringContributorsTab":"ravi Negi",
+    "RecurringContributorsTab":"Akshat Akshat",
     "RecurringAddTimeEntryLable":"Recurring Time Entry",
     "RecurringAddTimeEntryDescription":"Recurring Time Entry Test case",
     "RecurringTotalHours":"3",
     "RecurringAddDescription":"We are saving time entry now for Recurring Time Entry",
-    "RecurringTimeEntryConnection":"Sirajday Sirajday",
-    "RecurringAddComments":"Hi these are the Recurring kit item test case that is for comment testing",
-    "RecurringAddGroup":"",
+    "RecurringTimeEntryConnection":"Ranveer Etelligens",
+    "RecurringAddComments":"Comment testing for recurring kit item",
+    "RecurringAddGroup":"Test Group",
 
 
+    "RecurringitemName":"TodayItem",
 
-    "KitName":"SamTest",
+    "KitName":"BuildingAreas",
     "Url":"https://www.recurringitem.com",
     "Text":"Recurring text data",
     "NewFormLibFileName":"Screenshot_12",
-    "Telephone":"(123) 123-2495",
+    "Telephone":"(123) 123-1234",
     "TextAera":"Recurring kit item",
+    "SliderValue":"50",
     "Currency":"15",
     "Measure":"2",
 
@@ -38,10 +37,11 @@
     "Country":"United States",
     "Number":"3",
 
-    "SelectListValue":"MNV",
-    
+    "SelectListValue":"Australia",
+    "RadioSelectValue":"SR1",
 
-    "RadioSelectValue":"SR5",
+    "StepperValue":"Jio",
+    "InspectionValue":"Cdot",
 
     "CheckboxSelectValue1":"CheckboxSelect1",
     "CheckboxSelectValue2":"CheckboxSelect2",
@@ -49,15 +49,10 @@
     "CheckboxSelectValue4":"CheckboxSelect4",
     "CheckboxSelectValue5":"CheckboxSelect5",
 
-    "StepperValue1":"Jio",
-    "StepperValue2":"Moto",
-    "StepperValue3":"Note",
-    "StepperValue4":"Oppo",
-    "StepperValue5":"RealMe",
 
-    "UserSelectorName":"John Murray",
-    "ContactSelectorName":"Sirajday Sirajday",
-    "AssigningName":"Teng Teng",
+    "UserSelectorName":"Kat Vonnorights",
+    "ContactSelectorName":"Aaron Seabaugh",
+    "AssigningName":"Mack Ss",
     
     "ExtraSmalliconSize":"Extra Small",
     "SmalliconSize":"Small",
@@ -67,12 +62,7 @@
 
     "IconLabel":"recurring",
 
-    "These are the index value of div child":"use according to select inspection value",
-    "1st for 1st value":"2nd for 2nd value and so on...",
-    "InspectionValue1":"1",
-    "InspectionValue2":"2",
-    "InspectionValue3":"3",
-    "InspectionValue4":"4",
-    "InspectionValue5":"5"
+    "LoggedTime":"4:30 pm",
+    "LoggedDate":"03/25/2021"
 
 }

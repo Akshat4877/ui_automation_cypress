@@ -6,8 +6,8 @@ describe("Bulk Edit test case for List View kit item", function () {
     // cy.viewport(1280, 720);
     const lp = new LoginPage();
     const slp = new SanityLoginPage();
-    slp.nvdTest()
-    //slp.TmProd();
+    //slp.nvdTest()
+    slp.TmProd();
 
     //Handling Alert
     cy.on("window:confirm", () => {
@@ -17,8 +17,8 @@ describe("Bulk Edit test case for List View kit item", function () {
     //Login Assertions
     cy.contains(" Log In ").should("be.visible");
     //Enter credentials
-    lp.EnterEmail("propertymanagement@commonareas.work.dev");
-    //lp.EnterEmail("sam@armyspy.com");
+    //lp.EnterEmail("propertymanagement@commonareas.work.dev");
+    lp.EnterEmail("sam@armyspy.com");
     lp.EnterPassword("1234567Aa");
     lp.Submit();
     cy.log("User has been Logged In into the application");
@@ -45,27 +45,27 @@ describe("Bulk Edit test case for List View kit item", function () {
       "jwtAccessToken"
     );
 
-    cy.fixture("SanityPackTestData2/BulkEditData").then(function (KitDataEle) {
-      this.NewKitItemData = KitDataEle;
-    });
-
-    // cy.fixture("SanityPackTestData(Prod)/BulkEditData(Prod)").then(function (
-    //   KitDataEle
-    // ) {
+    // cy.fixture("SanityPackTestData2/BulkEditData").then(function (KitDataEle) {
     //   this.NewKitItemData = KitDataEle;
     // });
 
-    cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
-      NewDataForElements
+    cy.fixture("SanityPackTestData2(Prod)/BulkEditData(Prod)").then(function (
+      KitDataEle
     ) {
-      this.DataType2 = NewDataForElements;
+      this.NewKitItemData = KitDataEle;
     });
 
-    // cy.fixture("SanityPackTestData(Prod)/KitBuilderDataTypes2(Prod)").then(
-    //   function (NewDataForElements) {
-    //     this.DataType2 = NewDataForElements;
-    //   }
-    // );
+    // cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
+    //   NewDataForElements
+    // ) {
+    //   this.DataType2 = NewDataForElements;
+    // });
+
+    cy.fixture("SanityPackTestData(Prod)/KitBuilderDataTypes2(Prod)").then(
+      function (NewDataForElements) {
+        this.DataType2 = NewDataForElements;
+      }
+    );
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
   });
@@ -153,15 +153,12 @@ describe("Bulk Edit test case for List View kit item", function () {
       .eq(1)
       .type(this.NewKitItemData.TextAera);
 
-    //Slider;
-    //Firing Alert pop for manual action
-    cy.log("User need to do something").then(() => {
-      alert("Set Slider value by clicking slider Bar");
-    });
-    cy.log(
-      "Firing Alert pop for manual action to Set Slider value by clicking slider Bar"
-    );
-    cy.wait(2000);
+    //Slider
+    cy.xpath('//div[@class="v-slider v-slider--horizontal theme--light"]//div[@class="v-slider__track-container"]')
+      .eq(0)
+      .invoke('val', this.NewKitItemData.SliderValue)
+      .trigger('change').click({ force: true })
+
 
     // Currency;
     cy.get(
@@ -419,8 +416,16 @@ describe("Bulk Edit test case for List View kit item", function () {
     var lower = this.DataType2.TextAera.toLowerCase();
     //Validating details view input data
     cy.get('[name="TextAera"]').eq(3).should("have.value", this.NewKitItemData.TextAera)
-
   });
+
+  it.only("Slider Element data Validation", function () {
+    //Validation for True Value 
+    cy.xpath('//div[@class="v-input v-input--is-label-active v-input--is-dirty theme--light v-input__slider"]//div[@class="v-slider v-slider--horizontal theme--light"]//input')
+      .invoke('val').then((text) => {
+        cy.log(text)
+        expect(text).equal(this.NewKitItemData.SliderValue)
+      })
+  })
 
   it.only('Currency Element data Validation', function () {
     var currency = this.DataType2.Currency.toLowerCase();
@@ -602,8 +607,16 @@ describe("Bulk Edit test case for List View kit item", function () {
     var lower = this.DataType2.TextAera.toLowerCase();
     //Validating details view input data
     cy.get('[name="TextAera"]').eq(3).should("have.value", this.NewKitItemData.TextAera)
-
   });
+
+  it.only("Slider Element data Validation", function () {
+    //Validation for True Value 
+    cy.xpath('//div[@class="v-input v-input--is-label-active v-input--is-dirty theme--light v-input__slider"]//div[@class="v-slider v-slider--horizontal theme--light"]//input')
+      .invoke('val').then((text) => {
+        cy.log(text)
+        expect(text).equal(this.NewKitItemData.SliderValue)
+      })
+  })
 
   it.only('Currency Element data Validation', function () {
     var currency = this.DataType2.Currency.toLowerCase();
@@ -786,8 +799,16 @@ describe("Bulk Edit test case for List View kit item", function () {
     var lower = this.DataType2.TextAera.toLowerCase();
     //Validating details view input data
     cy.get('[name="TextAera"]').eq(3).should("have.value", this.NewKitItemData.TextAera)
-
   });
+
+  it.only("Slider Element data Validation", function () {
+    //Validation for True Value 
+    cy.xpath('//div[@class="v-input v-input--is-label-active v-input--is-dirty theme--light v-input__slider"]//div[@class="v-slider v-slider--horizontal theme--light"]//input')
+      .invoke('val').then((text) => {
+        cy.log(text)
+        expect(text).equal(this.NewKitItemData.SliderValue)
+      })
+  })
 
   it.only('Currency Element data Validation', function () {
     var currency = this.DataType2.Currency.toLowerCase();
@@ -971,8 +992,16 @@ describe("Bulk Edit test case for List View kit item", function () {
     var lower = this.DataType2.TextAera.toLowerCase();
     //Validating details view input data
     cy.get('[name="TextAera"]').eq(3).should("have.value", this.NewKitItemData.TextAera)
-
   });
+
+  it.only("Slider Element data Validation", function () {
+    //Validation for True Value 
+    cy.xpath('//div[@class="v-input v-input--is-label-active v-input--is-dirty theme--light v-input__slider"]//div[@class="v-slider v-slider--horizontal theme--light"]//input')
+      .invoke('val').then((text) => {
+        cy.log(text)
+        expect(text).equal(this.NewKitItemData.SliderValue)
+      })
+  })
 
   it.only('Currency Element data Validation', function () {
     var currency = this.DataType2.Currency.toLowerCase();

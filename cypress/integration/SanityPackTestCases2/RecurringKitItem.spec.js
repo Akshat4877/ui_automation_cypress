@@ -7,8 +7,8 @@ describe("Recurring New kit item creation test case", function () {
     // cy.viewport(1280, 720);
     const lp = new LoginPage();
     const slp = new SanityLoginPage();
-    slp.nvdTest()
-    //slp.TmProd();
+    //slp.nvdTest()
+    slp.TmProd();
     //Handling Alert
 
     cy.on("window:confirm", () => {
@@ -17,8 +17,8 @@ describe("Recurring New kit item creation test case", function () {
     //Login Assertions
     cy.contains(" Log In ").should("be.visible");
     //Enter credentials
-    lp.EnterEmail("propertymanagement@commonareas.work.dev");
-    //lp.EnterEmail("sam@armyspy.com");
+    //lp.EnterEmail("propertymanagement@commonareas.work.dev");
+    lp.EnterEmail("sam@armyspy.com");
     lp.EnterPassword("1234567Aa");
     lp.Submit();
     cy.log("User has been Logged In into the application");
@@ -45,28 +45,31 @@ describe("Recurring New kit item creation test case", function () {
       "jwtAccessToken"
     );
 
-    // cy.fixture("SanityPackTestData(Prod)/RecurringKitItemData(Prod)").then(
-    //   function (SanityTCData) {
-    //     this.NewKitItemData = SanityTCData;
-    //   }
-    // );
 
-    cy.fixture("SanityPackTestData2/RecurringKitItemData").then(function (
-      SanityTCData
-    ) {
-      this.NewKitItemData = SanityTCData;
-    });
-    cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
-      NewDataForElements
-    ) {
-      this.DataType2 = NewDataForElements;
-    });
+    // cy.fixture("SanityPackTestData2/RecurringKitItemData").then(function (
+    //   SanityTCData
+    // ) {
+    //   this.NewKitItemData = SanityTCData;
+    // });
 
-    // cy.fixture("SanityPackTestData(Prod)/KitBuilderDataTypes2(Prod)").then(
-    //   function (NewDataForElements) {
-    //     this.DataType2 = NewDataForElements;
-    //   }
-    // );
+    cy.fixture("SanityPackTestData2(Prod)/RecurringKitItemData(Prod)").then(
+      function (SanityTCData) {
+        this.NewKitItemData = SanityTCData;
+      }
+    );
+
+
+    // cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
+    //   NewDataForElements
+    // ) {
+    //   this.DataType2 = NewDataForElements;
+    // });
+
+    cy.fixture("SanityPackTestData(Prod)/KitBuilderDataTypes2(Prod)").then(
+      function (NewDataForElements) {
+        this.DataType2 = NewDataForElements;
+      }
+    );
 
     //////////////////////////////////////////////////////////////////////////////////
 
@@ -119,7 +122,6 @@ describe("Recurring New kit item creation test case", function () {
     cy.wait(1000);
     //Click on To open Kit Type
     KTP.SearchKitType(this.NewKitItemData.KitName);
-    cy.wait(3000);
     //This is class to open searched kit type by clicking + iocn
     cy.get(".truncate-special").first().click({ force: true });
     cy.wait(1000);
@@ -131,6 +133,10 @@ describe("Recurring New kit item creation test case", function () {
 
     //Creating Recurring kit item
     //save Kit Item for empty form
+    cy.wait(2000)
+    //Url
+    cy.get("[name" + "=" + this.DataType2.Url + "]")
+      .last().should('be.visible');
     cy.get(".v-select__selections .v-btn__content").click({ force: true });
     //kit item Save Assertion for no data
     cy.contains("Nothing to save for " + this.NewKitItemData.KitName).should(
@@ -169,15 +175,11 @@ describe("Recurring New kit item creation test case", function () {
       .last()
       .type(this.NewKitItemData.TextAera);
 
-    //Slider;
-    //Firing Alert pop for manual action
-    cy.log("User need to do something").then(() => {
-      alert("Set Slider value by clicking slider Bar");
-    });
-    cy.log(
-      "Firing Alert pop for manual action to Set Slider value by clicking slider Bar"
-    );
-    cy.wait(5000);
+    //Slider
+    cy.xpath('//div[@class="v-slider v-slider--horizontal theme--light"]//div[@class="v-slider__track-container"]')
+      .eq(0)
+      .invoke('val', this.NewKitItemData.SliderValue)
+      .trigger('change').click({ force: true })
 
     //Currency;
     cy.get(
@@ -246,7 +248,7 @@ describe("Recurring New kit item creation test case", function () {
     cy.xpath("//span[contains(text(),'30')]").first().click({ force: true });
     cy.wait(1000);
     //Click on PM
-    cy.xpath("//div[contains(text(),'PM')]").click({ force: true });
+    cy.xpath("//div[contains(text(),'PM')]").first().click({ force: true });
     //Click on OK to save date
     cy.xpath(
       "//div[contains(@class,'v-dialog v-dialog--active')]//button[1]"
@@ -272,13 +274,11 @@ describe("Recurring New kit item creation test case", function () {
     });
 
     //Click on DropDown of SelectList
-    cy.wait(3000);
     cy.get(
       "div > div > div.v-input__slot > div.v-select__slot > div.v-input__append-inner"
     )
       .eq(4)
       .click({ force: true });
-    cy.wait(2000);
     //SelectList Value(Values coming form KitItemValues Json File)
     cy.contains(this.NewKitItemData.SelectListValue).click({ force: true });
     cy.log("SelectList Value has been set.");
@@ -361,7 +361,7 @@ describe("Recurring New kit item creation test case", function () {
     cy.xpath('//*[text() ="Search"]').first().click({ force: true })
     cy.wait(1000)
     cy.xpath('//*[text() ="Search"]').first().next('input')
-      .type(`${this.NewKitItemData.Assigning}{enter}`)
+      .type(`${this.NewKitItemData.AssigningName}{enter}`)
     cy.wait(3000)
     cy.contains(this.NewKitItemData.AssigningName).click({ force: true });
     cy.wait(2000);
@@ -538,12 +538,6 @@ describe("Recurring New kit item creation test case", function () {
     cy.wait(3000);
     //Selct the to be linked kit item
     cy.get("div:nth-child(3) > div > .row:nth-child(5) .item-check").first().click({ force: true });
-
-
-
-    //cy.get(".thumb-selected-icon").eq(1).click();
-    // cy.get(".thumb-selected-icon").eq(2).click();
-    // cy.get(".thumb-selected-icon").eq(3).click();
     cy.wait(2000);
     //Click on select btn
     cy.get(".button-pop-ups > .v-btn__content").first().click({ force: true });
@@ -572,7 +566,12 @@ describe("Recurring New kit item creation test case", function () {
     cy.contains(" Connections ").should("be.visible");
     //Click on contribytors checkbox
     cy.contains("Contributor").click({ force: true });
-    cy.wait(1000);
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.NewKitItemData.RecurringContributorsTab}{enter}`)
+    cy.wait(3000)
     //Select Name
     cy.contains(this.NewKitItemData.RecurringContributorsTab).click({
       force: true,

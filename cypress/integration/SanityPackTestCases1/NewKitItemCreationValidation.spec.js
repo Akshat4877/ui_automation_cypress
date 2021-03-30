@@ -162,6 +162,15 @@ describe("New created kit item creation Validation test case", function () {
     cy.xpath("//input[@controlname='" + lower + "']").should("have.value", this.NewKitItemData.Text)
   });
 
+  it.only("Slider Element data Validation", function () {
+    //Validation for True Value 
+    cy.xpath('//div[@class="v-input v-input--is-label-active v-input--is-dirty theme--light v-input__slider"]//div[@class="v-slider v-slider--horizontal theme--light"]//input')
+      .invoke('val').then((text) => {
+        cy.log(text)
+        expect(text).equal(this.NewKitItemData.SliderValue)
+      })
+  })
+
   it.only('File Element data Validation', function () {
     cy.xpath('//div[@class="drop-zone"]//div[@class="v-input__slot"]//div[@class="v-text-field__slot"]//input')
       .invoke('val').then((text) => {
@@ -262,6 +271,11 @@ describe("New created kit item creation Validation test case", function () {
     cy.get('[placeholder=" MM / DD / YYYY"]')
       .should("have.value", this.NewKitItemData.LoggedDate)
   })
+
+  it.only("Toggle Element data Validation", function () {
+    cy.xpath('//div[@class="pl-3 col"]//div[@class="v-input--selection-controls__input"]//input')
+      .should('have.attr', 'aria-checked', 'true')
+  });
 
   it.only("SelectList Element data Validation", function () {
     //json value assertion

@@ -4,12 +4,10 @@ import SanityLoginPage from "../PageObject/SanityLoginPage";
 
 describe("Related Control Square Card test case", function () {
   this.beforeAll(function () {
-    // cy.viewport(1280, 720);
     const lp = new LoginPage();
     const slp = new SanityLoginPage();
-    //slp.visitCityComTest();
-    slp.nvdTest()
-    //slp.TmProd();
+    //slp.nvdTest()
+    slp.TmProd();
 
     //Handling Alert
     cy.on("window:confirm", () => {
@@ -19,9 +17,8 @@ describe("Related Control Square Card test case", function () {
     //Login Assertions
     cy.contains(" Log In ").should("be.visible");
     //Enter credentials
-    //lp.EnterEmail("sam@armyspy.com");
-    lp.EnterEmail("propertymanagement@commonareas.work.dev");
-    //lp.EnterEmail("citycom@commonareas.work.dev");
+    //lp.EnterEmail("propertymanagement@commonareas.work.dev");
+    lp.EnterEmail("sam@armyspy.com");
     lp.EnterPassword("1234567Aa");
     lp.Submit();
     cy.log("User has been Logged In into the application");
@@ -48,43 +45,43 @@ describe("Related Control Square Card test case", function () {
       "jwtAccessToken"
     );
 
-    cy.fixture("SanityPackTestData/RelatedSqCardData").then(function (
-      SanityTCData
-    ) {
-      this.RelatedKitItemData = SanityTCData;
-    });
+    // cy.fixture("SanityPackTestData/RelatedSqCardData").then(function (
+    //   SanityTCData
+    // ) {
+    //   this.RelatedKitItemData = SanityTCData;
+    // });
 
-    // cy.fixture("SanityPackTestData(Prod)/RelatedSqCardData(Prod)").then(
-    //   function (SanityTCData) {
-    //     this.RelatedKitItemData = SanityTCData;
-    //   }
-    // );
+    cy.fixture("SanityPackTestData(Prod)/RelatedSqCardData(Prod)").then(
+      function (SanityTCData) {
+        this.RelatedKitItemData = SanityTCData;
+      }
+    );
 
-    cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
-      NewDataForElements
-    ) {
-      this.DataType2 = NewDataForElements;
-    });
+    // cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
+    //   NewDataForElements
+    // ) {
+    //   this.DataType2 = NewDataForElements;
+    // });
 
-    // cy.fixture("SanityPackTestData(Prod)/KitBuilderDataTypes2(Prod)").then(
-    //   function (NewDataForElements) {
-    //     this.DataType2 = NewDataForElements;
-    //   }
-    // );
+    cy.fixture("SanityPackTestData(Prod)/KitBuilderDataTypes2(Prod)").then(
+      function (NewDataForElements) {
+        this.DataType2 = NewDataForElements;
+      }
+    );
+
+    // cy.fixture("KitTypeTestData/NewKitItemDataValues").then(function (
+    //   KitDataEle
+    // ) {
+    //   this.NewKitItemData = KitDataEle;
+    // });
+
+    cy.fixture("SanityPackTestData(Prod)/NewKitItemDataValue(Prod)").then(
+      function (KitDataEle) {
+        this.NewKitItemData = KitDataEle;
+      }
+    );
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    cy.fixture("KitBuilderTestData/NewKitTypeData").then(function (
-      KittypeName
-    ) {
-      this.KitTypeName = KittypeName;
-    });
-
-    cy.fixture("KitTypeTestData/NewKitItemDataValues").then(function (
-      KitDataEle
-    ) {
-      this.NewKitItemData = KitDataEle;
-    });
 
     cy.fixture("KitBuilderTestData/FormViewsNameData").then(function (
       KitTypeFormViewsNames
@@ -196,15 +193,11 @@ describe("Related Control Square Card test case", function () {
       .eq(1)
       .type(this.RelatedKitItemData.TextAera);
 
-    //Slider;
-    //Firing Alert pop for manual action
-    // cy.log("User need to do something").then(() => {
-    //   alert("Set Slider value by clicking slider Bar");
-    // });
-    // cy.log(
-    //   "Firing Alert pop for manual action to Set Slider value by clicking slider Bar"
-    // );
-    // cy.wait(4000);
+    //Slider
+    cy.xpath('//div[@class="v-slider v-slider--horizontal theme--light"]//div[@class="v-slider__track-container"]')
+      .eq(0)
+      .invoke('val', this.NewKitItemData.SliderValue)
+      .trigger('change').click({ force: true })
 
     // Currency;
     cy.get(
@@ -284,7 +277,7 @@ describe("Related Control Square Card test case", function () {
     cy.xpath("//span[contains(text(),'30')]").first().click({ force: true });
     cy.wait(1000);
     //Click on PM
-    cy.xpath("//div[contains(text(),'PM')]").click({ force: true });
+    cy.xpath("//div[contains(text(),'PM')]").first().click({ force: true });
     //Click on OK to save date
     cy.xpath(
       "//div[contains(@class,'v-dialog v-dialog--active')]//button[1]"
@@ -535,6 +528,15 @@ describe("Related Control Square Card test case", function () {
     cy.get('[name="TextAera"]').eq(1).should("have.value", this.RelatedKitItemData.TextAera)
   });
 
+  it.only("Slider Element data Validation", function () {
+    //Validation for True Value 
+    cy.xpath('//div[@class="v-input v-input--is-label-active v-input--is-dirty theme--light v-input__slider"]//div[@class="v-slider v-slider--horizontal theme--light"]//input')
+      .invoke('val').then((text) => {
+        cy.log(text)
+        expect(text).equal(this.NewKitItemData.SliderValue)
+      })
+  })
+
   it.only('Currency Element data Validation', function () {
     var currency = this.DataType2.Currency.toLowerCase();
     //Assertion Validation for currency
@@ -610,8 +612,13 @@ describe("Related Control Square Card test case", function () {
     //Check in josn for LoggedDate
     cy.get('[placeholder=" MM / DD / YYYY"]').eq(0)
       .should("have.value", this.RelatedKitItemData.LoggedDate)
-
   })
+
+  it.only("Toggle Element data Validation", function () {
+    cy.xpath('//div[@class="pl-3 col"]//div[@class="v-input--selection-controls__input"]//input')
+      .first()
+      .should('have.attr', 'aria-checked', 'true')
+  });
 
   it.only("SelectList Element data Validation", function () {
     var selectList = this.DataType2.SelectListName.toLowerCase();
@@ -659,6 +666,10 @@ describe("Related Control Square Card test case", function () {
     cy.xpath('//div[@controlname="contactSelector"]//div[@class="col item-label"]').children('div').invoke('text').then((text) => {
       expect(text.trim()).equal(this.RelatedKitItemData.ContactSelectorName)
     });
+  })
+
+  it.only('OneToOne Related Control Items Validation', function () {
+    cy.get(".last-updated:nth-child(2) > .v-icon").should("exist");
   })
 
   it.only('Assigning Element data Validation', function () {

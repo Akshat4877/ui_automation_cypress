@@ -1,12 +1,13 @@
 {
 
 
-    "KitName":"SamTest",
-    "Url":"https://www.akshat.com",
+    "KitName":"BuildingAreas",
+    "Url":"https://www.aakshat.com",
     "Text":"akshat bulk action",
   
-    "Telephone":"(999) 999-999",
+    "Telephone":"(999) 999-9999",
     "TextAera":"Performing bulk action",
+    "SliderValue":"50",
     "Currency":"9",
     "Measure":"9",
 
@@ -21,26 +22,19 @@
     "Country":"United States",
     "Number":"9",
 
-    "SelectListValue":" VVIP ",
-    
-
+    "SelectListValue":" Venacura ",
     "RadioSelectValue":"SR5",
+    "StepperValue":"RealMe",
 
     "CheckboxSelectValue1":"CheckboxSelect1",
     "CheckboxSelectValue2":"CheckboxSelect2",
     "CheckboxSelectValue3":"CheckboxSelect3",
     "CheckboxSelectValue4":"CheckboxSelect4",
     "CheckboxSelectValue5":"CheckboxSelect5",
-
-    "StepperValue1":"Jio",
-    "StepperValue2":"Moto",
-    "StepperValue3":"Note",
-    "StepperValue4":"Oppo",
-    "StepperValue5":"RealMe",
-
-    "UserSelectorName":"Mack Ss",
-    "ContactSelectorName":"Jason Roy",
    
+    
+    "UserSelectorName":"John Murray",
+    "ContactSelectorName":"Akshat Akshat",
     
     "ExtraSmalliconSize":"Extra Small",
     "SmalliconSize":"Small",
@@ -48,7 +42,10 @@
     "LargeiconSize":"Large",
     "ExtraLargeiconSize":"Extra Large",
 
-    "IconLabel":"Bulk Action"
+    "IconLabel":"Prod Bulk",
+
+    "LoggedTime":"9:30 pm",
+    "LoggedDate":"03/20/2021"
 
 
 }

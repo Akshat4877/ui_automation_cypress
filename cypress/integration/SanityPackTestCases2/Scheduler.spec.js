@@ -3,10 +3,8 @@ import SanityLoginPage from "../PageObject/SanityLoginPage";
 
 describe("Create Active schedule for Kit Item through Add button in calendar", function () {
   this.beforeAll(function () {
-    // cy.viewport(1280, 720);
     const lp = new LoginPage();
     const slp = new SanityLoginPage();
-    //slp.visitCityComTest();
     slp.nvdTest()
     //slp.TmProd();
 
@@ -17,7 +15,6 @@ describe("Create Active schedule for Kit Item through Add button in calendar", f
 
     //Login Assertions
     cy.contains(" Log In ").should("be.visible");
-
     //Enter credentials
     //lp.EnterEmail("sam@armyspy.com");
     lp.EnterEmail("propertymanagement@commonareas.work.dev");
@@ -35,8 +32,6 @@ describe("Create Active schedule for Kit Item through Add button in calendar", f
       "refreshToken",
       "jwtAccessToken"
     );
-    
-    cy.wait(10000);
   });
 
   this.beforeEach("KitType Data", function () {

@@ -490,7 +490,7 @@ class KitBuilderDataTypes {
     //Click on Save
     cy.get(".v-btn--text:nth-child(2)").click();
     //Assertion to close
-    cy.get(".v-btn__content > .theme--dark").click();
+    //cy.get(".v-btn__content > .theme--dark").click();
     cy.log("Toggle Data Type has been Created");
   }
 
@@ -543,7 +543,8 @@ class KitBuilderDataTypes {
     cy.get(".v-btn--text:nth-child(2) > .v-btn__content").last().click();
     cy.wait(2000);
     //Click on Assertion to close msg
-    cy.get(".closeBtn .v-icon").click();
+    //cy.get(".closeBtn .v-icon").click();
+
     cy.wait(1000);
     //Click on Save
     cy.get(".v-btn--text:nth-child(2)").click();
@@ -553,7 +554,7 @@ class KitBuilderDataTypes {
     cy.wait(5000);
 
     //Click on Configure the SelectList to Add Values
-    cy.get(".v-size--small:nth-child(1)").click();
+    cy.get('[value="Configure"]').click({ force: true });
 
     //1st Value to SelectList
     //Click on Lable 1(default)
@@ -725,7 +726,7 @@ class KitBuilderDataTypes {
     cy.get(".v-btn--text:nth-child(2) > .v-btn__content").last().click();
     cy.wait(2000);
     //Click on Assertion to close msg
-    cy.get(".closeBtn .v-icon").click();
+    //cy.get(".closeBtn .v-icon").click();
     cy.wait(1000);
     //Click on Save
     cy.get(".v-btn--text:nth-child(2)").click();
@@ -734,7 +735,7 @@ class KitBuilderDataTypes {
     //cy.get('.v-btn__content > .theme--dark').click();
     cy.wait(5000);
     //Click on Configure the RadioSelect to Add Values
-    cy.get(".v-size--small:nth-child(1)").click();
+    cy.get('[value="Configure"]').click({ force: true });
 
     //1st Value to RadioSelect
     //Click on Lable 1(default)
@@ -919,7 +920,7 @@ class KitBuilderDataTypes {
     cy.get(".v-btn--text:nth-child(2) > .v-btn__content").last().click();
     cy.wait(4000);
     //Click on Assertion to close msg
-    cy.get(".closeBtn .v-icon").click();
+    //cy.get(".closeBtn .v-icon").click();
     cy.wait(1000);
     //Click on Save
     cy.get(".v-btn--text:nth-child(2)").click();
@@ -928,7 +929,7 @@ class KitBuilderDataTypes {
     //cy.get('.v-btn__content > .theme--dark').click();
     cy.wait(5000);
     //Click on Configure the CheckboxSelect to Add Values
-    cy.get(".v-size--small:nth-child(1)").click();
+    cy.get('[value="Configure"]').click({ force: true });
 
     //1st Value to CheckboxSelect
     //Click on Lable 1(default)
@@ -1239,7 +1240,7 @@ class KitBuilderDataTypes {
     //cy.get('.v-btn__content > .theme--dark').click();
     cy.wait(5000);
     //Click on Configure the Stepper to Add Values
-    cy.get(".v-size--small:nth-child(1)").click();
+    cy.get('[value="Configure"]').click({ force: true });
 
     //1st Value to Stepper
     //Click on Lable 1(default)
@@ -1461,7 +1462,7 @@ class KitBuilderDataTypes {
     cy.get(".v-btn--text:nth-child(2) > .v-btn__content").last().click();
     cy.wait(2000);
     //Click on Assertion to close msg
-    cy.get(".closeBtn .v-icon").click();
+    //cy.get(".closeBtn .v-icon").click();
     cy.wait(1000);
     //Click on Save
     cy.get(".v-btn--text:nth-child(2)").click();
@@ -1470,7 +1471,7 @@ class KitBuilderDataTypes {
     //cy.get('.v-btn__content > .theme--dark').click();
     cy.wait(5000);
     //Click on Configure the Inspection to Add Values
-    cy.get(".v-size--small:nth-child(1)").click();
+    cy.get('[value="Configure"]').click({ force: true });
 
     //1st Value to Inspection
     //Click on Lable 1(default)
@@ -1682,7 +1683,7 @@ class KitBuilderDataTypes {
     cy.wait(1000);
 
     //Click on Configure
-    cy.get(".v-size--small:nth-child(1)").click();
+    cy.get('[value="Configure"]').click({ force: true });
 
     cy.wait(5000);
 

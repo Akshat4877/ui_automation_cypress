@@ -124,5 +124,14 @@ describe("Blank Bulk Edit test case for List View kit item", function () {
         });
         cy.log("Remove Bulk POP UP by Clicking somewhere ELSE");
         cy.wait(2000);
+        //Click on save
+        cy.get(".ca-button-green > .v-btn__content").click({ force: true });
+        cy.contains(" Bulk edit complete ").should("be.visible");
+        cy.wait(2000);
     });
+
+
+    it.only('Validate Blank Fields',function(){
+
+    })
 })

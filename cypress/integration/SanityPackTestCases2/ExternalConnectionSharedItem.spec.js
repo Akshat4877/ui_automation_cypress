@@ -1,24 +1,24 @@
 import LoginPage from "../PageObject/LoginPage";
+import SignUpPage from "../PageObject/SignUpPage";
 import SanityLoginPage from "../PageObject/SanityLoginPage";
 
-describe("Shared Kit Item Updation Test Case for Internal User", function () {
+
+describe("External Connection Shared Kit Item Test Case", function () {
     this.beforeAll(function () {
-        // cy.viewport(1280, 720);
+        //cy.viewport(1280, 720);
         const lp = new LoginPage();
         const slp = new SanityLoginPage();
-
-        //slp.nvdTest()
-        slp.TmProd()
+        //lp.BaseTest()
+        lp.ProdBaseTest()
         //Handling Alert
         cy.on("window:confirm", () => {
             cy.log("Alert has been Handled");
         });
-
         //Login Assertions
         cy.contains(" Log In ").should("be.visible");
         //Enter credentials
-        //lp.EnterEmail("admin@nvdlp.com.dev");
-        lp.EnterEmail("kat@armyspy.com");
+        //lp.EnterEmail("Shardul@mailinator.com");
+        lp.EnterEmail("Akshat@mailinator.com");
         lp.EnterPassword("1234567Aa");
         lp.Submit();
         cy.log("User has been Logged In into the application");
@@ -69,33 +69,27 @@ describe("Shared Kit Item Updation Test Case for Internal User", function () {
             }
         );
 
-        // cy.fixture("SanityPackTestData/NewKitItemTabsData").then(function (
+        // cy.fixture("SanityPackTestData/DetailViewTestData").then(function (
         //     SanityTCData
         // ) {
         //     this.SData = SanityTCData;
         // });
 
-        cy.fixture("SanityPackTestData(Prod)/NewKitItemTabsData(Prod)").then(
+        cy.fixture("SanityPackTestData(Prod)/DetailViewTestData(Prod)").then(
             function (SanityTCData) {
                 this.SData = SanityTCData;
             }
         );
-
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         cy.fixture("SanityPackTestData2/KitItemId").then(function (ItemID) {
             this.KitItemId = ItemID;
         });
 
-        cy.fixture("KitBuilderTestData/FormViewsNameData").then(function (
-            KitTypeFormViewsNames
-        ) {
-            this.ViewName = KitTypeFormViewsNames;
-        });
     });
 
 
-    it.only('Click on Shared Kit Item to External Connection', function () {
+    it.only('Click on Shared Kit Item', function () {
         cy.wait(2000)
         //Adding coma() in kit item id
         var id = this.KitItemId.ItemID.replace(' ', ', ')
@@ -139,15 +133,6 @@ describe("Shared Kit Item Updation Test Case for Internal User", function () {
         //Validating details view input data
         cy.get('[name="TextAera"]').eq(1).should("have.value", this.UpdateKitItemData.TextAera)
     });
-
-    it.only("Slider Element data Validation", function () {
-        //Validation for True Value 
-        cy.xpath('//div[@class="v-input v-input--is-label-active v-input--is-dirty theme--light v-input__slider"]//div[@class="v-slider v-slider--horizontal theme--light"]//input')
-            .invoke('val').then((text) => {
-                cy.log(text)
-                expect(text).equal(this.UpdateKitItemData.SliderValue)
-            })
-    })
 
     it.only('Currency Element data Validation', function () {
         var currency = this.DataType2.Currency.toLowerCase();
@@ -207,107 +192,71 @@ describe("Shared Kit Item Updation Test Case for Internal User", function () {
             .should("have.value", this.UpdateKitItemData.Country)
     });
 
-    it.only("Number Element data Validation", function () {
-        var lower = this.DataType2.Number.toLowerCase();
-        //Validating details view input data
-        cy.xpath("//input[@controlname='" + lower + "']")
-            .should("have.value", this.UpdateKitItemData.Number)
+    it("Files tab data Validation in details view", function () {
+        cy.contains("Files").click({ force: true });
+        //cy.contains(this.NewKitItemData.NewFormLibFileName).should("be.visible");
+        cy.contains(this.SData.DetailViewFileName).should("be.visible");
+        cy.log("Uploaded files exist");
+
     });
 
-    it.only('Time Element data Validation', function () {
-        //Check in josn for LoggedTime
-        cy.get('[placeholder="Add Time"][readonly="readonly"]').eq(0)
-            .should("have.value", this.UpdateKitItemData.LoggedTime)
-    })
-
-    it.only('Date Element data Validation', function () {
-        //Check in josn for LoggedDate
-        cy.get('[placeholder=" MM / DD / YYYY"]')
-            .should("have.value", this.UpdateKitItemData.LoggedDate)
-    })
-
-    it.only("Toggle Element data Validation", function () {
-        cy.xpath('//div[@class="pl-3 col"]//div[@class="v-input--selection-controls__input"]//input')
-            .should('have.attr', 'aria-checked', 'false')
+    it.only("Contributors tab data Validation in details view", function () {
+        cy.contains("Contributors").click({ force: true })
+        cy.contains(this.SData.ExternalConnection).should('be.visible')
     });
 
-    it.only("SelectList Element data Validation", function () {
-        var selectList = this.DataType2.SelectListName.toLowerCase();
-        cy.xpath('//div[@controlname="selectList"]//div[@class="v-list-item__subtitle"]')
-            .invoke('text').then((text) => {
-                expect(text.trim()).equal(this.UpdateKitItemData.SelectListValue)
-            });
-    })
+    it.only("Comments tab data Validation in details view", function () {
+        cy.contains("Comments").click({ force: true });
+        cy.wait(1000);
+        cy.contains(this.SData.AddComments).should("be.visible");
+        cy.log("Created comments exist");
 
-    it.only('RadioSelect Element data Validation', function () {
-        var radio = this.DataType2.RadioSelectName.toLowerCase();
-        //json value assertion
-        cy.xpath('//div[@controlname="radioSelect"]//div[@class="v-input__slot"]//div[@class="v-radio theme--light v-item--active"]//div[@class="v-list-item__content"]')
-            .invoke('text')
-            .then((text) => {
-                cy.log(text)
-                expect(text.trim()).contains(this.UpdateKitItemData.RadioSelectValue)
-            });
-    })
-
-    it.only("CheckboxSelect Element data Validation", function () {
-        //CheckboxSelect2
-        cy.get('[type="checkbox"]').eq(2).should('be.checked')
     });
 
-    it.only('Stepper Element data Validation', function () {
-        var stepper = this.DataType2.StepperName.toLowerCase();
-        cy.xpath('//div[@controlname="' + stepper + '"]//div[@class="v-stepper__header"]//div[@class="v-stepper__step v-stepper__step--inactive v-stepper__step--complete"]//div[@class="v-list-item__subtitle"]')
-            .invoke('text').then((text) => {
-                expect(text.trim()).equal(this.UpdateKitItemData.StepperValue)
-            })
+    it.only("Tabs which should be hide for Shared View", function () {
+        cy.contains(" Time Entries ").should('not.exist')
+        cy.contains(" Calendar ").should('not.exist')
+        cy.contains(" Scheduler ").should('not.exist')
+        cy.contains(" Common Plans ").should('not.exist')
     });
-
-    it.only('UserSelector Element data Validation', function () {
-        //scroll to user selector
-        cy.get('.imageContent').eq(0).scrollIntoView({ force: true })
-        cy.wait(1000)
-        cy.xpath('//div[@controlname="userSelector"]//div[@class="col item-label"]').children('div').invoke('text').then((text) => {
-            expect(text.trim()).equal(this.UpdateKitItemData.UserSelector)
-        });
-
-    })
-
-    it.only('ContactSelector Element data Validation', function () {
-        cy.xpath('//div[@controlname="contactSelector"]//div[@class="col item-label"]').children('div').invoke('text').then((text) => {
-            expect(text.trim()).equal(this.UpdateKitItemData.ContactSelector)
-        });
-    })
-
-    it.only('Assigning Element data Validation', function () {
-        var assigning = this.DataType2.Assigning.toLowerCase();
-        cy.get('.v-btn:nth-child(1) .v-badge > .inline-svg').scrollIntoView({ force: true })
-        //json value assertion
-        cy.xpath('//div[@controlname="' + assigning + '"]//div[@class="item-label col"]').children('div').invoke('text')
-            .then((text) => {
-                expect(text.trim()).equal(this.UpdateKitItemData.Assigning)
-            });
-    })
-
-    it.only('Inspection Element data Validation', function () {
-        var inspection = this.DataType2.InspectionName.toLowerCase();
-        cy.xpath('//div[@controlname="' + inspection + '"]//div[@class="v-slide-group__content"]').children('span.v-chip--active')
-            .invoke('text').then((text) => {
-                expect(text.trim()).equal(this.UpdateKitItemData.InspectionValue)
-            });
-    });
-
-    it.only('Icon Element data Validation', function () {
-        //Validating details view input data
-        cy.get('[placeholder="Label"]')
-            .should("have.value", this.UpdateKitItemData.IconLabel)
-    })
-
-    it.only('Close details view', function () {
-        cy.wait(1000)
-        //Close Kit type
-        cy.get(".subheader--button-icon-wrapper .inline-svg").click({
-            force: true,
-        });
-    })
 })
+
+describe("Email Notification Shared Activity", function () {
+    this.beforeEach(
+        "Internal User Credentials",
+        function () {
+
+            // cy.fixture("SanityPackTestData2/SharedUserCredentials").then(function (KitDataEle) {
+            //     this.Credentials = KitDataEle;
+            // });
+
+            cy.fixture("SanityPackTestData2(Prod)/SharedUserCredentials(Prod)").then(function (KitDataEle) {
+                this.Credentials = KitDataEle;
+            });
+
+            // cy.fixture("KitTypeTestData/NewKitItemDataValues").then(function (
+            //     KitDataEle
+            // ) {
+            //     this.NewKitItemData = KitDataEle;
+            // });
+
+            cy.fixture("SanityPackTestData(Prod)/NewKitItemDataValue(Prod)").then(
+                function (KitDataEle) {
+                    this.NewKitItemData = KitDataEle;
+                }
+            );
+        });
+
+    it.only("Verifying Email Notification Shared Kit Item Activity for External User ", function () {
+        //PageObject
+        const sp = new SignUpPage();
+        sp.mailinatorSite();
+        cy.url().should("include", "mailinator.com");
+        sp.EnterMailinatorEmail(this.Credentials.ExternalConnection);
+        cy.log("User Email has been Entered");
+        //Click on Go
+        sp.Go();
+        cy.wait(10000);
+        cy.contains("New " + this.NewKitItemData.KitName).click({ force: true });
+    });
+});

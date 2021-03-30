@@ -1,20 +1,6 @@
 {
-
-    "KitLabel":"AkshatChildKit2",
-    "KitName":"AkshatChildKit2",
-    "KitDescription":"AkshatChildKit2",
-    "APIName":"AkshatChildKit2",
-
-    "KitLabel2":"Property Builder",
-    "KitName2":"Property Builder",
-    "KitDescription2":"Property Builder",
-    "APIName2":"PropertyBuilder",
-
-    "KitLabel3":"BaseTesting",
-    "KitName3":"BaseTesting",
-    "KitDescription3":"BaseTesting",
-    "APIName3":"BaseTesting"
-
-    
-
+    "KitLabel3": "PropertyBuilder",
+    "KitName3": "PropertyBuilder",
+    "KitDescription3": "Propertyuilder",
+    "APIName3": "PropertyBuilder"
 }

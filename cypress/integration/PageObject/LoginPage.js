@@ -1,4 +1,15 @@
 class LoginPage {
+
+  BaseTest() {
+    cy.visit("https://app.ca-test.com/Public/Login?ReturnUrl=%2F");
+    
+  }
+
+  ProdBaseTest() {
+    cy.visit("https://commonareas.io/Public/Login?ReturnUrl=%2F");
+    
+  }
+
   visitServiceTest() {
     cy.visit("https://serviceproviders.ca-test.com/");
   }
@@ -39,8 +50,8 @@ class LoginPage {
     cy.visit("https://citycommercial.ca-build.com/#/");
   }
 
-  visitCityComTestKitBuilder() {
-    cy.visit("https://citycommercial.ca-test.com/ClientAdmin/KitBuilder#/");
+  NVDTestKitBuilder() {
+    cy.visit("https://nvd.ca-test.com/ClientAdmin/KitBuilder#/");
   }
 
   visitCityComBuildKitBuilder() {

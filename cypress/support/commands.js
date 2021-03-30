@@ -187,6 +187,9 @@ Cypress.Commands.add("KitIcon", () => {
 
 Cypress.Commands.add("CreateKit", () => {
   //Create btn
+  //click to on external data share
+  cy.contains('External Data Share').click({ force: true })
+  cy.wait(1000)
   cy.get(".ca-button-green").eq(0).click({ force: true });
   cy.contains("Kit Type Saved Successfully").should("be.visible");
   //Assertion msg close
@@ -625,7 +628,7 @@ Cypress.Commands.add("TimelineListViewIcon", () => {
 
 Cypress.Commands.add("SaveTimelineList", () => {
   //Click on Checkbox
-  cy.contains("Default Timeline List View for Kit").click({ force: true });
+  //cy.contains("Default Timeline List View for Kit").click({ force: true });
   // //Click on Save
   cy.get(".px-4 > .v-btn__content").click();
   //Click on Assertion msg for save

@@ -4,32 +4,35 @@
     
     "UrlNote":"all letters in lower case",
 
-    "NewKitItemUrl":"https://www.sqcardnewform.com",
+    "NewKitItemUrl":"https://www.asqcardnewform.com",
     "NewKitItemText":"Square Card Relation TC",
     
-    "Url":"https://www.sqrelated.com",
+    "Url":"https://www.zsqrelated.com",
     "Text":"Sq card Related New",
-    "RelNewFileName":"Screenshot_6",
-    "Telephone":"(245) 909-2765",
+    "RelNewFileName":"sass",
+    "Telephone":"(245) 909-3333",
     "TextAera":"Sq Card Related New automation",
+    "SliderValue":"50",
     "Currency":"3",
     "Measure":"3",
 
     "Email":"sqcardNew@gmail.com",
     "Important Note for Email":"should be in small letters",
 
-    "Addressline1":"Romrog WaySqRel",
-    "Addressline2":"Oak WayCardRel",
-    "City":"Grand Island Card",
-    "State":"Alaska",
-    "ZipCode":"83234",
+    "Addressline1":"Card way",
+    "Addressline2":"Oak New",
+    "City":"Grand Card",
+    "State":"Arizona",
+    "ZipCode":"9876",
     "Country":"United States",
     "Number":"4",
 
     "SelectListValue":"India",
     
-
     "RadioSelectValue":"SR3",
+
+    "StepperValue":"Note",
+    "InspectionValue":"Python",
 
     "CheckboxSelectValue1":"CheckboxSelect1",
     "CheckboxSelectValue2":"CheckboxSelect2",
@@ -43,8 +46,8 @@
     "StepperValue4":"Oppo",
     "StepperValue5":"RealMe",
 
-    "UserSelectorName":"ravi Negi",
-    "ContactSelectorName":"Jason Roy",
+    "UserSelectorName":"Kat Vonnorights",
+    "ContactSelectorName":"Aaron Seabaugh",
     "AssigningName":"Mack Ss",
     
     "ExtraSmalliconSize":"Extra Small",
@@ -53,14 +56,12 @@
     "LargeiconSize":"Large",
     "ExtraLargeiconSize":"Extra Large",
 
-    "IconLabel":"SqCard",
+    "IconLabel":"Prod CardToday",
 
-    "These are the index value of div child":"use according to select inspection value",
-    "1st for 1st value":"2nd for 2nd value and so on...",
-    "InspectionValue1":"1",
-    "InspectionValue2":"2",
-    "InspectionValue3":"3",
-    "InspectionValue4":"4",
-    "InspectionValue5":"5"
+   
+    
+    "Form Element Validation":"Data-Dont modify",
+    "LoggedTime":"4:30 pm",
+    "LoggedDate":"03/25/2021"
     
 }

@@ -71,7 +71,7 @@
     "InspectionValue5":"Zapare",
 
     "OneToOneRelation":"SectionOneToOne",
-    "KitToBeRelate":"RelatedKit",
+    "KitToBeRelate":"Extension",
     "OneToOneRelatedNew":"RelatedNewView",
     "OneToOneRelatedEdit":"RelatedEditView",
     "OneToOneMapView":"MapView",
@@ -80,12 +80,12 @@
 
 
     "OneToManyRelation":"SectionOneToNRel",
-    "KitToBeRelated":"RelatedKit",
+    "KitToBeRelated":"Extension",
     "OneToManyRelatedNew":"RelatedNewView",
     "OneToManyRelatedEdit":"RelatedEditView",
     "OneToManyMapView":"MapView",
     "OneToManySearchView":"SearchView",
-    "RelatedTableView":"TableOneToN",
+    "RelatedTableView":"SectionTableOneToN",
     "RelatedEle_1":"Url",
     "RelatedEle_2":"Text",
     "RelatedEle_3":"Telephone",
@@ -94,7 +94,7 @@
 
      
     "SquareCardName":"SectionSquareCard",
-    "CardKitToBeRelated":"RelatedKit",
+    "CardKitToBeRelated":"CommercialKit",
     "CardRelatedNew":"RelatedNewView",
     "CardRelatedEdit":"RelatedEditView",
     "CardMapView":"MapView",

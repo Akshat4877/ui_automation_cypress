@@ -12,30 +12,31 @@
     "ExistingRecurringItemName":"TodayItem",
     "UpdatedRecurringitemName":"RecurringUpdation",
 
-    "KitName":"SamTest",
+    "KitName":"BuildingAreas",
     "UpdatedUrl":"https://www.updatedrecurring.com",
     "UpdatedText":"Recurring Updated kit item",
     "UpdatedLibFileName":"Screenshot_1",
-    "UpdatedTelephone":"(123) 123-9999",
+    "UpdatedTelephone":"(123) 123-4877",
     "UpdatedTextAera":" Updated Recurring kit item",
     "UpdatedCurrency":"9",
     "UpdatedMeasure":"9",
 
-    "UpdatedEmail":"updatedrecurring@yahoo.com",
+    "UpdatedEmail":"updatedrec@yahoo.com",
     "Important Note for Email":"should be in small letters",
 
     "NewAddressline1":" Updated recurring Way",
     "NewAddressline2":" Updated Oak recurring",
     "NewCity":" Updated Grand Island recurring",
-    "NewState":"Arizona",
+    "NewState":"Alaska",
     "UpdatedZipCode":"4899",
     "Country":"United States",
     "UpdatedNumber":"9",
 
-    "SelectListValue":"KUA",
-    
+    "SelectListValue":"Venacura",
+    "RadioSelectValue":"SR5",
 
-    "RadioSelectValue":"SR2",
+    "StepperValue":"RealMe",
+    "InspectionValue":"Zapare",
 
     "CheckboxSelectValue1":"CheckboxSelect1",
     "CheckboxSelectValue2":"CheckboxSelect2",
@@ -43,15 +44,9 @@
     "CheckboxSelectValue4":"CheckboxSelect4",
     "CheckboxSelectValue5":"CheckboxSelect5",
 
-    "StepperValue1":"Jio",
-    "StepperValue2":"Moto",
-    "StepperValue3":"Note",
-    "StepperValue4":"Oppo",
-    "StepperValue5":"RealMe",
-
-    "UserSelectorName":"Teng Teng",
-    "ContactSelectorName":"Sunny Sunny",
-    "AssigningName":"Common Areas Support",
+    "UserSelectorName":"John Murray",
+    "ContactSelectorName":"Akshat Akshat",
+    "Assigning":"Kat Vonnorights",
     
     "ExtraSmalliconSize":"Extra Small",
     "SmalliconSize":"Small",
@@ -59,14 +54,6 @@
     "LargeiconSize":"Large",
     "ExtraLargeiconSize":"Extra Large",
 
-    "IconLabel":"Updated icon",
-
-    "These are the index value of div child":"use according to select inspection value",
-    "1st for 1st value":"2nd for 2nd value and so on...",
-    "InspectionValue1":"1",
-    "InspectionValue2":"2",
-    "InspectionValue3":"3",
-    "InspectionValue4":"4",
-    "InspectionValue5":"5"
+    "IconLabel":"Updated icon"
 
 }

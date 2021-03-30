@@ -3,12 +3,10 @@ import SanityLoginPage from "../PageObject/SanityLoginPage";
 
 describe("Update Related New fot OneToOne Related Control", function () {
   this.beforeAll(function () {
-    // cy.viewport(1280, 720);
     const lp = new LoginPage();
     const slp = new SanityLoginPage();
-    //slp.visitCityComTest();
-    slp.nvdTest()
-    //slp.TmProd();
+    //slp.nvdTest()
+    slp.TmProd();
 
     //Handling Alert
     cy.on("window:confirm", () => {
@@ -18,9 +16,8 @@ describe("Update Related New fot OneToOne Related Control", function () {
     //Login Assertions
     cy.contains(" Log In ").should("be.visible");
     //Enter credentials
-    lp.EnterEmail("propertymanagement@commonareas.work.dev");
-    //lp.EnterEmail("citycom@commonareas.work.dev");
-    //lp.EnterEmail("sam@armyspy.com");
+    //lp.EnterEmail("propertymanagement@commonareas.work.dev");
+    lp.EnterEmail("sam@armyspy.com");
     lp.EnterPassword("1234567Aa");
     lp.Submit();
     cy.log("User has been Logged In into the application");
@@ -49,67 +46,55 @@ describe("Update Related New fot OneToOne Related Control", function () {
       "jwtAccessToken"
     );
 
-    cy.fixture("SanityPackTestData/RelatedOneToOneData").then(function (
-      SanityTCData
-    ) {
-      this.RelatedKitItemData2 = SanityTCData;
-    });
+    // cy.fixture("SanityPackTestData/RelatedOneToOneData").then(function (
+    //   SanityTCData
+    // ) {
+    //   this.RelatedKitItemData2 = SanityTCData;
+    // });
 
-    // cy.fixture("SanityPackTestData(Prod)/RelatedOneToOneData(Prod)").then(
-    //   function (SanityTCData) {
-    //     this.RelatedKitItemData2 = SanityTCData;
-    //   }
-    // );
+    cy.fixture("SanityPackTestData(Prod)/RelatedOneToOneData(Prod)").then(
+      function (SanityTCData) {
+        this.RelatedKitItemData2 = SanityTCData;
+      }
+    );
 
-    cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
-      NewDataForElements
-    ) {
-      this.DataType2 = NewDataForElements;
-    });
+    // cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
+    //   NewDataForElements
+    // ) {
+    //   this.DataType2 = NewDataForElements;
+    // });
 
-    // cy.fixture("SanityPackTestData(Prod)/KitBuilderDataTypes2(Prod)").then(
-    //   function (NewDataForElements) {
-    //     this.DataType2 = NewDataForElements;
-    //   }
-    // );
+    cy.fixture("SanityPackTestData(Prod)/KitBuilderDataTypes2(Prod)").then(
+      function (NewDataForElements) {
+        this.DataType2 = NewDataForElements;
+      }
+    );
 
-    cy.fixture("SanityPackTestData/UpdateKItItemData").then(function (
-      UpDateKitItemSDTCData
-    ) {
-      this.UpdateKitItemData = UpDateKitItemSDTCData;
-    });
+    // cy.fixture("SanityPackTestData/UpdateKItItemData").then(function (
+    //   UpDateKitItemSDTCData
+    // ) {
+    //   this.UpdateKitItemData = UpDateKitItemSDTCData;
+    // });
 
-    // cy.fixture("SanityPackTestData(Prod)/UpdateKItItemData(Prod)").then(
-    //   function (UpDateKitItemSDTCData) {
-    //     this.UpdateKitItemData = UpDateKitItemSDTCData;
-    //   }
-    // );
+    cy.fixture("SanityPackTestData(Prod)/UpdateKItItemData(Prod)").then(
+      function (UpDateKitItemSDTCData) {
+        this.UpdateKitItemData = UpDateKitItemSDTCData;
+      }
+    );
 
-    cy.fixture("SanityPackTestData/RelatedOneToOneData").then(function (
-      SanityTCData
-    ) {
-      this.RelatedKitItemData2 = SanityTCData;
-    });
+    // cy.fixture("KitTypeTestData/NewKitItemDataValues").then(function (
+    //   KitDataEle
+    // ) {
+    //   this.NewKitItemData = KitDataEle;
+    // });
 
-    // cy.fixture("SanityPackTestData(Prod)/RelatedOneToOneData(Prod)").then(
-    //   function (SanityTCData) {
-    //     this.RelatedKitItemData = SanityTCData;
-    //   }
-    // );
+    cy.fixture("SanityPackTestData(Prod)/NewKitItemDataValue(Prod)").then(
+      function (KitDataEle) {
+        this.NewKitItemData = KitDataEle;
+      }
+    );
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    cy.fixture("KitBuilderTestData/NewKitTypeData").then(function (
-      KittypeName
-    ) {
-      this.KitTypeName = KittypeName;
-    });
-
-    cy.fixture("KitTypeTestData/NewKitItemDataValues").then(function (
-      KitDataEle
-    ) {
-      this.NewKitItemData = KitDataEle;
-    });
 
     cy.fixture("KitBuilderTestData/FormViewsNameData").then(function (
       KitTypeFormViewsNames
@@ -270,7 +255,7 @@ describe("Update Related New fot OneToOne Related Control", function () {
 
     cy.get('[placeholder="Street address, building, company ... "]')
       .eq(0).scrollIntoView({ force: true })
-    cy.wait(1000)
+    cy.wait(2000)
 
     //Address
     cy.get('[placeholder="Street address, building, company ... "]')
@@ -572,8 +557,16 @@ describe("Update Related New fot OneToOne Related Control", function () {
     cy.get("[name" + "=" + this.DataType2.TextAera + "]").eq(1).should("have.value", this.UpdateKitItemData.TextAera)
   });
 
-  it.only('Currency Element data Validation', function () {
+  it.only("Slider Element data Validation", function () {
+    //Validation for True Value 
+    cy.xpath('//div[@class="v-input v-input--is-label-active v-input--is-dirty theme--light v-input__slider"]//div[@class="v-slider v-slider--horizontal theme--light"]//input')
+      .invoke('val').then((text) => {
+        cy.log(text)
+        expect(text).equal(this.UpdateKitItemData.SliderValue)
+      })
+  })
 
+  it.only('Currency Element data Validation', function () {
     var currency = this.DataType2.Currency.toLowerCase();
     cy.xpath('//div[@class="kit-control-' + currency + '--right ma-0 pa-0 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
       .next('input').should("have.value", this.UpdateKitItemData.Currency)
@@ -651,6 +644,12 @@ describe("Update Related New fot OneToOne Related Control", function () {
       .should("have.value", this.UpdateKitItemData.LoggedDate)
   })
 
+  it.only("Toggle Element data Validation", function () {
+    cy.xpath('//div[@class="pl-3 col"]//div[@class="v-input--selection-controls__input"]//input')
+      .first()
+      .should('have.attr', 'aria-checked', 'false')
+  });
+
   it.only("SelectList Element data Validation", function () {
     var selectList = this.DataType2.SelectListName.toLowerCase();
     cy.xpath('//div[@controlname="selectList"]//div[@class="v-list-item__subtitle"]')
@@ -697,7 +696,10 @@ describe("Update Related New fot OneToOne Related Control", function () {
     cy.xpath('//div[@controlname="contactSelector"]//div[@class="col item-label"]').children('div').invoke('text').then((text) => {
       expect(text.trim()).equal(this.UpdateKitItemData.ContactSelector)
     });
+  })
 
+  it.only('OneToOne Related Control Items Validation', function () {
+    cy.get(".last-updated:nth-child(2) > .v-icon").should("exist");
   })
 
   it.only('Assigning Element data Validation', function () {
@@ -793,6 +795,12 @@ describe("Update Related New fot OneToOne Related Control", function () {
       .eq(1)
       .type(this.RelatedKitItemData2.Text);
 
+    //Slider
+    cy.xpath('//div[@class="v-slider v-slider--horizontal theme--light"]//div[@class="v-slider__track-container"]')
+      .eq(0)
+      .invoke('val', this.RelatedKitItemData2.SliderValue)
+      .trigger('change').click({ force: true })
+
     //File
     cy.get(".dropzone-icons-content > .clickable path")
       .eq(0)
@@ -852,7 +860,7 @@ describe("Update Related New fot OneToOne Related Control", function () {
 
     cy.get('[placeholder="Street address, building, company ... "]')
       .eq(0).scrollIntoView({ force: true })
-    cy.wait(1000)
+    cy.wait(2000)
 
     //Address
     cy.get('[placeholder="Street address, building, company ... "]')
@@ -1121,11 +1129,9 @@ describe("Update Related New fot OneToOne Related Control", function () {
 
 
   it.only("Telephone Element data Validation", function () {
-
     var lower = this.DataType2.Telephone.toLowerCase();
     //Validating details view input data
     cy.xpath("//input[@controlname='" + lower + "']").should("have.value", this.RelatedKitItemData2.Telephone)
-
   });
 
 
@@ -1133,8 +1139,16 @@ describe("Update Related New fot OneToOne Related Control", function () {
     var lower = this.DataType2.TextAera.toLowerCase();
     //Validating details view input data
     cy.get('[name="TextAera"]').eq(1).should("have.value", this.RelatedKitItemData2.TextAera)
-
   });
+
+  it.only("Slider Element data Validation", function () {
+    //Validation for True Value 
+    cy.xpath('//div[@class="v-input v-input--is-label-active v-input--is-dirty theme--light v-input__slider"]//div[@class="v-slider v-slider--horizontal theme--light"]//input')
+      .invoke('val').then((text) => {
+        cy.log(text)
+        expect(text).equal(this.RelatedKitItemData2.SliderValue)
+      })
+  })
 
   it.only('Currency Element data Validation', function () {
     var currency = this.DataType2.Currency.toLowerCase();
@@ -1217,6 +1231,12 @@ describe("Update Related New fot OneToOne Related Control", function () {
       .should("have.value", this.RelatedKitItemData2.LoggedDate)
   })
 
+  it.only("Toggle Element data Validation", function () {
+    cy.xpath('//div[@class="pl-3 col"]//div[@class="v-input--selection-controls__input"]//input')
+      .first()
+      .should('have.attr', 'aria-checked', 'true')
+  });
+
   it.only("SelectList Element data Validation", function () {
     var selectList = this.DataType2.SelectListName.toLowerCase();
     cy.xpath('//div[@controlname="selectList"]//div[@class="v-list-item__subtitle"]')
@@ -1260,10 +1280,13 @@ describe("Update Related New fot OneToOne Related Control", function () {
   })
 
   it.only('ContactSelector Element data Validation', function () {
-
     cy.xpath('//div[@controlname="contactSelector"]//div[@class="col item-label"]').children('div').invoke('text').then((text) => {
       expect(text.trim()).equal(this.RelatedKitItemData2.ContactSelectorName)
     });
+  })
+
+  it.only('OneToOne Related Control Items Validation', function () {
+    cy.get(".last-updated:nth-child(2) > .v-icon").should("exist");
   })
 
   it.only('Assigning Element data Validation', function () {

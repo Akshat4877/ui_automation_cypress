@@ -3,12 +3,10 @@ import SanityLoginPage from "../PageObject/SanityLoginPage";
 
 describe("Update created kit item test case", function () {
   this.beforeAll(function () {
-    // cy.viewport(1280, 720);
     const lp = new LoginPage();
     const slp = new SanityLoginPage();
-    //slp.visitCityComTest();
-    slp.nvdTest()
-    //slp.TmProd();
+    //slp.nvdTest()
+    slp.TmProd();
 
     //Handling Alert
     cy.on("window:confirm", () => {
@@ -18,9 +16,8 @@ describe("Update created kit item test case", function () {
     //Login Assertions
     cy.contains(" Log In ").should("be.visible");
     //Enter credentials
-    lp.EnterEmail("propertymanagement@commonareas.work.dev");
-    //lp.EnterEmail("citycom@commonareas.work.dev");
-    //lp.EnterEmail("sam@armyspy.com");
+    //lp.EnterEmail("propertymanagement@commonareas.work.dev");
+    lp.EnterEmail("sam@armyspy.com");
     lp.EnterPassword("1234567Aa");
     lp.Submit();
     cy.log("User has been Logged In into the application");
@@ -47,49 +44,57 @@ describe("Update created kit item test case", function () {
       "jwtAccessToken"
     );
 
-    cy.fixture("SanityPackTestData/UpdateKItItemData").then(function (
-      UpDateKitItemSDTCData
-    ) {
-      this.UpdateKitItemData = UpDateKitItemSDTCData;
-    });
+    // cy.fixture("SanityPackTestData/UpdateKItItemData").then(function (
+    //   UpDateKitItemSDTCData
+    // ) {
+    //   this.UpdateKitItemData = UpDateKitItemSDTCData;
+    // });
 
-    // cy.fixture("SanityPackTestData(Prod)/UpdateKItItemData(Prod)").then(
-    //   function (UpDateKitItemSDTCData) {
-    //     this.UpdateKitItemData = UpDateKitItemSDTCData;
-    //   }
-    // );
+    cy.fixture("SanityPackTestData(Prod)/UpdateKItItemData(Prod)").then(
+      function (UpDateKitItemSDTCData) {
+        this.UpdateKitItemData = UpDateKitItemSDTCData;
+      }
+    );
 
-    cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
-      NewDataForElements
-    ) {
-      this.DataType2 = NewDataForElements;
-    });
+    // cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
+    //   NewDataForElements
+    // ) {
+    //   this.DataType2 = NewDataForElements;
+    // });
 
-    // cy.fixture("SanityPackTestData(Prod)/KitBuilderDataTypes2(Prod)").then(
-    //   function (NewDataForElements) {
-    //     this.DataType2 = NewDataForElements;
-    //   }
-    // );
+    cy.fixture("SanityPackTestData(Prod)/KitBuilderDataTypes2(Prod)").then(
+      function (NewDataForElements) {
+        this.DataType2 = NewDataForElements;
+      }
+    );
 
-    cy.fixture("SanityPackTestData/DetailViewTestData").then(function (
-      SanityTCData
-    ) {
-      this.DetailViewData = SanityTCData;
-    });
+    // cy.fixture("SanityPackTestData/DetailViewTestData").then(function (
+    //   SanityTCData
+    // ) {
+    //   this.DetailViewData = SanityTCData;
+    // });
 
-    // cy.fixture("SanityPackTestData(Prod)/DetailViewTestData(Prod)").then(
-    //   function (SanityTCData) {
-    //     this.DetailViewData = SanityTCData;
-    //   }
-    // );
+    cy.fixture("SanityPackTestData(Prod)/DetailViewTestData(Prod)").then(
+      function (SanityTCData) {
+        this.DetailViewData = SanityTCData;
+      }
+    );
+
+    // cy.fixture("KitTypeTestData/NewKitItemDataValues").then(function (
+    //   KitDataEle
+    // ) {
+    //   this.NewKitItemData = KitDataEle;
+    // });
+
+    cy.fixture("SanityPackTestData(Prod)/NewKitItemDataValue(Prod)").then(
+      function (KitDataEle) {
+        this.NewKitItemData = KitDataEle;
+      }
+    );
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    cy.fixture("KitTypeTestData/NewKitItemDataValues").then(function (
-      KitDataEle
-    ) {
-      this.NewKitItemData = KitDataEle;
-    });
+
 
     cy.fixture("KitBuilderTestData/FormViewsNameData").then(function (
       KitTypeFormViewsNames
@@ -464,7 +469,11 @@ describe("Update created kit item test case", function () {
     cy.contains("Files").click({ force: true });
     //Click on Library
     cy.contains("Choose From Library").click({ force: true });
-    cy.wait(1000);
+    //Click on External View for file library
+    cy.xpath('//div[@class="v-input--switch__thumb theme--light"]').first()
+      .click({ force: true })
+    cy.wait(5000)
+
     //give file name to select
     cy.contains(this.DetailViewData.DetailViewFileName).click({ force: true });
     //cy.get(".thumb-container:nth-child(2) .item-check").click({ force: true });
@@ -559,8 +568,14 @@ describe("Update created kit item test case", function () {
     cy.get(".addBtn:nth-child(2) > .v-btn__content").click({ force: true });
     //Assertion validation
     cy.contains(" Connections ").should("be.visible");
-    cy.contains("Coordinator").click({ force: true });
-    cy.contains(this.DetailViewData.ContributorsName).click({ force: true });
+    cy.contains("Contributor").click({ force: true });
+
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.DetailViewData.ExternalConnection}{enter}`)
+    cy.wait(3000)
+    cy.contains(this.DetailViewData.ExternalConnection).click({ force: true });
     //Click on Save
     cy.get(".button-pop-ups--size > .v-btn__content")
       .first()
@@ -745,88 +760,6 @@ describe("Update created kit item test case", function () {
     cy.wait(2000)
   })
 
-});
-
-
-describe("Details view updation validation test case", function () {
-  this.beforeAll(function () {
-    // cy.viewport(1280, 720);
-    const lp = new LoginPage();
-    const slp = new SanityLoginPage();
-
-    Cypress.Cookies.preserveOnce(
-      ".AspNet.ApplicationCookie",
-      "ASP.NET_SessionId",
-      "ca-cf-auth",
-      "kit-detail-selected-tab",
-      "jwt",
-      "refreshToken",
-      "jwtAccessToken"
-    );
-  });
-
-  this.beforeEach("KitType Data", function () {
-    Cypress.Cookies.preserveOnce(
-      ".AspNet.ApplicationCookie",
-      "ASP.NET_SessionId",
-      "ca-cf-auth",
-      "kit-detail-selected-tab",
-      "jwt",
-      "refreshToken",
-      "jwtAccessToken"
-    );
-
-    cy.fixture("SanityPackTestData/UpdateKItItemData").then(function (
-      UpDateKitItemSDTCData
-    ) {
-      this.UpdateKitItemData = UpDateKitItemSDTCData;
-    });
-
-    // cy.fixture("SanityPackTestData(Prod)/UpdateKItItemData(Prod)").then(
-    //   function (UpDateKitItemSDTCData) {
-    //     this.UpdateKitItemData = UpDateKitItemSDTCData;
-    //   }
-    // );
-
-    cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
-      NewDataForElements
-    ) {
-      this.DataType2 = NewDataForElements;
-    });
-
-    // cy.fixture("SanityPackTestData(Prod)/KitBuilderDataTypes2(Prod)").then(
-    //   function (NewDataForElements) {
-    //     this.DataType2 = NewDataForElements;
-    //   }
-    // );
-
-    cy.fixture("SanityPackTestData/NewKitItemTabsData").then(function (
-      SanityTCData
-    ) {
-      this.SData = SanityTCData;
-    });
-
-    // cy.fixture("SanityPackTestData(Prod)/NewKitItemTabsData(Prod)").then(
-    //   function (SanityTCData) {
-    //     this.SData = SanityTCData;
-    //   }
-    // );
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    cy.fixture("KitBuilderTestData/NewKitTypeData").then(function (
-      KittypeName
-    ) {
-      this.KitTypeName = KittypeName;
-    });
-
-    cy.fixture("KitBuilderTestData/FormViewsNameData").then(function (
-      KitTypeFormViewsNames
-    ) {
-      this.ViewName = KitTypeFormViewsNames;
-    });
-  });
-
   it.only("Open updated kit item", function () {
     //Page Object
     const lp = new LoginPage();
@@ -874,7 +807,6 @@ describe("Details view updation validation test case", function () {
     var lower = this.DataType2.Telephone.toLowerCase();
     //Validating details view input data
     cy.xpath("//input[@controlname='" + lower + "']").should("have.value", this.UpdateKitItemData.Telephone)
-
   });
 
 
@@ -884,16 +816,22 @@ describe("Details view updation validation test case", function () {
     cy.get('[name="TextAera"]').eq(3).should("have.value", this.UpdateKitItemData.TextAera)
   });
 
-  it.only('Currency Element data Validation', function () {
+  it.only("Slider Element data Validation", function () {
+    //Validation for True Value 
+    cy.xpath('//div[@class="v-input v-input--is-label-active v-input--is-dirty theme--light v-input__slider"]//div[@class="v-slider v-slider--horizontal theme--light"]//input')
+      .invoke('val').then((text) => {
+        cy.log(text)
+        expect(text).equal(this.UpdateKitItemData.SliderValue)
+      })
+  })
 
+  it.only('Currency Element data Validation', function () {
     var currency = this.DataType2.Currency.toLowerCase();
     cy.xpath('//div[@class="kit-control-' + currency + '--right ma-0 pa-0 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
       .next('input').should("have.value", this.UpdateKitItemData.Currency)
-
   })
 
   it.only('Measure Element data Validation', function () {
-
     var measure = this.DataType2.Measure.toLowerCase();
     cy.xpath('//div[@class="kit-control-' + measure + '--left ma-0 pa-0 pr-2 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
       .next('input').should("have.value", this.UpdateKitItemData.Measure)
@@ -901,11 +839,8 @@ describe("Details view updation validation test case", function () {
 
   it.only("Email Element data Validation", function () {
     var lower = this.DataType2.Email.toLowerCase();
-
     //Validating details view input data
     cy.xpath("//input[@controlname='" + lower + "']").should("have.value", this.UpdateKitItemData.Email)
-
-
   });
 
   it.only("Addressline1 Element data Validation", function () {
@@ -968,6 +903,11 @@ describe("Details view updation validation test case", function () {
     cy.get('[placeholder=" MM / DD / YYYY"]')
       .should("have.value", this.UpdateKitItemData.LoggedDate)
   })
+
+  it.only("Toggle Element data Validation", function () {
+    cy.xpath('//div[@class="pl-3 col"]//div[@class="v-input--selection-controls__input"]//input')
+      .should('have.attr', 'aria-checked', 'false')
+  });
 
   it.only("SelectList Element data Validation", function () {
     var selectList = this.DataType2.SelectListName.toLowerCase();
@@ -1068,6 +1008,7 @@ describe("Details view updation validation test case", function () {
     cy.url().should("include", "/Public/Login?");
     cy.log("User has been sign out");
   });
+
 })
 
 
