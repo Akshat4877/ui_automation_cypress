@@ -4,11 +4,10 @@ import SanityLoginPage from "../PageObject/SanityLoginPage";
 
 describe("Create New Kit type ", function () {
   this.beforeAll(function () {
-    // cy.viewport(1280, 720);
     const lp = new LoginPage();
     const slp = new SanityLoginPage();
-    //slp.nvdTest()
-    slp.TmProd();
+    slp.nvdTest()
+    //slp.TmProd();
 
     //Handling Alert
     cy.on("window:confirm", () => {
@@ -18,8 +17,8 @@ describe("Create New Kit type ", function () {
     //Login Assertions
     cy.contains(" Log In ").should("be.visible");
     //Enter credentials
-    //lp.EnterEmail("propertymanagement@commonareas.work.dev");
-    lp.EnterEmail("sam@armyspy.com");
+    lp.EnterEmail("propertymanagement@commonareas.work.dev");
+    //lp.EnterEmail("sam@armyspy.com");
     lp.EnterPassword("1234567Aa");
     lp.Submit();
     cy.log("User has been Logged In into the application");
@@ -61,16 +60,15 @@ describe("Create New Kit type ", function () {
   it("Create A New Kit Type", function () {
     const kb = new KitBuilderPage();
     const lp = new LoginPage();
-    cy.wait(5000);
+    cy.wait(3000);
     cy.title().should("eq", "Common Areas");
-    cy.wait(5000);
     lp.NVDTestKitBuilder();
-    cy.visit('https://tm.commonareas.io/ClientAdmin/KitBuilder#/')
+    //cy.visit('https://tm.commonareas.io/ClientAdmin/KitBuilder#/')
     cy.log("User in Kit Builder");
     kb.ClickOnCreateNewKit();
     //Create Kit type Pop Up Window Assertion
     cy.contains("Create New Kit").should("be.visible");
-    cy.wait(5000);
+    cy.wait(2000);
     //For Creating New Kit type commands coming form Command.js
     cy.KitLabel(this.KitTypeName.KitLabel3);
     cy.KitName(this.KitTypeName.KitName3);
@@ -84,14 +82,10 @@ describe("Create New Kit type ", function () {
   });
 
   it("New View Form", function () {
-    cy.wait(5000);
     const kb = new KitBuilderPage();
     cy.contains(this.KitTypeName.KitName3).click({ force: true });
-    cy.wait(3000);
-
     cy.contains("Form Views").click({ force: true });
-    cy.wait(3000);
-
+    cy.wait(1000);
     //Click On New Form
     kb.ClickOnNewForm();
     //New Form View Detalis commands coming form command.js
@@ -100,11 +94,9 @@ describe("Create New Kit type ", function () {
     cy.NewViewDescription(this.data.NewView);
     cy.SaveNewForm();
     cy.log("New View Form has been Created");
-    cy.wait(3000);
   });
 
   it("Edit View Form", function () {
-    cy.wait(3000);
     const kb = new KitBuilderPage();
     //Click On Edit Form
     kb.ClickOnEditForm();
@@ -117,7 +109,6 @@ describe("Create New Kit type ", function () {
   });
 
   it("Shared View Form", function () {
-    cy.wait(3000);
     const kb = new KitBuilderPage();
     //Click On Shared Form
     kb.ClickOnSharedForm();
@@ -130,7 +121,6 @@ describe("Create New Kit type ", function () {
   });
 
   it("Email View Form", function () {
-    cy.wait(3000);
     const kb = new KitBuilderPage();
     //Click On Email Form
     kb.ClickOnEmailForm();
@@ -143,7 +133,6 @@ describe("Create New Kit type ", function () {
   });
 
   it("Map View Form", function () {
-    cy.wait(3000);
     const kb = new KitBuilderPage();
     //Click On Map Form
     kb.ClickOnScheduleForm();
@@ -156,7 +145,6 @@ describe("Create New Kit type ", function () {
   });
 
   it("Schedule View Form", function () {
-    cy.wait(3000);
     const kb = new KitBuilderPage();
     //Click On Schedule Form
     kb.ClickOnScheduleForm();
@@ -169,7 +157,6 @@ describe("Create New Kit type ", function () {
   });
 
   it("CommonPlan View Form", function () {
-    cy.wait(3000);
     const kb = new KitBuilderPage();
     //Click On CommonPlan Form
     kb.ClickOnCommonPlanForm();
@@ -182,7 +169,6 @@ describe("Create New Kit type ", function () {
   });
 
   it("RelatedNew View Form", function () {
-    cy.wait(3000);
     const kb = new KitBuilderPage();
     //Click On RelatedNew Form
     kb.ClickOnRelatedNewForm();
@@ -195,7 +181,6 @@ describe("Create New Kit type ", function () {
   });
 
   it("RelatedEdit View Form", function () {
-    cy.wait(3000);
     const kb = new KitBuilderPage();
     //Click On RelatedEdit Form
     kb.ClickOnRelatedEditForm();
@@ -216,15 +201,12 @@ describe("Create New Kit type ", function () {
     // cy.wait(5000);
     // kb.ClickOnKitBuilder();
     // cy.wait(5000);
-
     // cy.contains(this.data.KitName).click({ force: true });
-    cy.wait(3000);
-
     // cy.contains("Form Views").click({ force: true });
     // cy.wait(3000);
 
     cy.contains("List Views").click({ force: true });
-    cy.wait(3000);
+    cy.wait(1000);
 
     //const kb = new KitBuilderPage();
 
@@ -235,7 +217,6 @@ describe("Create New Kit type ", function () {
     cy.TableListViewIcon();
     cy.SaveTableList();
     cy.log("Table List View has been Created");
-    cy.wait(5000);
 
     //Search ListView Detalis commands coming form command.js
     kb.ClickOnSearchList();
@@ -244,7 +225,6 @@ describe("Create New Kit type ", function () {
     cy.SearchListViewIcon();
     cy.SaveSearchList();
     cy.log("Search List View has been Created");
-    cy.wait(5000);
 
     //Timeline ListView Detalis commands coming form command.js
     kb.ClickOnTimelineList();
@@ -253,7 +233,6 @@ describe("Create New Kit type ", function () {
     cy.TimelineListViewIcon();
     cy.SaveTimelineList();
     cy.log("Timeline List View has been Created");
-    cy.wait(3000);
     cy.contains("TimelineView").scrollIntoView({ force: true });
   });
 });

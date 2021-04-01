@@ -6,8 +6,8 @@ describe("Related Control One to Many test case", function () {
   this.beforeAll(function () {
     const lp = new LoginPage();
     const slp = new SanityLoginPage();
-    //slp.nvdTest()
-    slp.TmProd();
+    slp.nvdTest()
+    //slp.TmProd();
 
     //Handling Alert
     cy.on("window:confirm", () => {
@@ -17,8 +17,8 @@ describe("Related Control One to Many test case", function () {
     //Login Assertions
     cy.contains(" Log In ").should("be.visible");
     //Enter credentials
-    //lp.EnterEmail("propertymanagement@commonareas.work.dev");
-    lp.EnterEmail("sam@armyspy.com");
+    lp.EnterEmail("propertymanagement@commonareas.work.dev");
+    //lp.EnterEmail("sam@armyspy.com");
     lp.EnterPassword("1234567Aa");
     lp.Submit();
     cy.log("User has been Logged In into the application");
@@ -45,41 +45,41 @@ describe("Related Control One to Many test case", function () {
       "jwtAccessToken"
     );
 
-    // cy.fixture("SanityPackTestData/RelatedOneToNData").then(function (
-    //   SanityTCData
-    // ) {
-    //   this.RelatedKitItemData = SanityTCData;
-    // });
+    cy.fixture("SanityPackTestData/RelatedOneToNData").then(function (
+      SanityTCData
+    ) {
+      this.RelatedKitItemData = SanityTCData;
+    });
 
-    cy.fixture("SanityPackTestData(Prod)/RelatedOneToNData(Prod)").then(
-      function (SanityTCData) {
-        this.RelatedKitItemData = SanityTCData;
-      }
-    );
+    // cy.fixture("SanityPackTestData(Prod)/RelatedOneToNData(Prod)").then(
+    //   function (SanityTCData) {
+    //     this.RelatedKitItemData = SanityTCData;
+    //   }
+    // );
 
-    // cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
-    //   NewDataForElements
-    // ) {
-    //   this.DataType2 = NewDataForElements;
-    // });
+    cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
+      NewDataForElements
+    ) {
+      this.DataType2 = NewDataForElements;
+    });
 
-    cy.fixture("SanityPackTestData(Prod)/KitBuilderDataTypes2(Prod)").then(
-      function (NewDataForElements) {
-        this.DataType2 = NewDataForElements;
-      }
-    );
+    // cy.fixture("SanityPackTestData(Prod)/KitBuilderDataTypes2(Prod)").then(
+    //   function (NewDataForElements) {
+    //     this.DataType2 = NewDataForElements;
+    //   }
+    // );
 
-    // cy.fixture("KitTypeTestData/NewKitItemDataValues").then(function (
-    //   KitDataEle
-    // ) {
-    //   this.NewKitItemData = KitDataEle;
-    // });
+    cy.fixture("KitTypeTestData/NewKitItemDataValues").then(function (
+      KitDataEle
+    ) {
+      this.NewKitItemData = KitDataEle;
+    });
 
-    cy.fixture("SanityPackTestData(Prod)/NewKitItemDataValue(Prod)").then(
-      function (KitDataEle) {
-        this.NewKitItemData = KitDataEle;
-      }
-    );
+    // cy.fixture("SanityPackTestData(Prod)/NewKitItemDataValue(Prod)").then(
+    //   function (KitDataEle) {
+    //     this.NewKitItemData = KitDataEle;
+    //   }
+    // );
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -3,7 +3,6 @@ import SanityLoginPage from "../PageObject/SanityLoginPage";
 
 describe("Triggered Recurring KitItem Validation Test Case", function () {
     this.beforeAll(function () {
-        // cy.viewport(1280, 720);
         const lp = new LoginPage();
         const slp = new SanityLoginPage();
         slp.nvdTest()

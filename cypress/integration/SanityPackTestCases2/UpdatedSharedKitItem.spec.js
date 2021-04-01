@@ -3,12 +3,11 @@ import SanityLoginPage from "../PageObject/SanityLoginPage";
 
 describe("Shared Kit Item Updation Test Case for Internal User", function () {
     this.beforeAll(function () {
-        // cy.viewport(1280, 720);
         const lp = new LoginPage();
         const slp = new SanityLoginPage();
 
-        //slp.nvdTest()
-        slp.TmProd()
+        slp.nvdTest()
+        //slp.TmProd()
         //Handling Alert
         cy.on("window:confirm", () => {
             cy.log("Alert has been Handled");
@@ -17,8 +16,8 @@ describe("Shared Kit Item Updation Test Case for Internal User", function () {
         //Login Assertions
         cy.contains(" Log In ").should("be.visible");
         //Enter credentials
-        //lp.EnterEmail("admin@nvdlp.com.dev");
-        lp.EnterEmail("kat@armyspy.com");
+        lp.EnterEmail("admin@nvdlp.com.dev");
+        //lp.EnterEmail("kat@armyspy.com");
         lp.EnterPassword("1234567Aa");
         lp.Submit();
         cy.log("User has been Logged In into the application");
@@ -45,41 +44,41 @@ describe("Shared Kit Item Updation Test Case for Internal User", function () {
             "jwtAccessToken"
         );
 
-        // cy.fixture("SanityPackTestData/UpdateKItItemData").then(function (
-        //     UpDateKitItemSDTCData
-        // ) {
-        //     this.UpdateKitItemData = UpDateKitItemSDTCData;
-        // });
+        cy.fixture("SanityPackTestData/UpdateKItItemData").then(function (
+            UpDateKitItemSDTCData
+        ) {
+            this.UpdateKitItemData = UpDateKitItemSDTCData;
+        });
 
-        cy.fixture("SanityPackTestData(Prod)/UpdateKItItemData(Prod)").then(
-            function (UpDateKitItemSDTCData) {
-                this.UpdateKitItemData = UpDateKitItemSDTCData;
-            }
-        );
+        // cy.fixture("SanityPackTestData(Prod)/UpdateKItItemData(Prod)").then(
+        //     function (UpDateKitItemSDTCData) {
+        //         this.UpdateKitItemData = UpDateKitItemSDTCData;
+        //     }
+        // );
 
-        // cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
-        //     NewDataForElements
-        // ) {
-        //     this.DataType2 = NewDataForElements;
-        // });
+        cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
+            NewDataForElements
+        ) {
+            this.DataType2 = NewDataForElements;
+        });
 
-        cy.fixture("SanityPackTestData(Prod)/KitBuilderDataTypes2(Prod)").then(
-            function (NewDataForElements) {
-                this.DataType2 = NewDataForElements;
-            }
-        );
+        // cy.fixture("SanityPackTestData(Prod)/KitBuilderDataTypes2(Prod)").then(
+        //     function (NewDataForElements) {
+        //         this.DataType2 = NewDataForElements;
+        //     }
+        // );
 
-        // cy.fixture("SanityPackTestData/NewKitItemTabsData").then(function (
-        //     SanityTCData
-        // ) {
-        //     this.SData = SanityTCData;
-        // });
+        cy.fixture("SanityPackTestData/NewKitItemTabsData").then(function (
+            SanityTCData
+        ) {
+            this.SData = SanityTCData;
+        });
 
-        cy.fixture("SanityPackTestData(Prod)/NewKitItemTabsData(Prod)").then(
-            function (SanityTCData) {
-                this.SData = SanityTCData;
-            }
-        );
+        // cy.fixture("SanityPackTestData(Prod)/NewKitItemTabsData(Prod)").then(
+        //     function (SanityTCData) {
+        //         this.SData = SanityTCData;
+        //     }
+        // );
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

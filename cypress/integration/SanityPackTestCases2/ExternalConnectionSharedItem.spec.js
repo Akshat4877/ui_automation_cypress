@@ -8,8 +8,8 @@ describe("External Connection Shared Kit Item Test Case", function () {
         //cy.viewport(1280, 720);
         const lp = new LoginPage();
         const slp = new SanityLoginPage();
-        //lp.BaseTest()
-        lp.ProdBaseTest()
+        lp.BaseTest()
+        //lp.ProdBaseTest()
         //Handling Alert
         cy.on("window:confirm", () => {
             cy.log("Alert has been Handled");
@@ -17,8 +17,8 @@ describe("External Connection Shared Kit Item Test Case", function () {
         //Login Assertions
         cy.contains(" Log In ").should("be.visible");
         //Enter credentials
-        //lp.EnterEmail("Shardul@mailinator.com");
-        lp.EnterEmail("Akshat@mailinator.com");
+        lp.EnterEmail("Shardul@mailinator.com");
+        //lp.EnterEmail("Akshat@mailinator.com");
         lp.EnterPassword("1234567Aa");
         lp.Submit();
         cy.log("User has been Logged In into the application");
@@ -45,41 +45,41 @@ describe("External Connection Shared Kit Item Test Case", function () {
             "jwtAccessToken"
         );
 
-        // cy.fixture("SanityPackTestData/UpdateKItItemData").then(function (
-        //     UpDateKitItemSDTCData
-        // ) {
-        //     this.UpdateKitItemData = UpDateKitItemSDTCData;
-        // });
+        cy.fixture("SanityPackTestData/UpdateKItItemData").then(function (
+            UpDateKitItemSDTCData
+        ) {
+            this.UpdateKitItemData = UpDateKitItemSDTCData;
+        });
 
-        cy.fixture("SanityPackTestData(Prod)/UpdateKItItemData(Prod)").then(
-            function (UpDateKitItemSDTCData) {
-                this.UpdateKitItemData = UpDateKitItemSDTCData;
-            }
-        );
+        // cy.fixture("SanityPackTestData(Prod)/UpdateKItItemData(Prod)").then(
+        //     function (UpDateKitItemSDTCData) {
+        //         this.UpdateKitItemData = UpDateKitItemSDTCData;
+        //     }
+        // );
 
-        // cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
-        //     NewDataForElements
-        // ) {
-        //     this.DataType2 = NewDataForElements;
-        // });
+        cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
+            NewDataForElements
+        ) {
+            this.DataType2 = NewDataForElements;
+        });
 
-        cy.fixture("SanityPackTestData(Prod)/KitBuilderDataTypes2(Prod)").then(
-            function (NewDataForElements) {
-                this.DataType2 = NewDataForElements;
-            }
-        );
+        // cy.fixture("SanityPackTestData(Prod)/KitBuilderDataTypes2(Prod)").then(
+        //     function (NewDataForElements) {
+        //         this.DataType2 = NewDataForElements;
+        //     }
+        // );
 
-        // cy.fixture("SanityPackTestData/DetailViewTestData").then(function (
-        //     SanityTCData
-        // ) {
-        //     this.SData = SanityTCData;
-        // });
+        cy.fixture("SanityPackTestData/DetailViewTestData").then(function (
+            SanityTCData
+        ) {
+            this.SData = SanityTCData;
+        });
 
-        cy.fixture("SanityPackTestData(Prod)/DetailViewTestData(Prod)").then(
-            function (SanityTCData) {
-                this.SData = SanityTCData;
-            }
-        );
+        // cy.fixture("SanityPackTestData(Prod)/DetailViewTestData(Prod)").then(
+        //     function (SanityTCData) {
+        //         this.SData = SanityTCData;
+        //     }
+        // );
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         cy.fixture("SanityPackTestData2/KitItemId").then(function (ItemID) {
@@ -226,25 +226,25 @@ describe("Email Notification Shared Activity", function () {
         "Internal User Credentials",
         function () {
 
-            // cy.fixture("SanityPackTestData2/SharedUserCredentials").then(function (KitDataEle) {
-            //     this.Credentials = KitDataEle;
-            // });
-
-            cy.fixture("SanityPackTestData2(Prod)/SharedUserCredentials(Prod)").then(function (KitDataEle) {
+            cy.fixture("SanityPackTestData2/SharedUserCredentials").then(function (KitDataEle) {
                 this.Credentials = KitDataEle;
             });
 
-            // cy.fixture("KitTypeTestData/NewKitItemDataValues").then(function (
-            //     KitDataEle
-            // ) {
-            //     this.NewKitItemData = KitDataEle;
+            // cy.fixture("SanityPackTestData2(Prod)/SharedUserCredentials(Prod)").then(function (KitDataEle) {
+            //     this.Credentials = KitDataEle;
             // });
 
-            cy.fixture("SanityPackTestData(Prod)/NewKitItemDataValue(Prod)").then(
-                function (KitDataEle) {
-                    this.NewKitItemData = KitDataEle;
-                }
-            );
+            cy.fixture("KitTypeTestData/NewKitItemDataValues").then(function (
+                KitDataEle
+            ) {
+                this.NewKitItemData = KitDataEle;
+            });
+
+            // cy.fixture("SanityPackTestData(Prod)/NewKitItemDataValue(Prod)").then(
+            //     function (KitDataEle) {
+            //         this.NewKitItemData = KitDataEle;
+            //     }
+            // );
         });
 
     it.only("Verifying Email Notification Shared Kit Item Activity for External User ", function () {

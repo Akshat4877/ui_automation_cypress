@@ -4,11 +4,10 @@ import SanityLoginPage from "../PageObject/SanityLoginPage";
 
 describe("Recurring New kit item creation test case", function () {
   this.beforeAll(function () {
-    // cy.viewport(1280, 720);
     const lp = new LoginPage();
     const slp = new SanityLoginPage();
-    //slp.nvdTest()
-    slp.TmProd();
+    slp.nvdTest()
+    //slp.TmProd();
     //Handling Alert
 
     cy.on("window:confirm", () => {
@@ -17,8 +16,8 @@ describe("Recurring New kit item creation test case", function () {
     //Login Assertions
     cy.contains(" Log In ").should("be.visible");
     //Enter credentials
-    //lp.EnterEmail("propertymanagement@commonareas.work.dev");
-    lp.EnterEmail("sam@armyspy.com");
+    lp.EnterEmail("propertymanagement@commonareas.work.dev");
+    //lp.EnterEmail("sam@armyspy.com");
     lp.EnterPassword("1234567Aa");
     lp.Submit();
     cy.log("User has been Logged In into the application");
@@ -45,31 +44,29 @@ describe("Recurring New kit item creation test case", function () {
       "jwtAccessToken"
     );
 
+    cy.fixture("SanityPackTestData2/RecurringKitItemData").then(function (
+      SanityTCData
+    ) {
+      this.NewKitItemData = SanityTCData;
+    });
 
-    // cy.fixture("SanityPackTestData2/RecurringKitItemData").then(function (
-    //   SanityTCData
-    // ) {
-    //   this.NewKitItemData = SanityTCData;
-    // });
+    // cy.fixture("SanityPackTestData2(Prod)/RecurringKitItemData(Prod)").then(
+    //   function (SanityTCData) {
+    //     this.NewKitItemData = SanityTCData;
+    //   }
+    // );
 
-    cy.fixture("SanityPackTestData2(Prod)/RecurringKitItemData(Prod)").then(
-      function (SanityTCData) {
-        this.NewKitItemData = SanityTCData;
-      }
-    );
+    cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
+      NewDataForElements
+    ) {
+      this.DataType2 = NewDataForElements;
+    });
 
-
-    // cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
-    //   NewDataForElements
-    // ) {
-    //   this.DataType2 = NewDataForElements;
-    // });
-
-    cy.fixture("SanityPackTestData(Prod)/KitBuilderDataTypes2(Prod)").then(
-      function (NewDataForElements) {
-        this.DataType2 = NewDataForElements;
-      }
-    );
+    // cy.fixture("SanityPackTestData(Prod)/KitBuilderDataTypes2(Prod)").then(
+    //   function (NewDataForElements) {
+    //     this.DataType2 = NewDataForElements;
+    //   }
+    // );
 
     //////////////////////////////////////////////////////////////////////////////////
 
@@ -108,7 +105,7 @@ describe("Recurring New kit item creation test case", function () {
     cy.get('[name="Name"]').type(this.NewKitItemData.RecurringitemName);
   });
 
-  it.only("Create Recurring New Kit Item", function () {
+  it.only("Open Recurring New Kit Item", function () {
     const KTP = new KitTypePage();
     //Click on to add kit item
     cy.contains(" Recurring Items ").click({ force: true });
@@ -122,15 +119,69 @@ describe("Recurring New kit item creation test case", function () {
     cy.wait(1000);
     //Click on To open Kit Type
     KTP.SearchKitType(this.NewKitItemData.KitName);
+    cy.wait(3000)
     //This is class to open searched kit type by clicking + iocn
     cy.get(".truncate-special").first().click({ force: true });
     cy.wait(1000);
     //Assertion
     cy.contains("New Item created").should("be.visible");
     cy.log("New Item created and Kit Type has been Opened");
+    cy.wait(3000)
+  })
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////
+  it.only("Discarding the kit item should not be shown in recurring pop up", function () {
+    cy.wait(1000)
+    //After discarding the kit item, it is not showing in the recurring pop-up
+    //Click on cross icon to discard item
+    cy.get(".subheader--button-icon-wrapper path").click({
+      force: true,
+    });
+    cy.contains(' BuildingAreas has been discarded ').should('be.visible')
+    cy.log(this.NewKitItemData.KitName + "Kit item has been discarded");
+    cy.wait(2000)
+    //Kit item after discard should not be shown in recurring pop-up assertion
+    cy.contains(this.NewKitItemData.KitName + "#").should("not.exist");
+    cy.contains("Item: " + this.NewKitItemData.KitName).should("not.exist");
+    cy.log('After discarding the kit item, it is not in the recurring pop-up')
+    cy.wait(1000)
+  })
 
+  it.only('Delete the discarded item', function () {
+    //Click on delete icon
+    cy.get('.scheduled-action-item-card-container--right path')
+      .click({ force: true });
+    cy.contains('Are you sure you want to discard this item?').should('be.visible')
+    cy.xpath('//*[text()="Discard"]').click({ force: true })
+    //Kit item after delete should not be shown in recurring pop-up assertion
+    cy.contains(this.NewKitItemData.KitName + "#").should("not.exist");
+    cy.contains("Item: " + this.NewKitItemData.KitName).should("not.exist");
+    cy.log('After deleting the kit item, it is not in the recurring pop-up')
+    cy.wait(1000)
+  })
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  it.only("Create Recurring New Kit Item", function () {
+    const KTP = new KitTypePage();
+    //Again click on add btn to create recurring item
+    cy.wait(1000);
+    //Click on Add Btn
+    cy.get(".col > .scheduled-action-item-card-add-new .v-btn__content").click({
+      force: true,
+    });
+    //Assertion
+    cy.contains("Select Kit").should("be.visible");
+    cy.wait(1000);
+    //Click on To open Kit Type
+    KTP.SearchKitType(this.NewKitItemData.KitName);
+    cy.wait(3000)
+    //This is class to open searched kit type by clicking + iocn
+    cy.get(".truncate-special").first().click({ force: true });
+    cy.wait(1000);
+    //Assertion
+    cy.contains("New Item created").should("be.visible");
+    cy.log("New Item created and Kit Type has been Opened");
+    cy.wait(1000)
+    ////////////////////////////////////////////////////////////////////////////////////
     //Creating Recurring kit item
     //save Kit Item for empty form
     cy.wait(2000)
