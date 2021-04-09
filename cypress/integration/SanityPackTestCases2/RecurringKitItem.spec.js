@@ -279,6 +279,13 @@ describe("Recurring New kit item creation test case", function () {
 
     //City
     cy.get('[placeholder="City"]').type(this.NewKitItemData.City);
+
+    //country
+    cy.get('[placeholder="Country"]').click({ force: true })
+    cy.wait(1000)
+    cy.contains(this.NewKitItemData.Country).click({ force: true })
+    cy.wait(1000)
+
     //State
     cy.get(
       "div:nth-child(2) > div:nth-child(4) > div > div > div.v-input__slot > div.v-select__slot > div.v-input__append-inner > div"
@@ -363,21 +370,28 @@ describe("Recurring New kit item creation test case", function () {
     cy.wait(2000);
     //Click on to open UserSelector Pop up
     cy.get(".searchIcon").eq(0).click({ force: true });
-    cy.wait(3000);
-
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.NewKitItemData.UserSelectorName}{enter}`)
+    cy.wait(3000)
     cy.contains(this.NewKitItemData.UserSelectorName).click({ force: true });
     cy.log("UserSelect added");
-    cy.wait(3000);
+    cy.wait(1000);
 
     //ContactSelector(Values coming form KitItemValues Json File)
     //Click on to open ContactSelector Pop up
     cy.get(".searchIcon").eq(1).click({ force: true });
-
-    cy.wait(4000);
-
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.NewKitItemData.ContactSelectorName}{enter}`)
+    cy.wait(3000)
     cy.contains(this.NewKitItemData.ContactSelectorName).click({ force: true });
     cy.log("ContactSelecto added");
-    cy.wait(4000);
+    cy.wait(1000);
 
     //getting value form different json file
     //Icon
@@ -402,7 +416,7 @@ describe("Recurring New kit item creation test case", function () {
       .click({ force: true });
     cy.contains(this.NewKitItemData.LargeiconSize).click({ force: true });
     //IconLable
-    cy.get('[placeholder="Label"]').type(this.NewKitItemData.IconLabel);
+    cy.get('[placeholder="Label"]').eq(1).type(this.NewKitItemData.IconLabel);
 
     //Inspection
     cy.get('.v-btn:nth-child(1) .v-badge > .inline-svg')
@@ -418,7 +432,7 @@ describe("Recurring New kit item creation test case", function () {
     cy.contains('Contributor').click({ force: true })
     //Click on to open Assigning Pop up
     cy.get(".searchIcon").eq(2).click({ force: true });
-    cy.wait(4000);
+    cy.wait(1000);
     //Click on to select the Assigning
     cy.xpath('//*[text() ="Search"]').first().click({ force: true })
     cy.wait(1000)
@@ -428,7 +442,7 @@ describe("Recurring New kit item creation test case", function () {
     cy.contains(this.NewKitItemData.AssigningName).click({ force: true });
     cy.wait(2000);
     //Click on to save
-    cy.get(".button-pop-ups--size > .v-btn__content").click({ force: true });
+    cy.get(".button-pop-ups--size > .v-btn__content").first().click({ force: true });
     //Assigning creation assertion
     cy.contains("Item shared").should("be.visible");
     cy.log("Assigning added");
@@ -481,12 +495,12 @@ describe("Recurring New kit item creation test case", function () {
     /////////////////////////////////////////////////////////////////////////////////////////////////
 
     //Link OnetoOne
-    cy.get(".action-icon:nth-child(2) > .inline-svg").scrollIntoView({
+    cy.get(".action-icon:nth-child(2) > .inline-svg").eq(1).scrollIntoView({
       force: true,
     });
 
     //Click on to link existing item
-    cy.get(".action-icon:nth-child(2) > .inline-svg").click({ force: true });
+    cy.get(".action-icon:nth-child(2) > .inline-svg").eq(1).click({ force: true });
 
     //Search List view pop up assertion
     cy.contains(" Related Items ").should("be.visible");

@@ -1,9 +1,11 @@
 {
     "Url Note": "all in small letters",
+
     "KitName": "BuildingAreas",
+
     "Url": "https://www.calender.com",
     "Text": "calender",
-    "UpdateFileName": "Screenshot_6",
+    "CalenderFile": "Screenshot_1",
     "Telephone": "(123) 456-7890",
     "TextAera": "calender active",
     "SliderValue": "50",
@@ -18,24 +20,33 @@
     "ZipCode": "4877",
     "Country": "United States",
     "Number": "4",
+
     "SelectListValue": "Australia",
+
     "RadioSelectValue": "SR1",
+
     "StepperValue": "Jio",
+
     "InspectionValue": "Cdot",
+
     "CheckboxSelectValue1": "CheckboxSelect1",
     "CheckboxSelectValue2": "CheckboxSelect2",
     "CheckboxSelectValue3": "CheckboxSelect3",
     "CheckboxSelectValue4": "CheckboxSelect4",
     "CheckboxSelectValue5": "CheckboxSelect5",
-    "UserSelector": "Jerome Casanova",
+
+    "UserSelector": "Eduardo Castaneda",
     "ContactSelector": "Eric Buhring",
-    "Assigning": "Ema Ema",
+    "Assigning": "Jacob Ss",
+
     "ExtraSmalliconSize": "Extra Small",
     "SmalliconSize": "Small",
     "MediumiconSize": "Medium",
     "LargeiconSize": "Large",
     "ExtraLargeiconSize": "Extra Large",
+
     "IconLabel": "calender",
+
     "Form Element Validation": "Data",
     "LoggedTime": "5:25 pm",
     "LoggedDate": "03/25/2021"

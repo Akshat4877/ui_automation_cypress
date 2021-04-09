@@ -222,35 +222,16 @@ describe("Update Related New fot OneToOne Related Control", function () {
       .type(this.UpdateKitItemData.TextAera);
     cy.log("TextAera Updated");
 
-    //Slider;
-    //Firing Alert pop for manual action
-    // cy.log("User need to do something").then(() => {
-    //   alert("Set Slider value by clicking slider Bar");
-    // });
-    // cy.log(
-    //   "Firing Alert pop for manual action to Set Slider value by clicking slider Bar"
-    // );
-    // cy.wait(10000);
-
     // Currency;
     var currency = this.DataType2.Currency.toLowerCase();
     cy.xpath('//div[@class="kit-control-' + currency + '--right ma-0 pa-0 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
       .next('input').clear().type(this.UpdateKitItemData.Currency);
-
-    // cy.get(
-    //   "#inspire > div.v-dialog__content.v-dialog__content--active > div > div > div > div:nth-child(2) > div.new-kit-item.v-card.v-sheet.theme--light > div > div > div > div > div.row.kit-details-wrapper--content.pb-0 > div > div > div > div > div > div > div.tab--content.col > div > div > div.v-window-item.v-window-item--active > div > div > div.row.container-details > div.fill-height.col > div > div > div.kit-control-component.kit-control-currency.px-3.col.col-sm-12.col-md-6.mb-4.px-3 > div > div.kit-control-currency--right.ma-0.pa-0.col > div > div > div.v-input__slot > div"
-    // ).eq(0).click({ force: true }).type(this.UpdateKitItemData.Currency);
     cy.log("Currnecy Updated");
 
     var measure = this.DataType2.Measure.toLowerCase();
     //Measure
     cy.xpath('//div[@class="kit-control-' + measure + '--left ma-0 pa-0 pr-2 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
       .next('input').clear().type(this.UpdateKitItemData.Measure);
-
-    //Measure
-    // cy.get(
-    //   "#inspire > div.v-dialog__content.v-dialog__content--active > div > div > div > div:nth-child(2) > div.new-kit-item.v-card.v-sheet.theme--light > div > div > div > div > div.row.kit-details-wrapper--content.pb-0 > div > div > div > div > div > div > div.tab--content.col > div > div > div.v-window-item.v-window-item--active > div > div > div.row.container-details > div.fill-height.col > div > div > div.kit-control-component.kit-control-measure.px-3.col.col-sm-12.col-md-6.mb-4.px-3 > div > div.kit-control-measure--left.ma-0.pa-0.pr-2.col > div > div > div.v-input__slot > div"
-    // ).eq(0).click({ force: true }).type(this.UpdateKitItemData.Measure);
     cy.log("Measure Updated");
 
     //Email;
@@ -399,9 +380,12 @@ describe("Update Related New fot OneToOne Related Control", function () {
     )
       .eq(0)
       .click({ force: true });
-    cy.wait(4000);
-    //Click on to open UserSelector Pop up
-    //cy.get(".searchIcon").eq(7).click({ force: true });
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.UpdateKitItemData.UserSelector}{enter}`)
+    cy.wait(3000)
     cy.contains(this.UpdateKitItemData.UserSelector).click({ force: true });
     cy.log("UserSelect Updated");
     cy.wait(1000);
@@ -411,9 +395,12 @@ describe("Update Related New fot OneToOne Related Control", function () {
     )
       .eq(1)
       .click({ force: true });
-    cy.wait(4000);
-    // //Click on to open ContactSelector Pop up
-    // cy.get(".searchIcon").eq(8).click({ force: true });
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.UpdateKitItemData.ContactSelector}{enter}`)
+    cy.wait(3000)
     cy.contains(this.UpdateKitItemData.ContactSelector).click({
       force: true,
     });
@@ -458,7 +445,7 @@ describe("Update Related New fot OneToOne Related Control", function () {
     });
     //IconLable
     cy.get('[placeholder="Label"]')
-      .first()
+      .eq(1)
       .clear()
       .type(this.UpdateKitItemData.IconLabel);
 
@@ -477,10 +464,7 @@ describe("Update Related New fot OneToOne Related Control", function () {
       .eq(2)
       .click({ force: true });
     //Click on to open Assigning
-    cy.wait(4000);
-    // cy.get(
-    //   ".v-list-item:nth-child(1) > .list-item-search > .v-list-item__title"
-    // ).click({ force: true });
+    cy.wait(1000);
     cy.xpath('//*[text() ="Search"]').first().click({ force: true })
     cy.wait(1000)
     cy.xpath('//*[text() ="Search"]').first().next('input')
@@ -781,7 +765,7 @@ describe("Update Related New fot OneToOne Related Control", function () {
   it.only("OneToOne Related New", function () {
     //One To One Relation
     //Click on New Item for one to one Related Control
-    cy.get(".mr-4 > .inline-svg > path")
+    cy.get(".mr-4 > .inline-svg > path").eq(1)
       .scrollIntoView({ force: true })
       .click({ force: true });
     //New Item Assertion
@@ -845,16 +829,6 @@ describe("Update Related New fot OneToOne Related Control", function () {
     cy.get("[name" + "=" + this.DataType2.TextAera + "]")
       .eq(1)
       .type(this.RelatedKitItemData2.TextAera);
-
-    //Slider;
-    //Firing Alert pop for manual action
-    // cy.log("User need to do something").then(() => {
-    //   alert("Set Slider value by clicking slider Bar");
-    // });
-    // cy.log(
-    //   "Firing Alert pop for manual action to Set Slider value by clicking slider Bar"
-    // );
-    // cy.wait(10000);
 
     // Currency;
     cy.get(
@@ -1001,8 +975,12 @@ describe("Update Related New fot OneToOne Related Control", function () {
     //UserSelector(Values coming form KitItemValues Json File)
     //Click on to open UserSelector Pop up
     cy.get(".searchIcon").eq(0).click({ force: true });
-    cy.wait(3000);
-
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.RelatedKitItemData2.UserSelectorName}{enter}`)
+    cy.wait(3000)
     cy.contains(this.RelatedKitItemData2.UserSelectorName).click({
       force: true,
     });
@@ -1011,9 +989,13 @@ describe("Update Related New fot OneToOne Related Control", function () {
 
     //ContactSelector(Values coming form KitItemValues Json File)
     cy.get(".searchIcon").eq(1).click({ force: true });
-    //cy.get("span > i > svg > path").eq(2).click({ force: true });
     cy.contains(" Connection ").should("be.visible");
-    cy.wait(4000);
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.RelatedKitItemData2.ContactSelectorName}{enter}`)
+    cy.wait(3000)
     cy.contains(this.RelatedKitItemData2.ContactSelectorName).click({
       force: true,
     });
@@ -1045,7 +1027,7 @@ describe("Update Related New fot OneToOne Related Control", function () {
     cy.contains(this.RelatedKitItemData2.LargeiconSize).click({ force: true });
     //IconLable
     cy.get('[placeholder="Label"]')
-      .eq(0)
+      .eq(1)
       .type(this.RelatedKitItemData2.IconLabel);
 
     //Inspection
@@ -1191,7 +1173,6 @@ describe("Update Related New fot OneToOne Related Control", function () {
     //Validating details view input data
     cy.get('[placeholder="Street address, building, company ... "]').eq(0)
       .should("have.value", this.RelatedKitItemData2.Addressline1)
-
   });
 
   it.only("Addressline2 Element data Validation", function () {
@@ -1286,7 +1267,6 @@ describe("Update Related New fot OneToOne Related Control", function () {
   });
 
   it.only('UserSelector Element data Validation', function () {
-
     //scroll to user selector
     cy.get('.imageContent').eq(0).scrollIntoView({ force: true })
     cy.wait(1000)

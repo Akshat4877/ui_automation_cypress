@@ -169,8 +169,6 @@ describe("Related Control One to One test case", function () {
 
     //Enter data in Related New form
 
-
-
     //click on URl pancil icon
     cy.xpath('//div[@class="wrapper-card-buttons d-flex justify-end col"]//div[@class="mr-4 action-icon"]')
       .eq(0)
@@ -364,8 +362,11 @@ describe("Related Control One to One test case", function () {
     //Click on to open UserSelector Pop up
     cy.get(".searchIcon").eq(0).click({ force: true });
     cy.contains(" Users ").should("be.visible");
-    cy.wait(3000);
-
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.RelatedKitItemData.UserSelectorName}{enter}`)
+    cy.wait(3000)
     cy.contains(this.RelatedKitItemData.UserSelectorName).click({
       force: true,
     });
@@ -376,8 +377,12 @@ describe("Related Control One to One test case", function () {
     //Click on to open ContactSelector Pop up
     cy.get(".searchIcon").eq(1).click({ force: true });
     cy.contains(" Connection ").should("be.visible");
-
-    cy.wait(4000);
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.RelatedKitItemData.ContactSelectorName}{enter}`)
+    cy.wait(3000)
     cy.contains(this.RelatedKitItemData.ContactSelectorName).click({
       force: true,
     });

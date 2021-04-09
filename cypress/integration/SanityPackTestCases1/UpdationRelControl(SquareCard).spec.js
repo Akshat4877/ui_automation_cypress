@@ -206,27 +206,10 @@ describe("Update Related New fot Square Card Related Control", function () {
       .type(this.UpdateKitItemData.TextAera);
     cy.log("TextAera Updated");
 
-    //Slider;
-    //Firing Alert pop for manual action
-    // cy.log("User need to do something").then(() => {
-    //   alert("Set Slider value by clicking slider Bar");
-    // });
-    // cy.log(
-    //   "Firing Alert pop for manual action to Set Slider value by clicking slider Bar"
-    // );
-    // cy.wait(10000);
-
-    // Currency;
-
     // Currency;
     var currency = this.DataType2.Currency.toLowerCase();
     cy.xpath('//div[@class="kit-control-' + currency + '--right ma-0 pa-0 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
       .next('input').clear().type(this.UpdateKitItemData.Currency);
-
-
-    // cy.get(
-    //   "#inspire > div.v-dialog__content.v-dialog__content--active > div > div > div > div:nth-child(2) > div.new-kit-item.v-card.v-sheet.theme--light > div > div > div > div > div.row.kit-details-wrapper--content.pb-0 > div > div > div > div > div > div > div.tab--content.col > div > div > div.v-window-item.v-window-item--active > div > div > div.row.container-details > div.fill-height.col > div > div > div.kit-control-component.kit-control-currency.px-3.col.col-sm-12.col-md-6.mb-4.px-3 > div > div.kit-control-currency--right.ma-0.pa-0.col > div > div > div.v-input__slot > div"
-    // ).eq(0).click({ force: true }).type(this.UpdateKitItemData.Currency);
     cy.log("Currnecy Updated");
     cy.wait(1000);
 
@@ -235,10 +218,6 @@ describe("Update Related New fot Square Card Related Control", function () {
     //Measure
     cy.xpath('//div[@class="kit-control-' + measure + '--left ma-0 pa-0 pr-2 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
       .next('input').clear().type(this.UpdateKitItemData.Measure);
-
-    // cy.get(
-    //   "#inspire > div.v-dialog__content.v-dialog__content--active > div > div > div > div:nth-child(2) > div.new-kit-item.v-card.v-sheet.theme--light > div > div > div > div > div.row.kit-details-wrapper--content.pb-0 > div > div > div > div > div > div > div.tab--content.col > div > div > div.v-window-item.v-window-item--active > div > div > div.row.container-details > div.fill-height.col > div > div > div.kit-control-component.kit-control-measure.px-3.col.col-sm-12.col-md-6.mb-4.px-3 > div > div.kit-control-measure--left.ma-0.pa-0.pr-2.col > div > div > div.v-input__slot > div"
-    // ).eq(0).click({ force: true }).type(this.UpdateKitItemData.Measure);
     cy.log("Measure Updated");
 
     //Email;

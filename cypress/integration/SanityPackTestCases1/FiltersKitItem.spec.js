@@ -6,8 +6,8 @@ describe("New kit item creation test case", function () {
   this.beforeAll(function () {
     const lp = new LoginPage();
     const slp = new SanityLoginPage();
-    //slp.nvdTest()
-    slp.TmProd()
+    slp.nvdTest()
+    //slp.TmProd()
     //Handling Alert
     cy.on("window:confirm", () => {
       cy.log("Alert has been Handled");
@@ -16,8 +16,8 @@ describe("New kit item creation test case", function () {
     //Login Assertions
     cy.contains(" Log In ").should("be.visible");
     //Enter credentials
-    //lp.EnterEmail("propertymanagement@commonareas.work.dev");
-    lp.EnterEmail("sam@armyspy.com");
+    lp.EnterEmail("propertymanagement@commonareas.work.dev");
+    //lp.EnterEmail("sam@armyspy.com");
     lp.EnterPassword("1234567Aa");
     lp.Submit();
     cy.log("User has been Logged In into the application");
@@ -44,29 +44,29 @@ describe("New kit item creation test case", function () {
       "jwtAccessToken"
     );
 
-    // cy.fixture("SanityPackTestData/FiltersKitItemData").then(function (
-    //   KitDataEle
-    // ) {
-    //   this.NewKitItemData = KitDataEle;
-    // });
+    cy.fixture("SanityPackTestData/FiltersKitItemData").then(function (
+      KitDataEle
+    ) {
+      this.NewKitItemData = KitDataEle;
+    });
 
-    cy.fixture("SanityPackTestData(Prod)/FiltersKitItemData(Prod)").then(
-      function (KitDataEle) {
-        this.NewKitItemData = KitDataEle;
-      }
-    );
+    // cy.fixture("SanityPackTestData(Prod)/FiltersKitItemData(Prod)").then(
+    //   function (KitDataEle) {
+    //     this.NewKitItemData = KitDataEle;
+    //   }
+    // );
 
-    // cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
-    //   NewDataForElements
-    // ) {
-    //   this.DataType2 = NewDataForElements;
-    // });
+    cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
+      NewDataForElements
+    ) {
+      this.DataType2 = NewDataForElements;
+    });
 
-    cy.fixture("SanityPackTestData(Prod)/KitBuilderDataTypes2(Prod)").then(
-      function (NewDataForElements) {
-        this.DataType2 = NewDataForElements;
-      }
-    );
+    // cy.fixture("SanityPackTestData(Prod)/KitBuilderDataTypes2(Prod)").then(
+    //   function (NewDataForElements) {
+    //     this.DataType2 = NewDataForElements;
+    //   }
+    // );
 
     //////////////////////////////////////////////////////////////////////////////////
 
@@ -286,16 +286,25 @@ describe("New kit item creation test case", function () {
     //UserSelector(Values coming form KitItemValues Json File)
     //Click on to open UserSelector Pop up
     cy.get(".searchIcon").eq(0).click({ force: true });
-    cy.wait(1000);
-
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.NewKitItemData.UserSelectorName}{enter}`)
+    cy.wait(3000)
     cy.contains(this.NewKitItemData.UserSelectorName).click({ force: true });
     cy.log("UserSelect added");
-    cy.wait(3000);
+    cy.wait(1000);
 
     //ContactSelector(Values coming form KitItemValues Json File)
     //Click on to open ContactSelector Pop up
     cy.get(".searchIcon").eq(1).click({ force: true });
-    cy.wait(4000);
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.NewKitItemData.ContactSelectorName}{enter}`)
+    cy.wait(3000)
     cy.contains(this.NewKitItemData.ContactSelectorName).click({ force: true });
     cy.log("ContactSelecto added");
     cy.wait(1000);
@@ -323,7 +332,7 @@ describe("New kit item creation test case", function () {
       .click({ force: true });
     cy.contains(this.NewKitItemData.LargeiconSize).click({ force: true });
     //IconLable
-    cy.get('[placeholder="Label"]').type(this.NewKitItemData.IconLabel);
+    cy.get('[placeholder="Label"]').eq(1).type(this.NewKitItemData.IconLabel);
 
     //Inspection
     cy.get('.v-btn:nth-child(1) .v-badge > .inline-svg')

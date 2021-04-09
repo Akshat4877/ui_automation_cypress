@@ -216,16 +216,6 @@ describe("Update Related New for OneToMany Related Control", function () {
     cy.log("TextAera Updated");
     cy.wait(1000);
 
-    //Slider;
-    //Firing Alert pop for manual action
-    // cy.log("User need to do something").then(() => {
-    //   alert("Set Slider value by clicking slider Bar");
-    // });
-    // cy.log(
-    //   "Firing Alert pop for manual action to Set Slider value by clicking slider Bar"
-    // );
-    // cy.wait(10000);
-
     //Currency
     var currency = this.DataType2.Currency.toLowerCase();
     cy.xpath('//div[@class="kit-control-' + currency + '--right ma-0 pa-0 col"]//div[@class="v-text-field__slot"]//label[@class="v-label v-label--active theme--light"]')
@@ -386,9 +376,12 @@ describe("Update Related New for OneToMany Related Control", function () {
     )
       .eq(0)
       .click({ force: true });
-    cy.wait(4000);
-    //Click on to open UserSelector Pop up
-    //cy.get(".searchIcon").eq(7).click({ force: true });
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.UpdateKitItemData.UserSelector}{enter}`)
+    cy.wait(3000)
     cy.contains(this.UpdateKitItemData.UserSelector).click({ force: true });
     cy.log("UserSelect Updated");
     cy.wait(1000)
@@ -399,9 +392,12 @@ describe("Update Related New for OneToMany Related Control", function () {
     )
       .eq(1)
       .click({ force: true });
-    cy.wait(4000);
-    // //Click on to open ContactSelector Pop up
-    // cy.get(".searchIcon").eq(8).click({ force: true });
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.UpdateKitItemData.ContactSelector}{enter}`)
+    cy.wait(3000)
     cy.contains(this.UpdateKitItemData.ContactSelector).click({
       force: true,
     });
@@ -467,7 +463,7 @@ describe("Update Related New for OneToMany Related Control", function () {
       .eq(2)
       .click({ force: true });
     //Click on to open Assigning
-    cy.wait(4000);
+    cy.wait(1000);
     cy.xpath('//*[text() ="Search"]').first().click({ force: true })
     cy.wait(1000)
     cy.xpath('//*[text() ="Search"]').first().next('input')
@@ -960,16 +956,15 @@ describe("Update Related New for OneToMany Related Control", function () {
     cy.contains(this.RelatedKitItemData.StepperValue).click({ force: true });
     cy.log("Stepper Value has been set.");
 
-    //.v-stepper__step:nth-child(1/3/5/7/9)
-    // cy.get(".v-stepper__step:nth-child(5) > .v-stepper__step__step").click({
-    //   force: true,
-    // });
-
     //UserSelector(Values coming form KitItemValues Json File)
     //Click on to open UserSelector Pop up
     cy.get(".searchIcon").eq(0).click({ force: true });
-    cy.wait(4000);
-
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.RelatedKitItemData.UserSelectorName}{enter}`)
+    cy.wait(3000)
     cy.contains(this.RelatedKitItemData.UserSelectorName).click({
       force: true,
     });
@@ -981,13 +976,17 @@ describe("Update Related New for OneToMany Related Control", function () {
     cy.get(
       "div.fill-height.pa-0.ma-0.col.wrapper-tabs-and-content.fill-height.fill-width div.tab--content.col div.v-window.tab-content-wrapper.v-item-group.theme--light.v-tabs-items div.v-window__container div.v-window-item.v-window-item--active:nth-child(1) div.wrapper-tabs-content.v-card.v-sheet.theme--light div.v-card__text.kit-documents.fill-height div.row.container-details div.fill-height.col div.container.details-wrapper.fill-height div.row.kit-related-form.pa-6 div.kit-control-component.kit-control-component--item-picker.px-3.col.col-sm-12.col-md-6.mb-4.px-3.col-sm-12.col-md-6.mb-4.px-3:nth-child(23) span.searchRel div.v-input.searchSelectNone.v-input--is-readonly.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-select div.v-input__control div.v-input__slot > div.v-select__slot:nth-child(2)"
     ).click({ force: true });
-
-    cy.wait(4000);
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.RelatedKitItemData.ContactSelectorName}{enter}`)
+    cy.wait(3000)
     cy.contains(this.RelatedKitItemData.ContactSelectorName).click({
       force: true,
     });
     cy.log("ContactSelecto added");
-    cy.wait(4000);
+    cy.wait(1000);
 
     //getting value form different json file
     //Icon
@@ -1037,7 +1036,7 @@ describe("Update Related New for OneToMany Related Control", function () {
     cy.get(
       " div.kit-control-component.kit-control-assigning.pr-3.col.col-sm-12.col-md-6.mb-4.px-3.col-sm-12.col-md-6.mb-4.px-3:nth-child(26) span.searchRel div.v-input.searchSelectNone.v-input--is-readonly.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-select div.v-input__control div.v-input__slot > div.v-select__slot:nth-child(2)"
     ).click({ force: true });
-    cy.wait(4000);
+    cy.wait(1000);
     //Click on to select the Assigning
     cy.xpath('//*[text() ="Search"]').first().click({ force: true })
     cy.wait(1000)

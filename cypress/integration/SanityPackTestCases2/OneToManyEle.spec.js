@@ -119,7 +119,7 @@ describe("Only One to Many Related Control Element Test Case", function () {
     cy.wait(4000);
 
     ///Related New form element assertion
-    cy.get("[name" + "=" + this.DataType2.Url + "]").should("be.visible");
+    cy.get("[name" + "=" + this.DataType2.Text + "]").should("be.visible");
     cy.wait(2000);
 
     //save related new with no data
@@ -133,10 +133,20 @@ describe("Only One to Many Related Control Element Test Case", function () {
 
     //Enter data in Related New
     cy.wait(2000);
-    //Url
-    cy.get("[name" + "=" + this.DataType2.Url + "]")
-      .eq(1)
+    //click on URl pancil icon
+    cy.xpath('//div[@class="wrapper-card-buttons d-flex justify-end col"]//div[@class="mr-4 action-icon"]')
+      .eq(0)
+      .click({ force: true });
+
+    cy.contains('Edit Link').should('be.visible')
+    //Enter lable
+    cy.get('[placeholder="Label"]').first().type(this.RelatedKitItemData.Url)
+    //Url Link
+    cy.get("[placeholder" + "=" + this.DataType2.Url + "]").first()
       .type(this.RelatedKitItemData.Url);
+    //Click on save
+    cy.get('.button-pop-ups--size > .v-btn__content').first().click({ force: true });
+    cy.wait(1000)
 
     //Text
     cy.get("[name" + "=" + this.DataType2.Text + "]")

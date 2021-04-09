@@ -125,7 +125,6 @@ describe("Related Control One to Many test case", function () {
     cy.xpath('//div[@class="wrapper-card-buttons d-flex justify-end col"]//div[@class="mr-4 action-icon"]')
       .eq(0)
       .click({ force: true });
-
     cy.contains('Edit Link').should('be.visible')
     //Enter lable
     cy.get('[placeholder="Label"]').first().type(this.RelatedKitItemData.NewKitItemUrl)

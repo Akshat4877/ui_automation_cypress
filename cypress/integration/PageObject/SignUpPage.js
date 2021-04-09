@@ -39,6 +39,7 @@ class SignUpPage {
     cy.get("#msg_body").then(($iframe) => {
       const $a = $iframe.contents().find("a");
       cy.wrap($a).contains("Reset your password").click();
+      
     });
   }
 }

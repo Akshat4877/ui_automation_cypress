@@ -45,15 +45,16 @@ describe("TableList KitItem Filter", function () {
       "jwtAccessToken"
     );
 
-    cy.fixture("SanityPackTestData/FiltersKitItemData").then(function (
-      KitDataEle
+    cy.fixture("SanityPackTestData2/RecurringKitItemData").then(function (
+      SanityTCData
     ) {
-      this.NewKitItemData = KitDataEle;
+      this.NewKitItemData = SanityTCData;
     });
 
-    // cy.fixture("SanityPackTestData(Prod)/FiltersKitItemData(Prod)").then(
-    //   function (KitDataEle) {
-    //     this.NewKitItemData = KitDataEle;
+
+    // cy.fixture("SanityPackTestData2(Prod)/RecurringKitItemData(Prod)").then(
+    //   function (SanityTCData) {
+    //     this.NewKitItemData = SanityTCData;
     //   }
     // );
 
@@ -130,7 +131,8 @@ describe("TableList KitItem Filter", function () {
     ).should("be.visible");
     cy.wait(3000);
     //Click on created kit item
-    cy.get('.list-item--title').first().click({ force: true });
+    cy.xpath('//div[@class="row-list-item-details--content py-2 justify-center col col-10 truncate-wrapper"]')
+      .first().click({ force: true });
     cy.wait(1000);
     var lower = this.DataType2.Url.toLowerCase();
     //Validating details view input data
@@ -145,8 +147,6 @@ describe("TableList KitItem Filter", function () {
     cy.contains(" Recently Viewed ").should("be.visible");
     //Click on cross icon to remove filter
     cy.get(".inline-svg:nth-child(3) > path").click({ force: true });
-
-
   });
 
   it.only("Filter Text Element", function () {
@@ -1074,8 +1074,9 @@ describe("TableList KitItem Filter", function () {
     cy.wait(3000);
 
     //Click on created kit item
-    cy.get(".list-item--title").first().click({ force: true });
-    cy.wait(5000);
+    cy.xpath('//div[@class="row-list-item-details--content py-2 justify-center col col-10 truncate-wrapper"]')
+      .first().click({ force: true });
+    cy.wait(3000);
     cy.get('[placeholder="Zip/Postal Code"]').scrollIntoView({ force: true });
     cy.wait(3000);
     //Validation for False Value 

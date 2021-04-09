@@ -44,16 +44,12 @@ describe("Email Notification Shared Activity", function () {
     cy.wait(10000);
     cy.contains("New " + this.NewKitItemData.KitName).click({ force: true });
     cy.wait(3000)
-
-    var id = this.KitItemId.ItemID.replace('# ',' ')
-    cy.log(id)
-
     //Validate shared kit item id
     cy.get("#html_msg_body").eq(0).then(($iframe) => {
-      const $a = $iframe.contents().find("td");
-      cy.wrap($a).contains('ID:330').invoke('val').then((text) => {
+      const $a = $iframe.contents().find("td").then((text) => {
         cy.log(text)
       })
     });
+
   });
 });

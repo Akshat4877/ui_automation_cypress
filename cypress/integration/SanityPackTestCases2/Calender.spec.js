@@ -5,8 +5,8 @@ describe("Create Active schedule for Kit Item through Add button in calendar", f
   this.beforeAll(function () {
     const lp = new LoginPage();
     const slp = new SanityLoginPage();
-    //slp.nvdTest()
-    slp.TmProd();
+    slp.nvdTest()
+    //slp.TmProd();
 
     //Handling Alert
     cy.on("window:confirm", () => {
@@ -17,8 +17,8 @@ describe("Create Active schedule for Kit Item through Add button in calendar", f
     cy.contains(" Log In ").should("be.visible");
 
     //Enter credentials
-    //lp.EnterEmail("propertymanagement@commonareas.work.dev");
-    lp.EnterEmail("sam@armyspy.com");
+    lp.EnterEmail("propertymanagement@commonareas.work.dev");
+    //lp.EnterEmail("sam@armyspy.com");
     lp.EnterPassword("1234567Aa");
     lp.Submit();
     cy.log("User has been Logged In into the application");
@@ -55,29 +55,29 @@ describe("Create Active schedule for Kit Item through Add button in calendar", f
     //   this.NewKitItemData = KitDataEle;
     // });
 
-    // cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
-    //   NewDataForElements
-    // ) {
-    //   this.DataType2 = NewDataForElements;
-    // });
+    cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
+      NewDataForElements
+    ) {
+      this.DataType2 = NewDataForElements;
+    });
 
-    cy.fixture("SanityPackTestData(Prod)/KitBuilderDataTypes2(Prod)").then(
-      function (NewDataForElements) {
-        this.DataType2 = NewDataForElements;
-      }
-    );
+    // cy.fixture("SanityPackTestData(Prod)/KitBuilderDataTypes2(Prod)").then(
+    //   function (NewDataForElements) {
+    //     this.DataType2 = NewDataForElements;
+    //   }
+    // );
 
-    // cy.fixture("SanityPackTestData2/UpdateCalendar").then(function (
-    //   KitDataEle
-    // ) {
-    //   this.UpdateCalendar = KitDataEle;
-    // });
-
-    cy.fixture("SanityPackTestData(Prod)/UpdateCalendar").then(function (
+    cy.fixture("SanityPackTestData2/UpdateCalendar").then(function (
       KitDataEle
     ) {
       this.UpdateCalendar = KitDataEle;
     });
+
+    // cy.fixture("SanityPackTestData(Prod)/UpdateCalendar").then(function (
+    //   KitDataEle
+    // ) {
+    //   this.UpdateCalendar = KitDataEle;
+    // });
   });
 
   it.only("Navigate to kit item list View(Left Panel) to open Calendar", function () {
@@ -104,17 +104,14 @@ describe("Create Active schedule for Kit Item through Add button in calendar", f
       " Recently Viewed "
     );
     cy.wait(3000);
-
     //Click on created kit item
-    cy.get(".list-item--title").eq(0).click({ force: true });
-    cy.wait(3000);
-
+    cy.xpath('//div[@class="row-list-item-details--content py-2 justify-center col col-10 truncate-wrapper"]')
+      .eq(0).click({ force: true })
     cy.contains(" Calendar ").click({ force: true });
     cy.wait(3000);
     //Calender tab assertion
     cy.contains("Today").should("be.visible");
     cy.wait(3000);
-
     //Click on add
     cy.get(".button-w-new-borders > .v-btn__content").click({ force: true });
     cy.contains(" Schedule ").should("be.visible");
@@ -123,10 +120,20 @@ describe("Create Active schedule for Kit Item through Add button in calendar", f
 
   it.only("Calender Active Schedule", function () {
     //Url
-    cy.get("[name" + "=" + this.DataType2.Url + "]")
-      .eq(1)
-      .clear()
+    //click on URl pancil icon
+    cy.xpath('//div[@class="wrapper-card-buttons d-flex justify-end col"]//div[@class="mr-4 action-icon"]')
+      .eq(0)
+      .click({ force: true });
+
+    cy.contains('Edit Link').should('be.visible')
+    //Enter lable
+    cy.get('[placeholder="Label"]').first().type(this.NewKitItemData.Url)
+    //Url Link
+    cy.get("[placeholder" + "=" + this.DataType2.Url + "]")
       .type(this.NewKitItemData.Url);
+    //Click on save
+    cy.get('.button-pop-ups--size > .v-btn__content').first().click({ force: true });
+    cy.wait(1000)
 
     //Text
     cy.get("[name" + "=" + this.DataType2.Text + "]")
@@ -137,9 +144,8 @@ describe("Create Active schedule for Kit Item through Add button in calendar", f
     cy.get(".link-icon--green > path").first().click({ force: true });
     cy.contains(" File Library ").should("be.visible");
     //give file name to select
-    cy.get(".thumb-container:nth-child(1) .selected-icon").click({
-      force: true,
-    });
+    //give file name to select
+    cy.contains(this.NewKitItemData.CalenderFile).click({ force: true });
     //Click on save file
     cy.get(
       ".container-search > .pop-up--header > .pop-up--header--right > .button-pop-ups--size > .v-btn__content"
@@ -307,20 +313,24 @@ describe("Create Active schedule for Kit Item through Add button in calendar", f
     cy.log("Stepper Value has been set.");
 
     //Click on to opne user selector
-    cy.get(
-      "div > div > div.v-input__slot > div.v-select__slot > div.v-input__append-inner"
+    cy.xpath(
+      '//span[@class="searchRel"]//div[@class="v-select__slot"]//div[@class="v-select__selections"]'
     )
-      .eq(3)
+      .eq(0)
       .click({ force: true });
     cy.contains(" Users ").should("be.visible");
-    cy.wait(3000);
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.NewKitItemData.UserSelector}{enter}`)
+    cy.wait(3000)
     cy.contains(this.NewKitItemData.UserSelector).click({ force: true });
-    cy.wait(1000);
     cy.log("UserSelect added");
     cy.wait(1000);
 
     //Link onetoone
-    cy.get(".action-icon:nth-child(2) path").first().click({ force: true });
+    cy.get(".action-icon:nth-child(2) path").eq(1).click({ force: true });
     cy.contains(" Related Items ").should("be.visible");
     cy.wait(2000);
     cy.get(
@@ -329,29 +339,28 @@ describe("Create Active schedule for Kit Item through Add button in calendar", f
     //link onetoone assertion
     cy.get(".last-updated:nth-child(2) > .v-icon").should("be.visible");
 
-    //Click on to opne user selector
+    //Click on to opne contact selector
     cy.get(
-      "div > div > div.v-input__slot > div.v-select__slot > div.v-input__append-inner"
+      ' span > div > div > div.v-input__slot > div.v-select__slot > div:nth-child(3)'
     )
-      .eq(5)
+      .eq(1)
       .click({ force: true });
-
     //Click on to open ContactSelector Pop up
     cy.contains("Connection").should("be.visible");
-    cy.wait(4000);
-
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.NewKitItemData.ContactSelector}{enter}`)
+    cy.wait(3000)
     cy.contains(this.NewKitItemData.ContactSelector).click({ force: true });
     cy.log("ContactSelecto added");
     cy.wait(1000);
 
-    cy.get(".v-btn--depressed > .v-btn__content > .inline-svg > path")
-      .first()
-      .scrollIntoView({ force: true });
-    cy.wait(2000);
     //Icon
     //Click on + icon of ICON Element
     cy.get(".v-btn--depressed > .v-btn__content > .inline-svg > path")
-      .first()
+      .eq(0)
       .click({
         force: true,
       });
@@ -371,7 +380,7 @@ describe("Create Active schedule for Kit Item through Add button in calendar", f
       .click({ force: true });
     cy.contains(this.NewKitItemData.LargeiconSize).click({ force: true });
     //IconLable
-    cy.get('[placeholder="Label"]').first().type(this.NewKitItemData.IconLabel);
+    cy.get('[placeholder="Label"]').eq(1).type(this.NewKitItemData.IconLabel);
 
     //Inspection
     cy.get('.v-btn:nth-child(1) .v-badge > .inline-svg').eq(0)
@@ -382,16 +391,20 @@ describe("Create Active schedule for Kit Item through Add button in calendar", f
       .click({ force: true })
     cy.wait(1000);
     //Click to open assiging
-    cy.get(
-      "div > div > div.v-input__slot > div.v-select__slot > div.v-input__append-inner"
+    cy.xpath(
+      '//span[@class="searchRel"]//div[@class="v-select__slot"]//div[@class="v-select__selections"]'
     )
-      .eq(8)
+      .eq(2)
       .click({ force: true });
-    cy.wait(5000);
+    cy.wait(1000);
     //click on to first node of assginig
-    cy.get(
-      ".v-list-item:nth-child(1) .v-input--selection-controls__ripple"
-    ).click({ force: true });
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.NewKitItemData.Assigning}{enter}`)
+    cy.wait(3000)
+    cy.contains(this.NewKitItemData.Assigning).click({ force: true });
+    cy.wait(2000);
     //click to save
     cy.get(
       ".fill-height > .pop-up--header > .pop-up--header--right .v-btn__content"
@@ -399,9 +412,6 @@ describe("Create Active schedule for Kit Item through Add button in calendar", f
     //Assigning creation assertion
     cy.contains("Item shared").should("be.visible");
     cy.log("Assigning added");
-
-
-
     cy.wait(3000);
     //scheduler end date
     cy.get('[placeholder="Select End Time"]').click({ force: true });
@@ -432,6 +442,56 @@ describe("Create Active schedule for Kit Item through Add button in calendar", f
     //need to change after bug fixed
     //cy.contains('').should('be.visible')
     cy.wait(4000);
+  });
+
+  it.only('Click to Validate Calender Fields', function () {
+
+    cy.wait(3000);
+    cy.get(".dhx_event_move").eq(1).scrollIntoView({ force: true });
+    cy.wait(2000);
+    cy.get(".dhx_event_move").eq(1).dblclick({ force: true });
+    cy.wait(2000);
+    cy.get(".icon_edit").should("exist");
+    //click on edit icon
+    cy.get(".icon_edit").click({ force: true });
+  })
+
+  it.only("Url Element data Validation", function () {
+    var lower = this.DataType2.Url.toLowerCase();
+    //Validating details view input data
+    cy.xpath("//input[@controlname='" + lower + "']")
+      .eq(1).should("have.value", this.NewKitItemData.Url)
+  });
+
+  it.only("Text Element data Validation", function () {
+    var lower = this.DataType2.Text.toLowerCase();
+    //Validating details view input data
+    cy.xpath("//input[@controlname='" + lower + "']")
+      .eq(1).should("have.value", this.NewKitItemData.Text)
+
+  });
+
+  it.only('File Element data Validation', function () {
+    var lower = this.DataType2.File.toLowerCase();
+    cy.xpath('//div[@class="drop-zone"]//div[@class="v-input__slot"]//div[@class="v-text-field__slot"]//input').eq(0)
+      .invoke('val').then((text) => {
+        expect(text.trim()).equal(this.NewKitItemData.CalenderFile)
+      });
+    cy.wait(2000)
+  })
+
+  it.only("Telephone Element data Validation", function () {
+    var lower = this.DataType2.Telephone.toLowerCase();
+    //Validating details view input data
+    cy.xpath("//input[@controlname='" + lower + "']")
+      .eq(0).should("have.value", this.NewKitItemData.Telephone)
+  });
+
+  it.only("TextAera Element data Validation", function () {
+    var lower = this.DataType2.TextAera.toLowerCase();
+    //Validating details view input data
+    cy.get("[name" + "=" + this.DataType2.TextAera + "]")
+      .eq(1).should("have.value", this.NewKitItemData.TextAera)
   });
 
   it.only("Update Calnder", function () {

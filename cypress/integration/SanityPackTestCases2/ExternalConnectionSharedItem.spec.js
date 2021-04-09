@@ -17,7 +17,7 @@ describe("External Connection Shared Kit Item Test Case", function () {
         //Login Assertions
         cy.contains(" Log In ").should("be.visible");
         //Enter credentials
-        lp.EnterEmail("Shardul@mailinator.com");
+        lp.EnterEmail("Mahesh@mailinator.com");
         //lp.EnterEmail("Akshat@mailinator.com");
         lp.EnterPassword("1234567Aa");
         lp.Submit();
@@ -258,5 +258,12 @@ describe("Email Notification Shared Activity", function () {
         sp.Go();
         cy.wait(10000);
         cy.contains("New " + this.NewKitItemData.KitName).click({ force: true });
+        //Validate shared kit item id
+        cy.get("#html_msg_body").eq(0).then(($iframe) => {
+            const $a = $iframe.contents().find("td")
+                .then((text) => {
+                    cy.log(text)
+                })
+        });
     });
 });
