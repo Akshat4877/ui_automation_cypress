@@ -113,7 +113,7 @@ describe("New kit item complete creation test case", function () {
     const lp = new LoginPage();
     cy.wait(2000);
     //new form ele visible assertion
-    cy.get("[name" + "=" + this.DataType2.Url + "]")
+    cy.get("[name" + "=" + this.DataType2.Text + "]")
       .last()
       .should("be.visible");
     //save Kit Item for empty form
@@ -123,10 +123,21 @@ describe("New kit item complete creation test case", function () {
       "be.visible"
     );
     cy.log("With No data new kit item saved successfully ");
-    //Url
-    cy.get("[name" + "=" + this.DataType2.Url + "]")
-      .last()
+
+    //click on URl pancil icon
+    cy.xpath('//div[@class="wrapper-card-buttons d-flex justify-end col"]//div[@class="mr-4 action-icon"]')
+      .eq(0)
+      .click({ force: true });
+
+    cy.contains('Edit Link').should('be.visible')
+    //Enter lable
+    cy.get('[placeholder="Label"]').first().type(this.NewKitItemData.Url)
+    //Url Link
+    cy.get("[placeholder" + "=" + this.DataType2.Url + "]")
       .type(this.NewKitItemData.Url);
+    //Click on save
+    cy.get('.button-pop-ups--size > .v-btn__content').click({ force: true });
+    cy.wait(1000)
 
     //Text
     cy.get("[name" + "=" + this.DataType2.Text + "]")
@@ -289,8 +300,12 @@ describe("New kit item complete creation test case", function () {
     //UserSelector(Values coming form KitItemValues Json File)
     //Click on to open UserSelector Pop up
     cy.get(".searchIcon").eq(0).click({ force: true });
-    cy.wait(3000);
-
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.NewKitItemData.UserSelectorName}{enter}`)
+    cy.wait(3000)
     cy.contains(this.NewKitItemData.UserSelectorName).click({ force: true });
     cy.log("UserSelect added");
     cy.wait(1000);
@@ -298,7 +313,12 @@ describe("New kit item complete creation test case", function () {
     //ContactSelector(Values coming form KitItemValues Json File)
     //Click on to open ContactSelector Pop up
     cy.get(".searchIcon").eq(1).click({ force: true });
-    cy.wait(4000);
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.NewKitItemData.ContactSelectorName}{enter}`)
+    cy.wait(3000)
     cy.contains(this.NewKitItemData.ContactSelectorName).click({ force: true });
     cy.log("ContactSelecto added");
     cy.wait(1000);
@@ -333,7 +353,7 @@ describe("New kit item complete creation test case", function () {
       .click({ force: true });
     cy.contains(this.NewKitItemData.LargeiconSize).click({ force: true });
     //IconLable
-    cy.get('[placeholder="Label"]').type(this.NewKitItemData.IconLabel);
+    cy.get('[placeholder="Label"]').eq(1).type(this.NewKitItemData.IconLabel);
 
     //Inspection
     cy.get('.v-btn:nth-child(1) .v-badge > .inline-svg')
@@ -358,7 +378,7 @@ describe("New kit item complete creation test case", function () {
     cy.contains(this.NewKitItemData.AssigningName).click({ force: true });
     cy.wait(3000);
     //Click on to save
-    cy.get(".button-pop-ups--size > .v-btn__content").click({ force: true });
+    cy.get(".button-pop-ups--size > .v-btn__content").first().click({ force: true });
     //Assigning creation assertion
     cy.contains("Item shared").should("be.visible");
     cy.log("Assigning added");
@@ -378,17 +398,27 @@ describe("New kit item complete creation test case", function () {
       force: true,
     });
     cy.wait(2000);
-    cy.get("[name" + "=" + this.DataType2.Url + "]")
+    cy.get("[name" + "=" + this.DataType2.Text + "]")
       .last()
       .scrollIntoView({ force: true });
     cy.wait(2000);
 
-    //Url
-    cy.get("[name" + "=" + this.DataType2.Url + "]")
-      .last()
-      .clear()
-      .type(this.UpdateKitItemData.Url);
-    cy.log("Url Updated");
+
+    //click on URl pancil icon
+    cy.xpath('//div[@class="wrapper-card-buttons d-flex justify-end col"]//div[@class="mr-4 action-icon"]')
+      .eq(0)
+      .click({ force: true });
+
+    cy.contains('Edit Link').should('be.visible')
+    //Enter lable
+    cy.get('[placeholder="Label"]').first().clear().type(this.UpdateKitItemData.Url)
+    //Url Link
+    cy.get("[placeholder" + "=" + this.DataType2.Url + "]")
+      .clear().type(this.UpdateKitItemData.Url);
+    //Click on save
+    cy.get('.button-pop-ups--size > .v-btn__content').click({ force: true });
+    cy.wait(1000)
+
 
     //Text
     cy.get("[name" + "=" + this.DataType2.Text + "]")
@@ -596,9 +626,12 @@ describe("New kit item complete creation test case", function () {
     cy.get(
       "div.v-window.tab-content-wrapper.v-item-group.theme--light.v-tabs-items div.v-window__container div.v-window-item.v-window-item--active:nth-child(1) div.wrapper-tabs-content.v-card.v-sheet.theme--light div.v-card__text.kit-documents.fill-height div.row.container-details div.fill-height.col div.container.details-wrapper.fill-height div.row.kit-related-form.pa-6 div.kit-control-component.kit-control-component--item-picker.px-3.col.col-sm-12.col-md-6.mb-4.px-3.col-sm-12.col-md-6.mb-4.px-3:nth-child(22) span.searchRel div.v-input.searchSelectNone.v-input--is-label-active.v-input--is-dirty.v-input--is-readonly.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-select div.v-input__control div.v-input__slot div.v-select__slot:nth-child(2) div.v-select__selections:nth-child(2) div.imageContent:nth-child(1) > div.row.control-item-picker"
     ).click({ force: true });
-    cy.wait(4000);
-    //Click on to open UserSelector Pop up
-    //cy.get(".searchIcon").eq(7).click({ force: true });
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.UpdateKitItemData.UserSelector}{enter}`)
+    cy.wait(3000)
     cy.contains(this.UpdateKitItemData.UserSelector).click({ force: true });
     cy.log("UserSelect Updated");
     cy.wait(1000);
@@ -607,9 +640,12 @@ describe("New kit item complete creation test case", function () {
     cy.get(
       "div.tab--content.col div.v-window.tab-content-wrapper.v-item-group.theme--light.v-tabs-items div.v-window__container div.v-window-item.v-window-item--active:nth-child(1) div.wrapper-tabs-content.v-card.v-sheet.theme--light div.v-card__text.kit-documents.fill-height div.row.container-details div.fill-height.col div.container.details-wrapper.fill-height div.row.kit-related-form.pa-6 div.kit-control-component.kit-control-component--item-picker.px-3.col.col-sm-12.col-md-6.mb-4.px-3.col-sm-12.col-md-6.mb-4.px-3:nth-child(24) span.searchRel div.v-input.searchSelectNone.v-input--is-label-active.v-input--is-dirty.v-input--is-readonly.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-select div.v-input__control div.v-input__slot div.v-select__slot:nth-child(2) div.v-select__selections:nth-child(2) div.imageContent:nth-child(1) > div.row.control-item-picker"
     ).click({ force: true });
-    cy.wait(4000);
-    // //Click on to open ContactSelector Pop up
-    // cy.get(".searchIcon").eq(8).click({ force: true });
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.UpdateKitItemData.ContactSelector}{enter}`)
+    cy.wait(3000)
     cy.contains(this.UpdateKitItemData.ContactSelector).click({
       force: true,
     });
@@ -639,7 +675,7 @@ describe("New kit item complete creation test case", function () {
     cy.get(".button-pop-ups").first().click({ force: true });
 
     //IcozSize
-    cy.get('[placeholder="Label"]').scrollIntoView({ force: true });
+    cy.get('[placeholder="Label"]').eq(1).scrollIntoView({ force: true });
     //Click on arrow
     cy.get(
       "div.fill-height.border-right.col.col-4 div.v-input.v-input--is-label-active.v-input--is-dirty.theme--light.v-text-field.v-text-field--single-line.v-text-field--solo.v-text-field--is-booted.v-text-field--enclosed.v-select div.v-input__control div.v-input__slot div.v-select__slot div.v-input__append-inner:nth-child(2) div.v-input__icon.v-input__icon--append > i.v-icon.notranslate.material-icons.theme--light"
@@ -650,7 +686,7 @@ describe("New kit item complete creation test case", function () {
       force: true,
     });
     //IconLable
-    cy.get('[placeholder="Label"]')
+    cy.get('[placeholder="Label"]').eq(1)
       .clear()
       .type(this.UpdateKitItemData.IconLabel);
 
@@ -675,7 +711,7 @@ describe("New kit item complete creation test case", function () {
     cy.contains(this.UpdateKitItemData.Assigning).click({ force: true });
     cy.wait(2000);
     //Click on to save
-    cy.get(".button-pop-ups--size > .v-btn__content").click({ force: true });
+    cy.get(".button-pop-ups--size > .v-btn__content").first().click({ force: true });
     //Assigning creation assertion
     cy.contains("Item shared").should("be.visible");
     cy.log("Assigning added");
@@ -730,12 +766,12 @@ describe("New kit item complete creation test case", function () {
 
     //Link OnetoOne
     cy.wait(2000);
-    cy.get(".action-icon:nth-child(2) > .inline-svg").scrollIntoView({
+    cy.get(".action-icon:nth-child(2) > .inline-svg").eq(1).scrollIntoView({
       force: true,
     });
 
     //Click on to link existing item
-    cy.get(".action-icon:nth-child(2) > .inline-svg").click({ force: true });
+    cy.get(".action-icon:nth-child(2) > .inline-svg").eq(1).click({ force: true });
 
     //Search List view pop up assertion
     cy.contains(" Related Items ").should("be.visible");

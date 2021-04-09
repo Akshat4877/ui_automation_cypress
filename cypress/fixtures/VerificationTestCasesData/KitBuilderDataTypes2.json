@@ -104,7 +104,7 @@
 
      
     "SquareCardName":"BaseSquareCard",
-    "CardKitToBeRelated":"CommercialKit",
+    "CardKitToBeRelated":"PropertyBuilder",
     "CardRelatedNew":"RelatedNewView",
     "CardRelatedEdit":"RelatedEditView",
     "CardMapView":"MapView",

@@ -185,8 +185,8 @@ describe("Recurring New kit item creation test case", function () {
     //Creating Recurring kit item
     //save Kit Item for empty form
     cy.wait(2000)
-    //Url
-    cy.get("[name" + "=" + this.DataType2.Url + "]")
+    //text
+    cy.get("[name" + "=" + this.DataType2.Text + "]")
       .last().should('be.visible');
     cy.get(".v-select__selections .v-btn__content").click({ force: true });
     //kit item Save Assertion for no data
@@ -195,10 +195,21 @@ describe("Recurring New kit item creation test case", function () {
     );
     cy.wait(1000);
     cy.log("With No data new kit item saved successfully ");
-    //Url
-    cy.get("[name" + "=" + this.DataType2.Url + "]")
-      .last()
+
+    //click on URl pancil icon
+    cy.xpath('//div[@class="wrapper-card-buttons d-flex justify-end col"]//div[@class="mr-4 action-icon"]')
+      .eq(0)
+      .click({ force: true });
+
+    cy.contains('Edit Link').should('be.visible')
+    //Enter lable
+    cy.get('[placeholder="Label"]').first().type(this.NewKitItemData.Url)
+    //Url Link
+    cy.get("[placeholder" + "=" + this.DataType2.Url + "]")
       .type(this.NewKitItemData.Url);
+    //Click on save
+    cy.get('.button-pop-ups--size > .v-btn__content').click({ force: true });
+    cy.wait(1000)
 
     //Text
     cy.get("[name" + "=" + this.DataType2.Text + "]")

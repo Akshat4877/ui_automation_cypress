@@ -109,6 +109,7 @@ describe("Update created kit item test case", function () {
     cy.contains(this.NewKitItemData.KitName).scrollIntoView({
       force: true,
     });
+    cy.wait(1000)
 
     //Open KitType from left paneal
     cy.contains(this.NewKitItemData.KitName).click({
@@ -125,7 +126,7 @@ describe("Update created kit item test case", function () {
     );
     //Created kit type existance assertion
     cy.contains(
-      this.DataType2.Url + ":" + " " + this.NewKitItemData.Url
+      this.DataType2.Text + ":" + " " + this.NewKitItemData.Text
     ).should("exist");
     cy.log("Created New Kit Item has been Exist");
     //Click on created kit item
@@ -136,12 +137,20 @@ describe("Update created kit item test case", function () {
   });
 
   it.only("Updation in DetailView(EditView)", function () {
-    //Url
-    cy.get("[name" + "=" + this.DataType2.Url + "]")
-      .last()
-      .clear()
-      .type(this.UpdateKitItemData.Url);
-    cy.log("Url Updated");
+
+    //click on URl pancil icon
+    cy.xpath('//div[@class="wrapper-card-buttons d-flex justify-end col"]//div[@class="mr-4 action-icon"]')
+      .eq(0)
+      .click({ force: true });
+    cy.contains('Edit Link').should('be.visible')
+    //Update lable
+    cy.get('[placeholder="Label"]').first().clear().type(this.UpdateKitItemData.Url)
+    //Update Url Link
+    cy.get("[placeholder" + "=" + this.DataType2.Url + "]")
+      .clear().type(this.UpdateKitItemData.Url);
+    //Click on save
+    cy.get('.button-pop-ups--size > .v-btn__content').eq(0).click({ force: true });
+    cy.wait(1000)
 
     //Text
     cy.get("[name" + "=" + this.DataType2.Text + "]")
@@ -214,13 +223,13 @@ describe("Update created kit item test case", function () {
     cy.log("Email Updated");
     cy.wait(1000);
 
-    //Click to save
-    cy.get(".navi-bar-dropdown:nth-child(2) .v-btn").click({ force: true });
-    cy.contains(this.NewKitItemData.KitName + " has been saved").should(
-      "be.visible"
-    );
-    cy.log("Paritally saved deatils views");
-    cy.wait(2000);
+    // //Click to save
+    // cy.get(".navi-bar-dropdown:nth-child(2) .v-btn").click({ force: true });
+    // cy.contains(this.NewKitItemData.KitName + " has been saved").should(
+    //   "be.visible"
+    // );
+    // cy.log("Paritally saved deatils views");
+    // cy.wait(2000);
 
     //scroll
     cy.get('[placeholder="Street address, building, company ... "]')
@@ -366,9 +375,12 @@ describe("Update created kit item test case", function () {
       .eq(5)
       .click({ force: true });
     cy.contains(" Users ").should("be.visible");
-    cy.wait(4000);
-    //Click on to open UserSelector Pop up
-    //cy.get(".searchIcon").eq(7).click({ force: true });
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.UpdateKitItemData.UserSelector}{enter}`)
+    cy.wait(3000)
     cy.contains(this.UpdateKitItemData.UserSelector).click({ force: true });
     cy.log("UserSelect Updated");
     cy.wait(1000);
@@ -378,9 +390,12 @@ describe("Update created kit item test case", function () {
       .eq(6)
       .click({ force: true });
     cy.contains(" Connection ").should("be.visible");
-    cy.wait(4000);
-    // //Click on to open ContactSelector Pop up
-    // cy.get(".searchIcon").eq(8).click({ force: true });
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.UpdateKitItemData.ContactSelector}{enter}`)
+    cy.wait(3000)
     cy.contains(this.UpdateKitItemData.ContactSelector).click({
       force: true,
     });
@@ -407,7 +422,7 @@ describe("Update created kit item test case", function () {
     cy.get(".button-pop-ups").first().click({ force: true });
 
     //IcozSize
-    cy.get('[placeholder="Label"]').scrollIntoView({ force: true });
+    cy.get('[placeholder="Label"]').eq(0).scrollIntoView({ force: true });
     //Click on arrow
     cy.get(
       "div.fill-height.border-right.col.col-4 div.v-input.v-input--is-label-active.v-input--is-dirty.theme--light.v-text-field.v-text-field--single-line.v-text-field--solo.v-text-field--is-booted.v-text-field--enclosed.v-select div.v-input__control div.v-input__slot div.v-select__slot div.v-input__append-inner:nth-child(2) div.v-input__icon.v-input__icon--append > i.v-icon.notranslate.material-icons.theme--light"
@@ -418,7 +433,7 @@ describe("Update created kit item test case", function () {
       force: true,
     });
     //IconLable
-    cy.get('[placeholder="Label"]')
+    cy.xpath('//div[@class="pl-2 border-right px-2 col col-4"]//div[@class="v-text-field__slot"]//input').first()
       .clear()
       .type(this.UpdateKitItemData.IconLabel);
 
@@ -435,7 +450,7 @@ describe("Update created kit item test case", function () {
       .eq(7)
       .click({ force: true });
     //Click on to open Assigning
-    cy.wait(5000);
+    cy.wait(1000);
     cy.xpath('//*[text() ="Search"]').first().click({ force: true })
     cy.wait(1000)
     cy.xpath('//*[text() ="Search"]').first().next('input')
@@ -445,7 +460,7 @@ describe("Update created kit item test case", function () {
     cy.contains(this.UpdateKitItemData.Assigning).click({ force: true });
     cy.wait(1000);
     //Click on to save
-    cy.get(".button-pop-ups--size > .v-btn__content").click({ force: true });
+    cy.get(".button-pop-ups--size > .v-btn__content").first().click({ force: true });
     //Assigning creation assertion
     cy.contains("Item shared").should("be.visible");
     cy.log("Assigning added");
@@ -753,7 +768,7 @@ describe("Update created kit item test case", function () {
     cy.wait(2000);
     //Update kit item assertion
     cy.contains(
-      this.DataType2.Url + ":" + " " + this.UpdateKitItemData.Url
+      this.DataType2.Text + ":" + " " + this.UpdateKitItemData.Text
     ).should("be.visible");
     cy.wait(2000)
   })
@@ -768,7 +783,7 @@ describe("Update created kit item test case", function () {
     );
     //Created kit type existance assertion
     cy.contains(
-      this.DataType2.Url + ":" + " " + this.UpdateKitItemData.Url
+      this.DataType2.Text + ":" + " " + this.UpdateKitItemData.Text
     ).should("exist");
     cy.log("Created New Kit Item has been Exist");
     //Click on created kit item
@@ -842,12 +857,10 @@ describe("Update created kit item test case", function () {
   });
 
   it.only("Addressline1 Element data Validation", function () {
-
     cy.get('[placeholder="Street address, building, company ... "]').scrollIntoView({ force: true })
     //Validating details view input data
     cy.get('[placeholder="Street address, building, company ... "]')
       .should("have.value", this.UpdateKitItemData.Addressline1)
-
   });
 
   it.only("Addressline2 Element data Validation", function () {
@@ -987,8 +1000,6 @@ describe("Update created kit item test case", function () {
     cy.get(".subheader--button-icon-wrapper .inline-svg").click({
       force: true,
     });
-
-
     //Update kit item assertion
     cy.contains(
       this.DataType2.Url + ":" + " " + this.UpdateKitItemData.Url

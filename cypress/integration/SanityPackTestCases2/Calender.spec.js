@@ -5,9 +5,8 @@ describe("Create Active schedule for Kit Item through Add button in calendar", f
   this.beforeAll(function () {
     const lp = new LoginPage();
     const slp = new SanityLoginPage();
-    //slp.visitCityComTest();
-    slp.nvdTest()
-    //slp.TmProd();
+    //slp.nvdTest()
+    slp.TmProd();
 
     //Handling Alert
     cy.on("window:confirm", () => {
@@ -18,9 +17,8 @@ describe("Create Active schedule for Kit Item through Add button in calendar", f
     cy.contains(" Log In ").should("be.visible");
 
     //Enter credentials
-    //lp.EnterEmail("sam@armyspy.com");
-    lp.EnterEmail("propertymanagement@commonareas.work.dev");
-    //lp.EnterEmail("citycom@commonareas.work.dev");
+    //lp.EnterEmail("propertymanagement@commonareas.work.dev");
+    lp.EnterEmail("sam@armyspy.com");
     lp.EnterPassword("1234567Aa");
     lp.Submit();
     cy.log("User has been Logged In into the application");
@@ -34,8 +32,6 @@ describe("Create Active schedule for Kit Item through Add button in calendar", f
       "refreshToken",
       "jwtAccessToken"
     );
-
-    cy.wait(10000);
   });
 
   this.beforeEach("KitType Data", function () {
@@ -59,29 +55,29 @@ describe("Create Active schedule for Kit Item through Add button in calendar", f
     //   this.NewKitItemData = KitDataEle;
     // });
 
-    cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
-      NewDataForElements
-    ) {
-      this.DataType2 = NewDataForElements;
-    });
+    // cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
+    //   NewDataForElements
+    // ) {
+    //   this.DataType2 = NewDataForElements;
+    // });
 
-    // cy.fixture("SanityPackTestData(Prod)/KitBuilderDataTypes2(Prod)").then(
-    //   function (NewDataForElements) {
-    //     this.DataType2 = NewDataForElements;
-    //   }
-    // );
+    cy.fixture("SanityPackTestData(Prod)/KitBuilderDataTypes2(Prod)").then(
+      function (NewDataForElements) {
+        this.DataType2 = NewDataForElements;
+      }
+    );
 
-    cy.fixture("SanityPackTestData2/UpdateCalendar").then(function (
-      KitDataEle
-    ) {
-      this.UpdateCalendar = KitDataEle;
-    });
-
-    // cy.fixture("SanityPackTestData(Prod)/UpdateCalendar").then(function (
+    // cy.fixture("SanityPackTestData2/UpdateCalendar").then(function (
     //   KitDataEle
     // ) {
     //   this.UpdateCalendar = KitDataEle;
     // });
+
+    cy.fixture("SanityPackTestData(Prod)/UpdateCalendar").then(function (
+      KitDataEle
+    ) {
+      this.UpdateCalendar = KitDataEle;
+    });
   });
 
   it.only("Navigate to kit item list View(Left Panel) to open Calendar", function () {

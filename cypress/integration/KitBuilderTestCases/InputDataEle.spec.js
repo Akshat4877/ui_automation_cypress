@@ -8,8 +8,8 @@ describe("Input Section Data Elements Configuration", function () {
 
     const lp = new LoginPage();
     const slp = new SanityLoginPage();
-    //slp.nvdTest()
-    slp.TmProd();
+    slp.nvdTest()
+    //slp.TmProd();
 
     //Handling Alert
     cy.on("window:confirm", () => {
@@ -19,8 +19,8 @@ describe("Input Section Data Elements Configuration", function () {
     //Login Assertions
     cy.contains(" Log In ").should("be.visible");
     //Enter credentials
-    //lp.EnterEmail("propertymanagement@commonareas.work.dev");
-    lp.EnterEmail("sam@armyspy.com");
+    lp.EnterEmail("propertymanagement@commonareas.work.dev");
+    //lp.EnterEmail("sam@armyspy.com");
     lp.EnterPassword("1234567Aa");
     lp.Submit();
     cy.log("User has been Logged In into the application");
@@ -76,8 +76,8 @@ describe("Input Section Data Elements Configuration", function () {
     cy.wait(5000);
     cy.title().should("eq", "Common Areas");
     cy.wait(5000);
-    //lp.NVDTestKitBuilder()
-    cy.visit('https://tm.commonareas.io/ClientAdmin/KitBuilder#/')
+    lp.NVDTestKitBuilder()
+    //cy.visit('https://tm.commonareas.io/ClientAdmin/KitBuilder#/')
     cy.log("User entered in kit builder");
     cy.wait(3000);
     //Open Craeted Kit Type

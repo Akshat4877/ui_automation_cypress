@@ -98,7 +98,7 @@ describe("New kit item creation test case", function () {
   it.only("Create New Kit Item with all the fields for Filters", function () {
     const lp = new LoginPage();
     cy.wait(2000)
-    cy.get("[name" + "=" + this.DataType2.Url + "]")
+    cy.get("[name" + "=" + this.DataType2.Text + "]")
       .last().should('be.visible')
     //save Kit Item for empty form
     cy.get(".v-select__selections .v-btn__content").click({ force: true });
@@ -107,11 +107,22 @@ describe("New kit item creation test case", function () {
       "be.visible"
     );
     cy.log("With No data new kit item saved successfully ");
-    //Url
-    cy.get("[name" + "=" + this.DataType2.Url + "]")
-      .last()
-      .type(this.NewKitItemData.Url);
 
+
+    //click on URl pancil icon
+    cy.xpath('//div[@class="wrapper-card-buttons d-flex justify-end col"]//div[@class="mr-4 action-icon"]')
+      .eq(0)
+      .click({ force: true });
+
+    cy.contains('Edit Link').should('be.visible')
+    //Enter lable
+    cy.get('[placeholder="Label"]').first().type(this.NewKitItemData.Url)
+    //Url Link
+    cy.get("[placeholder" + "=" + this.DataType2.Url + "]")
+      .type(this.NewKitItemData.Url);
+    //Click on save
+    cy.get('.button-pop-ups--size > .v-btn__content').click({ force: true });
+    cy.wait(1000)
 
     //Text
     cy.get("[name" + "=" + this.DataType2.Text + "]")
@@ -339,7 +350,8 @@ describe("New kit item creation test case", function () {
     cy.contains(this.NewKitItemData.AssigningName).click({ force: true });
     cy.wait(1000);
     //Click on to save
-    cy.get(".button-pop-ups--size > .v-btn__content").click({ force: true });
+    cy.get('.fill-height > .pop-up--header > .pop-up--header--right .v-btn__content')
+      .click({ force: true });
     //Assigning creation assertion
     cy.contains("Item shared").should("be.visible");
     cy.log("Assigning added");

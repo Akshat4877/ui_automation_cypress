@@ -110,7 +110,7 @@ describe("Related Control Square Card test case", function () {
 
   it.only("Square Card Related Control to configure Related New form", function () {
     //new form ele visible assertion
-    cy.get("[name" + "=" + this.DataType2.Url + "]").last().should("be.visible");
+    cy.get("[name" + "=" + this.DataType2.Text + "]").last().should("be.visible");
     //save Kit Item for empty form
     cy.get(".v-select__selections .v-btn__content").click({ force: true });
     //kit item Save Assertion for no data
@@ -118,10 +118,20 @@ describe("Related Control Square Card test case", function () {
       "be.visible"
     );
 
-    //Url
-    cy.get("[name" + "=" + this.DataType2.Url + "]")
-      .last()
+    //click on URl pancil icon
+    cy.xpath('//div[@class="wrapper-card-buttons d-flex justify-end col"]//div[@class="mr-4 action-icon"]')
+      .eq(0)
+      .click({ force: true });
+
+    cy.contains('Edit Link').should('be.visible')
+    //Enter lable
+    cy.get('[placeholder="Label"]').first().type(this.RelatedKitItemData.NewKitItemUrl)
+    //Url Link
+    cy.get("[placeholder" + "=" + this.DataType2.Url + "]")
       .type(this.RelatedKitItemData.NewKitItemUrl);
+    //Click on save
+    cy.get('.button-pop-ups--size > .v-btn__content').click({ force: true });
+    cy.wait(1000)
 
     //Text
     cy.get("[name" + "=" + this.DataType2.Text + "]")
@@ -143,7 +153,7 @@ describe("Related Control Square Card test case", function () {
     cy.contains(this.DataType2.CardKitToBeRelated).should("be.visible");
     cy.wait(5000)
     //related new form element visible assertion
-    cy.get("[name" + "=" + this.DataType2.Url + "]")
+    cy.get("[name" + "=" + this.DataType2.Text + "]")
       .eq(1).should('be.visible')
 
     //save square card related new with no data
@@ -157,10 +167,21 @@ describe("Related Control Square Card test case", function () {
 
 
     //Enter data in Related New form
+
     //Url
-    cy.get("[name" + "=" + this.DataType2.Url + "]")
-      .eq(1)
+    //click on URl pancil icon
+    cy.xpath('//div[@class="wrapper-card-buttons d-flex justify-end col"]//div[@class="mr-4 action-icon"]')
+      .eq(0)
+      .click({ force: true });
+    cy.contains('Edit Link').should('be.visible')
+    //Enter lable
+    cy.get('[placeholder="Label"]').first().type(this.RelatedKitItemData.Url)
+    //Url Link
+    cy.get("[placeholder" + "=" + this.DataType2.Url + "]").first()
       .type(this.RelatedKitItemData.Url);
+    //Click on save
+    cy.get('.button-pop-ups--size > .v-btn__content').first().click({ force: true });
+    cy.wait(1000)
 
     //Text
     cy.get("[name" + "=" + this.DataType2.Text + "]")
@@ -382,7 +403,7 @@ describe("Related Control Square Card test case", function () {
     cy.contains(this.RelatedKitItemData.LargeiconSize).click({ force: true });
     //IconLable
     cy.get('[placeholder="Label"]')
-      .eq(0)
+      .eq(1)
       .type(this.RelatedKitItemData.IconLabel);
 
     //Inspection
@@ -408,13 +429,13 @@ describe("Related Control Square Card test case", function () {
     cy.contains(this.RelatedKitItemData.AssigningName).click({ force: true });
     cy.wait(3000);
     //Click on to save
-    cy.get(".button-pop-ups--size > .v-btn__content").click({ force: true });
+    cy.get(".button-pop-ups--size > .v-btn__content").first().click({ force: true });
     //Assigning creation assertion
     cy.contains("Item shared").should("be.visible");
     cy.log("Assigning added")
 
     //Onetoone link
-    cy.get(".action-icon:nth-child(2) path").first().click({ force: true });
+    cy.get(".action-icon:nth-child(2) path").eq(1).click({ force: true });
     cy.wait(2000);
     //OneToOne
     cy.get(
@@ -693,7 +714,7 @@ describe("Related Control Square Card test case", function () {
 
   it.only('Icon Element data Validation', function () {
     //Validating details view input data
-    cy.get('[placeholder="Label"]')
+    cy.get('[placeholder="Label"]').eq(0)
       .should("have.value", this.RelatedKitItemData.IconLabel)
   })
 

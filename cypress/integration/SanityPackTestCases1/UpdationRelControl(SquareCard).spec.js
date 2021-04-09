@@ -145,12 +145,20 @@ describe("Update Related New fot Square Card Related Control", function () {
     cy.log("Related Edit form has been opened");
     cy.wait(10000);
 
-    //Url
-    cy.get("[name" + "=" + this.DataType2.Url + "]")
-      .eq(1)
-      .clear({ force: true })
-      .type(this.UpdateKitItemData.Url);
+    //click on URl pancil icon
+    cy.xpath('//div[@class="wrapper-card-buttons d-flex justify-end col"]//div[@class="mr-4 action-icon"]')
+      .eq(0)
+      .click({ force: true });
+    cy.contains('Edit Link').should('be.visible')
+    //Update lable
+    cy.get('[placeholder="Label"]').first().clear().type(this.UpdateKitItemData.Url)
+    //Update Url Link
+    cy.get("[placeholder" + "=" + this.DataType2.Url + "]")
+      .clear().type(this.UpdateKitItemData.Url);
+    //Click on save
+    cy.get('.button-pop-ups--size > .v-btn__content').click({ force: true });
     cy.log("Url Updated");
+    cy.wait(1000)
 
     //Text
     cy.get("[name" + "=" + this.DataType2.Text + "]")
@@ -379,9 +387,12 @@ describe("Update Related New fot Square Card Related Control", function () {
     )
       .eq(0)
       .click({ force: true });
-    cy.wait(4000);
-    //Click on to open UserSelector Pop up
-    //cy.get(".searchIcon").eq(7).click({ force: true });
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.UpdateKitItemData.UserSelector}{enter}`)
+    cy.wait(3000)
     cy.contains(this.UpdateKitItemData.UserSelector).click({ force: true });
     cy.log("UserSelect Updated");
     cy.wait(1000);
@@ -392,9 +403,12 @@ describe("Update Related New fot Square Card Related Control", function () {
     )
       .eq(1)
       .click({ force: true });
-    cy.wait(4000);
-    // //Click on to open ContactSelector Pop up
-    // cy.get(".searchIcon").eq(8).click({ force: true });
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.UpdateKitItemData.ContactSelector}{enter}`)
+    cy.wait(3000)
     cy.contains(this.UpdateKitItemData.ContactSelector).click({
       force: true,
     });
@@ -438,7 +452,7 @@ describe("Update Related New fot Square Card Related Control", function () {
     });
     //IconLable
     cy.get('[placeholder="Label"]')
-      .first()
+      .eq(1)
       .clear()
       .type(this.UpdateKitItemData.IconLabel);
 
@@ -470,7 +484,7 @@ describe("Update Related New fot Square Card Related Control", function () {
     cy.contains(this.UpdateKitItemData.Assigning).click({ force: true });
     cy.wait(1000);
     //Click on to save
-    cy.get(".button-pop-ups--size > .v-btn__content").click({ force: true });
+    cy.get(".button-pop-ups--size > .v-btn__content").first().click({ force: true });
     //Assigning creation assertion
     cy.contains("Item shared").should("be.visible");
     cy.log("Assigning added");
@@ -755,10 +769,20 @@ describe("Update Related New fot Square Card Related Control", function () {
 
     //Create Sqaurecard RelatedNew
     cy.wait(2000);
-    //Url
-    cy.get("[name" + "=" + this.DataType2.Url + "]")
-      .eq(1)
+    //click on URl pancil icon
+    cy.xpath('//div[@class="wrapper-card-buttons d-flex justify-end col"]//div[@class="mr-4 action-icon"]')
+      .eq(0)
+      .click({ force: true });
+
+    cy.contains('Edit Link').should('be.visible')
+    //Enter lable
+    cy.get('[placeholder="Label"]').first().type(this.RelatedKitItemData3.Url)
+    //Url Link
+    cy.get("[placeholder" + "=" + this.DataType2.Url + "]").first()
       .type(this.RelatedKitItemData3.Url);
+    //Click on save
+    cy.get('.button-pop-ups--size > .v-btn__content').click({ force: true });
+    cy.wait(1000)
 
     //Text
     cy.get("[name" + "=" + this.DataType2.Text + "]")
@@ -948,8 +972,12 @@ describe("Update Related New fot Square Card Related Control", function () {
     //Click on to open UserSelector Pop up
     cy.get(".searchIcon").eq(0).click({ force: true });
     cy.contains(" Users ").should("be.visible");
-    cy.wait(3000);
-
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.RelatedKitItemData3.UserSelectorName}{enter}`)
+    cy.wait(3000)
     cy.contains(this.RelatedKitItemData3.UserSelectorName).click({
       force: true,
     });
@@ -960,13 +988,17 @@ describe("Update Related New fot Square Card Related Control", function () {
     //Click on to open ContactSelector Pop up
     cy.get(".searchIcon").eq(1).click({ force: true });
     cy.contains(" Connection ").should("be.visible");
-    cy.wait(4000);
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.RelatedKitItemData3.ContactSelectorName}{enter}`)
+    cy.wait(3000)
     cy.contains(this.RelatedKitItemData3.ContactSelectorName).click({
       force: true,
     });
     cy.log("ContactSelecto added");
     cy.wait(1000);
-
 
     //Icon
     //Click on + icon of ICON Element
@@ -992,7 +1024,7 @@ describe("Update Related New fot Square Card Related Control", function () {
     cy.contains(this.RelatedKitItemData3.LargeiconSize).click({ force: true });
     //IconLable
     cy.get('[placeholder="Label"]')
-      .eq(0)
+      .eq(1)
       .type(this.RelatedKitItemData3.IconLabel);
 
     //Inspection
@@ -1020,13 +1052,13 @@ describe("Update Related New fot Square Card Related Control", function () {
     cy.contains(this.RelatedKitItemData3.AssigningName).click({ force: true });
     cy.wait(1000);
     //Click on to save
-    cy.get(".button-pop-ups--size > .v-btn__content").click({ force: true });
+    cy.get(".button-pop-ups--size > .v-btn__content").first().click({ force: true });
     //Assigning creation assertion
     cy.contains("Item shared").should("be.visible");
     cy.log("Assigning added");
 
     //Click on to link onetoone
-    cy.get(".action-icon:nth-child(2) path").eq(0).click({ force: true });
+    cy.get(".action-icon:nth-child(2) path").eq(1).click({ force: true });
     cy.wait(3000);
     //Link existing kit item for one to one
     cy.get(
@@ -1249,7 +1281,6 @@ describe("Update Related New fot Square Card Related Control", function () {
   });
 
   it.only('UserSelector Element data Validation', function () {
-
     //scroll to user selector
     cy.get('.imageContent').eq(0).scrollIntoView({ force: true })
     cy.wait(1000)

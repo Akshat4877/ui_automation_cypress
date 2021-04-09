@@ -151,12 +151,20 @@ describe("Update Related New for OneToMany Related Control", function () {
     ).click({ force: true });
     cy.wait(10000);
 
-    //Url
-    cy.get("[name" + "=" + this.DataType2.Url + "]")
-      .eq(1)
-      .clear({ force: true })
-      .type(this.UpdateKitItemData.Url);
+    //click on URl pancil icon
+    cy.xpath('//div[@class="wrapper-card-buttons d-flex justify-end col"]//div[@class="mr-4 action-icon"]')
+      .eq(0)
+      .click({ force: true });
+    cy.contains('Edit Link').should('be.visible')
+    //Update lable
+    cy.get('[placeholder="Label"]').first().clear().type(this.UpdateKitItemData.Url)
+    //Update Url Link
+    cy.get("[placeholder" + "=" + this.DataType2.Url + "]")
+      .clear().type(this.UpdateKitItemData.Url);
+    //Click on save
+    cy.get('.button-pop-ups--size > .v-btn__content').click({ force: true });
     cy.log("Url Updated");
+    cy.wait(1000)
 
 
     //Text
@@ -440,7 +448,7 @@ describe("Update Related New for OneToMany Related Control", function () {
 
     //IconLable
     cy.get('[placeholder="Label"]')
-      .first()
+      .eq(1)
       .clear()
       .type(this.UpdateKitItemData.IconLabel);
 
@@ -467,7 +475,7 @@ describe("Update Related New for OneToMany Related Control", function () {
     cy.wait(3000)
     cy.contains(this.UpdateKitItemData.Assigning).click({ force: true });
     //Click on to save
-    cy.get(".button-pop-ups--size > .v-btn__content").click({ force: true });
+    cy.get(".button-pop-ups--size > .v-btn__content").first().click({ force: true });
     //Assigning creation assertion
     cy.contains("Item shared").should("be.visible");
     cy.log("Assigning added");
@@ -750,11 +758,20 @@ describe("Update Related New for OneToMany Related Control", function () {
 
     //Create OneToMany RelatedNew
     cy.wait(2000);
-    //Url
-    cy.get("[name" + "=" + this.DataType2.Url + "]")
-      .eq(1)
+    //click on URl pancil icon
+    cy.xpath('//div[@class="wrapper-card-buttons d-flex justify-end col"]//div[@class="mr-4 action-icon"]')
+      .eq(0)
+      .click({ force: true });
+
+    cy.contains('Edit Link').should('be.visible')
+    //Enter lable
+    cy.get('[placeholder="Label"]').first().type(this.RelatedKitItemData.Url)
+    //Url Link
+    cy.get("[placeholder" + "=" + this.DataType2.Url + "]").first()
       .type(this.RelatedKitItemData.Url);
-    cy.wait(1000);
+    //Click on save
+    cy.get('.button-pop-ups--size > .v-btn__content').first().click({ force: true });
+    cy.wait(1000)
 
     //Text
     cy.get("[name" + "=" + this.DataType2.Text + "]")
@@ -1001,7 +1018,7 @@ describe("Update Related New for OneToMany Related Control", function () {
     cy.wait(1000);
     //IconLable
     cy.get('[placeholder="Label"]')
-      .eq(0)
+      .eq(1)
       .type(this.RelatedKitItemData.IconLabel);
 
     ///Inspection
@@ -1030,13 +1047,13 @@ describe("Update Related New for OneToMany Related Control", function () {
     cy.contains(this.RelatedKitItemData.AssigningName).click({ force: true });
     cy.wait(2000);
     //Click on to save
-    cy.get(".button-pop-ups--size > .v-btn__content").click({ force: true });
+    cy.get(".button-pop-ups--size > .v-btn__content").first().click({ force: true });
     //Assigning creation assertion
     cy.contains("Item shared").should("be.visible");
     cy.log("Assigning added");
 
     //Click on to link onetoone
-    cy.get(".action-icon:nth-child(2) path").eq(0).click({ force: true });
+    cy.get(".action-icon:nth-child(2) path").eq(1).click({ force: true });
     cy.wait(3000);
     //Link existing kit item for one to one
 

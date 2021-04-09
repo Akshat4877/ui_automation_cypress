@@ -159,12 +159,20 @@ describe("Update Related New fot OneToOne Related Control", function () {
       "be.visible"
     );
 
-    //Url
-    cy.get("[name" + "=" + this.DataType2.Url + "]")
-      .eq(1)
-      .clear()
-      .type(this.UpdateKitItemData.Url);
+    //click on URl pancil icon
+    cy.xpath('//div[@class="wrapper-card-buttons d-flex justify-end col"]//div[@class="mr-4 action-icon"]')
+      .eq(0)
+      .click({ force: true });
+    cy.contains('Edit Link').should('be.visible')
+    //Update lable
+    cy.get('[placeholder="Label"]').first().clear().type(this.UpdateKitItemData.Url)
+    //Update Url Link
+    cy.get("[placeholder" + "=" + this.DataType2.Url + "]")
+      .clear().type(this.UpdateKitItemData.Url);
+    //Click on save
+    cy.get('.button-pop-ups--size > .v-btn__content').click({ force: true });
     cy.log("Url Updated");
+    cy.wait(1000)
 
     //Text
     cy.get("[name" + "=" + this.DataType2.Text + "]")
@@ -481,7 +489,7 @@ describe("Update Related New fot OneToOne Related Control", function () {
     cy.contains(this.UpdateKitItemData.Assigning).click({ force: true });
     cy.wait(1000);
     //Click on to save
-    cy.get(".button-pop-ups--size > .v-btn__content").click({ force: true });
+    cy.get(".button-pop-ups--size > .v-btn__content").first().click({ force: true });
     //Assigning creation assertion
     cy.contains("Item shared").should("be.visible");
     cy.log("Assigning added");
@@ -780,15 +788,26 @@ describe("Update Related New fot OneToOne Related Control", function () {
     cy.contains("New Item created").should("be.visible");
     //Related Kit Assertion
     cy.contains(this.DataType2.KitToBeRelate).should("be.visible");
-    cy.get("[name" + "=" + this.DataType2.Url + "]")
+    cy.get("[name" + "=" + this.DataType2.Text + "]")
       .eq(1).should('be.visible')
     cy.wait(4000);
 
-    //Create OneToOne RelatedNew
-    //Url
-    cy.get("[name" + "=" + this.DataType2.Url + "]")
-      .eq(1)
+    //Create OneToMany RelatedNew
+    cy.wait(2000);
+    //click on URl pancil icon
+    cy.xpath('//div[@class="wrapper-card-buttons d-flex justify-end col"]//div[@class="mr-4 action-icon"]')
+      .eq(0)
+      .click({ force: true });
+
+    cy.contains('Edit Link').should('be.visible')
+    //Enter lable
+    cy.get('[placeholder="Label"]').first().type(this.RelatedKitItemData2.Url)
+    //Url Link
+    cy.get("[placeholder" + "=" + this.DataType2.Url + "]").first()
       .type(this.RelatedKitItemData2.Url);
+    //Click on save
+    cy.get('.button-pop-ups--size > .v-btn__content').first().click({ force: true });
+    cy.wait(1000)
 
     //Text
     cy.get("[name" + "=" + this.DataType2.Text + "]")
@@ -1042,10 +1061,7 @@ describe("Update Related New fot OneToOne Related Control", function () {
 
     //Click on to open Assigning Pop up
     cy.get(".searchIcon").eq(2).click({ force: true });
-    // cy.get(
-    //   " div.kit-control-component.kit-control-assigning.pr-3.col.col-sm-12.col-md-6.mb-4.px-3.col-sm-12.col-md-6.mb-4.px-3:nth-child(26) span.searchRel div.v-input.searchSelectNone.v-input--is-readonly.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-select div.v-input__control div.v-input__slot > div.v-select__slot:nth-child(2)"
-    // ).click({ force: true });
-    cy.wait(4000);
+    cy.wait(2000);
     //Click on to select the Assigning
     cy.xpath('//*[text() ="Search"]').first().click({ force: true })
     cy.wait(1000)
@@ -1055,12 +1071,12 @@ describe("Update Related New fot OneToOne Related Control", function () {
     cy.contains(this.RelatedKitItemData2.AssigningName).click({ force: true });
     cy.wait(3000);
     //Click on to save
-    cy.get(".button-pop-ups--size > .v-btn__content").click({ force: true });
+    cy.get(".button-pop-ups--size > .v-btn__content").first().click({ force: true });
     //Assigning creation assertion
     cy.contains("Item shared").should("be.visible");
     cy.log("Assigning added");
     //Click on to link onetoone
-    cy.get(".action-icon:nth-child(2) path").eq(0).click({ force: true });
+    cy.get(".action-icon:nth-child(2) path").eq(1).click({ force: true });
     cy.wait(2000);
     //Link existing kit item for one to one
     cy.get(

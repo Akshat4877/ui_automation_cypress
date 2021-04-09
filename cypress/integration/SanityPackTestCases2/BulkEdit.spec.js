@@ -127,10 +127,21 @@ describe("Bulk Edit test case for List View kit item", function () {
   });
 
   it.only("Bulk Data", function () {
-    //Url
-    cy.get("[name" + "=" + this.DataType2.Url + "]")
-      .eq(1)
+
+    //click on URl pancil icon
+    cy.xpath('//div[@class="wrapper-card-buttons d-flex justify-end col"]//div[@class="mr-4 action-icon"]')
+      .eq(0)
+      .click({ force: true });
+
+    cy.contains('Edit Link').should('be.visible')
+    //Enter lable
+    cy.get('[placeholder="Label"]').first().type(this.NewKitItemData.Url)
+    //Url Link
+    cy.get("[placeholder" + "=" + this.DataType2.Url + "]")
       .type(this.NewKitItemData.Url);
+    //Click on save
+    cy.get('.button-pop-ups--size > .v-btn__content').first().click({ force: true });
+    cy.wait(1000)
 
     //Text
     cy.get("[name" + "=" + this.DataType2.Text + "]")
@@ -318,7 +329,7 @@ describe("Bulk Edit test case for List View kit item", function () {
       .click({ force: true });
     cy.contains(this.NewKitItemData.LargeiconSize).click({ force: true });
     //IconLable
-    cy.get('[placeholder="Label"]').type(this.NewKitItemData.IconLabel);
+    cy.get('[placeholder="Label"]').last().type(this.NewKitItemData.IconLabel);
     cy.wait(1000)
 
 
@@ -367,7 +378,7 @@ describe("Bulk Edit test case for List View kit item", function () {
     cy.wait(1000);
 
     //Link onetoone
-    cy.get(".action-icon:nth-child(2) path").click({ force: true });
+    cy.get(".action-icon:nth-child(2) path").last().click({ force: true });
     cy.contains(" Related Items ").should("be.visible");
     cy.wait(2000);
     cy.get(
@@ -375,7 +386,7 @@ describe("Bulk Edit test case for List View kit item", function () {
     ).click({ force: true });
 
     //Click on save
-    cy.get(".ca-button-green > .v-btn__content").click({ force: true });
+    cy.get(".ca-button-green > .v-btn__content").first().click({ force: true });
     cy.contains(" Bulk edit complete ").should("be.visible");
     cy.wait(2000);
   });
@@ -560,6 +571,10 @@ describe("Bulk Edit test case for List View kit item", function () {
     });
   })
 
+  it.only('OneToOne Related Control Items Validation', function () {
+    cy.get(".last-updated:nth-child(2) > .v-icon").should("exist");
+  })
+
   it.only('Icon Element data Validation', function () {
     //Validating details view input data
     //json value assertion
@@ -578,8 +593,9 @@ describe("Bulk Edit test case for List View kit item", function () {
   })
   ////////////////////////////////////////////////////////////////////////////////////////////////
   it.only('Open and Validate Second bulk Edit kit item', function () {
+
     cy.wait(1000)
-    cy.xpath('//div[@class="v-list-item__subtitle truncate list-item--title"]')
+    cy.xpath('//div[@class="row-list-item-details--content py-2 justify-center col col-10 truncate-wrapper"]')
       .eq(1).click({ force: true })
     cy.wait(2000)
   })
@@ -751,6 +767,10 @@ describe("Bulk Edit test case for List View kit item", function () {
     });
   })
 
+  it.only('OneToOne Related Control Items Validation', function () {
+    cy.get(".last-updated:nth-child(2) > .v-icon").should("exist");
+  })
+
   it.only('Icon Element data Validation', function () {
     //Validating details view input data
     //json value assertion
@@ -771,7 +791,7 @@ describe("Bulk Edit test case for List View kit item", function () {
   /////////////////////////////////////////////////////////////////////////////////////////////////////
   it.only('Open and Validate Third bulk Edit kit item', function () {
     cy.wait(1000)
-    cy.xpath('//div[@class="v-list-item__subtitle truncate list-item--title"]')
+    cy.xpath('//div[@class="row-list-item-details--content py-2 justify-center col col-10 truncate-wrapper"]')
       .eq(2).click({ force: true })
     cy.wait(2000)
   })
@@ -943,6 +963,10 @@ describe("Bulk Edit test case for List View kit item", function () {
     });
   })
 
+  it.only('OneToOne Related Control Items Validation', function () {
+    cy.get(".last-updated:nth-child(2) > .v-icon").should("exist");
+  })
+
   it.only('Icon Element data Validation', function () {
     //Validating details view input data
     //json value assertion
@@ -964,7 +988,7 @@ describe("Bulk Edit test case for List View kit item", function () {
 
   it.only('Open and Validate Fourth bulk Edit kit item', function () {
     cy.wait(1000)
-    cy.xpath('//div[@class="v-list-item__subtitle truncate list-item--title"]')
+    cy.xpath('//div[@class="row-list-item-details--content py-2 justify-center col col-10 truncate-wrapper"]')
       .eq(3).click({ force: true })
     cy.wait(2000)
   })
@@ -1134,6 +1158,10 @@ describe("Bulk Edit test case for List View kit item", function () {
     cy.xpath('//div[@controlname="contactSelector"]//div[@class="col item-label"]').children('div').invoke('text').then((text) => {
       expect(text.trim()).equal(this.NewKitItemData.ContactSelectorName)
     });
+  })
+
+  it.only('OneToOne Related Control Items Validation', function () {
+    cy.get(".last-updated:nth-child(2) > .v-icon").should("exist");
   })
 
   it.only('Icon Element data Validation', function () {

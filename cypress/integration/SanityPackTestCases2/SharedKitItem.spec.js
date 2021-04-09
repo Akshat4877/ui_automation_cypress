@@ -17,7 +17,7 @@ describe("Internal Connection Shared Kit Item Test Case", function () {
     //Login Assertions
     cy.contains(" Log In ").should("be.visible");
     //Enter credentials
-    lp.EnterEmail("ema@mailinator.com");
+    lp.EnterEmail("jacob@mailinator.com");
     //lp.EnterEmail("mack2@mailinator.com");
 
     lp.EnterPassword("1234567Aa");
@@ -354,7 +354,7 @@ describe("Internal Connection Shared Kit Item Test Case", function () {
 
   it.only("Contributors tab data Validation in details view", function () {
     cy.contains("Contributors").click({ force: true })
-    cy.contains(this.SData.ContributorsName).should('be.visible')
+    cy.contains(this.SData.ContributorsName).should('exist')
     cy.contains(this.NewKitItemData.AssigningName).should('exist')
   });
 });
@@ -383,6 +383,11 @@ describe("Email Notification Shared Activity", function () {
       //     this.NewKitItemData = KitDataEle;
       //   }
       // );
+      ///////////////////////////////////////////////////////////////////
+
+      cy.fixture("SanityPackTestData2/KitItemId").then(function (ItemID) {
+        this.KitItemId = ItemID;
+      });
 
     });
 

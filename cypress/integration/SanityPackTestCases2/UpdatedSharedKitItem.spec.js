@@ -16,7 +16,7 @@ describe("Shared Kit Item Updation Test Case for Internal User", function () {
         //Login Assertions
         cy.contains(" Log In ").should("be.visible");
         //Enter credentials
-        lp.EnterEmail("admin@nvdlp.com.dev");
+        lp.EnterEmail("maintenancedirector@nvdlp.com.dev");
         //lp.EnterEmail("kat@armyspy.com");
         lp.EnterPassword("1234567Aa");
         lp.Submit();

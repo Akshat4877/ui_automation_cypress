@@ -117,7 +117,7 @@ describe("New kit item complete creation test case", function () {
   it.only("Create New Kit Item with all the fields", function () {
     const lp = new LoginPage();
     //new form ele visible assertion
-    cy.get("[name" + "=" + this.DataType2.Url + "]")
+    cy.get("[name" + "=" + this.DataType2.Text + "]")
       .last()
       .should("be.visible");
     //save Kit Item for empty form
@@ -127,10 +127,21 @@ describe("New kit item complete creation test case", function () {
       "be.visible"
     );
     cy.log("With No data new kit item saved successfully ");
-    //Url
-    cy.get("[name" + "=" + this.DataType2.Url + "]")
-      .last()
+
+    //click on URl pancil icon
+    cy.xpath('//div[@class="wrapper-card-buttons d-flex justify-end col"]//div[@class="mr-4 action-icon"]')
+      .eq(0)
+      .click({ force: true });
+
+    cy.contains('Edit Link').should('be.visible')
+    //Enter lable
+    cy.get('[placeholder="Label"]').first().type(this.NewKitItemData.Url)
+    //Url Link
+    cy.get("[placeholder" + "=" + this.DataType2.Url + "]")
       .type(this.NewKitItemData.Url);
+    //Click on save
+    cy.get('.button-pop-ups--size > .v-btn__content').click({ force: true });
+    cy.wait(1000)
 
     //Text
     cy.get("[name" + "=" + this.DataType2.Text + "]")
@@ -139,11 +150,10 @@ describe("New kit item complete creation test case", function () {
 
     //File
     cy.get(".link-icon--green > path").click({ force: true });
-    cy.wait(3000);
+    cy.wait(1000);
     //give file name to select
     cy.contains(this.NewKitItemData.NewFormLibFileName).click({ force: true });
     //Click on save file
-    cy.wait(2000);
     cy.get(
       ".container-search > .pop-up--header > .pop-up--header--right > .button-pop-ups--size > .v-btn__content"
     ).click({ force: true });
@@ -311,8 +321,12 @@ describe("New kit item complete creation test case", function () {
     //UserSelector(Values coming form KitItemValues Json File)
     //Click on to open UserSelector Pop up
     cy.get(".searchIcon").eq(0).click({ force: true });
-    cy.wait(3000);
-
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.NewKitItemData.UserSelectorName}{enter}`)
+    cy.wait(3000)
     cy.contains(this.NewKitItemData.UserSelectorName).click({ force: true });
     cy.log("UserSelect added");
     cy.wait(1000);
@@ -320,7 +334,12 @@ describe("New kit item complete creation test case", function () {
     //ContactSelector(Values coming form KitItemValues Json File)
     //Click on to open ContactSelector Pop up
     cy.get(".searchIcon").eq(1).click({ force: true });
-    cy.wait(4000);
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.NewKitItemData.ContactSelectorName}{enter}`)
+    cy.wait(3000)
     cy.contains(this.NewKitItemData.ContactSelectorName).click({ force: true });
     cy.log("ContactSelecto added");
     cy.wait(1000);
@@ -497,14 +516,14 @@ describe("New kit item complete creation test case", function () {
     cy.contains(this.DataType2.KitToBeRelated).should("be.visible");
     cy.wait(4000)
     //related new form element visibility assertion
-    cy.get("[name" + "=" + this.DataType2.Url + "]")
+    cy.get("[name" + "=" + this.DataType2.Text + "]")
       .eq(1).should('be.visible')
     cy.wait(2000)
 
     //Url
-    cy.get("[name" + "=" + this.DataType2.Url + "]")
-      .eq(1)
-      .type(this.NewKitItemData.Url);
+    // cy.get("[name" + "=" + this.DataType2.Url + "]")
+    //   .eq(1)
+    //   .type(this.NewKitItemData.Url);
 
     //Text
     cy.get("[name" + "=" + this.DataType2.Text + "]")

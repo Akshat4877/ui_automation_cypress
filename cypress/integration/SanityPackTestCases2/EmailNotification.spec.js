@@ -5,12 +5,31 @@ describe("Email Notification Shared Activity", function () {
     "Internal User Credentials",
     function () {
 
-      cy.fixture("SanityPackTestData2/SharedUserCredentials").then(function (InternalUser) {
-        this.Credentials = InternalUser;
+      cy.fixture("SanityPackTestData2/SharedUserCredentials").then(function (KitDataEle) {
+        this.Credentials = KitDataEle;
       });
-      // cy.fixture("SanityPackTestData2/SharedUserCredentials").then(function (ExternallUser) {
-      //   this.Credentials = ExternallUser;
+
+      // cy.fixture("SanityPackTestData2(Prod)/SharedUserCredentials(Prod)").then(function (KitDataEle) {
+      //   this.Credentials = KitDataEle;
       // });
+
+      cy.fixture("KitTypeTestData/NewKitItemDataValues").then(function (
+        KitDataEle
+      ) {
+        this.NewKitItemData = KitDataEle;
+      });
+
+      // cy.fixture("SanityPackTestData(Prod)/NewKitItemDataValue(Prod)").then(
+      //   function (KitDataEle) {
+      //     this.NewKitItemData = KitDataEle;
+      //   }
+      // );
+      ///////////////////////////////////////////////////////////////////
+
+      cy.fixture("SanityPackTestData2/KitItemId").then(function (ItemID) {
+        this.KitItemId = ItemID;
+      });
+
     });
 
   it.only("Verifying Email Notification Shared Kit Item Activity for Internal User ", function () {
@@ -23,6 +42,18 @@ describe("Email Notification Shared Activity", function () {
     //Click on Go
     sp.Go();
     cy.wait(10000);
-    cy.contains("New BuildingAreas").click({ force: true });
+    cy.contains("New " + this.NewKitItemData.KitName).click({ force: true });
+    cy.wait(3000)
+
+    var id = this.KitItemId.ItemID.replace('# ',' ')
+    cy.log(id)
+
+    //Validate shared kit item id
+    cy.get("#html_msg_body").eq(0).then(($iframe) => {
+      const $a = $iframe.contents().find("td");
+      cy.wrap($a).contains('ID:330').invoke('val').then((text) => {
+        cy.log(text)
+      })
+    });
   });
 });

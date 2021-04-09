@@ -110,7 +110,7 @@ describe("Related Control One to One test case", function () {
   it.only("One to One Related Control to configure Related New form", function () {
     cy.wait(1000);
     //new form ele visible assertion
-    cy.get("[name" + "=" + this.DataType2.Url + "]").last().should("be.visible");
+    cy.get("[name" + "=" + this.DataType2.Text + "]").last().should("be.visible");
 
     //save Kit Item for empty form
     cy.get(".v-select__selections .v-btn__content").click({ force: true });
@@ -120,10 +120,21 @@ describe("Related Control One to One test case", function () {
     );
     cy.log("With No data new kit item saved successfully ");
 
-    //Url
-    cy.get("[name" + "=" + this.DataType2.Url + "]")
-      .last()
+
+    //click on URl pancil icon
+    cy.xpath('//div[@class="wrapper-card-buttons d-flex justify-end col"]//div[@class="mr-4 action-icon"]')
+      .eq(0)
+      .click({ force: true });
+
+    cy.contains('Edit Link').should('be.visible')
+    //Enter lable
+    cy.get('[placeholder="Label"]').first().type(this.RelatedKitItemData.NewKitItemUrl)
+    //Url Link
+    cy.get("[placeholder" + "=" + this.DataType2.Url + "]")
       .type(this.RelatedKitItemData.NewKitItemUrl);
+    //Click on save
+    cy.get('.button-pop-ups--size > .v-btn__content').click({ force: true });
+    cy.wait(1000)
 
     //Text
     cy.get("[name" + "=" + this.DataType2.Text + "]")
@@ -131,11 +142,11 @@ describe("Related Control One to One test case", function () {
       .type(this.RelatedKitItemData.NewKitItemText);
 
     //Scroll
-    cy.get(".mr-4 > .inline-svg > path").scrollIntoView({ force: true });
+    cy.get(".mr-4 > .inline-svg > path").last().scrollIntoView({ force: true });
     cy.wait(1000);
 
     //Click on New Item for one to one Related Control
-    cy.get(".mr-4 > .inline-svg > path")
+    cy.get(".mr-4 > .inline-svg > path").last()
       .scrollIntoView({ force: true })
       .click({ force: true });
     //New Item Assertion
@@ -143,7 +154,7 @@ describe("Related Control One to One test case", function () {
     //Related Kit Assertion
     cy.contains(this.DataType2.KitToBeRelated).should("be.visible");
     cy.wait(4000);
-    cy.get("[name" + "=" + this.DataType2.Url + "]")
+    cy.get("[name" + "=" + this.DataType2.Text + "]")
       .eq(1).should('be.visible')
 
     //save related new with no data
@@ -158,10 +169,22 @@ describe("Related Control One to One test case", function () {
 
     //Enter data in Related New form
 
-    //Url
-    cy.get("[name" + "=" + this.DataType2.Url + "]")
-      .eq(1)
+
+
+    //click on URl pancil icon
+    cy.xpath('//div[@class="wrapper-card-buttons d-flex justify-end col"]//div[@class="mr-4 action-icon"]')
+      .eq(0)
+      .click({ force: true });
+
+    cy.contains('Edit Link').should('be.visible')
+    //Enter lable
+    cy.get('[placeholder="Label"]').first().type(this.RelatedKitItemData.Url)
+    //Url Link
+    cy.get("[placeholder" + "=" + this.DataType2.Url + "]").first()
       .type(this.RelatedKitItemData.Url);
+    //Click on save
+    cy.get('.button-pop-ups--size > .v-btn__content').first().click({ force: true });
+    cy.wait(1000)
 
     //Text
     cy.get("[name" + "=" + this.DataType2.Text + "]")
@@ -386,7 +409,7 @@ describe("Related Control One to One test case", function () {
     cy.contains(this.RelatedKitItemData.LargeiconSize).click({ force: true });
     //IconLable
     cy.get('[placeholder="Label"]')
-      .eq(0)
+      .eq(1)
       .type(this.RelatedKitItemData.IconLabel);
 
     //Inspection
@@ -411,13 +434,13 @@ describe("Related Control One to One test case", function () {
     cy.contains(this.RelatedKitItemData.AssigningName).click({ force: true });
     cy.wait(1000);
     //Click on to save
-    cy.get(".button-pop-ups--size > .v-btn__content").click({ force: true });
+    cy.get(".button-pop-ups--size > .v-btn__content").first().click({ force: true });
     //Assigning creation assertion
     cy.contains("Item shared").should("be.visible");
     cy.log("Assigning added");
 
     //Onetoone link
-    cy.get(".action-icon:nth-child(2) path").first().click({ force: true });
+    cy.get(".action-icon:nth-child(2) path").eq(1).click({ force: true });
     //OneToOne
     cy.get(
       ".row:nth-child(1) > .d-flex > .list-item-col-left > .v-avatar:nth-child(1) svg"
@@ -687,7 +710,7 @@ describe("Related Control One to One test case", function () {
 
   it.only('Icon Element data Validation', function () {
     //Validating details view input data
-    cy.get('[placeholder="Label"]')
+    cy.get('[placeholder="Label"]').eq(0)
       .should("have.value", this.RelatedKitItemData.IconLabel)
   })
 
@@ -719,7 +742,7 @@ describe("Related Control One to One test case", function () {
 
   it.only("Deletion Validation of added OneToOne element", function () {
     //Deletion assertion
-    cy.get(".action-icon:nth-child(2) > .inline-svg").scrollIntoView({
+    cy.get(".action-icon:nth-child(2) > .inline-svg").last().scrollIntoView({
       force: true,
     });
 
@@ -734,12 +757,12 @@ describe("Related Control One to One test case", function () {
 
   it.only("Link Existing Item for OneToOne Related Control", function () {
     cy.wait(2000);
-    cy.get(".action-icon:nth-child(2) > .inline-svg").scrollIntoView({
+    cy.get(".action-icon:nth-child(2) > .inline-svg").last().scrollIntoView({
       force: true,
     });
 
     //Click on to link existing item
-    cy.get(".action-icon:nth-child(2) > .inline-svg").click({ force: true });
+    cy.get(".action-icon:nth-child(2) > .inline-svg").last().click({ force: true });
     //Search List view pop up assertion
     cy.contains(" Related Items ").should("be.visible");
     //Select item to be linked kit item
