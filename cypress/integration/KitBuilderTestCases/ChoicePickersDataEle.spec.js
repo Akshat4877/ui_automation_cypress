@@ -78,22 +78,20 @@ describe("Choice Pickers Section Data Elements Configuration", function () {
     cy.wait(5000);
     lp.NVDTestKitBuilder();
     cy.log("User entered in kit builder");
-    cy.wait(3000);
     //Open Craeted Kit Type
     kb.KBSearchBox(this.KitTypeName.KitName3);
-    cy.wait(5000);
+    cy.wait(2000);
     cy.contains(this.KitTypeName.KitName3).click({ force: true });
-    cy.wait(3000);
     cy.log("Created Kit type has been opened");
     cy.contains("Form Views").click({ force: true });
-    cy.wait(3000);
+    cy.wait(1000);
     cy.contains(this.data.NewView).click({ force: true });
-    cy.wait(5000);
+    cy.wait(1000);
   });
 
   it("Choice Pickers Section Data Elements", function () {
     cy.contains("Choice Pickers").click({ force: true });
-    cy.wait(2000);
+    cy.wait(1000);
   });
 
   it("Toggle Data Type", function () {
@@ -103,7 +101,7 @@ describe("Choice Pickers Section Data Elements Configuration", function () {
     //Page Object
     const DataType = new KitBuilderDataTypes();
     DataType.Toggle(this.DataType2.Toggle);
-    cy.wait(5000);
+    cy.wait(1000);
   });
 
   it("SelectList Data Type", function () {
@@ -122,7 +120,7 @@ describe("Choice Pickers Section Data Elements Configuration", function () {
       this.DataType2.SelectListValue4,
       this.DataType2.SelectListValue5
     );
-    cy.wait(5000);
+    cy.wait(1000);
   });
 
   it("RadioSelect Data Type", function () {
@@ -141,7 +139,7 @@ describe("Choice Pickers Section Data Elements Configuration", function () {
       this.DataType2.RadioSelectValue4,
       this.DataType2.RadioSelectValue5
     );
-    cy.wait(5000);
+    cy.wait(1000);
   });
 
   it("CheckboxSelect Data Type", function () {
@@ -159,14 +157,14 @@ describe("Choice Pickers Section Data Elements Configuration", function () {
       this.DataType2.CheckboxSelectValue4,
       this.DataType2.CheckboxSelectValue5
     );
-    cy.wait(5000);
+    cy.wait(1000);
   });
 
   it("Kit Builder Save and Publish", function () {
     //Kit Builder Save
     cy.get(".mr-2:nth-child(2) > .v-btn__content").click({ force: true });
     //save assertion closed
-    cy.get(".v-btn__content > .theme--dark").click({ multiple: true });
+    cy.get(".v-btn__content > .theme--dark").click({ force: true });
     cy.log("Kit builder(New Form) has been Saved");
     cy.wait(3000);
     //Click on  Publish

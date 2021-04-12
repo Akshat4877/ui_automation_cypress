@@ -1,19 +1,39 @@
 import LoginPage from "../PageObject/LoginPage";
 import KitBuilderPage from "../PageObject/KitBuilderPage";
-import KitBuilderDataTypes from "../PageObject/KitBuilderDataTypes";
+import SanityLoginPage from "../PageObject/SanityLoginPage";
 
 describe("Copy New Form Elements to the Edit View", function () {
   this.beforeAll(function () {
     const lp = new LoginPage();
-    lp.visitServiceBuild();
+    const slp = new SanityLoginPage();
+    slp.nvdTest()
+    //slp.TmProd();
+
+    //Handling Alert
+    cy.on("window:confirm", () => {
+      cy.log("Alert has been Handled");
+    });
+
     //Login Assertions
-    cy.contains(" Log In ").should("be.visible")
+    cy.contains(" Log In ").should("be.visible");
     //Enter credentials
-    lp.EnterEmail("kstanley@commonareas.work.dev");
+    lp.EnterEmail("propertymanagement@commonareas.work.dev");
+    //lp.EnterEmail("sam@armyspy.com");
     lp.EnterPassword("1234567Aa");
     lp.Submit();
     cy.log("User has been Logged In into the application");
-    cy.wait(10000);
+
+    Cypress.Cookies.preserveOnce(
+      ".AspNet.ApplicationCookie",
+      "ASP.NET_SessionId",
+      "ca-cf-auth",
+      "kit-detail-selected-tab",
+      "jwt",
+      "refreshToken",
+      "jwtAccessToken"
+    );
+
+    cy.wait(3000);
   });
 
   this.beforeEach("Fixtures file data", function () {
@@ -35,20 +55,18 @@ describe("Copy New Form Elements to the Edit View", function () {
   it("Navigating to New Form of Created Kit Type", function () {
     const kb = new KitBuilderPage();
     const lp = new LoginPage();
-    cy.wait(5000);
     cy.title().should("eq", "Common Areas");
-    cy.wait(5000);
-    lp.visitKitBuilderServiceBuild();
+    lp.NVDTestKitBuilder()
     cy.log("User entered in kit builder");
     //Open Craeted Kit Type
     kb.KBSearchBox(this.KitTypeName.KitName3);
-    cy.wait(5000);
+    cy.wait(2000);
     cy.contains(this.KitTypeName.KitName).click({ force: true });
-    cy.wait(3000);
+    cy.wait(1000);
     cy.contains("Form Views").click({ force: true });
-    cy.wait(3000);
+    cy.wait(1000);
     cy.contains(this.data.NewView).click({ force: true });
-    cy.wait(5000);
+    cy.wait(2000);
   });
 
   it("Copy the Elements into Edit form", function () {
@@ -72,15 +90,16 @@ describe("Copy New Form Elements to the Edit View", function () {
     cy.wait(2000);
     cy.log("New Form View Elements has been Copied into Edit Form");
 
-    cy.wait(2000);
     //Kit Builder Save
-    cy.get(".ca-button-green:nth-child(1)").click({ force: true });
+    cy.get(".mr-2:nth-child(2) > .v-btn__content").click({ force: true });
+    //save assertion closed
     cy.get(".v-btn__content > .theme--dark").click({ force: true });
-    cy.log("Kit builder(Edit Form) has been Saved");
+    cy.log("Kit builder(New Form) has been Saved");
+    cy.wait(3000);
     //Click on  Publish
     cy.contains("Publish").click({ force: true });
     //cy.get(".v-btn__content > .theme--dark").click();
-    cy.log("Kit builder(Edit Form) has been Published");
+    cy.log("Kit builder(New Form) has been Published");
     cy.wait(2000);
   });
 });

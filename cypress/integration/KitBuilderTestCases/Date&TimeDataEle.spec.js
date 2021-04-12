@@ -4,13 +4,21 @@ import KitBuilderDataTypes from "../PageObject/KitBuilderDataTypes";
 
 describe("Date & Time Section Data Elements Configuration", function () {
   this.beforeAll(function () {
-    //Page Object
     const lp = new LoginPage();
-    lp.visitCityComBuild();
+    const slp = new SanityLoginPage();
+    slp.nvdTest()
+    //slp.TmProd();
+
+    //Handling Alert
+    cy.on("window:confirm", () => {
+      cy.log("Alert has been Handled");
+    });
+
     //Login Assertions
     cy.contains(" Log In ").should("be.visible");
     //Enter credentials
-    lp.EnterEmail("citycom@commonareas.work.dev");
+    lp.EnterEmail("propertymanagement@commonareas.work.dev");
+    //lp.EnterEmail("sam@armyspy.com");
     lp.EnterPassword("1234567Aa");
     lp.Submit();
     cy.log("User has been Logged In into the application");
@@ -25,7 +33,7 @@ describe("Date & Time Section Data Elements Configuration", function () {
       "jwtAccessToken"
     );
 
-    cy.wait(10000);
+    cy.wait(5000);
   });
 
   this.beforeEach("Fixtures file data", function () {
@@ -65,27 +73,23 @@ describe("Date & Time Section Data Elements Configuration", function () {
   it.only("Navigating to New Form of Created Kit Type", function () {
     const kb = new KitBuilderPage();
     const lp = new LoginPage();
-    cy.wait(5000);
     cy.title().should("eq", "Common Areas");
-    cy.wait(5000);
-    lp.visitCityComKBuildKitBuilder();
+    lp.NVDTestKitBuilder()
     cy.log("User entered in kit builder");
-    cy.wait(3000);
     //Open Craeted Kit Type
     kb.KBSearchBox(this.KitTypeName.KitName3);
-    cy.wait(5000);
+    cy.wait(2000);
     cy.contains(this.KitTypeName.KitName3).click({ force: true });
-    cy.wait(3000);
+    cy.wait(1000);
     cy.log("Created Kit type has been opened");
     cy.contains("Form Views").click({ force: true });
-    cy.wait(3000);
     cy.contains(this.data.NewView).click({ force: true });
-    cy.wait(5000);
+    cy.wait(1000);
   });
 
   it.only("Date & Time Section Data Elements", function () {
     cy.contains("Date & Time").click({ force: true });
-    cy.wait(2000);
+    cy.wait(1000);
   });
 
   it.only("Time Data Type", function () {
@@ -95,7 +99,7 @@ describe("Date & Time Section Data Elements Configuration", function () {
     //Page Object
     const DataType = new KitBuilderDataTypes();
     DataType.Time(this.DataType2.Time);
-    cy.wait(5000);
+    cy.wait(1000);
   });
 
   it.only("Date Data Type", function () {
@@ -105,7 +109,7 @@ describe("Date & Time Section Data Elements Configuration", function () {
     //Page Object
     const DataType = new KitBuilderDataTypes();
     DataType.Date(this.DataType2.Date);
-    cy.wait(5000);
+    cy.wait(1000);
   });
 
   it.only("Reminder Data Type", function () {
@@ -118,7 +122,7 @@ describe("Date & Time Section Data Elements Configuration", function () {
 
   it.only("Kit Builder Save and Publish", function () {
     //Kit Builder Save
-    cy.get(".ca-button-green:nth-child(1)").click({ force: true });
+    cy.get(".mr-2:nth-child(2) > .v-btn__content").click({ force: true });
     //save assertion closed
     cy.get(".v-btn__content > .theme--dark").click({ force: true });
     cy.log("Kit builder(New Form) has been Saved");

@@ -33,7 +33,7 @@ describe("Kit Builder Data Types Details", function () {
       "refreshToken",
       "jwtAccessToken"
     );
-    cy.wait(5000);
+    cy.wait(3000);
   });
 
   this.beforeEach("Fixtures file data", function () {
@@ -74,28 +74,24 @@ describe("Kit Builder Data Types Details", function () {
   it.only("Navigating to New Form of Created Kit Type", function () {
     const kb = new KitBuilderPage();
     const lp = new LoginPage();
-    cy.wait(5000);
+    cy.wait(2000);
     cy.title().should("eq", "Common Areas");
-    cy.wait(5000);
     lp.NVDTestKitBuilder()
     //cy.visit('https://tm.commonareas.io/ClientAdmin/KitBuilder#/')
     cy.log("User entered in kit builder");
     cy.wait(3000);
     //Open Craeted Kit Type
     kb.KBSearchBox(this.KitTypeName.KitName3);
-    cy.wait(5000);
+    cy.wait(2000);
     cy.contains(this.KitTypeName.KitName3).click({ force: true });
-    cy.wait(3000);
     cy.log("Created Kit type has been opened");
     cy.contains("Form Views").click({ force: true });
-    cy.wait(3000);
     cy.contains(this.data.NewView).click({ force: true });
-    cy.wait(5000);
+    cy.wait(2000);
   });
 
   it.only("Content Section Data Elements", function () {
     cy.contains("Content").click({ force: true });
-    cy.wait(2000);
   });
 
   it("OneToManyRelation Data Type", function () {
@@ -120,7 +116,7 @@ describe("Kit Builder Data Types Details", function () {
       this.DataType2.OneToManySearchView
     );
 
-    cy.wait(5000);
+    cy.wait(2000);
   });
 
   it.only("Stepper Data Type", function () {
@@ -138,7 +134,7 @@ describe("Kit Builder Data Types Details", function () {
       this.DataType2.StepperValue4,
       this.DataType2.StepperValue5
     );
-    cy.wait(5000);
+    cy.wait(2000);
   });
 
   it.only("UserSelector Data Type", function () {
@@ -148,7 +144,7 @@ describe("Kit Builder Data Types Details", function () {
     //Page Object
     const DataType = new KitBuilderDataTypes();
     DataType.UserSelector(this.DataType2.UserSelector);
-    cy.wait(5000);
+    cy.wait(2000);
   });
 
   it("OneToOneRelation Data Type", function () {
@@ -161,7 +157,9 @@ describe("Kit Builder Data Types Details", function () {
     DataType.OneToOneRelation(
       this.DataType2.OneToOneRelation,
       this.DataType2.KitToBeRelate,
-      this.DataType2.ElementToBeRelate,
+      this.DataType2.ElementToBeRelate1,
+      this.DataType2.ElementToBeRelate2,
+      this.DataType2.ElementToBeRelate3,
       this.DataType2.OneToOneRelatedNew,
       this.DataType2.OneToOneRelatedEdit,
       this.DataType2.OneToOneMapView,
@@ -177,7 +175,7 @@ describe("Kit Builder Data Types Details", function () {
     //Page Object
     const DataType = new KitBuilderDataTypes();
     DataType.ContactSelector(this.DataType2.ContactSelector);
-    cy.wait(5000);
+    cy.wait(2000);
   });
 
   it("SquareCard Data Type", function () {
@@ -202,7 +200,7 @@ describe("Kit Builder Data Types Details", function () {
       this.DataType2.CardSearchView
     );
 
-    cy.wait(5000);
+    cy.wait(2000);
   });
 
   it.only("Icon Data Type", function () {
@@ -212,7 +210,7 @@ describe("Kit Builder Data Types Details", function () {
     //Page Object
     const DataType = new KitBuilderDataTypes();
     DataType.Icon(this.DataType2.Icon);
-    cy.wait(5000);
+    cy.wait(2000);
   });
 
   it.only("Inspection Data Type", function () {
@@ -230,7 +228,7 @@ describe("Kit Builder Data Types Details", function () {
       this.DataType2.InspectionValue4,
       this.DataType2.InspectionValue5
     );
-    cy.wait(5000);
+    cy.wait(2000);
   });
 
   it.only("Assigning Data Type", function () {
@@ -241,7 +239,7 @@ describe("Kit Builder Data Types Details", function () {
     //Page Object
     const DataType = new KitBuilderDataTypes();
     DataType.Assigning(this.DataType2.Assigning);
-    cy.wait(5000);
+    cy.wait(2000);
   });
 
 

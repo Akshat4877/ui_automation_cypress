@@ -26,10 +26,11 @@ class KitBuilderDataTypes {
     //cy.contains("Element Friendly Description")
     cy.get(
       "div.v-dialog__container.new-element-header > div > div > div.container.new-element-body > div > div > form > div:nth-child(2) > div > div > div > div.v-input__slot > div"
-    )
-      .click({ force: true })
-      .type(UrlName);
-
+    ).click({ force: true }).type(UrlName);
+    cy.wait(1000)
+    //Click on to ON External data share for URL 
+    cy.xpath('//*[text()="External Data Share"]').click({ force: true })
+    cy.wait(1000)
     //Click on Save
     cy.get(".v-btn--text:nth-child(2)").click();
     //Assertion to close
@@ -60,10 +61,11 @@ class KitBuilderDataTypes {
     //cy.contains("Element Friendly Description")
     cy.get(
       "div.v-dialog__container.new-element-header > div > div > div.container.new-element-body > div > div > form > div:nth-child(2) > div > div > div > div.v-input__slot > div"
-    )
-      .click({ force: true })
-      .type(TextName);
-
+    ).click({ force: true }).type(TextName);
+    cy.wait(1000)
+    //Click on to ON External data share for Text 
+    cy.xpath('//*[text()="External Data Share"]').click({ force: true })
+    cy.wait(1000)
     //Click on Save
     cy.get(".v-btn--text:nth-child(2)").click();
     //Assertion to close
@@ -96,10 +98,11 @@ class KitBuilderDataTypes {
     //cy.contains("Element Friendly Description")
     cy.get(
       "div.v-dialog__container.new-element-header > div > div > div.container.new-element-body > div > div > form > div:nth-child(2) > div > div > div > div.v-input__slot > div"
-    )
-      .click({ force: true })
-      .type(FileName);
-
+    ).click({ force: true }).type(FileName);
+    cy.wait(1000)
+    //Click on to ON External data share for File 
+    cy.xpath('//*[text()="External Data Share"]').click({ force: true })
+    cy.wait(1000)
     //Click on Save
     cy.get(".v-btn--text:nth-child(2)").click();
     //Assertion to close
@@ -130,9 +133,12 @@ class KitBuilderDataTypes {
     //cy.contains("Element Friendly Description")
     cy.get(
       "div.v-dialog__container.new-element-header > div > div > div.container.new-element-body > div > div > form > div:nth-child(2) > div > div > div > div.v-input__slot > div"
-    )
-      .click({ force: true })
-      .type(Telephone);
+    ).click({ force: true }).type(Telephone);
+
+    cy.wait(1000)
+    //Click on to ON External data share for Telephone 
+    cy.xpath('//*[text()="External Data Share"]').click({ force: true })
+    cy.wait(1000)
 
     //Click on Save
     cy.get(".v-btn--text:nth-child(2)").click();
@@ -168,6 +174,10 @@ class KitBuilderDataTypes {
       .click({ force: true })
       .type(TextAera);
 
+    cy.wait(1000)
+    //Click on to ON External data share for TextArea 
+    cy.xpath('//*[text()="External Data Share"]').click({ force: true })
+    cy.wait(1000)
     //Click on Save
     cy.get(".v-btn--text:nth-child(2)").click();
     //Assertion to close
@@ -201,6 +211,11 @@ class KitBuilderDataTypes {
     )
       .click({ force: true })
       .type(Slider);
+
+    cy.wait(1000)
+    //Click on to ON External data share for Slider 
+    cy.xpath('//*[text()="External Data Share"]').click({ force: true })
+    cy.wait(1000)
 
     //Click on Save
     cy.get(".v-btn--text:nth-child(2)").click();
@@ -236,6 +251,11 @@ class KitBuilderDataTypes {
       .click({ force: true })
       .type(Currency);
 
+    cy.wait(1000)
+    //Click on to ON External data share for Currency 
+    cy.xpath('//*[text()="External Data Share"]').click({ force: true })
+    cy.wait(1000)
+
     //Click on Save
     cy.get(".v-btn--text:nth-child(2)").click();
     //Assertion to close
@@ -269,6 +289,11 @@ class KitBuilderDataTypes {
     )
       .click({ force: true })
       .type(Measure);
+
+    cy.wait(1000)
+    //Click on to ON External data share for Measure 
+    cy.xpath('//*[text()="External Data Share"]').click({ force: true })
+    cy.wait(1000)
 
     //Click on Save
     cy.get(".v-btn--text:nth-child(2)").click();
@@ -304,6 +329,11 @@ class KitBuilderDataTypes {
       .click({ force: true })
       .type(Email);
 
+    cy.wait(1000)
+    //Click on to ON External data share for Email 
+    cy.xpath('//*[text()="External Data Share"]').click({ force: true })
+    cy.wait(1000)
+
     //Click on Save
     cy.get(".v-btn--text:nth-child(2)").click();
     //Assertion to close
@@ -337,6 +367,11 @@ class KitBuilderDataTypes {
     )
       .click({ force: true })
       .type(Address);
+
+    cy.wait(1000)
+    //Click on to ON External data share for Address 
+    cy.xpath('//*[text()="External Data Share"]').click({ force: true })
+    cy.wait(1000)
 
     //Click on Save
     cy.get(".v-btn--text:nth-child(2)").click();
@@ -1596,7 +1631,9 @@ class KitBuilderDataTypes {
   OneToOneRelation(
     RelationName,
     KitToBeRelate,
-    ElementToBeRelate,
+    ElementToBeRelate1,
+    ElementToBeRelate2,
+    ElementToBeRelate3,
     RelatedNewName,
     RelatedEditName,
     MapViewName,
@@ -1636,7 +1673,7 @@ class KitBuilderDataTypes {
     //Value is comming form KitBuilderDataTypes.json(Fixtures file)
     cy.wait(3000);
     cy.contains(KitToBeRelate).click({ force: true });
-    cy.wait(3000);
+    cy.wait(1000);
 
     //Select 1-One Realtion
     cy.get(
@@ -1687,8 +1724,10 @@ class KitBuilderDataTypes {
 
     cy.wait(5000);
 
-    //Select the Elements for 1-N Realtion
-    cy.contains(ElementToBeRelate).click({ force: true });
+    //Select the Elements for onetoone  Realtion
+    cy.contains(ElementToBeRelate1).click({ force: true });
+    cy.contains(ElementToBeRelate2).click({ force: true });
+    cy.contains(ElementToBeRelate3).click({ force: true });
     cy.log("OneToOne's Related kitType Element has been Selected");
     //Save Relation
     cy.get(".v-btn--text:nth-child(2)").click();
@@ -1746,9 +1785,10 @@ class KitBuilderDataTypes {
 
     //Select Kit type
     //Value is comming form KitBuilderDataTypes.json(Fixtures file)
-    cy.wait(5000);
+    cy.wait(1000);
+    //cy.xpath('//*[text()="Related to"]').click({ force: true }).type(KitToBeRelated)
+    cy.wait(1000)
     cy.contains(KitToBeRelated).click({ force: true });
-    cy.wait(3000);
 
     //Select 1-N Realtion
     cy.get(
@@ -1801,34 +1841,31 @@ class KitBuilderDataTypes {
 
     //ListView Lable
     cy.get(
-      "div:nth-child(4) > div > div > div > div.container > div > div > form > div:nth-child(1) > div.pr-2.pa-0.col.col-6 > div > div > div.v-input__slot > div"
+      "div.v-overlay__content > div > div > div > div > div.container > div > div > form > div:nth-child(1) > div.pr-2.pa-0.col.col-6 > div > div > div.v-input__slot > div"
     )
       .click({ force: true })
       .type(RelatedTableView);
 
     //ListView Description
     cy.get(
-      "div:nth-child(4) > div > div > div > div.container > div > div > form > div:nth-child(3) > div > div > div.v-input__slot > div"
+      "div.v-overlay__content > div > div > div > div > div.container > div > div > form > div:nth-child(3) > div > div > div.v-input__slot"
     )
       .click({ force: true })
       .type(RelatedTableView);
 
     //Icon
     cy.get(
-      "div:nth-child(4) > div > div > div > div.container > div > div > form > div:nth-child(2) > div.pl-2.pa-0.col.col-6 > div > div > div.v-input__slot > div.v-select__slot > div"
+      "div.v-overlay__content > div > div > div > div > div.container > div > div > form > div:nth-child(2) > div.pl-2.pa-0.col.col-6 > div > div > div.v-input__slot > div.v-select__slot > div"
     ).click({ force: true });
     cy.get(".v-list-item:nth-child(1) .v-list-item__title").click({
       force: true,
     });
-    //Checkbox
-    // cy.contains("Default View for Kit").click({ force: true });
 
     //Click on Save
     cy.get(".px-4 > .v-btn__content").first().click({ force: true });
     //Assertion Close
     cy.get(".v-btn__content > .theme--dark").click({ force: true });
-
-    cy.wait(3000);
+    cy.wait(1000);
     //Click on Edit btn to add Elements
     cy.get(".editTableListBtn").click({ force: true });
     //Add List Results Elements
@@ -1837,8 +1874,6 @@ class KitBuilderDataTypes {
 
     cy.wait(3000);
     //Click on Close Window of Add Elements
-    //cy.get('div.v-dialog__container.editListViewDialog > div > div > div > div.v-overlay.v-overlay--active.theme--dark > div.v-overlay__content > div > div > div > div.row.d-flex.ma-0.pa-0 > div > div.d-flex.align-center.pa-0.col.col-auto > button > span')
-    //.click({force:true});
     //OR 2nd Css of cross icon
     cy.get(".grey--text .v-icon").click({ force: true });
     cy.wait(2000);
@@ -1861,6 +1896,10 @@ class KitBuilderDataTypes {
     cy.get('[role="checkbox"]').eq(3).click({ force: true });
     cy.get('[role="checkbox"]').eq(4).click({ force: true });
     cy.get('[role="checkbox"]').eq(5).click({ force: true });
+    cy.get('[role="checkbox"]').eq(6).click({ force: true });
+    cy.get('[role="checkbox"]').eq(7).click({ force: true });
+    cy.get('[role="checkbox"]').eq(8).click({ force: true });
+    cy.get('[role="checkbox"]').eq(10).click({ force: true });
     cy.wait(2000);
     cy.contains("Add Selected").click({ force: true });
     cy.log("OneToMany's Related kitType Elements has been Selected");
@@ -1885,11 +1924,11 @@ class KitBuilderDataTypes {
     //Add List Filters
     cy.contains("Add List Filters").click({ force: true });
     //Add Table List Filters Values index wise
-    cy.get('[role="checkbox"][type="checkbox"]').eq(12).click({ force: true });
-    cy.get('[role="checkbox"][type="checkbox"]').eq(13).click({ force: true });
-    cy.get('[role="checkbox"][type="checkbox"]').eq(14).click({ force: true });
-    cy.get('[role="checkbox"][type="checkbox"]').eq(15).click({ force: true });
-    cy.get('[role="checkbox"][type="checkbox"]').eq(16).click({ force: true });
+    cy.get('[role="checkbox"][type="checkbox"]').eq(21).click({ force: true });
+    cy.get('[role="checkbox"][type="checkbox"]').eq(22).click({ force: true });
+    cy.get('[role="checkbox"][type="checkbox"]').eq(23).click({ force: true });
+    cy.get('[role="checkbox"][type="checkbox"]').eq(24).click({ force: true });
+    cy.get('[role="checkbox"][type="checkbox"]').eq(25).click({ force: true });
     cy.wait(2000);
     //Click on Save Selected
     cy.contains("Save Selected").click({ force: true });
@@ -1955,9 +1994,9 @@ class KitBuilderDataTypes {
     ).click({ force: true });
     //Select Kit type
     //Value is comming form KitBuilderDataTypes.json(Fixtures file)
-    cy.wait(5000);
+    cy.wait(1000);
     cy.contains(CardKitToBeRelated).click({ force: true });
-    cy.wait(5000);
+    cy.wait(1000);
 
     //Select Square Card Realtion
     cy.get(
@@ -2014,27 +2053,25 @@ class KitBuilderDataTypes {
 
     //ListView Lable
     cy.get(
-      "div:nth-child(4) > div > div > div > div.container > div > div > form > div:nth-child(1) > div.pr-2.pa-0.col.col-6 > div > div > div.v-input__slot > div"
+      "div.v-overlay__content > div > div > div > div > div.container > div > div > form > div:nth-child(1) > div.pr-2.pa-0.col.col-6 > div > div > div.v-input__slot > div"
     )
       .click({ force: true })
       .type(SquareCardTableView);
 
     //ListView Description
     cy.get(
-      "div:nth-child(4) > div > div > div > div.container > div > div > form > div:nth-child(3) > div > div > div.v-input__slot > div"
+      "div.v-overlay__content > div > div > div > div > div.container > div > div > form > div:nth-child(3) > div > div > div.v-input__slot"
     )
       .click({ force: true })
       .type(SquareCardTableView);
 
     //Icon
     cy.get(
-      "div:nth-child(4) > div > div > div > div.container > div > div > form > div:nth-child(2) > div.pl-2.pa-0.col.col-6 > div > div > div.v-input__slot > div.v-select__slot > div"
+      "div.v-overlay__content > div > div > div > div > div.container > div > div > form > div:nth-child(2) > div.pl-2.pa-0.col.col-6 > div > div > div.v-input__slot > div.v-select__slot > div"
     ).click({ force: true });
     cy.get(".v-list-item:nth-child(1) .v-list-item__title").click({
       force: true,
     });
-    //Checkbox
-    //cy.contains("Default View for Kit").click({ force: true });
 
     //Click on Save
     cy.get(".px-4 > .v-btn__content").first().click({ force: true });
@@ -2071,10 +2108,8 @@ class KitBuilderDataTypes {
     //Add table List Results Values index wise
     cy.get('[role="checkbox"]').eq(0).click({ force: true });
     cy.get('[role="checkbox"]').eq(1).click({ force: true });
-    cy.get('[role="checkbox"]').eq(2).click({ force: true });
-    cy.get('[role="checkbox"]').eq(3).click({ force: true });
     cy.get('[role="checkbox"]').eq(4).click({ force: true });
-    cy.get('[role="checkbox"]').eq(5).click({ force: true });
+
     cy.wait(2000);
     cy.contains("Add Selected").click({ force: true });
     cy.log("SquareCard's Related kitType Elements has been Selected");
@@ -2086,8 +2121,8 @@ class KitBuilderDataTypes {
     cy.get('[role="checkbox"]').eq(1).click({ force: true });
     cy.get('[role="checkbox"]').eq(2).click({ force: true });
     cy.get('[role="checkbox"]').eq(4).click({ force: true });
-    cy.get('[role="checkbox"]').eq(6).click({ force: true });
-    cy.get('[role="checkbox"]').eq(8).click({ force: true });
+    // cy.get('[role="checkbox"]').eq(6).click({ force: true });
+    // cy.get('[role="checkbox"]').eq(8).click({ force: true });
     cy.log(
       "Enabled sort and Default sort Elements has been Selected for SquareCard Relation"
     );

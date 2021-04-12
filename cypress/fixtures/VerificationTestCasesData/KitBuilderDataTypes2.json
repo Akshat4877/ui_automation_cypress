@@ -79,13 +79,6 @@
     "InspectionValue4":"Ruby",
     "InspectionValue5":"Zapare",
 
-    "OneToOneRelation":"BaseOneToOne",
-    "KitToBeRelate":"Extension",
-    "OneToOneRelatedNew":"RelatedNewView",
-    "OneToOneRelatedEdit":"RelatedEditView",
-    "OneToOneMapView":"MapView",
-    "OneToOneSearchView":"SearchView",
-    "ElementToBeRelate":"url",
 
 
     
@@ -95,12 +88,23 @@
     "OneToManyRelatedEdit":"RelatedEditView",
     "OneToManyMapView":"MapView",
     "OneToManySearchView":"SearchView",
-    "RelatedTableView":"TableOneToN",
+    "RelatedTableView":"TableOneToMany",
     "RelatedEle_1":"Url",
     "RelatedEle_2":"Text",
     "RelatedEle_3":"Telephone",
     "RelatedEle_4":"Email",
     "RelatedEle_5":"Currency",
+
+    
+    "OneToOneRelation":"BaseOneToOne",
+    "KitToBeRelate":"Extension",
+    "OneToOneRelatedNew":"RelatedNewView",
+    "OneToOneRelatedEdit":"RelatedEditView",
+    "OneToOneMapView":"MapView",
+    "OneToOneSearchView":"SearchView",
+    "ElementToBeRelate1":"url",
+    "ElementToBeRelate2":"text",
+    "ElementToBeRelate3":"textAera",
 
      
     "SquareCardName":"BaseSquareCard",

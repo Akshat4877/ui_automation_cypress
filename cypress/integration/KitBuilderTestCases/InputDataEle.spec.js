@@ -5,7 +5,6 @@ import SanityLoginPage from "../PageObject/SanityLoginPage";
 
 describe("Input Section Data Elements Configuration", function () {
   this.beforeAll(function () {
-
     const lp = new LoginPage();
     const slp = new SanityLoginPage();
     slp.nvdTest()
@@ -75,26 +74,22 @@ describe("Input Section Data Elements Configuration", function () {
     const lp = new LoginPage();
     cy.wait(5000);
     cy.title().should("eq", "Common Areas");
-    cy.wait(5000);
     lp.NVDTestKitBuilder()
     //cy.visit('https://tm.commonareas.io/ClientAdmin/KitBuilder#/')
     cy.log("User entered in kit builder");
     cy.wait(3000);
     //Open Craeted Kit Type
     kb.KBSearchBox(this.KitTypeName.KitName3);
-    cy.wait(5000);
+    cy.wait(2000);
     cy.contains(this.KitTypeName.KitName3).click({ force: true });
-    cy.wait(3000);
     cy.log("Created Kit type has been opened");
     cy.contains("Form Views").click({ force: true });
-    cy.wait(3000);
     cy.contains(this.data.NewView).click({ force: true });
-    cy.wait(5000);
+    cy.wait(1000);
   });
 
   it("Input Section Data Elements", function () {
     cy.contains("Inputs").click({ force: true });
-    cy.wait(2000);
   });
 
   it("Url Data Type", function () {
@@ -103,9 +98,8 @@ describe("Input Section Data Elements Configuration", function () {
     cy.wait(1000);
     //Page Object
     const DataType = new KitBuilderDataTypes();
-
     DataType.Url(this.DataType2.Url);
-    cy.wait(5000);
+    cy.wait(2000);
   });
 
   it("Text Data Type", function () {
@@ -116,7 +110,7 @@ describe("Input Section Data Elements Configuration", function () {
     const DataType = new KitBuilderDataTypes();
 
     DataType.Text(this.DataType2.Text);
-    cy.wait(5000);
+    cy.wait(2000);
   });
 
   it("File Data Type", function () {
@@ -126,7 +120,7 @@ describe("Input Section Data Elements Configuration", function () {
     //Page Object
     const DataType = new KitBuilderDataTypes();
     DataType.File(this.DataType2.File);
-    cy.wait(5000);
+    cy.wait(2000);
   });
 
   it("Telephone Data Type", function () {
@@ -136,7 +130,7 @@ describe("Input Section Data Elements Configuration", function () {
     //Page Object
     const DataType = new KitBuilderDataTypes();
     DataType.Telephone(this.DataType2.Telephone);
-    cy.wait(5000);
+    cy.wait(2000);
   });
 
   it("TextAera Data Type", function () {
@@ -146,7 +140,7 @@ describe("Input Section Data Elements Configuration", function () {
     //Page Object
     const DataType = new KitBuilderDataTypes();
     DataType.TextAera(this.DataType2.TextAera);
-    cy.wait(5000);
+    cy.wait(2000);
   });
 
   it("Slider Data Type", function () {
@@ -156,7 +150,7 @@ describe("Input Section Data Elements Configuration", function () {
     //Page Object
     const DataType = new KitBuilderDataTypes();
     DataType.Slider(this.DataType2.Slider);
-    cy.wait(5000);
+    cy.wait(2000);
   });
 
   it("Currency Data Type", function () {
@@ -166,7 +160,7 @@ describe("Input Section Data Elements Configuration", function () {
     //Page Object
     const DataType = new KitBuilderDataTypes();
     DataType.Currency(this.DataType2.Currency);
-    cy.wait(5000);
+    cy.wait(2000);
   });
 
   it("Measure Data Type", function () {
@@ -176,7 +170,7 @@ describe("Input Section Data Elements Configuration", function () {
     //Page Object
     const DataType = new KitBuilderDataTypes();
     DataType.Measure(this.DataType2.Measure);
-    cy.wait(5000);
+    cy.wait(2000);
   });
 
   it("Email Data Type", function () {
@@ -186,7 +180,7 @@ describe("Input Section Data Elements Configuration", function () {
     //Page Object
     const DataType = new KitBuilderDataTypes();
     DataType.Email(this.DataType2.Email);
-    cy.wait(5000);
+    cy.wait(2000);
   });
 
   it("Address Data Type", function () {
@@ -196,7 +190,7 @@ describe("Input Section Data Elements Configuration", function () {
     //Page Object
     const DataType = new KitBuilderDataTypes();
     DataType.Address(this.DataType2.Address);
-    cy.wait(5000);
+    cy.wait(2000);
   });
 
   it("Section Data Type", function () {
@@ -206,7 +200,7 @@ describe("Input Section Data Elements Configuration", function () {
     //Page Object
     const DataType = new KitBuilderDataTypes();
     DataType.Section(this.DataType2.Section);
-    cy.wait(5000);
+    cy.wait(2000);
   });
 
   it("Number Data Type", function () {
@@ -216,7 +210,7 @@ describe("Input Section Data Elements Configuration", function () {
     //Page Object
     const DataType = new KitBuilderDataTypes();
     DataType.Number(this.DataType2.Number);
-    cy.wait(5000);
+    cy.wait(2000);
   });
 
   it("Kit Builder Save and Publish", function () {
@@ -240,7 +234,7 @@ describe("Input Section Data Elements Configuration", function () {
     //Page Object
     const DataType = new KitBuilderDataTypes();
     DataType.Time(this.DataType2.Time);
-    cy.wait(5000);
+    cy.wait(2000);
   });
 
   it("Date Data Type", function () {
@@ -250,7 +244,7 @@ describe("Input Section Data Elements Configuration", function () {
     //Page Object
     const DataType = new KitBuilderDataTypes();
     DataType.Date(this.DataType2.Date);
-    cy.wait(5000);
+    cy.wait(2000);
   });
 
   it("Reminder Data Type", function () {
@@ -282,7 +276,7 @@ describe("Input Section Data Elements Configuration", function () {
     //Page Object
     const DataType = new KitBuilderDataTypes();
     DataType.Toggle(this.DataType2.Toggle);
-    cy.wait(5000);
+    cy.wait(2000);
   });
 
   it("SelectList Data Type", function () {
@@ -301,7 +295,7 @@ describe("Input Section Data Elements Configuration", function () {
       this.DataType2.SelectListValue4,
       this.DataType2.SelectListValue5
     );
-    cy.wait(5000);
+    cy.wait(2000);
   });
 
   it("RadioSelect Data Type", function () {
@@ -320,7 +314,7 @@ describe("Input Section Data Elements Configuration", function () {
       this.DataType2.RadioSelectValue4,
       this.DataType2.RadioSelectValue5
     );
-    cy.wait(5000);
+    cy.wait(2000);
   });
 
   it("CheckboxSelect Data Type", function () {
@@ -338,7 +332,7 @@ describe("Input Section Data Elements Configuration", function () {
       this.DataType2.CheckboxSelectValue4,
       this.DataType2.CheckboxSelectValue5
     );
-    cy.wait(5000);
+    cy.wait(2000);
   });
   it("Kit Builder Save and Publish", function () {
     //Kit Builder Save

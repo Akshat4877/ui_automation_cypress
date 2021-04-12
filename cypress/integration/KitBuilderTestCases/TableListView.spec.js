@@ -1,71 +1,103 @@
 import LoginPage from "../PageObject/LoginPage";
 import KitBuilderPage from "../PageObject/KitBuilderPage";
-import KitBuilderDataTypes from "../PageObject/KitBuilderDataTypes";
+import SanityLoginPage from "../PageObject/SanityLoginPage";
 
 describe("Adding Results and Filters Element to Table List View", function () {
   this.beforeAll(function () {
     const lp = new LoginPage();
-    lp.visitServiceBuild();
+    const slp = new SanityLoginPage();
+    slp.nvdTest()
+    //slp.TmProd();
+
+    //Handling Alert
+    cy.on("window:confirm", () => {
+      cy.log("Alert has been Handled");
+    });
+
     //Login Assertions
-    cy.contains(" Log In ").should("be.visible")
+    cy.contains(" Log In ").should("be.visible");
     //Enter credentials
-    lp.EnterEmail("kstanley@commonareas.work.dev");
+    lp.EnterEmail("propertymanagement@commonareas.work.dev");
+    //lp.EnterEmail("sam@armyspy.com");
     lp.EnterPassword("1234567Aa");
     lp.Submit();
-    cy.wait(10000);
+    cy.log("User has been Logged In into the application");
+
+    Cypress.Cookies.preserveOnce(
+      ".AspNet.ApplicationCookie",
+      "ASP.NET_SessionId",
+      "ca-cf-auth",
+      "kit-detail-selected-tab",
+      "jwt",
+      "refreshToken",
+      "jwtAccessToken"
+    );
+    cy.wait(3000);
   });
 
   this.beforeEach("Fixtures file data", function () {
-    cy.fixture(
-      "KitBuilderValidationTestData/TimelineListFilterValidation"
-    ).then(function (TLKitName) {
-      this.TableListKitName = TLKitName;
-    });
 
+    Cypress.Cookies.preserveOnce(
+      ".AspNet.ApplicationCookie",
+      "ASP.NET_SessionId",
+      "ca-cf-auth",
+      "kit-detail-selected-tab",
+      "jwt",
+      "refreshToken",
+      "jwtAccessToken"
+    );
+
+    cy.fixture("KitBuilderTestData/NewKitTypeData").then(function (
+      KittypeName
+    ) {
+      this.KitTypeName = KittypeName;
+    });
     cy.fixture("KitBuilderTestData/FormViewsNameData").then(function (
       KitTypeFormViewsNames
     ) {
       this.data = KitTypeFormViewsNames;
     });
-    cy.fixture("KitBuilderTestData/NewKitTypeData").then(function (KitName) {
-      this.KitName = KitName;
-    });
     cy.fixture("KitBuilderTestData/KitBuilderDataTypes").then(function (
       datatypes
     ) {
-      this.DataType = datatypes;
+      this.DataType2 = datatypes;
     });
+
+    cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
+      NewDataForElements
+    ) {
+      this.DataType = NewDataForElements;
+    });
+
+
   });
 
-  it("Navigating to Table List Views of Created Kit Type", function () {
+  it.only("Navigating to Table List Views of Created Kit Type", function () {
     const kb = new KitBuilderPage();
     const lp = new LoginPage();
-    cy.wait(5000);
     cy.title().should("eq", "Common Areas");
-    cy.wait(5000);
-    lp.visitKitBuilderServiceBuild();
+    lp.NVDTestKitBuilder()
     cy.wait(3000);
     //Enter created kit type name into search box
-    //kb.KBSearchBox(this.KitName.KitName);
-    kb.KBSearchBox(this.TableListKitName.TLKitName);
-    cy.wait(5000);
+    kb.KBSearchBox(this.KitTypeName.KitName3);
+    cy.wait(2000);
     //Click to open kit type for adding List view elements
-    //cy.contains(this.KitName.KitName).click({ force: true });
-    cy.contains(this.TableListKitName.TLKitName).click({ force: true });
+    cy.contains(this.KitTypeName.KitName3).click({ force: true });
     cy.contains("Form Views").click({ force: true });
-    cy.wait(3000);
+    cy.wait(1000);
     cy.contains("List Views").click({ force: true });
-    cy.wait(5000);
+    cy.wait(2000);
   });
 
-  it("Adding Results and Filters Element to Table List View", function () {
+  it("Adding Results Element to Table List View", function () {
+    //Page object
+    const kb = new KitBuilderPage();
     //View Name coming form json file
     cy.contains(this.data.TableView).click({ force: true });
     cy.wait(3000);
     cy.log(this.data.TableView + " has been Opened");
 
     ///*
-
     //Add List Results Elements
     cy.contains("Add List Results").click({ force: true });
     cy.wait(2000);
@@ -73,43 +105,44 @@ describe("Adding Results and Filters Element to Table List View", function () {
     cy.contains(this.DataType2.Url).click({ force: true });
     cy.contains(this.DataType2.Text).click({ force: true });
     cy.contains(this.DataType2.File).click({ force: true });
-    cy.contains(this.DataType2.Telephone).click({ force: true });
-    cy.contains(this.DataType2.TextAera).click({ force: true });
-    cy.wait(2000);
 
-    cy.contains(this.DataType2.Slider).click({ force: true });
-    cy.contains(this.DataType2.Currency).click({ force: true });
-    cy.contains(this.DataType2.Measure).click({ force: true });
-    cy.contains(this.DataType2.Email).click({ force: true });
-    cy.contains(this.DataType2.Address).click({ force: true });
-    cy.wait(2000);
+    // cy.contains(this.DataType2.Telephone).click({ force: true });
+    // cy.contains(this.DataType2.TextAera).click({ force: true });
+    // cy.wait(2000);
 
-    cy.contains(this.DataType2.Number).click({ force: true });
-    cy.contains(this.DataType2.Time).click({ force: true });
-    cy.contains(this.DataType2.Date).click({ force: true });
-    cy.contains(this.DataType2.Toggle).click({ force: true });
-    cy.contains(this.DataType2.SelectList).click({ force: true });
-    cy.wait(2000);
+    // cy.contains(this.DataType2.Slider).click({ force: true });
+    // cy.contains(this.DataType2.Currency).click({ force: true });
+    // cy.contains(this.DataType2.Measure).click({ force: true });
+    // cy.contains(this.DataType2.Email).click({ force: true });
+    // cy.contains(this.DataType2.Address).click({ force: true });
+    // cy.wait(2000);
 
-    cy.contains(this.DataType2.Assigning).scrollIntoView({ force: true });
-    cy.wait(2000);
+    // cy.contains(this.DataType2.Number).click({ force: true });
+    // cy.contains(this.DataType2.Time).click({ force: true });
+    // cy.contains(this.DataType2.Date).click({ force: true });
+    // cy.contains(this.DataType2.Toggle).click({ force: true });
+    // cy.contains(this.DataType2.SelectList).click({ force: true });
+    // cy.wait(2000);
 
-    cy.contains(this.DataType2.RadioSelect).click({ force: true });
-    cy.contains(this.DataType2.CheckboxSelect).click({ force: true });
-    cy.contains(this.DataType2.Stepper).click({ force: true });
-    cy.contains(this.DataType2.UserSelector).click({ force: true });
-    cy.contains(this.DataType2.ContactSelector).click({ force: true });
-    cy.wait(2000);
+    // cy.contains(this.DataType2.Assigning).scrollIntoView({ force: true });
+    // cy.wait(2000);
 
-    cy.contains(this.DataType2.Icon).click({ force: true });
-    cy.contains(this.DataType2.Inspection).click({ force: true });
-    cy.contains(this.DataType2.Assigning).click({ force: true });
+    // cy.contains(this.DataType2.RadioSelect).click({ force: true });
+    // cy.contains(this.DataType2.CheckboxSelect).click({ force: true });
+    // cy.contains(this.DataType2.Stepper).click({ force: true });
+    // cy.contains(this.DataType2.UserSelector).click({ force: true });
+    // cy.contains(this.DataType2.ContactSelector).click({ force: true });
+    // cy.wait(2000);
 
-    cy.contains("Created On").click({ force: true });
-    cy.contains("Modified On").click({ force: true });
-    cy.contains("Created By").click({ force: true });
-    cy.contains("Modified By").click({ force: true });
-    cy.contains("ItemId For Account").click({ force: true });
+    // cy.contains(this.DataType2.Icon).click({ force: true });
+    // cy.contains(this.DataType2.Inspection).click({ force: true });
+    // cy.contains(this.DataType2.Assigning).click({ force: true });
+
+    // cy.contains("Created On").click({ force: true });
+    // cy.contains("Modified On").click({ force: true });
+    // cy.contains("Created By").click({ force: true });
+    // cy.contains("Modified By").click({ force: true });
+    // cy.contains("ItemId For Account").click({ force: true });
 
     cy.wait(2000);
 
@@ -141,9 +174,23 @@ describe("Adding Results and Filters Element to Table List View", function () {
     cy.get(".closeBtn .v-icon").click();
     cy.wait(1000);
     cy.log("Assertion closed");
+    cy.wait(1000);
+    //To close the opened Table List
+    kb.ClickOnCrossIcon();
+    cy.log("Table List has been Closed");
+    cy.wait(3000);
 
+  })
+
+  it.only('Adding Filters Element to Table List View', function () {
+
+    //Page object
+    const kb = new KitBuilderPage();
+    //View Name coming form json file
+    cy.contains(this.data.TableView).click({ force: true });
+    cy.log(this.data.TableView + " Has been Opened");
+    cy.wait(3000);
     ///*
-
     //Add Filters Elements
     cy.contains("Filters").click({ force: true });
     cy.wait(2000);
@@ -184,6 +231,9 @@ describe("Adding Results and Filters Element to Table List View", function () {
     cy.contains(this.DataType2.Icon).click({ force: true });
     cy.contains(this.DataType2.Inspection).click({ force: true });
     cy.contains(this.DataType2.Assigning).click({ force: true });
+    cy.contains(this.DataType.OneToManyRelation).click({ force: true });
+    cy.contains(this.DataType.OneToOneRelation).click({ force: true });
+    cy.contains(this.DataType.SquareCardName).click({ force: true });
 
     cy.wait(2000);
     cy.log("Table List Filters Element has been Checked");
@@ -201,5 +251,9 @@ describe("Adding Results and Filters Element to Table List View", function () {
     cy.get(".closeBtn .v-icon").click();
     cy.wait(3000);
     cy.log("Assertion close");
-  });
+
+
+
+  })
+
 });

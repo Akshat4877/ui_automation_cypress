@@ -83,6 +83,7 @@ describe("Create New Kit type ", function () {
 
   it("New View Form", function () {
     const kb = new KitBuilderPage();
+    cy.wait(2000)
     cy.contains(this.KitTypeName.KitName3).click({ force: true });
     cy.contains("Form Views").click({ force: true });
     cy.wait(1000);

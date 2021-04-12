@@ -1,15 +1,24 @@
 import LoginPage from "../PageObject/LoginPage";
 import KitBuilderPage from "../PageObject/KitBuilderPage";
-import KitBuilderDataTypes from "../PageObject/KitBuilderDataTypes";
+import SanityLoginPage from "../PageObject/SanityLoginPage";
 
 describe("Adding Results and Filters Element to List Views", function () {
   this.beforeAll(function () {
     const lp = new LoginPage();
-    lp.visitCityComTest();
+    const slp = new SanityLoginPage();
+    slp.nvdTest()
+    //slp.TmProd();
+
+    //Handling Alert
+    cy.on("window:confirm", () => {
+      cy.log("Alert has been Handled");
+    });
+
     //Login Assertions
     cy.contains(" Log In ").should("be.visible");
     //Enter credentials
-    lp.EnterEmail("citycom@commonareas.work.dev");
+    lp.EnterEmail("propertymanagement@commonareas.work.dev");
+    //lp.EnterEmail("sam@armyspy.com");
     lp.EnterPassword("1234567Aa");
     lp.Submit();
     cy.log("User has been Logged In into the application");
@@ -24,7 +33,7 @@ describe("Adding Results and Filters Element to List Views", function () {
       "jwtAccessToken"
     );
 
-    cy.wait(10000);
+    cy.wait(3000);
   });
 
   this.beforeEach("Fixtures file data", function () {
@@ -54,29 +63,31 @@ describe("Adding Results and Filters Element to List Views", function () {
     ) {
       this.DataType2 = NewDataForElements;
     });
+
+    cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
+      NewDataForElements
+    ) {
+      this.DataType = NewDataForElements;
+    });
+
   });
 
-  it.only("Navigating to List Views of Created Kit Type", function () {
+  it("Navigating to List Views of Created Kit Type", function () {
     const kb = new KitBuilderPage();
     const lp = new LoginPage();
-    cy.wait(5000);
     cy.title().should("eq", "Common Areas");
-    cy.wait(5000);
-    lp.visitCityComTestKitBuilder();
+    lp.NVDTestKitBuilder()
     cy.log("User entered in kit builder");
-
     cy.wait(3000);
     //Enter created kit type name into search box
     kb.KBSearchBox(this.KitTypeName.KitName3);
-    cy.wait(5000);
+    cy.wait(2000);
     //Open created kit type for adding List view elements
-    //cy.contains(this.KitTypeName.KitName).click({ force: true });
-    //Click to open kit type for adding List view elements
     cy.contains(this.KitTypeName.KitName3).click({ force: true });
     cy.contains("Form Views").click({ force: true });
-    cy.wait(3000);
+    cy.wait(1000);
     cy.contains("List Views").click({ force: true });
-    cy.wait(5000);
+    cy.wait(1000);
   });
 
   it("Adding Results and Filters Element to Table List View", function () {
@@ -86,7 +97,6 @@ describe("Adding Results and Filters Element to List Views", function () {
     cy.log(this.data.TableView + " has been Opened");
 
     ///*
-
     //Add List Results Elements
     cy.contains("Add List Results").click({ force: true });
     cy.wait(2000);
@@ -94,43 +104,33 @@ describe("Adding Results and Filters Element to List Views", function () {
     cy.contains(this.DataType2.Url).click({ force: true });
     cy.contains(this.DataType2.Text).click({ force: true });
     cy.contains(this.DataType2.File).click({ force: true });
-    cy.contains(this.DataType2.Telephone).click({ force: true });
-    cy.contains(this.DataType2.TextAera).click({ force: true });
-    cy.wait(2000);
 
-    cy.contains(this.DataType2.Slider).click({ force: true });
-    cy.contains(this.DataType2.Currency).click({ force: true });
-    cy.contains(this.DataType2.Measure).click({ force: true });
-    cy.contains(this.DataType2.Email).click({ force: true });
-    cy.contains(this.DataType2.Address).click({ force: true });
-    cy.wait(2000);
+    // cy.contains(this.DataType2.Telephone).click({ force: true });
+    // cy.contains(this.DataType2.TextAera).click({ force: true });
+    // cy.contains(this.DataType2.Slider).click({ force: true });
+    // cy.contains(this.DataType2.Currency).click({ force: true });
+    // cy.contains(this.DataType2.Measure).click({ force: true });
+    // cy.contains(this.DataType2.Email).click({ force: true });
+    // cy.contains(this.DataType2.Address).click({ force: true });
 
-    cy.contains(this.DataType2.Number).click({ force: true });
-    cy.contains(this.DataType2.Time).click({ force: true });
-    cy.contains(this.DataType2.Date).click({ force: true });
-    cy.contains(this.DataType2.Toggle).click({ force: true });
-    cy.contains(this.DataType2.SelectList).click({ force: true });
-    cy.wait(2000);
+    // cy.contains(this.DataType2.Number).click({ force: true });
+    // cy.contains(this.DataType2.Time).click({ force: true });
+    // cy.contains(this.DataType2.Date).click({ force: true });
+    // cy.contains(this.DataType2.Toggle).click({ force: true });
+    // cy.contains(this.DataType2.SelectList).click({ force: true });
 
-    cy.contains(this.DataType2.Assigning).scrollIntoView({ force: true });
-    cy.wait(2000);
+    // cy.contains(this.DataType2.Assigning).scrollIntoView({ force: true });
+    // cy.wait(2000);
 
-    cy.contains(this.DataType2.RadioSelect).click({ force: true });
-    cy.contains(this.DataType2.CheckboxSelect).click({ force: true });
-    cy.contains(this.DataType2.Stepper).click({ force: true });
-    cy.contains(this.DataType2.UserSelector).click({ force: true });
-    cy.contains(this.DataType2.ContactSelector).click({ force: true });
-    cy.wait(2000);
+    // cy.contains(this.DataType2.RadioSelect).click({ force: true });
+    // cy.contains(this.DataType2.CheckboxSelect).click({ force: true });
+    // cy.contains(this.DataType2.Stepper).click({ force: true });
+    // cy.contains(this.DataType2.UserSelector).click({ force: true });
+    // cy.contains(this.DataType2.ContactSelector).click({ force: true });
 
-    cy.contains(this.DataType2.Icon).click({ force: true });
-    cy.contains(this.DataType2.Inspection).click({ force: true });
-    cy.contains(this.DataType2.Assigning).click({ force: true });
-
-    cy.contains("Created On").click({ force: true });
-    cy.contains("Modified On").click({ force: true });
-    cy.contains("Created By").click({ force: true });
-    cy.contains("Modified By").click({ force: true });
-    cy.contains("ItemId For Account").click({ force: true });
+    // cy.contains(this.DataType2.Icon).click({ force: true });
+    // cy.contains(this.DataType2.Inspection).click({ force: true });
+    // cy.contains(this.DataType2.Assigning).click({ force: true });
     cy.wait(2000);
 
     cy.log("Table List Results Element has been Checked");
@@ -175,21 +175,18 @@ describe("Adding Results and Filters Element to List Views", function () {
     cy.contains(this.DataType2.File).click({ force: true });
     cy.contains(this.DataType2.Telephone).click({ force: true });
     cy.contains(this.DataType2.TextAera).click({ force: true });
-    cy.wait(2000);
 
     cy.contains(this.DataType2.Slider).click({ force: true });
     cy.contains(this.DataType2.Currency).click({ force: true });
     cy.contains(this.DataType2.Measure).click({ force: true });
     cy.contains(this.DataType2.Email).click({ force: true });
     cy.contains(this.DataType2.Address).click({ force: true });
-    cy.wait(2000);
 
     cy.contains(this.DataType2.Number).click({ force: true });
     cy.contains(this.DataType2.Time).click({ force: true });
     cy.contains(this.DataType2.Date).click({ force: true });
     cy.contains(this.DataType2.Toggle).click({ force: true });
     cy.contains(this.DataType2.SelectList).click({ force: true });
-    cy.wait(2000);
 
     cy.contains(this.DataType2.Assigning).scrollIntoView({ force: true });
     cy.wait(2000);
@@ -199,11 +196,13 @@ describe("Adding Results and Filters Element to List Views", function () {
     cy.contains(this.DataType2.Stepper).click({ force: true });
     cy.contains(this.DataType2.UserSelector).click({ force: true });
     cy.contains(this.DataType2.ContactSelector).click({ force: true });
-    cy.wait(2000);
 
     cy.contains(this.DataType2.Icon).click({ force: true });
     cy.contains(this.DataType2.Inspection).click({ force: true });
     cy.contains(this.DataType2.Assigning).click({ force: true });
+    cy.contains(this.DataType.OneToManyRelation).click({ force: true });
+    cy.contains(this.DataType.OneToOneRelation).click({ force: true });
+    cy.contains(this.DataType.SquareCardName).click({ force: true });
 
     cy.wait(2000);
     cy.log("Table List Filters Element has been Checked");
@@ -226,18 +225,13 @@ describe("Adding Results and Filters Element to List Views", function () {
   it("Adding Results and Filters Element to Search List View", function () {
     //Page object
     const kb = new KitBuilderPage();
-    cy.wait(3000);
-    //Click on Forms Drop down
-    // cy.get(
-    //   "#app > div > div > div:nth-child(1) > header > div > div:nth-child(3) > div > div > div > div > div.v-select__slot > div > div"
-    // ).click({ force: true });
-
+    cy.wait(1000);
     kb.ClickOnCrossIcon();
     cy.wait(2000);
     cy.log("Table List View Has been Close");
     //View Name coming form json file
     cy.contains(this.data.SearchView).click({ force: true });
-    cy.wait(3000);
+    cy.wait(1000);
     cy.log(this.data.SearchView + " has been Opened");
 
     ///*
@@ -250,22 +244,19 @@ describe("Adding Results and Filters Element to List Views", function () {
     cy.contains(this.DataType2.Text).click({ force: true });
     cy.contains(this.DataType2.File).click({ force: true });
     cy.contains(this.DataType2.Telephone).click({ force: true });
-    cy.contains(this.DataType2.TextAera).click({ force: true });
-    cy.wait(2000);
+    cy.contains(this.DataType2.TextAera).click({ force: true })
 
     cy.contains(this.DataType2.Slider).click({ force: true });
     cy.contains(this.DataType2.Currency).click({ force: true });
     cy.contains(this.DataType2.Measure).click({ force: true });
     cy.contains(this.DataType2.Email).click({ force: true });
     cy.contains(this.DataType2.Address).click({ force: true });
-    cy.wait(2000);
 
     cy.contains(this.DataType2.Number).click({ force: true });
     cy.contains(this.DataType2.Time).click({ force: true });
     cy.contains(this.DataType2.Date).click({ force: true });
     cy.contains(this.DataType2.Toggle).click({ force: true });
     cy.contains(this.DataType2.SelectList).click({ force: true });
-    cy.wait(2000);
 
     cy.contains(this.DataType2.Assigning).scrollIntoView({ force: true });
     cy.wait(2000);
@@ -279,14 +270,7 @@ describe("Adding Results and Filters Element to List Views", function () {
 
     cy.contains(this.DataType2.Icon).click({ force: true });
     cy.contains(this.DataType2.Inspection).click({ force: true });
-    cy.contains(this.DataType2.Assigning).click({ force: true });
-
-    cy.contains("Created On").click({ force: true });
-    cy.contains("Modified On").click({ force: true });
-    cy.contains("Created By").click({ force: true });
-    cy.contains("Modified By").click({ force: true });
-    cy.contains("ItemId For Account").click({ force: true });
-
+    cy.contains(this.DataType2.Assigning).click({ force: true })
     cy.wait(2000);
     cy.log("Search List View Results Element has been Checked");
     //Click on Add Select
@@ -330,21 +314,18 @@ describe("Adding Results and Filters Element to List Views", function () {
     cy.contains(this.DataType2.File).click({ force: true });
     cy.contains(this.DataType2.Telephone).click({ force: true });
     cy.contains(this.DataType2.TextAera).click({ force: true });
-    cy.wait(2000);
 
     cy.contains(this.DataType2.Slider).click({ force: true });
     cy.contains(this.DataType2.Currency).click({ force: true });
     cy.contains(this.DataType2.Measure).click({ force: true });
     cy.contains(this.DataType2.Email).click({ force: true });
-    cy.contains(this.DataType2.Address).click({ force: true });
-    cy.wait(2000);
+    cy.contains(this.DataType2.Address).click({ force: true })
 
     cy.contains(this.DataType2.Number).click({ force: true });
     cy.contains(this.DataType2.Time).click({ force: true });
     cy.contains(this.DataType2.Date).click({ force: true });
     cy.contains(this.DataType2.Toggle).click({ force: true });
-    cy.contains(this.DataType2.SelectList).click({ force: true });
-    cy.wait(2000);
+    cy.contains(this.DataType2.SelectList).click({ force: true })
 
     cy.contains(this.DataType2.Assigning).scrollIntoView({ force: true });
     cy.wait(2000);
@@ -354,12 +335,11 @@ describe("Adding Results and Filters Element to List Views", function () {
     cy.contains(this.DataType2.Stepper).click({ force: true });
     cy.contains(this.DataType2.UserSelector).click({ force: true });
     cy.contains(this.DataType2.ContactSelector).click({ force: true });
-    cy.wait(2000);
+
 
     cy.contains(this.DataType2.Icon).click({ force: true });
     cy.contains(this.DataType2.Inspection).click({ force: true });
     cy.contains(this.DataType2.Assigning).click({ force: true });
-
     cy.wait(2000);
     cy.log("Search List View Filters Element has been Checked");
     //Click on Save Selected
@@ -367,7 +347,6 @@ describe("Adding Results and Filters Element to List Views", function () {
     cy.log("Search List View Filters Element has been Selected");
 
     //*/
-
     //Click on Save
     cy.wait(2000);
     cy.get(".mr-2 > .v-btn__content").click();
@@ -378,21 +357,16 @@ describe("Adding Results and Filters Element to List Views", function () {
     cy.log("Assertion closed");
   });
 
-  it.only("Adding Results and Filters Element to Timeline List View", function () {
+  it("Adding Results and Filters Element to Timeline List View", function () {
     //Page object
     const kb = new KitBuilderPage();
-    cy.wait(3000);
-    //Click on Forms Drop down
-    // cy.get(
-    //   "#app > div > div > div:nth-child(1) > header > div > div:nth-child(3) > div > div > div > div > div.v-select__slot > div > div"
-    // ).click({ force: true });
     kb.ClickOnCrossIcon();
-    cy.wait(3000);
+    cy.wait(2000);
 
     //View Name coming form json file
     cy.contains(this.data.TimelineView).click({ force: true });
     cy.log(this.data.TimelineView + " Has been Opened");
-    cy.wait(3000);
+    cy.wait(1000);
     //Add List Results
     cy.contains("Add List Results").click({ force: true });
     cy.wait(2000);
@@ -402,21 +376,18 @@ describe("Adding Results and Filters Element to List Views", function () {
     cy.contains(this.DataType2.File).click({ force: true });
     cy.contains(this.DataType2.Telephone).click({ force: true });
     cy.contains(this.DataType2.TextAera).click({ force: true });
-    cy.wait(2000);
 
     cy.contains(this.DataType2.Slider).click({ force: true });
     cy.contains(this.DataType2.Currency).click({ force: true });
     cy.contains(this.DataType2.Measure).click({ force: true });
     cy.contains(this.DataType2.Email).click({ force: true });
     cy.contains(this.DataType2.Address).click({ force: true });
-    cy.wait(2000);
 
     cy.contains(this.DataType2.Number).click({ force: true });
-    cy.contains(this.DataType2.Time).last().click({ force: true });
+    //cy.contains(this.DataType2.Time).last().click({ force: true });
     cy.contains(this.DataType2.Date).click({ force: true });
     cy.contains(this.DataType2.Toggle).click({ force: true });
     cy.contains(this.DataType2.SelectList).click({ force: true });
-    cy.wait(2000);
 
     cy.contains(this.DataType2.Assigning).scrollIntoView({ force: true });
     cy.wait(2000);
@@ -426,18 +397,10 @@ describe("Adding Results and Filters Element to List Views", function () {
     cy.contains(this.DataType2.Stepper).click({ force: true });
     cy.contains(this.DataType2.UserSelector).click({ force: true });
     cy.contains(this.DataType2.ContactSelector).click({ force: true });
-    cy.wait(2000);
 
     cy.contains(this.DataType2.Icon).click({ force: true });
     cy.contains(this.DataType2.Inspection).click({ force: true });
     cy.contains(this.DataType2.Assigning).click({ force: true });
-
-    cy.contains("Created On").click({ force: true });
-    cy.contains("Modified On").click({ force: true });
-    cy.contains("Created By").click({ force: true });
-    cy.contains("Modified By").click({ force: true });
-    cy.contains("ItemId For Account").click({ force: true });
-
     cy.wait(2000);
 
     cy.log("Timeline List View Results Element has been Checkted");
@@ -477,22 +440,18 @@ describe("Adding Results and Filters Element to List Views", function () {
     cy.contains(this.DataType2.File).click({ force: true });
     cy.contains(this.DataType2.Telephone).click({ force: true });
     cy.contains(this.DataType2.TextAera).click({ force: true });
-    cy.wait(2000);
 
     cy.contains(this.DataType2.Slider).click({ force: true });
     cy.contains(this.DataType2.Currency).click({ force: true });
     cy.contains(this.DataType2.Measure).click({ force: true });
     cy.contains(this.DataType2.Email).click({ force: true });
     cy.contains(this.DataType2.Address).click({ force: true });
-    cy.wait(2000);
 
     cy.contains(this.DataType2.Number).click({ force: true });
-    cy.contains(this.DataType2.Time).last().click({ force: true });
+    //cy.contains(this.DataType2.Time).last().click({ force: true });
     cy.contains(this.DataType2.Date).click({ force: true });
     cy.contains(this.DataType2.Toggle).click({ force: true });
     cy.contains(this.DataType2.SelectList).click({ force: true });
-    cy.wait(2000);
-
     cy.contains(this.DataType2.Assigning).scrollIntoView({ force: true });
     cy.wait(2000);
 
@@ -501,12 +460,10 @@ describe("Adding Results and Filters Element to List Views", function () {
     cy.contains(this.DataType2.Stepper).click({ force: true });
     cy.contains(this.DataType2.UserSelector).click({ force: true });
     cy.contains(this.DataType2.ContactSelector).click({ force: true });
-    cy.wait(2000);
 
     cy.contains(this.DataType2.Icon).click({ force: true });
     cy.contains(this.DataType2.Inspection).click({ force: true });
     cy.contains(this.DataType2.Assigning).click({ force: true });
-
     cy.wait(2000);
 
     cy.log("Timeline List View Filters Element has been Checked");
