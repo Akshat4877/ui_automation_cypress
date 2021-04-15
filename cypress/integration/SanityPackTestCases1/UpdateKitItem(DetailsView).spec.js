@@ -530,7 +530,7 @@ describe("Update created kit item test case", function () {
     cy.get(".mb-4:nth-child(1) .v-btn__content").click({ force: true });
   });
 
-  it.only("Link Existing Relation On Map", function () {
+  it("Link Existing Relation On Map", function () {
     //Click on Map tab
     // cy.contains(" Map ").click({ force: true });
     // cy.wait(2000);

@@ -1347,7 +1347,7 @@ describe("Update Related New fot Square Card Related Control", function () {
     cy.get(".btn-load .inline-svg").eq(1).scrollIntoView({ force: true });
     //Click on three dots on linked square card
     //Click on created one to many kit item
-    cy.get(".px-2:nth-child(2) .inline-svg").click({ force: true });
+    cy.get(".px-2:nth-child(1) .inline-svg").click({ force: true });
     //Assertion
     //cy.contains(" Edit Item ").should("be.visible");
     //cy.contains(" Delete Item ").should("be.visible");

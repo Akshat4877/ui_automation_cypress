@@ -386,7 +386,7 @@ describe("Bulk Edit test case for List View kit item", function () {
     ).click({ force: true });
 
     //Click on save
-    cy.get(".ca-button-green > .v-btn__content").first().click({ force: true });
+    cy.get(".ca-button-green > .v-btn__content").last().click({ force: true });
     cy.contains(" Bulk edit complete ").should("be.visible");
     cy.wait(2000);
   });

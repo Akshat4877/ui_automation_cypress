@@ -459,7 +459,7 @@ describe("New kit item complete creation test case", function () {
     cy.wait(1000);
   });
 
-  it.only("Link Existing Relation On Map", function () {
+  it("Link Existing Relation On Map", function () {
     //Click on Map tab
     // cy.contains(" Map ").click({ force: true });
     // cy.wait(2000);
@@ -494,7 +494,7 @@ describe("New kit item complete creation test case", function () {
     cy.wait(1000);
   });
 
-  it.only("Add Relation On Map", function () {
+  it("Add Relation On Map", function () {
     //Click on Map tab
     // cy.contains(" Map ").click({ force: true });
     // cy.wait(2000);

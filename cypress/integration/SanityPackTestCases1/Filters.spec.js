@@ -1238,7 +1238,7 @@ describe("TableList KitItem Filter", function () {
     ).click({ force: true });
     cy.wait(2000);
     //CheckboxSelect filter value(Values coming form KitItemValues Json File)
-    cy.contains(this.NewKitItemData.CheckboxSelectValue2).click({
+    cy.contains(this.NewKitItemData.CheckboxSelectValue1).click({
       force: true,
     });
     cy.wait(1000);
@@ -1262,7 +1262,7 @@ describe("TableList KitItem Filter", function () {
     cy.wait(1000);
 
     //CheckboxSelect validation
-    cy.get('[type="checkbox"]').eq(4).should('be.checked')
+    cy.get('[type="checkbox"]').eq(3).should('be.checked')
     cy.wait(2000)
     //Close Kit type
     cy.get(".subheader--button-icon-wrapper .inline-svg").click({

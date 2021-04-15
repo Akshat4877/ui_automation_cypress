@@ -879,7 +879,7 @@ describe("New kit item complete creation test case", function () {
     var lower = this.DataType2.TextAera.toLowerCase();
     //Validating details view input data
     cy.get("[name" + "=" + this.DataType2.TextAera + "]")
-      .eq(1).should("have.value", this.UpdateKitItemData.TextAera)
+      .eq(0).should("have.value", this.UpdateKitItemData.TextAera)
   });
 
   it.only("Slider Element data Validation", function () {
