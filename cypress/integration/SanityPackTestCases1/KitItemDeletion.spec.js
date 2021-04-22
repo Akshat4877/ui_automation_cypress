@@ -85,7 +85,8 @@ describe("To Test deletion of kit item", function () {
     cy.wait(2000);
     cy.contains("Delete").click({ force: true });
     //Confirmation Assertion
-    cy.contains("Do you really want to delete this item?").should("be.visible");
+    cy.contains("Permanently remove this item? Doing so will remove it from the inbox of all shared accounts.")
+      .should("be.visible");
     cy.wait(2000);
     cy.get(".mb-4:nth-child(1) .v-btn__content").click();
     //Kit Item Deletion Assertion
