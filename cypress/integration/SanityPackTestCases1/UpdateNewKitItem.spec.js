@@ -875,7 +875,7 @@ describe("New kit item complete creation test case", function () {
     cy.xpath("//input[@controlname='" + lower + "']").should("have.value", this.UpdateKitItemData.Telephone)
   });
 
-  it.only("TextAera Element data Validation", function () {
+  it("TextAera Element data Validation", function () {
     var lower = this.DataType2.TextAera.toLowerCase();
     //Validating details view input data
     cy.get('//textarea[@controlname="textAera"]')

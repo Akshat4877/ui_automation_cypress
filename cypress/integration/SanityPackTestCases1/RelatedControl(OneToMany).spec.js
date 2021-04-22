@@ -362,8 +362,12 @@ describe("Related Control One to Many test case", function () {
     //UserSelector(Values coming form KitItemValues Json File)
     //Click on to open UserSelector Pop up
     cy.get(".searchIcon").eq(0).click({ force: true });
-    cy.wait(3000);
-
+    cy.contains(" Users ").should("be.visible");
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.RelatedKitItemData.UserSelectorName}{enter}`)
+    cy.wait(3000)
     cy.contains(this.RelatedKitItemData.UserSelectorName).click({
       force: true,
     });
@@ -373,8 +377,13 @@ describe("Related Control One to Many test case", function () {
     //ContactSelector(Values coming form KitItemValues Json File)
     //Click on to open ContactSelector Pop up
     cy.get(".searchIcon").eq(1).click({ force: true });
-
-    cy.wait(4000);
+    cy.contains(" Connection ").should("be.visible");
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.RelatedKitItemData.ContactSelectorName}{enter}`)
+    cy.wait(3000)
     cy.contains(this.RelatedKitItemData.ContactSelectorName).click({
       force: true,
     });
