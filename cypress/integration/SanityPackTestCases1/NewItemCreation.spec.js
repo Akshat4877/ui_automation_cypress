@@ -101,7 +101,7 @@ describe("New kit item complete creation test case", function () {
     const lp = new LoginPage();
     const KTP = new KitTypePage();
     //Assertion
-    //cy.title().should("eq", "Common Areas");
+    cy.title().should("eq", "Common Areas");
     lp.PlusIcon();
     //debugger;
     //Click on To open Kit Type
@@ -114,7 +114,7 @@ describe("New kit item complete creation test case", function () {
     cy.log("New Item created and Kit Type has been Opened");
   });
 
-  it.only("Create New Kit Item with all the fields", function () {
+  it("Create New Kit Item with all the fields", function () {
     const lp = new LoginPage();
     //new form ele visible assertion
     cy.get("[name" + "=" + this.DataType2.Text + "]")
@@ -428,6 +428,11 @@ describe("New kit item complete creation test case", function () {
     //Assertion validation
     cy.contains("File saved").should("be.visible");
     cy.log("File uploaded");
+    cy.wait(2000)
+    //make the file external viewable
+    cy.xpath('//*[text()=" Internally Viewable "]').eq(0).click({ force: true })
+    cy.contains(' File updated ').should('be.visible')
+    cy.wait(2000)
   });
 
   it.only("Add a pin on Map", function () {
@@ -714,8 +719,9 @@ describe("New kit item complete creation test case", function () {
     cy.get(".details-wrapper > .col > .ml-0 > .v-btn__content").click({
       force: true,
     });
+    cy.wait(2000)
     //Assertion validation
-    cy.contains(" Groups ").should("be.visible");
+    //cy.contains(" Groups ").should("be.visible");
     cy.contains(this.SData.AddGroup).click({ force: true });
     //Assertion validation
     cy.contains(this.SData.AddGroup).should("be.visible");
@@ -748,7 +754,6 @@ describe("New kit item complete creation test case", function () {
     //scroll to Open KitType from left panel
     cy.contains(this.NewKitItemData.KitName).scrollIntoView({ force: true })
     //Open KitType from left panel
-
     cy.xpath("//*[contains(@class, 'd-flex col-9')]//*[text() = '" + this.NewKitItemData.KitName + "']")
       .click({
         force: true,

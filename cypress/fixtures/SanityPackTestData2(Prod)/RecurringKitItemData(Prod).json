@@ -23,7 +23,7 @@
     "Telephone":"(123) 123-1234",
     "TextAera":"Recurring kit item",
     "SliderValue":"50",
-    "Currency":"15",
+    "Currency":"1",
     "Measure":"2",
 
     "Email":"recurring@yahoo.com",
@@ -32,10 +32,10 @@
     "Addressline1":"recurring Way",
     "Addressline2":"Oak recurring",
     "City":"Grand Island recurring",
-    "State":"Alaska",
+    "State":"Bihar",
     "ZipCode":"4877",
-    "Country":"United States",
-    "Number":"3",
+    "Country":"India",
+    "Number":"1",
 
     "SelectListValue":"Australia",
     "RadioSelectValue":"SR1",
@@ -63,6 +63,6 @@
     "IconLabel":"recurring",
 
     "LoggedTime":"4:30 pm",
-    "LoggedDate":"03/25/2021"
+    "LoggedDate":"04/25/2021"
 
 }

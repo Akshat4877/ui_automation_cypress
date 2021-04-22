@@ -662,7 +662,8 @@ describe("Update created kit item test case", function () {
     //Comments Tab
     cy.contains("Comments ").click({ force: true });
     cy.get('[name="addComment"]').type(this.DetailViewData.AddComments);
-    cy.contains(" SAVE ").click({ force: true });
+    cy.wait(2000)
+    cy.get('.left-align > .v-btn__content').click({ force: true });
     //Assertion validation
     cy.contains(" New Comment added ").should("be.visible");
     cy.log("Comment has been added");
@@ -759,6 +760,10 @@ describe("Update created kit item test case", function () {
   });
 
   it.only('Close details view', function () {
+
+    //Click to save
+    cy.get(".navi-bar-dropdown:nth-child(2) .v-btn").click({ force: true });
+    cy.wait(3000)
     //Close Kit type
     cy.get(".subheader--button-icon-wrapper .inline-svg").click({
       force: true,
