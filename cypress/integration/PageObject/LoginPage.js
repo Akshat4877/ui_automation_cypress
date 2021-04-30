@@ -2,68 +2,16 @@ class LoginPage {
 
   BaseTest() {
     cy.visit("https://app.ca-test.com/Public/Login?ReturnUrl=%2F");
-    
+
   }
 
   ProdBaseTest() {
     cy.visit("https://commonareas.io/Public/Login?ReturnUrl=%2F");
-    
-  }
 
-  visitServiceTest() {
-    cy.visit("https://serviceproviders.ca-test.com/");
-  }
-
-  visitKitBuilderServiceTest() {
-    cy.visit("https://serviceproviders.ca-test.com/ClientAdmin/KitBuilder#/");
-  }
-
-  visitServiceBuild() {
-    cy.visit("https://serviceproviders.ca-build.com/");
-  }
-
-  visitKitBuilderServiceBuild() {
-    cy.visit("https://serviceproviders.ca-build.com/ClientAdmin/KitBuilder#/");
-  }
-
-  visitStarksTest() {
-    cy.visit("http://starksolutions.ca-test.com/");
-  }
-
-  AdminStarksTest() {
-    cy.visit("https://starksolutions.ca-test.com/ClientAdmin/AddUser");
-  }
-
-  visitStarksBuild() {
-    cy.visit("http://starksolutions.ca-build.com/");
-  }
-
-  AddUserStarksBuild() {
-    cy.visit("https://starksolutions.ca-build.com/ClientAdmin/AddUser");
-  }
-
-  visitCityComTest() {
-    cy.visit("https://citycommercial.ca-test.com/#/");
-  }
-
-  visitCityComBuild() {
-    cy.visit("https://citycommercial.ca-build.com/#/");
   }
 
   NVDTestKitBuilder() {
     cy.visit("https://nvd.ca-test.com/ClientAdmin/KitBuilder#/");
-  }
-
-  visitCityComBuildKitBuilder() {
-    cy.visit("https://citycommercial.ca-build.com/ClientAdmin/KitBuilder#/");
-  }
-
-  CityComTestAddUser() {
-    cy.visit("https://citycommercial.ca-test.com/ClientAdmin/AddUser");
-  }
-
-  CityComBuildAddUser() {
-    cy.visit("https://citycommercial.ca-build.com/ClientAdmin/AddUser");
   }
 
   EnterEmail(value) {

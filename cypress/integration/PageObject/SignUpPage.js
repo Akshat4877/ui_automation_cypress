@@ -1,12 +1,4 @@
 class SignUpPage {
-  visitBaseTest() {
-    cy.visit("https://app.ca-test.com/Public/Login?ReturnUrl=%2F");
-    
-  }
-
-  visitBaseBuild() {
-    cy.visit("https://app.ca-build.com/Public/Login?ReturnUrl=%2F");
-  }
 
   SignUp() {
     const sb = cy.contains("Start a free account");
@@ -39,7 +31,7 @@ class SignUpPage {
     cy.get("#msg_body").then(($iframe) => {
       const $a = $iframe.contents().find("a");
       cy.wrap($a).contains("Reset your password").click();
-      
+
     });
   }
 }

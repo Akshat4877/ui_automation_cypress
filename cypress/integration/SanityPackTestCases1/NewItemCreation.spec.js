@@ -114,7 +114,7 @@ describe("New kit item complete creation test case", function () {
     cy.log("New Item created and Kit Type has been Opened");
   });
 
-  it("Create New Kit Item with all the fields", function () {
+  it.only("Create New Kit Item with all the fields", function () {
     const lp = new LoginPage();
     //new form ele visible assertion
     cy.get("[name" + "=" + this.DataType2.Text + "]")

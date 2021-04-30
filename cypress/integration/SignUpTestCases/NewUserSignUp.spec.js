@@ -197,12 +197,6 @@ describe("Login into the application for a new User ", function () {
     cy.contains(" Log In ").should("be.visible");
     //Enter credentials
     lp.EnterEmail(this.Credentials.UserEmail);
-
-    // cy.log('User need to do something').then(()=>{
-
-    //   alert('Enter Password')
-    // })
-
     lp.EnterPassword(this.Credentials.Password);
     cy.screenshot("User logged In Details");
     cy.wait(7000);
@@ -219,7 +213,7 @@ describe("Login into the application for a new User ", function () {
       "jwtAccessToken"
     );
 
-    cy.wait(10000);
+    cy.wait(5000);
     //cy.title().should("eq", "Common Areas");
     cy.log("New Users has been logged in successfully");
     //Assertion
@@ -234,7 +228,7 @@ describe("Login into the application for a new User ", function () {
     });
     cy.log("New Users has been logged in successfully");
     //cy.screenshot("New Users has been logged in successfully");
-    cy.wait(3000);
+    cy.wait(2000);
   });
 
   it("Sign Out for logged in user", function () {
