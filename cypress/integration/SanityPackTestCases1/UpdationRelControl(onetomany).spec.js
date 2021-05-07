@@ -1051,19 +1051,18 @@ describe("Update Related New for OneToMany Related Control", function () {
     cy.contains("Item shared").should("be.visible");
     cy.log("Assigning added");
 
-    //Click on to link onetoone
+    //Click on to link onetoone assertion
     cy.get(".action-icon:nth-child(2) path").eq(1).click({ force: true });
     cy.wait(3000);
     //Link existing kit item for one to one
-
     cy.get(
       ".row:nth-child(1) > .d-flex > .list-item-col-left > .v-avatar:nth-child(1) svg"
     ).should("be.visible");
     cy.wait(1000);
-
+    //Click on to link onetoone
     cy.get(
       ".row:nth-child(1) > .d-flex > .list-item-col-left > .v-avatar:nth-child(1) svg"
-    ).click({ force: true });
+    ).first().click({ force: true });
     cy.wait(5000);
 
     //save related new
@@ -1322,9 +1321,13 @@ describe("Update Related New for OneToMany Related Control", function () {
     cy.get(".ca-item").eq(0).click({ force: true });
     cy.wait(2000);
 
-    cy.get("div:nth-child(3) > div > .row:nth-child(1) .item-check").click({
-      force: true,
-    });
+    //Selct the to be linked kit item
+    cy.get('.v-dialog__content:nth-child(1) div:nth-child(4) > .row:nth-child(1) svg:nth-child(1)')
+      .click({ force: true });
+
+    // cy.get("div:nth-child(3) > div > .row:nth-child(1) .item-check").click({
+    //   force: true,
+    // });
     //Click on select btn
     cy.get(".button-pop-ups > .v-btn__content").first().click({ force: true });
 

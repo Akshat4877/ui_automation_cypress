@@ -112,7 +112,7 @@ describe("Related Control Square Card test case", function () {
     //new form ele visible assertion
     cy.get("[name" + "=" + this.DataType2.Text + "]").last().should("be.visible");
     //save Kit Item for empty form
-    cy.get(".v-select__selections .v-btn__content").click({ force: true });
+    cy.get(".v-select__selections .v-btn__content").first().click({ force: true });
     //kit item Save Assertion for no data
     cy.contains("Nothing to save for " + this.NewKitItemData.KitName).should(
       "be.visible"
@@ -780,7 +780,9 @@ describe("Related Control Square Card test case", function () {
     //Search List view pop up assertion
     cy.contains(this.ViewName.SearchView).should("be.visible");
     //Selct the to be linked kit item
-    cy.get(".thumb-selected-icon").eq(0).click();
+    cy.get('.v-dialog__content:nth-child(1) div:nth-child(4) > .row:nth-child(1) svg:nth-child(1)')
+      .click({ force: true });
+    //cy.get(".thumb-selected-icon").eq(0).click();
     //cy.get(".thumb-selected-icon").eq(1).click();
     cy.wait(2000);
     //Click on select btn

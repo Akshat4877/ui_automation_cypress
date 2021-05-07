@@ -1,8 +1,8 @@
 import SignUpPage from "../PageObject/SignUpPage";
 
-describe("Email Notification Shared Activity", function () {
+describe("Comment Email Notification Shared Activity", function () {
     this.beforeEach(
-        "Internal User Credentials",
+        "Shared User Credentials",
         function () {
 
             cy.fixture("SanityPackTestData2/SharedUserCredentials").then(function (KitDataEle) {
@@ -37,13 +37,11 @@ describe("Email Notification Shared Activity", function () {
         const sp = new SignUpPage();
         sp.mailinatorSite();
         cy.url().should("include", "mailinator.com");
-        sp.EnterMailinatorEmail(this.Credentials.InternalUser);
+        sp.EnterMailinatorEmail(this.Credentials.BaseConnection);
         cy.log("User Email has been Entered");
         //Click on Go
         sp.Go();
-        cy.wait(10000);
-        cy.contains("New " + this.NewKitItemData.KitName).click({ force: true });
-        cy.wait(3000)
-
+        cy.wait(5000);
+        cy.contains('Comments Added').click({ force: true })
     });
 });

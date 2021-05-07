@@ -1,8 +1,8 @@
 import SignUpPage from "../PageObject/SignUpPage";
 
-describe("Email Notification Shared Activity For External Connection", function () {
+describe("Email Notification Shared Activity For Base Connection", function () {
     this.beforeEach(
-        "Internal User Credentials",
+        "Shared User Credentials",
         function () {
 
             cy.fixture("SanityPackTestData2/SharedUserCredentials").then(function (KitDataEle) {
@@ -37,12 +37,6 @@ describe("Email Notification Shared Activity For External Connection", function 
         sp.Go();
         cy.wait(10000);
         cy.contains("New " + this.NewKitItemData.KitName).click({ force: true });
-        // //Validate shared kit item id
-        // cy.get("#html_msg_body").then(($iframe) => {
-        //     const $a = $iframe.contents().find("td");
-        //     cy.wrap($a).contains('ID:25')
-
-        // })
 
     });
 });

@@ -8,7 +8,6 @@ describe("Base Connection Shared Kit Item Test Case For Basic Controls", functio
     this.beforeAll(function () {
         //cy.viewport(1280, 720);
         const lp = new LoginPage();
-        const slp = new SanityLoginPage();
         lp.BaseTest()
         //lp.ProdBaseTest()
         //Handling Alert

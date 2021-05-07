@@ -88,15 +88,19 @@ describe("Bulk Edit test case for List View kit item", function () {
 
   it.only("Select kit items and Elements for bulk action", function () {
     //Select first kit items for bulk edit in table list view
-    cy.get(".row:nth-child(1) .list-item-col-left .item-check").click({
-      force: true,
-    });
+    cy.get('.row:nth-child(2) .list-item-col-left svg').eq(0).click({ force: true });
+    // cy.get(".row:nth-child(1) .list-item-col-left .item-check").click({
+    //   force: true,
+    // });
     //Select second four kit items for bulk edit in table list view
-    cy.get(".row:nth-child(2) > .d-flex .item-check").click({ force: true });
+    cy.get('.row:nth-child(2) .list-item-col-left svg').eq(1).click({ force: true });
+    //cy.get(".row:nth-child(2) > .d-flex .item-check").click({ force: true });
     //Select third four kit items for bulk edit in table list view
-    cy.get(".row:nth-child(3) > .d-flex .item-check").click({ force: true });
+    cy.get('.row:nth-child(2) .list-item-col-left svg').eq(2).click({ force: true });
+    //cy.get(".row:nth-child(3) > .d-flex .item-check").click({ force: true });
     //Select fourth four kit items for bulk edit in table list view
-    cy.get(".row:nth-child(4) > .d-flex .item-check").click({ force: true });
+    cy.get('.row:nth-child(2) .list-item-col-left svg').eq(3).click({ force: true });
+    //cy.get(".row:nth-child(4) > .d-flex .item-check").click({ force: true });
     //Assertion
     cy.contains("4 Items Selected").should("be.visible");
 
@@ -383,7 +387,8 @@ describe("Bulk Edit test case for List View kit item", function () {
     cy.wait(2000);
     cy.get(
       ".row:nth-child(1) > .d-flex > .list-item-col-left > .v-avatar:nth-child(1) svg"
-    ).click({ force: true });
+    ).first().click({ force: true });
+    cy.wait(3000)
 
     //Click on save
     cy.get(".ca-button-green > .v-btn__content").last().click({ force: true });

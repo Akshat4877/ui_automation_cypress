@@ -61,7 +61,8 @@ describe("Sign up for a New User", function () {
   it("New User Sign up", function () {
     //PageObject
     const sp = new SignUpPage();
-    sp.visitBaseTest();
+    const lp = new LoginPage();
+    lp.BaseTest()
     //cy.visit('https://commonareas.io/Public/Login')
     cy.wait(3000);
     //cy.eyesCheckWindow()
@@ -191,7 +192,7 @@ describe("Login into the application for a new User ", function () {
     //PageObject
     const sp = new SignUpPage();
     const lp = new LoginPage();
-    sp.visitBaseTest();
+    lp.BaseTest()
     //cy.visit('https://app.ca-test.com/Public/Login?ReturnUrl=%2F')
     //Login Assertions
     cy.contains(" Log In ").should("be.visible");

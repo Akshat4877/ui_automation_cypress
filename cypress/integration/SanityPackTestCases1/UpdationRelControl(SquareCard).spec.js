@@ -1047,7 +1047,7 @@ describe("Update Related New fot Square Card Related Control", function () {
 
     cy.get(
       ".row:nth-child(1) > .d-flex > .list-item-col-left > .v-avatar:nth-child(1) svg"
-    ).click({ force: true });
+    ).first().click({ force: true });
     cy.wait(3000);
 
     //save related new
@@ -1321,7 +1321,9 @@ describe("Update Related New fot Square Card Related Control", function () {
     //Search List view pop up assertion
     cy.contains(this.ViewName.SearchView).should("be.visible");
     //Select the item to be linked
-    cy.get(".thumb-selected-icon").eq(0).click({ force: true });
+    cy.get('.v-dialog__content:nth-child(1) div:nth-child(4) > .row:nth-child(1) svg:nth-child(1)')
+      .click({ force: true });
+    //cy.get(".thumb-selected-icon").eq(0).click({ force: true });
     cy.wait(1000);
     //Click on select btn
     cy.get(".button-pop-ups > .v-btn__content").first().click({ force: true });

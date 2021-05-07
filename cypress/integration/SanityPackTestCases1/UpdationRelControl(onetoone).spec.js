@@ -1063,7 +1063,7 @@ describe("Update Related New fot OneToOne Related Control", function () {
     //Link existing kit item for one to one
     cy.get(
       ".row:nth-child(1) > .d-flex > .list-item-col-left > .v-avatar:nth-child(1) svg"
-    ).click({ force: true });
+    ).first().click({ force: true });
     cy.wait(3000);
 
     //save related new

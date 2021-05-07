@@ -764,7 +764,9 @@ describe("Related Control One to Many test case", function () {
     //Search List view pop up assertion
     cy.contains(this.ViewName.SearchView).should("be.visible");
     //Selct the to be linked kit item
-    cy.get(".thumb-selected-icon").eq(0).click();
+    cy.get('.v-dialog__content:nth-child(1) div:nth-child(4) > .row:nth-child(1) svg:nth-child(1)')
+      .click({ force: true });
+    //cy.get(".thumb-selected-icon").eq(0).click();
     cy.wait(2000);
     //Click on select btn
     cy.get(".button-pop-ups > .v-btn__content").click({ force: true });

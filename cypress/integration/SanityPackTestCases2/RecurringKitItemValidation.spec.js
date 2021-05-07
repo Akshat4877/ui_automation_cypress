@@ -5,8 +5,8 @@ describe("Triggered Recurring KitItem Validation Test Case", function () {
     this.beforeAll(function () {
         const lp = new LoginPage();
         const slp = new SanityLoginPage();
-        //slp.nvdTest()
-        slp.TmProd();
+        slp.nvdTest()
+        //slp.TmProd();
         //Handling Alert
         cy.on("window:confirm", () => {
             cy.log("Alert has been Handled");
@@ -15,8 +15,8 @@ describe("Triggered Recurring KitItem Validation Test Case", function () {
         //Login Assertions
         cy.contains(" Log In ").should("be.visible");
         //Enter credentials
-        lp.EnterEmail("sam@armyspy.com");
-        //lp.EnterEmail("propertymanagement@commonareas.work.dev");
+        //lp.EnterEmail("sam@armyspy.com");
+        lp.EnterEmail("propertymanagement@commonareas.work.dev");
         lp.EnterPassword("1234567Aa");
         lp.Submit();
         cy.log("User has been Logged In into the application");
@@ -43,29 +43,29 @@ describe("Triggered Recurring KitItem Validation Test Case", function () {
             "jwtAccessToken"
         );
 
-        // cy.fixture("SanityPackTestData2/RecurringKitItemData").then(function (
-        //     KitDataEle
-        // ) {
-        //     this.NewKitItemData = KitDataEle;
-        // });
+        cy.fixture("SanityPackTestData2/RecurringKitItemData").then(function (
+            KitDataEle
+        ) {
+            this.NewKitItemData = KitDataEle;
+        });
 
-        cy.fixture("SanityPackTestData2(Prod)/RecurringKitItemData(Prod)").then(
-            function (KitDataEle) {
-                this.NewKitItemData = KitDataEle;
-            }
-        );
+        // cy.fixture("SanityPackTestData2(Prod)/RecurringKitItemData(Prod)").then(
+        //     function (KitDataEle) {
+        //         this.NewKitItemData = KitDataEle;
+        //     }
+        // );
 
-        // cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
-        //     NewDataForElements
-        // ) {
-        //     this.DataType2 = NewDataForElements;
-        // });
+        cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
+            NewDataForElements
+        ) {
+            this.DataType2 = NewDataForElements;
+        });
 
-        cy.fixture("SanityPackTestData(Prod)/KitBuilderDataTypes2(Prod)").then(
-            function (NewDataForElements) {
-                this.DataType2 = NewDataForElements;
-            }
-        );
+        // cy.fixture("SanityPackTestData(Prod)/KitBuilderDataTypes2(Prod)").then(
+        //     function (NewDataForElements) {
+        //         this.DataType2 = NewDataForElements;
+        //     }
+        // );
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     });

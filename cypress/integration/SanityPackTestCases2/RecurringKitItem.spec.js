@@ -188,7 +188,7 @@ describe("Recurring New kit item creation test case", function () {
     //text
     cy.get("[name" + "=" + this.DataType2.Text + "]")
       .last().should('be.visible');
-    cy.get(".v-select__selections .v-btn__content").click({ force: true });
+    cy.get(".v-select__selections .v-btn__content").first().click({ force: true });
     //kit item Save Assertion for no data
     cy.contains("Nothing to save for " + this.NewKitItemData.KitName).should(
       "be.visible"
@@ -348,6 +348,7 @@ describe("Recurring New kit item creation test case", function () {
     )
       .eq(4)
       .click({ force: true });
+    cy.wait(1000)
     //SelectList Value(Values coming form KitItemValues Json File)
     cy.contains(this.NewKitItemData.SelectListValue).click({ force: true });
     cy.log("SelectList Value has been set.");
@@ -463,8 +464,15 @@ describe("Recurring New kit item creation test case", function () {
     //Search List view pop up assertion
     cy.contains(this.ViewName.SearchView).should("be.visible");
     //Selct the to be linked kit item
-    cy.get(".thumb-selected-icon").eq(0).click();
-    cy.get(".thumb-selected-icon").eq(1).click();
+    //Selct the to be linked kit item
+    cy.get('.v-dialog__content:nth-child(1) div:nth-child(4) > .row:nth-child(1) svg:nth-child(1)')
+      .click({ force: true });
+    //Selct the to be linked kit item
+    cy.get('.v-dialog__content:nth-child(1) div:nth-child(4) > .row:nth-child(2) svg:nth-child(1)')
+      .click({ force: true });
+    // cy.get(".thumb-selected-icon").eq(0).click();
+    // cy.get(".thumb-selected-icon").eq(1).click();P
+
     cy.wait(2000);
     //Click on select btn
     cy.get(".button-pop-ups > .v-btn__content").click({ force: true });
@@ -505,9 +513,12 @@ describe("Recurring New kit item creation test case", function () {
     //Search List view pop up assertion
     cy.contains(" Related Items ").should("be.visible");
     //Select item to be linked kit item
-    cy.get(".row:nth-child(2) > .d-flex .v-avatar:nth-child(1) use").click({
-      force: true,
-    });
+    //Selct the to be linked kit item
+    cy.get('.v-dialog__content:nth-child(1) div:nth-child(4) > .row:nth-child(1) svg:nth-child(1)')
+      .click({ force: true });
+    // cy.get(".row:nth-child(2) > .d-flex .v-avatar:nth-child(1) use").click({
+    //   force: true,
+    // });
     //Scroll
     cy.get(".last-updated:nth-child(2) > .v-icon").scrollIntoView({
       force: true,
@@ -538,8 +549,14 @@ describe("Recurring New kit item creation test case", function () {
     //Search List view pop up assertion
     cy.contains(this.ViewName.SearchView).should("be.visible");
     //Selct the to be linked kit item
-    cy.get(".thumb-selected-icon").eq(0).click();
-    cy.get(".thumb-selected-icon").eq(1).click();
+    //Selct the to be linked kit item
+    cy.get('.v-dialog__content:nth-child(1) div:nth-child(4) > .row:nth-child(1) svg:nth-child(1)')
+      .click({ force: true });
+    //Selct the to be linked kit item
+    cy.get('.v-dialog__content:nth-child(1) div:nth-child(4) > .row:nth-child(2) svg:nth-child(1)')
+      .click({ force: true });
+    // cy.get(".thumb-selected-icon").eq(0).click();
+    // cy.get(".thumb-selected-icon").eq(1).click();
     cy.wait(2000);
     //Click on select btn
     cy.get(".button-pop-ups > .v-btn__content").first().click({ force: true });
@@ -560,7 +577,7 @@ describe("Recurring New kit item creation test case", function () {
     //////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //save Kit Item
-    cy.get(".v-select__selections .v-btn__content").click({ force: true });
+    cy.get(".v-select__selections .v-btn__content").first().click({ force: true });
     cy.contains(this.NewKitItemData.KitName + " has been saved").should(
       "be.visible"
     );
@@ -729,6 +746,7 @@ describe("Recurring New kit item creation test case", function () {
     cy.get('[name="addComment"]').type(
       this.NewKitItemData.RecurringAddComments
     );
+    cy.wait(2000)
     cy.contains(" SAVE ").click({ force: true });
     //Assertion validation
     cy.contains(" New Comment added ").should("be.visible");
@@ -743,13 +761,13 @@ describe("Recurring New kit item creation test case", function () {
       force: true,
     });
     //Assertion validation
-    cy.contains(" Groups ").should("be.visible");
+    //cy.contains(" Groups ").should("be.visible");
     cy.contains(this.NewKitItemData.RecurringAddGroup).click({ force: true });
     //Assertion validation
     cy.contains(this.NewKitItemData.RecurringAddGroup).should("be.visible");
 
     //save Kit Item
-    cy.get(".v-select__selections .v-btn__content").click({ force: true });
+    cy.get(".v-select__selections .v-btn__content").first().click({ force: true });
 
     //kit item Save Assertion
     cy.contains("Nothing to save for " + this.NewKitItemData.KitName).should(
