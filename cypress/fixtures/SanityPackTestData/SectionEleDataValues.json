@@ -1,10 +1,10 @@
 {
 
     
-    "SectionKitName":"PropertyBuilder",
+    "SectionKitName":"HouseAreas",
     "Url":"https://www.section.com",
     "Text":"section",
-    "NewFormLibFileName":"Screenshot_6",
+    "SectionFile":"Screenshot_6",
     "Telephone":"(222) 222-2222",
     "TextAera":"section element",
     "SliderValue":"50",
@@ -22,9 +22,9 @@
     "Country":"United States",
     "Number":"2",
 
-    "SelectListValue":"India",
+    "SelectListValue":"Lord",
     
-    "RadioSelectValue":"SR3",
+    "RadioSelectValue":"SR5",
 
     "StepperValue":"Note",
     "InspectionValue":"Python",
@@ -41,10 +41,11 @@
     "StepperValue4":"Oppo",
     "StepperValue5":"RealMe",
 
-    "UserSelectorName":"Jerome Casanova",
-    "ContactSelectorName":"Eric Buhring",
-    "AssigningName":"Morish Morish",
+    "UserSelectorName":"Common Areas Support ",
+    "ContactSelectorName":"Ethan Thomas ",
+    "AssigningName":"Pranav Testing",
     
+
     "ExtraSmalliconSize":"Extra Small",
     "SmalliconSize":"Small",
     "MediumiconSize":"Medium",

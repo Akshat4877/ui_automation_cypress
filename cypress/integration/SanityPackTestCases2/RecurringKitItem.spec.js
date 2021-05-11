@@ -549,7 +549,6 @@ describe("Recurring New kit item creation test case", function () {
     //Search List view pop up assertion
     cy.contains(this.ViewName.SearchView).should("be.visible");
     //Selct the to be linked kit item
-    //Selct the to be linked kit item
     cy.get('.v-dialog__content:nth-child(1) div:nth-child(4) > .row:nth-child(1) svg:nth-child(1)')
       .click({ force: true });
     //Selct the to be linked kit item

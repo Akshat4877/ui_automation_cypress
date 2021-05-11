@@ -121,7 +121,7 @@ describe("New kit item complete creation test case", function () {
       .last()
       .should("be.visible");
     //save Kit Item for empty form
-    cy.get(".v-select__selections .v-btn__content").click({ force: true });
+    cy.get(".v-select__selections .v-btn__content").first().click({ force: true });
     //kit item Save Assertion for no data
     cy.contains("Nothing to save for " + this.NewKitItemData.KitName).should(
       "be.visible"
@@ -177,7 +177,7 @@ describe("New kit item complete creation test case", function () {
       .trigger('change').click({ force: true })
 
     //save Kit Item
-    cy.get(".v-select__selections .v-btn__content").click({ force: true });
+    cy.get(".v-select__selections .v-btn__content").first().click({ force: true });
     cy.contains(this.NewKitItemData.KitName + " has been saved").should(
       "be.visible"
     );
@@ -406,7 +406,7 @@ describe("New kit item complete creation test case", function () {
     cy.contains("Item shared").should("be.visible");
     cy.log("Assigning added");
     //save Kit Item
-    cy.get(".v-select__selections .v-btn__content").click({ force: true });
+    cy.get(".v-select__selections .v-btn__content").first().click({ force: true });
     cy.contains(this.NewKitItemData.KitName + " has been saved").should(
       "be.visible"
     );
@@ -492,7 +492,7 @@ describe("New kit item complete creation test case", function () {
       " linked "
     ).should("be.visible");
     //Click on save
-    cy.get(".v-select__selections .v-btn__content").click({ force: true });
+    cy.get(".v-select__selections .v-btn__content").first().click({ force: true });
     cy.contains(this.NewKitItemData.KitName + " has been saved").should(
       "be.visible"
     );
@@ -731,7 +731,7 @@ describe("New kit item complete creation test case", function () {
       .first()
       .click({ force: true });
     //save Kit Item
-    cy.get(".v-select__selections .v-btn__content").click({ force: true });
+    cy.get(".v-select__selections .v-btn__content").first().click({ force: true });
     //cy.contains(this.NewKitItemData.KitName + " has been saved").should("be.visible");
     cy.log(this.NewKitItemData.KitName + "Kit Type has been Saved");
 

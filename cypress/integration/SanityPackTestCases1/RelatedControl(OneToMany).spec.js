@@ -113,7 +113,7 @@ describe("Related Control One to Many test case", function () {
     //Url
     cy.get("[name" + "=" + this.DataType2.Text + "]").should("be.visible");
     //save Kit Item for empty form
-    cy.get(".v-select__selections .v-btn__content").click({ force: true });
+    cy.get(".v-select__selections .v-btn__content").first().click({ force: true });
     //kit item Save Assertion for no data
     cy.contains("Nothing to save for " + this.NewKitItemData.KitName).should(
       "be.visible"

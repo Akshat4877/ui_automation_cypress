@@ -105,7 +105,7 @@ describe("Internal Connection Shared Kit Item Test Case", function () {
     it.only('Click on Shared Kit Item to Internal User', function () {
         cy.wait(2000)
         //Adding coma() in kit item id
-        var id = this.KitItemId.ItemID.replace(' ', ', ')
+        var id = this.KitItemId.ItemID.replace(' ', '# ',)
         cy.log(id)
         cy.xpath('//*[contains(@class, "v-list-item__subtitle truncate")]//*[text()="' + id + '"]')
             .click({ force: true })

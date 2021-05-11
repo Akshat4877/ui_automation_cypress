@@ -334,13 +334,14 @@ describe("Update created kit item test case", function () {
     });
     cy.log("Toggle updated");
 
-    //Click on DropDown of SelectList
-    cy.get(
-      " div.row.container-details div.fill-height.col div.container.details-wrapper.fill-height div.row.kit-related-form.pa-6 div.kit-control-component.row-component.px-3.col.col-sm-12.col-md-6.mb-4.px-3.col-sm-12.col-md-6.mb-4.px-3:nth-child(17) div.v-input.kit-control-select-list.layout-alignment.v-input--is-label-active.v-input--is-dirty.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-select div.v-input__control div.v-input__slot div.v-select__slot:nth-child(2) div.v-input__append-inner:nth-child(3) div.v-input__icon.v-input__icon--append > i.v-icon.notranslate.material-icons.theme--light"
-    ).click({ force: true });
-    //SelectList Value(Values coming form KitItemValues Json File)
-    cy.contains(this.UpdateKitItemData.SelectListValue).click({ force: true });
-    cy.log("SelectList Value has been Updated.");
+    // //Click on DropDown of SelectList
+    // cy.get(
+    //   " div.row.container-details div.fill-height.col div.container.details-wrapper.fill-height div.row.kit-related-form.pa-6 div.kit-control-component.row-component.px-3.col.col-sm-12.col-md-6.mb-4.px-3.col-sm-12.col-md-6.mb-4.px-3:nth-child(17) div.v-input.kit-control-select-list.layout-alignment.v-input--is-label-active.v-input--is-dirty.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-select div.v-input__control div.v-input__slot div.v-select__slot:nth-child(2) div.v-input__append-inner:nth-child(3) div.v-input__icon.v-input__icon--append > i.v-icon.notranslate.material-icons.theme--light"
+    // ).click({ force: true });
+    // //SelectList Value(Values coming form KitItemValues Json File)
+    // cy.contains(this.UpdateKitItemData.SelectListValue).click({ force: true });
+    // cy.log("SelectList Value has been Updated.");
+    cy.wait(2000)
 
     //RadioSelect
     cy.contains(this.UpdateKitItemData.RadioSelectValue).click({ force: true });
