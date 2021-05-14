@@ -422,7 +422,7 @@ describe("New kit item complete creation test case", function () {
     cy.wait(2000);
    //click on URl pancil icon
    cy.xpath('//div[@class="wrapper-card-buttons d-flex justify-end col"]//div[@class="mr-4 action-icon"]')
-   .eq(3)
+   .eq(1)
    .click({ force: true });
 
   cy.contains('Edit Link').should('be.visible')

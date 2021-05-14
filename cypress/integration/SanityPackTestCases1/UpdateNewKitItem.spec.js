@@ -117,7 +117,7 @@ describe("New kit item complete creation test case", function () {
       .last()
       .should("be.visible");
     //save Kit Item for empty form
-    cy.get(".v-select__selections .v-btn__content").click({ force: true });
+    cy.get(".v-select__selections .v-btn__content").first().click({ force: true });
     //kit item Save Assertion for no data
     cy.contains("Nothing to save for " + this.NewKitItemData.KitName).should(
       "be.visible"
@@ -384,7 +384,7 @@ describe("New kit item complete creation test case", function () {
     cy.log("Assigning added");
 
     //save Kit Item
-    cy.get(".v-select__selections .v-btn__content").click({ force: true });
+    cy.get(".v-select__selections .v-btn__content").first().click({ force: true });
     cy.contains(this.NewKitItemData.KitName + " has been saved").should(
       "be.visible"
     );
@@ -734,9 +734,8 @@ describe("New kit item complete creation test case", function () {
     //Search List view pop up assertion
     cy.contains(this.ViewName.SearchView).should("be.visible");
     //Selct the to be linked kit item
-    cy.get(".thumb-selected-icon").eq(0).click();
-    cy.get(".thumb-selected-icon").eq(1).click();
-    cy.wait(2000);
+    cy.get('.v-dialog__content:nth-child(1) div:nth-child(4) > .row:nth-child(1) svg:nth-child(1)')
+    .click({ force: true });
     //Click on select btn
     cy.get(".button-pop-ups > .v-btn__content").click({ force: true });
 
@@ -754,9 +753,6 @@ describe("New kit item complete creation test case", function () {
     cy.wait(2000);
     cy.get(
       ".grid-body:nth-child(1) > td:nth-child(1) > .v-list-item__subtitle"
-    ).should("exist");
-    cy.get(
-      ".grid-body:nth-child(2) > td:nth-child(1) > .v-list-item__subtitle"
     ).should("exist");
 
     cy.log("Existing item linked");
@@ -776,9 +772,9 @@ describe("New kit item complete creation test case", function () {
     //Search List view pop up assertion
     cy.contains(" Related Items ").should("be.visible");
     //Select item to be linked kit item
-    cy.get(".row:nth-child(2) > .d-flex .v-avatar:nth-child(1) use").click({
-      force: true,
-    });
+    cy.get('.v-dialog__content:nth-child(1) div:nth-child(4) > .row:nth-child(1) svg:nth-child(1)')
+    .click({ force: true });
+    cy.wait(2000);
     //Scroll
     cy.get(".last-updated:nth-child(2) > .v-icon").scrollIntoView({
       force: true,
@@ -807,8 +803,8 @@ describe("New kit item complete creation test case", function () {
     //Search List view pop up assertion
     cy.contains(this.ViewName.SearchView).should("be.visible");
     //Selct the to be linked kit item
-    cy.get(".thumb-selected-icon").eq(0).click();
-    cy.get(".thumb-selected-icon").eq(1).click();
+    cy.get('.v-dialog__content:nth-child(1) div:nth-child(4) > .row:nth-child(1) svg:nth-child(1)')
+    .click({ force: true });
     cy.wait(2000);
     //Click on select btn
     cy.get(".button-pop-ups > .v-btn__content").first().click({ force: true });
@@ -821,14 +817,12 @@ describe("New kit item complete creation test case", function () {
       " linked "
     ).should("be.visible");
     cy.get(".px-2:nth-child(1) .inline-svg").should("exist");
-    cy.get(".px-2:nth-child(2) .inline-svg").should("exist");
-
     cy.log("Existing item linked");
     cy.wait(1000);
 
     ////////////////////////////////////////////////////////////////////
     //save Kit Item
-    cy.get(".v-select__selections .v-btn__content").click({ force: true });
+    cy.get(".v-select__selections .v-btn__content").first().click({ force: true });
     cy.contains(this.NewKitItemData.KitName + " has been saved").should(
       "be.visible"
     );

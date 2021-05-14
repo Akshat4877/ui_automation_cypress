@@ -13,10 +13,9 @@ describe("Login into the application for a new User ", function () {
       "jwtAccessToken"
     );
 
-    //debugger;
-    // cy.fixture("LoginTestData/UserLogin").then(function (LoginData) {
-    //   this.Credentials = LoginData;
-    // });
+    cy.fixture("SignUpTestData/SignUpTestData").then(function (SignUpData) {
+      this.SignUPData = SignUpData;
+    });
 
     cy.fixture("ConnectionsDynamicTestData/ConnectionUserCredentials").then(
       function (LoginData) {
@@ -27,20 +26,13 @@ describe("Login into the application for a new User ", function () {
 
   it.only("Login into the appLication for New User", function () {
     //PageObject
-    const sp = new SignUpPage();
     const lp = new LoginPage();
-    sp.visitBaseTest();
-    //cy.visit('https://app.ca-test.com/Public/Login?ReturnUrl=%2F')
+    lp.BaseTest()
+   
     //Login Assertions
     cy.contains(" Log In ").should("be.visible");
     //Enter credentials
     lp.EnterEmail(this.Credentials.UserEmail);
-
-    // cy.log('User need to do something').then(()=>{
-
-    //   alert('Enter Password')
-    // })
-
     lp.EnterPassword(this.Credentials.Password);
     cy.screenshot("User logged In Details");
     cy.wait(7000);
@@ -57,13 +49,12 @@ describe("Login into the application for a new User ", function () {
       "jwtAccessToken"
     );
 
-    cy.wait(10000);
+    cy.wait(5000);
     //cy.title().should("eq", "Common Areas");
     cy.log("New Users has been logged in successfully");
-    //Assertion
     cy.get(
       "#inspire > div.v-application--wrap > div:nth-child(1) > div.root-container.fill-height.fill-width > div.base-layout-main-content.box > div.row.content-wrapper.fill-width.fill-height > div.fill-height.body-right-wrapper.col-sm-12.col.col-xs-12.col-md-7.col-lg-8.col-xl-9 > div > div > div > div.px-4.col.col-12 > div > span"
-    ).should("have.text", " Common Aers ");
+    ).should("have.text", this.SignUPData.CompanyName);
     cy.get(
       "#inspire > div.v-application--wrap > div:nth-child(1) > div.root-container.fill-height.fill-width > div.base-layout-main-content.box > div > div.fill-height.body-right-wrapper.col-sm-12.col.col-xs-12.col-md-7.col-lg-8.col-xl-9 > div > div > div > div.px-4.col.col-12 > div"
     ).then(function ($WelEle) {
@@ -72,7 +63,7 @@ describe("Login into the application for a new User ", function () {
     });
     cy.log("New Users has been logged in successfully");
     //cy.screenshot("New Users has been logged in successfully");
-    cy.wait(10000);
+    cy.wait(5000);
   });
 
   it.only("Sign Out for logged in user", function () {
