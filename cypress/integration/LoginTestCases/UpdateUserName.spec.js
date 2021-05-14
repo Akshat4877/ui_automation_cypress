@@ -50,12 +50,8 @@ describe("Update Email", function () {
         );
 
         cy.wait(5000);
-        //cy.title().should("eq", "Common Areas");
-        cy.log("New Users has been logged in successfully");
+        cy.title().should("eq", "Common Areas");
         //Assertion
-        cy.get(
-            "#inspire > div.v-application--wrap > div:nth-child(1) > div.root-container.fill-height.fill-width > div.base-layout-main-content.box > div.row.content-wrapper.fill-width.fill-height > div.fill-height.body-right-wrapper.col-sm-12.col.col-xs-12.col-md-7.col-lg-8.col-xl-9 > div > div > div > div.px-4.col.col-12 > div > span"
-        ).should("have.text", " Common Aers ");
         cy.get(
             "#inspire > div.v-application--wrap > div:nth-child(1) > div.root-container.fill-height.fill-width > div.base-layout-main-content.box > div > div.fill-height.body-right-wrapper.col-sm-12.col.col-xs-12.col-md-7.col-lg-8.col-xl-9 > div > div > div > div.px-4.col.col-12 > div"
         ).then(function ($WelEle) {
@@ -97,11 +93,9 @@ describe("Update Email", function () {
         cy.wait(1000)
         cy.xpath('//span[text()=" Save "]').click({ force: true })
         cy.contains(' User Profile saved ').should('be.visible')
-        cy.wait(2000)
     })
 
     it.only('Navigate to mailinator', function () {
-        cy.wait(1000)
         const sp = new SignUpPage();
         sp.mailinatorSite();
         cy.url().should("include", "mailinator.com");
@@ -178,7 +172,9 @@ describe("Reset/Creating New UserName", function () {
         cy.get('[placeholder="Password"]').type(this.Credentials.Password)
         cy.wait(2000)
         cy.contains('Confirm your credentials').click({ force: true })
-        cy.wait(1000)
+        //Assertion for change username
+        cy.contains(' Your username has been successfully changed! ').should('be.visible')
+        cy.wait(5000)
     })
 
     it.only('Login with New updated UserName', function () {
@@ -190,12 +186,29 @@ describe("Reset/Creating New UserName", function () {
         //Enter credentials
         lp.EnterEmail(this.Updated.UpdatedEmail);
         lp.EnterPassword(this.Credentials.Password);
-        cy.wait(2000);
         lp.Submit();
+        cy.wait(5000)
+    })
+
+    it.only('Validate Updtaed First and Last Name',function(){
         //Assertion
-        cy.get(
-            "#inspire > div.v-application--wrap > div:nth-child(1) > div.root-container.fill-height.fill-width > div.base-layout-main-content.box > div.row.content-wrapper.fill-width.fill-height > div.fill-height.body-right-wrapper.col-sm-12.col.col-xs-12.col-md-7.col-lg-8.col-xl-9 > div > div > div > div.px-4.col.col-12 > div > span"
-        ).should("have.text", " Common Aers ");
+       cy.xpath('//h2[@class="truncate"]')
+       .should('have.text', " "+this.Updated.UpdatedFirstName+"  "+this.Updated.UpdatedLastName+" ")
+       cy.wait(1000)
+    })
+
+    it.only('Validate new Username',function(){
+         //Click on admin
+         cy.get('[name="your-profile"]').click({ force: true });
+         cy.wait(1000)
+         //Click on Profile 
+         cy.xpath('//*[text()="Profile"]').click({ force: true })
+         cy.wait(1000)
+         cy.get('[name="email"]').scrollIntoView({force:true})
+         cy.wait(1000)
+         cy.get('[name="email"]').should('have.value',this.Updated.UpdatedEmail)
+         cy.wait(2000)
+
     })
 
 })

@@ -193,7 +193,6 @@ describe("Login into the application for a new User ", function () {
     const sp = new SignUpPage();
     const lp = new LoginPage();
     lp.BaseTest()
-    //cy.visit('https://app.ca-test.com/Public/Login?ReturnUrl=%2F')
     //Login Assertions
     cy.contains(" Log In ").should("be.visible");
     //Enter credentials
@@ -215,12 +214,7 @@ describe("Login into the application for a new User ", function () {
     );
 
     cy.wait(5000);
-    //cy.title().should("eq", "Common Areas");
-    cy.log("New Users has been logged in successfully");
-    //Assertion
-    cy.get(
-      "#inspire > div.v-application--wrap > div:nth-child(1) > div.root-container.fill-height.fill-width > div.base-layout-main-content.box > div.row.content-wrapper.fill-width.fill-height > div.fill-height.body-right-wrapper.col-sm-12.col.col-xs-12.col-md-7.col-lg-8.col-xl-9 > div > div > div > div.px-4.col.col-12 > div > span"
-    ).should("have.text", " Common Aers ");
+    cy.title().should("eq", "Common Areas");
     cy.get(
       "#inspire > div.v-application--wrap > div:nth-child(1) > div.root-container.fill-height.fill-width > div.base-layout-main-content.box > div > div.fill-height.body-right-wrapper.col-sm-12.col.col-xs-12.col-md-7.col-lg-8.col-xl-9 > div > div > div > div.px-4.col.col-12 > div"
     ).then(function ($WelEle) {
