@@ -4,7 +4,7 @@ import SanityLoginPage from "../PageObject/SanityLoginPage";
 import RolesAndRestrictionsPage from "../PageObject/RolesAndRestrictionsPage"
 import KitTypePage from "../PageObject/KitTypePage";
 
-describe("Roles And Restrication For Details(ViewDetails)", function () {
+describe("Roles And Restrication For Details(Create)", function () {
     this.beforeAll(function () {
         const lp = new LoginPage();
         const slp = new SanityLoginPage();
@@ -68,7 +68,7 @@ describe("Roles And Restrication For Details(ViewDetails)", function () {
 
     });
 
-    it.only("Navigate to Roles and Restrictions Page For (ViewDetails)Restriction ", function () {
+    it.only("Navigate to Roles and Restrictions Page For (Create)Restriction ", function () {
         const kb = new KitBuilderPage();
         const lp = new LoginPage();
         const RoleRestr = new RolesAndRestrictionsPage();
@@ -82,7 +82,7 @@ describe("Roles And Restrication For Details(ViewDetails)", function () {
         cy.url().should('include', '/ClientAdmin/KitBuilder#/roles')
     });
 
-    it.only('Select kit type to Configure Restriction For Details(ViewDetails)', function () {
+    it.only('Select kit type to Configure Restriction For Details(Create)', function () {
         const RoleRestr = new RolesAndRestrictionsPage();
         cy.wait(2000)
         cy.xpath('//*[text()="edit"]').first().click({ force: true })
@@ -103,14 +103,14 @@ describe("Roles And Restrication For Details(ViewDetails)", function () {
         cy.wait(1000)
     })
 
-    it.only('Apply ViewDetails Restriction', function () {
+    it.only('Apply Create Restriction', function () {
 
         cy.xpath('//*[text() ="Details"]')
             .within(($Details) => {
-                cy.xpath('//*[text() ="Details"]').scrollIntoView({ force: true })
+                cy.xpath('//*[text() ="Details"]').scrollIntoView()
                 cy.wait(1000)
-                //Click on Remove
-                cy.xpath("//*[@class='v-chip__content' and contains(text(),'View Details')]")
+                //Click on Create
+                cy.xpath("//*[@class='v-chip__content' and contains(text(),'Create')]").eq(3)
                     .click({ force: true })
                 cy.wait(2000)
                 cy.xpath('//*[text() ="SAVE"]').click({ force: true })
@@ -120,7 +120,7 @@ describe("Roles And Restrication For Details(ViewDetails)", function () {
 
     })
 
-    it.only('Navigate to UI to Validate(ViewDetails)Restriction', function () {
+    it.only('Navigate to UI to Validate(Create)Restriction', function () {
         //Page Object
         const slp = new SanityLoginPage();
         const lp = new LoginPage();
@@ -133,8 +133,8 @@ describe("Roles And Restrication For Details(ViewDetails)", function () {
         cy.title().should("eq", "Common Areas");
     })
 
-    it.only('Validate (ViewDetails)Restriciton Add New Item Page', function () {
-        cy.wait(10000);
+    it.only('Validate (Create)Restriciton on Add New Item Page', function () {
+        cy.wait(5000);
         const lp = new LoginPage();
         const KTP = new KitTypePage();
         //Assertion
@@ -144,33 +144,16 @@ describe("Roles And Restrication For Details(ViewDetails)", function () {
         //Click on To open Kit Type
         KTP.SearchKitType(this.KitTypeName.KitName3);
         cy.wait(5000)
-        //cy.contains(this.KitTypeName.KitName3).should('not.exist')
-        cy.contains(this.KitTypeName.KitName3).should('not.be.visible')
+        //this class should not be exist
+        cy.get(".truncate-special").should('not.exist')
         cy.wait(1000)
-
     })
 
-    it.only('Close (Add New Item Page)', function () {
+    it.only('Close(Add New Item Page)', function () {
         //Click on cross icon
         cy.wait(1000)
         cy.get('.add-new-pop-up-content__close-icon').click({ force: true });
         cy.wait(2000)
-
     })
-
-    it.only('Validate (ViewDetails)Restriciton in Left Panel', function () {
-
-        const lp = new LoginPage();
-        //Click on Hamburger Icon
-        lp.HMBIcon();
-        // cy.xpath("//*[contains(@class, 'd-flex col-9')]//*[text() = '" + this.KitTypeName.KitName3 + "']")
-        //     .should('not.exist')
-        cy.xpath("//*[contains(@class, 'd-flex col-9')]//*[text() = '" + this.KitTypeName.KitName3 + "']")
-            .should('not.be.visible')
-
-    })
-
-
-
-
+    
 })

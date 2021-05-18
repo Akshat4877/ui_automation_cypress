@@ -188,21 +188,21 @@ describe("Related Control Square Card test case", function () {
       .eq(1)
       .type(this.RelatedKitItemData.Text);
 
-    //File
-    cy.get(".dropzone-icons-content > .clickable path")
-      .eq(0)
-      .click({ force: true });
-    //give file name to select
-    cy.contains(this.RelatedKitItemData.RelNewFileName).click({
-      force: true,
-    });
-    //Click on save file
-    cy.get(
-      ".container-search > .pop-up--header > .pop-up--header--right > .button-pop-ups--size > .v-btn__content"
-    ).click({ force: true });
-    cy.contains("File saved").should("be.visible");
-    cy.log("File Saved");
-    cy.wait(1000);
+    // //File
+    // cy.get(".dropzone-icons-content > .clickable path")
+    //   .eq(0)
+    //   .click({ force: true });
+    // //give file name to select
+    // cy.contains(this.RelatedKitItemData.RelNewFileName).click({
+    //   force: true,
+    // });
+    // //Click on save file
+    // cy.get(
+    //   ".container-search > .pop-up--header > .pop-up--header--right > .button-pop-ups--size > .v-btn__content"
+    // ).click({ force: true });
+    // cy.contains("File saved").should("be.visible");
+    // cy.log("File Saved");
+    // cy.wait(1000);
 
     //Telephone
     cy.get("[name" + "=" + this.DataType2.Telephone + "]")

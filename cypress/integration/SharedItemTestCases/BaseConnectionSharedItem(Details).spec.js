@@ -16,7 +16,7 @@ describe("Base Connection Shared Kit Item Test Case", function () {
         //Login Assertions
         cy.contains(" Log In ").should("be.visible");
         //Enter credentials
-        lp.EnterEmail("Morgen@mailinator.com");
+        lp.EnterEmail("Moine@mailinator.com");
         //lp.EnterEmail("Akshat@mailinator.com");
         lp.EnterPassword("1234567Aa");
         lp.Submit();

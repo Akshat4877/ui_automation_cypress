@@ -216,16 +216,16 @@ describe("Recurring New kit item creation test case", function () {
       .last()
       .type(this.NewKitItemData.Text);
 
-    //File
-    cy.get(".link-icon--green > path").click({ force: true });
-    //give file name to select
-    cy.contains(this.NewKitItemData.NewFormLibFileName).click({ force: true });
-    cy.get(
-      ".container-search > .pop-up--header > .pop-up--header--right > .button-pop-ups--size > .v-btn__content"
-    ).click({ force: true });
-    cy.contains("File saved").should("be.visible");
-    cy.log("File Saved");
-    cy.wait(1000);
+    // //File
+    // cy.get(".link-icon--green > path").click({ force: true });
+    // //give file name to select
+    // cy.contains(this.NewKitItemData.NewFormLibFileName).click({ force: true });
+    // cy.get(
+    //   ".container-search > .pop-up--header > .pop-up--header--right > .button-pop-ups--size > .v-btn__content"
+    // ).click({ force: true });
+    // cy.contains("File saved").should("be.visible");
+    // cy.log("File Saved");
+    // cy.wait(1000);
 
     //Telephone
     cy.get("[name" + "=" + this.DataType2.Telephone + "]")

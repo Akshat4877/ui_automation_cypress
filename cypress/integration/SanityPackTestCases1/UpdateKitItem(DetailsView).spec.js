@@ -159,28 +159,27 @@ describe("Update created kit item test case", function () {
       .type(this.UpdateKitItemData.Text);
     cy.log("Text Updated");
 
-    //File
-    //Click on to remove existing file
-    cy.get(".dropzone-area-button:nth-child(2)").click({ force: true });
-    //Discard validation
-    cy.contains(" Are you sure you want to discard?").should("be.visible");
-    cy.wait(1000)
-    //Click on Discard
-    cy.get(".mb-4:nth-child(1) .v-btn__content").click({ force: true });
-    cy.log("Existing file has been deleted");
-    //Click on file link again
-    cy.get(".link-icon--green > path").click({ force: true });
-    //give file name to select
-    cy.contains(this.UpdateKitItemData.UpdateFileName).click({ force: true });
-    cy.log("New file has been uploaded");
-
+    // //File
+    // //Click on to remove existing file
+    // cy.get(".dropzone-area-button:nth-child(2)").click({ force: true });
+    // //Discard validation
+    // cy.contains(" Are you sure you want to discard?").should("be.visible");
+    // cy.wait(1000)
+    // //Click on Discard
+    // cy.get(".mb-4:nth-child(1) .v-btn__content").click({ force: true });
+    // cy.log("Existing file has been deleted");
+    // //Click on file link again
+    // cy.get(".link-icon--green > path").click({ force: true });
+    // //give file name to select
+    // cy.contains(this.UpdateKitItemData.UpdateFileName).click({ force: true });
+    // cy.log("New file has been uploaded");
     //Click on save file
-    cy.get(
-      ".container-search > .pop-up--header > .pop-up--header--right > .button-pop-ups--size > .v-btn__content"
-    ).click({ force: true });
-    cy.contains("File saved").should("be.visible");
-    cy.log("File Saved");
-    cy.wait(1000);
+    // cy.get(
+    //   ".container-search > .pop-up--header > .pop-up--header--right > .button-pop-ups--size > .v-btn__content"
+    // ).click({ force: true });
+    // cy.contains("File saved").should("be.visible");
+    // cy.log("File Saved");
+    // cy.wait(1000);
 
     //Telephone
     cy.get("[name" + "=" + this.DataType2.Telephone + "]")

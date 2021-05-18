@@ -590,7 +590,7 @@ Cypress.Commands.add("SearchListViewIcon", () => {
 
 Cypress.Commands.add("SaveSearchList", () => {
   //Click on Checkbox
-  cy.contains("Search Search Lists View popup").click({ force: true });
+  cy.contains("Search Lists View popup").click({ force: true });
   //Click on Save
   cy.get(".px-4 > .v-btn__content").click();
   //Click on Assertion msg for save

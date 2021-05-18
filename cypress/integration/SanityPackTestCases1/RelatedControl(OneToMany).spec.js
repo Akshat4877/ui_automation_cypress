@@ -190,22 +190,22 @@ describe("Related Control One to Many test case", function () {
       .type(this.RelatedKitItemData.Text);
 
 
-    //File
-    cy.get(".dropzone-icons-content > .clickable path")
-      .eq(0)
-      .click({ force: true });
-    //cy.get(".link-icon--green > path").last().click({ force: true });
-    cy.wait(1000);
-    //give file name to select
-    cy.contains(this.RelatedKitItemData.RelNewFileName).click({
-      force: true,
-    });
-    //Click on save file
-    cy.get(
-      ".container-search > .pop-up--header > .pop-up--header--right > .button-pop-ups--size > .v-btn__content"
-    ).click({ force: true });
-    cy.contains("File saved").should("be.visible");
-    cy.log("File Saved");
+    // //File
+    // cy.get(".dropzone-icons-content > .clickable path")
+    //   .eq(0)
+    //   .click({ force: true });
+    // //cy.get(".link-icon--green > path").last().click({ force: true });
+    // cy.wait(1000);
+    // //give file name to select
+    // cy.contains(this.RelatedKitItemData.RelNewFileName).click({
+    //   force: true,
+    // });
+    // //Click on save file
+    // cy.get(
+    //   ".container-search > .pop-up--header > .pop-up--header--right > .button-pop-ups--size > .v-btn__content"
+    // ).click({ force: true });
+    // cy.contains("File saved").should("be.visible");
+    // cy.log("File Saved");
 
 
     //Telephone

@@ -79,7 +79,7 @@ describe("Roles And Restrication", function () {
         cy.url().should('include', '/ClientAdmin/KitBuilder#/roles')
     });
 
-    it('Create New Role', function () {
+    it.only('Create New Role', function () {
         const RoleRestr = new RolesAndRestrictionsPage();
         cy.wait(1000)
         //Click on Roles btn
