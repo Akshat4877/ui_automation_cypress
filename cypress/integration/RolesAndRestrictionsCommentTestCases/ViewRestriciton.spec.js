@@ -2,9 +2,9 @@ import LoginPage from "../PageObject/LoginPage";
 import KitBuilderPage from "../PageObject/KitBuilderPage";
 import SanityLoginPage from "../PageObject/SanityLoginPage";
 import RolesAndRestrictionsPage from "../PageObject/RolesAndRestrictionsPage"
-import KitTypePage from "../PageObject/KitTypePage";
 
-describe("Roles And Restrication For Details(ModifyAll)", function () {
+
+describe("Roles And Restrication For Comments(View)", function () {
     this.beforeAll(function () {
         const lp = new LoginPage();
         const slp = new SanityLoginPage();
@@ -66,9 +66,15 @@ describe("Roles And Restrication For Details(ModifyAll)", function () {
             this.DataType2 = NewDataForElements;
         });
 
+        cy.fixture("KitTypeTestData/NewKitItemDataValues").then(function (
+            KitDataEle
+          ) {
+            this.NewKitItemData = KitDataEle;
+          });
+
     });
 
-    it.only("Navigate to Roles and Restrictions Page For (ModifyAll)Restriction ", function () {
+    it.only("Navigate to Roles and Restrictions Page For(View) Restriction ", function () {
         const kb = new KitBuilderPage();
         const lp = new LoginPage();
         const RoleRestr = new RolesAndRestrictionsPage();
@@ -82,7 +88,7 @@ describe("Roles And Restrication For Details(ModifyAll)", function () {
         cy.url().should('include', '/ClientAdmin/KitBuilder#/roles')
     });
 
-    it.only('Select kit type to Configure Restriction For Details(ModifyAll)', function () {
+    it.only('Select kit type to Configure Restriction For Comments(View)', function () {
         const RoleRestr = new RolesAndRestrictionsPage();
         cy.wait(2000)
         cy.xpath('//*[text()="edit"]').first().click({ force: true })
@@ -103,15 +109,14 @@ describe("Roles And Restrication For Details(ModifyAll)", function () {
         cy.wait(1000)
     })
 
-    it.only('Apply Modify All Restriction', function () {
+    it.only('Apply View Restriction', function () {
 
-        cy.xpath('//*[text() ="Details"]')
+        cy.xpath('//*[text() ="Comments"]')
             .within(($Details) => {
-
-                cy.xpath('//*[text() ="Details"]').scrollIntoView({ force: true })
-                cy.wait(2000)
-                //Click on Modify All
-                cy.xpath("//*[@class='v-chip__content' and contains(text(),'Modify All')]").eq(4)
+                cy.xpath('//*[text() ="Comments"]').scrollIntoView({ force: true })
+                cy.wait(1000)
+                //Click on View
+                cy.xpath("//*[@class='v-chip__content' and contains(text(),'View')]").eq(8)
                     .click({ force: true })
                 cy.wait(2000)
                 cy.xpath('//*[text() ="SAVE"]').click({ force: true })
@@ -121,7 +126,7 @@ describe("Roles And Restrication For Details(ModifyAll)", function () {
 
     })
 
-    it.only('Navigate to UI to Validate (ModifyAll)Restriction', function () {
+    it.only('Navigate to UI to Validate(View)Restriction', function () {
         //Page Object
         const slp = new SanityLoginPage();
         const lp = new LoginPage();
@@ -132,68 +137,87 @@ describe("Roles And Restrication For Details(ModifyAll)", function () {
         });
         //Assertion
         cy.title().should("eq", "Common Areas");
+        cy.wait(10000)
+    })
+
+    it.only('Clear App Cache',function(){
+        const lp = new LoginPage();
+        lp.ClickOnHomePageAdmin();
         cy.wait(1000)
+        //clear app cache
+        cy.contains('Clear App Cache').click({force:true})
+        cy.wait(2000)
+    })
+
+    it.only("Sign Out for logged in user", function () {
+        //Click on admin
+        cy.get('[name="your-profile"]').click({ force: true });
+        cy.wait(2000);
+        cy.contains("Sign Out").click({ force: true });
+        cy.wait(5000);
+        //Log out validation assertion
+        cy.contains(" Log In ").should("be.visible");
+        cy.url().should("include", "/Public/Login?");
+        cy.log("User has been sign out");
+      });
+
+      it.only('Logged In Again into the application', function () {
+
+        const lp = new LoginPage();
+        const slp = new SanityLoginPage();
+        slp.nvdTest()
+        //slp.TmProd();
+
+        //Handling Alert
+        cy.on("window:confirm", () => {
+            cy.log("Alert has been Handled");
+        });
+        //Login Assertions
+        cy.contains(" Log In ").should("be.visible");
+        //Enter credentials
+        lp.EnterEmail("propertymanagement@commonareas.work.dev");
+        //lp.EnterEmail("sam@armyspy.com");
+        lp.EnterPassword("1234567Aa");
+        lp.Submit();
+        cy.log("User has been Logged In into the application");
+        cy.wait(4000)
+        
+    })
+
+    it.only('Open kit item from left panel', function () {
+        const lp = new LoginPage();
         //Click on Hamburger Icon
         lp.HMBIcon();
-        //Open KitType from left panel
-        cy.xpath("//*[contains(@class, 'd-flex col-9')]//*[text() = '" + this.KitTypeName.KitName3 + "']")
-            .click({ force: true, });
-        cy.log("Kit Type has been OPened");
-        cy.wait(5000)
-        //Click on First kit item of kit type to open edit view
-        cy.log("Kit Item Detail View has been Opened");
-        //Validation assertion for details view
-        cy.get(".kits-landing--header-title").should(
-            "have.text",
-            " Recently Viewed "
-        );
-        cy.wait(3000)
+        cy.wait(2000)
+         //Open KitType from left panel
+         cy.xpath("//*[contains(@class, 'd-flex col-9')]//*[text() = '" + this.KitTypeName.KitName3 + "']")
+         .click({force: true});
+         cy.wait(2000)
+        //Click the kit item
+        cy.xpath('//div[@class="row-list-item-details--content py-2 justify-center col col-10 truncate-wrapper"]')
+        .eq(1).click({ force: true })
+        cy.wait(2000)
     })
 
-    it.only('Validate (ModifyAll)Restriciton', function () {
-        cy.wait(4000)
-        //Click on the first Kit Item in Kit item list view
-        cy.xpath('//div[@class="row-list-item-details--content py-2 justify-center col col-10 truncate-wrapper"]')
-            .eq(0).click({ force: true })
-        cy.wait(10000)
+    it.only('Asides tabs validation',function(){
+    //Contributors Tab
+    cy.contains(" Contributors ").click({ force: true });
+    cy.wait(1000);
+    //Time Entries Tab
+    cy.contains(" Time Entries ").click({ force: true });
+    cy.wait(2000);
+    //Click on common plan tab
+    cy.contains(" Common Plans ").click({ force: true });
+    cy.wait(1000)
+    })
 
-        //new form ele visible assertion
-        cy.get("[name" + "=" + this.DataType2.Text + "]")
-            .last()
-            .should("be.visible");
-
-        //Enter data in text field
-        cy.get("[name" + "=" + this.DataType2.Text + "]")
-            .last().type('Modifiy All restriction')
-        cy.wait(2000)
-
-        //Click to save
-        cy.get(".navi-bar-dropdown:nth-child(2) .v-btn").click({ force: true });
-        cy.contains(' User does not have permission to modify this kit item ').should(
-            "be.visible"
-        );
-        cy.wait(2000)
-        //Close Kit type
-        cy.get(".subheader--button-icon-wrapper .inline-svg").click({
-            force: true,
-        });
-
-        cy.contains('Are you sure you want to discard changes?').should('be.visible')
+    it.only('Validate (View)Restriciton for Comments Tab',function(){
+        //Comments Tab should not be visible/exist
+        cy.wait(1000);
+        //should not click because the Comments tab should not there
+        cy.contains("Comments ").should('not.exist') 
+        cy.log('Comments tab is not exist')
         cy.wait(1000)
-        cy.xpath('//*[text()=" Discard "]').click({ force: true })
-        cy.contains(" Recently Viewed ").should("be.visible");
-        cy.wait(2000);
-        //Click on the first Kit Item in Kit item list view
-        cy.xpath('//div[@class="row-list-item-details--content py-2 justify-center col col-10 truncate-wrapper"]')
-            .eq(0).click({ force: true })
-        cy.wait(5000)
-        var lower = this.DataType2.Text.toLowerCase();
-        //Validating details view input data
-        cy.xpath("//input[@controlname='" + lower + "']").should("not.have.value", 'Modifiy All restriction')
-
     })
-
-
-
-    
+  
 })

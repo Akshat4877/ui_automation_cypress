@@ -663,6 +663,7 @@ describe("Update created kit item test case", function () {
     cy.contains("Comments ").click({ force: true });
     cy.get('[name="addComment"]').type(this.DetailViewData.AddComments);
     cy.wait(2000)
+    //Click on save
     cy.get('.left-align > .v-btn__content').click({ force: true });
     //Assertion validation
     cy.contains(" New Comment added ").should("be.visible");

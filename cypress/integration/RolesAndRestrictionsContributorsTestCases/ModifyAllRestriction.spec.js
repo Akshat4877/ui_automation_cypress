@@ -4,7 +4,7 @@ import SanityLoginPage from "../PageObject/SanityLoginPage";
 import RolesAndRestrictionsPage from "../PageObject/RolesAndRestrictionsPage"
 import KitTypePage from "../PageObject/KitTypePage";
 
-describe("Roles And Restrication For Details(Create)", function () {
+describe("Roles And Restrication For Contributors(ModifyAll)", function () {
     this.beforeAll(function () {
         const lp = new LoginPage();
         const slp = new SanityLoginPage();
@@ -68,7 +68,7 @@ describe("Roles And Restrication For Details(Create)", function () {
 
     });
 
-    it.only("Navigate to Roles and Restrictions Page For (Create)Restriction ", function () {
+    it.only("Navigate to Roles and Restrictions Page For (ModifyAll)Restriction ", function () {
         const kb = new KitBuilderPage();
         const lp = new LoginPage();
         const RoleRestr = new RolesAndRestrictionsPage();
@@ -82,7 +82,7 @@ describe("Roles And Restrication For Details(Create)", function () {
         cy.url().should('include', '/ClientAdmin/KitBuilder#/roles')
     });
 
-    it.only('Select kit type to Configure Restriction For Details(Create)', function () {
+    it.only('Select kit type to Configure Restriction For Contributors(ModifyAll)', function () {
         const RoleRestr = new RolesAndRestrictionsPage();
         cy.wait(2000)
         cy.xpath('//*[text()="edit"]').first().click({ force: true })
@@ -103,14 +103,15 @@ describe("Roles And Restrication For Details(Create)", function () {
         cy.wait(1000)
     })
 
-    it.only('Apply Create Restriction', function () {
+    it.only('Apply Modify All Restriction', function () {
 
-        cy.xpath('//*[text() ="Details"]')
+        cy.xpath('//*[text() ="Contributors"]')
             .within(($Details) => {
-                cy.xpath('//*[text() ="Details"]').scrollIntoView()
-                cy.wait(1000)
-                //Click on Create
-                cy.xpath("//*[@class='v-chip__content' and contains(text(),'Create')]").eq(3)
+
+                cy.xpath('//*[text() ="Contributors"]').scrollIntoView({ force: true })
+                cy.wait(2000)
+                //Click on Modify All
+                cy.xpath("//*[@class='v-chip__content' and contains(text(),'Modify All')]").eq(5)
                     .click({ force: true })
                 cy.wait(2000)
                 cy.xpath('//*[text() ="SAVE"]').click({ force: true })
@@ -133,27 +134,25 @@ describe("Roles And Restrication For Details(Create)", function () {
         cy.title().should("eq", "Common Areas");
     })
 
-    it.only('Validate (Create)Restriciton on Add New Item Page', function () {
-        cy.wait(5000);
-        const lp = new LoginPage();
-        const KTP = new KitTypePage();
-        //Assertion
-        cy.title().should("eq", "Common Areas");
-        lp.PlusIcon();
-        //debugger;
-        //Click on To open Kit Type
-        KTP.SearchKitType(this.KitTypeName.KitName3);
-        cy.wait(5000)
-        //this class should not be exist
-        cy.get(".truncate-special").should('not.exist')
-        cy.wait(1000)
-    })
+    it.only('Open kit item from left panel', function () {
 
-    it.only('Close(Add New Item Page)', function () {
-        //Click on cross icon
-        cy.wait(1000)
-        cy.get('.add-new-pop-up-content__close-icon').click({ force: true });
+        const lp = new LoginPage();
+        //Click on Hamburger Icon
+        lp.HMBIcon();
         cy.wait(2000)
+         //Open KitType from left panel
+         cy.xpath("//*[contains(@class, 'd-flex col-9')]//*[text() = '" + this.KitTypeName.KitName3 + "']")
+         .click({force: true});
+         cy.wait(2000)
+        //Click the kit item
+        cy.xpath('//div[@class="row-list-item-details--content py-2 justify-center col col-10 truncate-wrapper"]')
+        .eq(1).click({ force: true })
+        cy.wait(2000)
+    
     })
+   
+
+
+
     
 })

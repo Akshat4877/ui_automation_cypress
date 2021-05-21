@@ -2,9 +2,9 @@ import LoginPage from "../PageObject/LoginPage";
 import KitBuilderPage from "../PageObject/KitBuilderPage";
 import SanityLoginPage from "../PageObject/SanityLoginPage";
 import RolesAndRestrictionsPage from "../PageObject/RolesAndRestrictionsPage"
-import KitTypePage from "../PageObject/KitTypePage";
 
-describe("Roles And Restrication For Details(ViewDetails)", function () {
+
+describe("Roles And Restrication For Comments(Create)", function () {
     this.beforeAll(function () {
         const lp = new LoginPage();
         const slp = new SanityLoginPage();
@@ -66,15 +66,9 @@ describe("Roles And Restrication For Details(ViewDetails)", function () {
             this.DataType2 = NewDataForElements;
         });
 
-        cy.fixture("KitTypeTestData/NewKitItemDataValues").then(function (
-            KitDataEle
-          ) {
-            this.NewKitItemData = KitDataEle;
-          });
-
     });
 
-    it("Navigate to Roles and Restrictions Page For (ViewDetails)Restriction ", function () {
+    it.only("Navigate to Roles and Restrictions Page For (Create)Restriction ", function () {
         const kb = new KitBuilderPage();
         const lp = new LoginPage();
         const RoleRestr = new RolesAndRestrictionsPage();
@@ -88,7 +82,7 @@ describe("Roles And Restrication For Details(ViewDetails)", function () {
         cy.url().should('include', '/ClientAdmin/KitBuilder#/roles')
     });
 
-    it('Select kit type to Configure Restriction For Details(ViewDetails)', function () {
+    it.only('Select kit type to Configure Restriction For Comments(Create)', function () {
         const RoleRestr = new RolesAndRestrictionsPage();
         cy.wait(2000)
         cy.xpath('//*[text()="edit"]').first().click({ force: true })
@@ -109,14 +103,14 @@ describe("Roles And Restrication For Details(ViewDetails)", function () {
         cy.wait(1000)
     })
 
-    it('Apply ViewDetails Restriction', function () {
+    it.only('Apply Create Restriction', function () {
 
-        cy.xpath('//*[text() ="Details"]')
+        cy.xpath('//*[text() ="Comments"]')
             .within(($Details) => {
-                cy.xpath('//*[text() ="Details"]').scrollIntoView({ force: true })
+                cy.xpath('//*[text() ="Comments"]').scrollIntoView()
                 cy.wait(1000)
-                //Click on Remove
-                cy.xpath("//*[@class='v-chip__content' and contains(text(),'View Details')]")
+                //Click on Create
+                cy.xpath("//*[@class='v-chip__content' and contains(text(),'Create')]").eq(7)
                     .click({ force: true })
                 cy.wait(2000)
                 cy.xpath('//*[text() ="SAVE"]').click({ force: true })
@@ -126,7 +120,7 @@ describe("Roles And Restrication For Details(ViewDetails)", function () {
 
     })
 
-    it('Navigate to UI to Validate(ViewDetails)Restriction', function () {
+    it.only('Navigate to UI to Validate(Create)Restriction', function () {
         //Page Object
         const slp = new SanityLoginPage();
         const lp = new LoginPage();
@@ -137,44 +131,85 @@ describe("Roles And Restrication For Details(ViewDetails)", function () {
         });
         //Assertion
         cy.title().should("eq", "Common Areas");
+        cy.wait(10000)
     })
 
-    it.only('Validate (ViewDetails)Restriciton Add New Item Page', function () {
-        cy.wait(10000);
+    it.only('Clear App Cache',function(){
         const lp = new LoginPage();
-        const KTP = new KitTypePage();
-        //Assertion
-        cy.title().should("eq", "Common Areas");
-        lp.PlusIcon();
-        //debugger;
-        //Click on To open Kit Type
-        KTP.SearchKitType(this.KitTypeName.KitName3);
-        cy.wait(5000)
-        //this class should not be exist
-        cy.get(".truncate-special").should('not.exist')
+        lp.ClickOnHomePageAdmin();
         cy.wait(1000)
-
-    })
-
-    it.only('Close (Add New Item Page)', function () {
-        //Click on cross icon
-        cy.wait(1000)
-        cy.get('.add-new-pop-up-content__close-icon').click({ force: true });
+        //clear app cache
+        cy.contains('Clear App Cache').click({force:true})
         cy.wait(2000)
-
     })
 
-    it.only('Validate (ViewDetails)Restriciton in Left Panel', function () {
+    it.only("Sign Out for logged in user", function () {
+        //Click on admin
+        cy.get('[name="your-profile"]').click({ force: true });
+        cy.wait(2000);
+        cy.contains("Sign Out").click({ force: true });
+        cy.wait(5000);
+        //Log out validation assertion
+        cy.contains(" Log In ").should("be.visible");
+        cy.url().should("include", "/Public/Login?");
+        cy.log("User has been sign out");
+      });
+
+      it.only('Logged In Again into the application', function () {
+
+        const lp = new LoginPage();
+        const slp = new SanityLoginPage();
+        slp.nvdTest()
+        //slp.TmProd();
+
+        //Handling Alert
+        cy.on("window:confirm", () => {
+            cy.log("Alert has been Handled");
+        });
+        //Login Assertions
+        cy.contains(" Log In ").should("be.visible");
+        //Enter credentials
+        lp.EnterEmail("propertymanagement@commonareas.work.dev");
+        //lp.EnterEmail("sam@armyspy.com");
+        lp.EnterPassword("1234567Aa");
+        lp.Submit();
+        cy.log("User has been Logged In into the application");
+        cy.wait(4000)
+        
+    })
+
+    it.only('Open kit item from left panel', function () {
 
         const lp = new LoginPage();
         //Click on Hamburger Icon
         lp.HMBIcon();
-       //kit type not exist validation
-       //this class should not be exist
-        //cy.get('.v-list-item__title').should('not.have.value',this.KitTypeName.KitName3)
-    cy.xpath("//*[contains(@class, 'd-flex col-9')]//*[text() = 'BuildingAreas']")
-    .should('not.be.visible')
+        cy.wait(2000)
+         //Open KitType from left panel
+         cy.xpath("//*[contains(@class, 'd-flex col-9')]//*[text() = '" + this.KitTypeName.KitName3 + "']")
+         .click({force: true});
+         cy.wait(2000)
+        //Click the kit item
+        cy.xpath('//div[@class="row-list-item-details--content py-2 justify-center col col-10 truncate-wrapper"]')
+        .eq(1).click({ force: true })
+        cy.wait(2000)
+    })
+
+    it.only('Click and Open Comments Tab',function(){
+    //Click and open Comments Tab
+    cy.contains("Comments ").click({ force: true });
+    cy.wait(1000)
 
     })
 
+    it.only('Validate (Create)Restriciton in Comments Tab',function(){
+    cy.wait(1000)
+    cy.get('[name="addComment"]')
+    .type('This is the comment create restriction and should not able to add any comment');
+    cy.wait(2000)
+    //Click on save, should not able to add comment in details view
+    cy.get('.left-align > .v-btn__content').click({ force: true });
+    cy.contains(' You are not permitted to create any comments for "BuildingAreas" please contact your administrator to remove this restriction ')
+    .should('be.visible')
+    })
+    
 })

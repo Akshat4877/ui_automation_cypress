@@ -772,6 +772,10 @@ describe("Recurring New kit item creation test case", function () {
     cy.contains("Nothing to save for " + this.NewKitItemData.KitName).should(
       "be.visible"
     );
+    
+  });
+
+  it.only('Close the item',function(){
 
     cy.wait(5000);
     //Close Kit type
@@ -784,7 +788,8 @@ describe("Recurring New kit item creation test case", function () {
     //Save recurring kit item assertion
     cy.contains(this.NewKitItemData.KitName + "#").should("be.visible");
     cy.contains("Item: " + this.NewKitItemData.KitName).should("be.visible");
-  });
+
+  })
 
   it.only("Set Recurring Schedule to Execute", function () {
     const lp = new LoginPage();

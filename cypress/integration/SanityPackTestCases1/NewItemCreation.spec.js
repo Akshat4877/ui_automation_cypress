@@ -373,7 +373,7 @@ describe("New kit item complete creation test case", function () {
       .click({ force: true });
     cy.contains(this.NewKitItemData.LargeiconSize).click({ force: true });
     //IconLable
-    cy.get('[placeholder="Label"]').type(this.NewKitItemData.IconLabel);
+    cy.get('[placeholder="Label"]').last().type(this.NewKitItemData.IconLabel);
 
     //Inspection
     cy.get('.v-btn:nth-child(1) .v-badge > .inline-svg')
@@ -401,10 +401,11 @@ describe("New kit item complete creation test case", function () {
 
     cy.contains(this.NewKitItemData.AssigningName).click({ force: true });
     //Click on to save
-    cy.get(".button-pop-ups--size > .v-btn__content").click({ force: true });
+    cy.get(".button-pop-ups--size > .v-btn__content").first().click({ force: true });
     //Assigning creation assertion
     cy.contains("Item shared").should("be.visible");
     cy.log("Assigning added");
+
     //save Kit Item
     cy.get(".v-select__selections .v-btn__content").first().click({ force: true });
     cy.contains(this.NewKitItemData.KitName + " has been saved").should(
@@ -704,7 +705,10 @@ describe("New kit item complete creation test case", function () {
     //Comments Tab
     cy.contains("Comments ").click({ force: true });
     cy.get('[name="addComment"]').type(this.SData.AddComments);
-    cy.contains(" SAVE ").click({ force: true });
+    cy.wait(2000)
+    //click on save
+    cy.get('.v-window-item:nth-child(7) .v-btn__content:nth-child(1)')
+    .click({force:true});
     //Assertion validation
     cy.contains(" New Comment added ").should("be.visible");
     cy.contains(this.SData.AddComments).should("be.visible");
@@ -734,6 +738,7 @@ describe("New kit item complete creation test case", function () {
     cy.get(".v-select__selections .v-btn__content").first().click({ force: true });
     //cy.contains(this.NewKitItemData.KitName + " has been saved").should("be.visible");
     cy.log(this.NewKitItemData.KitName + "Kit Type has been Saved");
+    cy.wait(3000)
 
     //close the Kit Item
     cy.get(".subheader--button-icon-wrapper path").click({

@@ -488,10 +488,7 @@ describe("Related Control Square Card test case", function () {
     cy.contains(this.NewKitItemData.KitName + " has been saved").should(
       "be.visible"
     );
-  });
-
-
-  it.only('Click to open created related new', function () {
+    cy.wait(2000)
     //Again save Kit item(new form)
     cy.get(".v-select__selections .v-btn__content")
       .first()
@@ -501,7 +498,13 @@ describe("Related Control Square Card test case", function () {
       "be.visible"
     );
     cy.wait(1000)
+  });
+
+
+  it.only('Click to open created related new', function () {
+    
     //Click on 3dots of square card
+    cy.wait(2000)
     cy.get(".pr-0").click({ force: true });
     //Assertion
     cy.contains(" Edit Item ").should("be.visible");

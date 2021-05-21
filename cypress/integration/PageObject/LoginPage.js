@@ -56,6 +56,14 @@ class LoginPage {
     button.click();
   }
 
+  ClickOnHomePageAdmin() {
+    const button = cy.get(
+      '[name="your-profile"]'
+    );
+    button.click();
+  }
+
+
   ClickOnAdmin() {
     const button = cy.get(
       ".custom-v-btn-nav-list-item:nth-child(5) > .v-list-item__title"

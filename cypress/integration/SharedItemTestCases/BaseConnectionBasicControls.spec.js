@@ -90,10 +90,9 @@ describe("Base Connection Shared Kit Item Test Case For Basic Controls", functio
 
     it.only('Click on Shared Kit Item', function () {
         cy.wait(2000)
-        //Adding coma() in kit item id
-        var id = this.KitItemId.ItemID.replace(' ', ', ')
+        var id = this.KitItemId.ItemID.replace(' #', '# ')
         cy.log(id)
-        cy.xpath('//*[contains(@class, "v-list-item__subtitle truncate")]//*[text()="' + id + '"]')
+        cy.xpath('//*[contains(@class, "row collaboration-inbox__title")]//*[text()="' + id + '"]')
             .click({ force: true })
     })
 
