@@ -5,22 +5,6 @@ import SanityLoginPage from "../PageObject/SanityLoginPage";
 
 describe("Base Connection Shared Kit Item Test Case", function () {
     this.beforeAll(function () {
-        //cy.viewport(1280, 720);
-        const lp = new LoginPage();
-        lp.BaseTest()
-        //lp.ProdBaseTest()
-        //Handling Alert
-        cy.on("window:confirm", () => {
-            cy.log("Alert has been Handled");
-        });
-        //Login Assertions
-        cy.contains(" Log In ").should("be.visible");
-        //Enter credentials
-        lp.EnterEmail("Moine@mailinator.com");
-        //lp.EnterEmail("Akshat@mailinator.com");
-        lp.EnterPassword("1234567Aa");
-        lp.Submit();
-        cy.log("User has been Logged In into the application");
 
         Cypress.Cookies.preserveOnce(
             ".AspNet.ApplicationCookie",
@@ -43,6 +27,23 @@ describe("Base Connection Shared Kit Item Test Case", function () {
             "refreshToken",
             "jwtAccessToken"
         );
+
+        
+        //Globally fixtures for login creads
+        cy.fixture("LoginTestData/GlobalLoginCreds").then(function (
+            LogInScriptGloably
+            ) {
+            this.LoginCreds = LogInScriptGloably;
+             });
+    
+            //Globally fixtures for shared item test cases creads
+            cy.fixture("LoginTestData/SharedUserCredentials").then(function (
+            LogInScriptGloably
+            ) {
+            this.SharedCreds = LogInScriptGloably;
+            });
+          /////////////////////////////////////////////////////////////////////////
+
 
         cy.fixture("SanityPackTestData/UpdateKItItemData").then(function (
             UpDateKitItemSDTCData
@@ -86,6 +87,24 @@ describe("Base Connection Shared Kit Item Test Case", function () {
         });
 
     });
+
+    it.only('Login TestCase',function(){
+        const lp = new LoginPage();
+        const slp = new SanityLoginPage();
+        slp.BaseUrl(this.LoginCreds.BaseUrl)
+        //Handling Alert
+        cy.on("window:confirm", () => {
+          cy.log("Alert has been Handled");
+        });
+        //Login Assertions
+        cy.contains(" Log In ").should("be.visible");
+        //Enter credentials
+        lp.EnterEmail(this.SharedCreds.DetailsBaseConnection);
+        lp.EnterPassword(this.LoginCreds.Password);
+        lp.Submit();
+        cy.log("User has been Logged In into the application");
+        cy.wait(5000)
+      })
 
     it.only('Click on Shared Kit Item', function () {
         cy.wait(2000)

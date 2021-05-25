@@ -3,24 +3,7 @@ import SanityLoginPage from "../PageObject/SanityLoginPage";
 
 describe("Triggered Recurring KitItem Validation Test Case", function () {
     this.beforeAll(function () {
-        const lp = new LoginPage();
-        const slp = new SanityLoginPage();
-        slp.nvdTest()
-        //slp.TmProd();
-        //Handling Alert
-        cy.on("window:confirm", () => {
-            cy.log("Alert has been Handled");
-        });
-
-        //Login Assertions
-        cy.contains(" Log In ").should("be.visible");
-        //Enter credentials
-        //lp.EnterEmail("sam@armyspy.com");
-        lp.EnterEmail("propertymanagement@commonareas.work.dev");
-        lp.EnterPassword("1234567Aa");
-        lp.Submit();
-        cy.log("User has been Logged In into the application");
-
+        
         Cypress.Cookies.preserveOnce(
             ".AspNet.ApplicationCookie",
             "ASP.NET_SessionId",
@@ -42,6 +25,14 @@ describe("Triggered Recurring KitItem Validation Test Case", function () {
             "refreshToken",
             "jwtAccessToken"
         );
+
+        //Globally fixtures for login creads
+    cy.fixture("LoginTestData/GlobalLoginCreds").then(function (
+        LogInScriptGloably
+      ) {
+        this.LoginCreds = LogInScriptGloably;
+      });
+      //////////////////////////////////////////////////////////////////////////////////////
 
         cy.fixture("SanityPackTestData2/RecurringKitItemData").then(function (
             KitDataEle
@@ -69,6 +60,24 @@ describe("Triggered Recurring KitItem Validation Test Case", function () {
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     });
+
+    it.only('Login TestCase',function(){
+        const lp = new LoginPage();
+        const slp = new SanityLoginPage();
+        slp.LoginUrl(this.LoginCreds.CAUrl)
+        //Handling Alert
+        cy.on("window:confirm", () => {
+          cy.log("Alert has been Handled");
+        });
+        //Login Assertions
+        cy.contains(" Log In ").should("be.visible");
+        //Enter credentials
+        lp.EnterEmail(this.LoginCreds.username);
+        lp.EnterPassword(this.LoginCreds.Password);
+        lp.Submit();
+        cy.log("User has been Logged In into the application");
+        cy.wait(5000)
+      })
 
     it.only("Click on list view and select kit type to Validate", function () {
         const lp = new LoginPage();
@@ -364,13 +373,8 @@ describe("Triggered Recurring KitItem Validation Test Case", function () {
 
     it.only("Contributors tab data Validation in details view", function () {
         cy.contains("Contributors").click({ force: true })
-        cy.get(".contributor__name")
-            .eq(0)
-            .should("have.text", this.NewKitItemData.RecurringContributorsTab);
-
-        cy.get(".contributor__name")
-            .eq(2)
-            .should("have.text", this.NewKitItemData.AssigningName);
+        cy.contains(this.NewKitItemData.RecurringContributorsTab).should('exist')
+        cy.contains(this.NewKitItemData.AssigningName).should('exist')
         cy.log("Added Contributors exist");
     });
 

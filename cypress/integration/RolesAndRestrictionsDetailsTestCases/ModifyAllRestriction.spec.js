@@ -6,24 +6,6 @@ import KitTypePage from "../PageObject/KitTypePage";
 
 describe("Roles And Restrication For Details(ModifyAll)", function () {
     this.beforeAll(function () {
-        const lp = new LoginPage();
-        const slp = new SanityLoginPage();
-        slp.nvdTest()
-        //slp.TmProd();
-
-        //Handling Alert
-        cy.on("window:confirm", () => {
-            cy.log("Alert has been Handled");
-        });
-
-        //Login Assertions
-        cy.contains(" Log In ").should("be.visible");
-        //Enter credentials
-        lp.EnterEmail("propertymanagement@commonareas.work.dev");
-        //lp.EnterEmail("sam@armyspy.com");
-        lp.EnterPassword("1234567Aa");
-        lp.Submit();
-        cy.log("User has been Logged In into the application");
 
         Cypress.Cookies.preserveOnce(
             ".AspNet.ApplicationCookie",
@@ -47,6 +29,14 @@ describe("Roles And Restrication For Details(ModifyAll)", function () {
             "jwtAccessToken"
         );
 
+        //Globally fixtures for login creads
+        cy.fixture("LoginTestData/GlobalLoginCreds").then(function (
+            LogInScriptGloably
+             ) {
+            this.LoginCreds = LogInScriptGloably;
+             });
+         ////////////////////////////////////////////////////////////////////////////////////////////
+
         cy.fixture("KitBuilderTestData/NewKitTypeData").then(function (
             KittypeName
         ) {
@@ -67,6 +57,25 @@ describe("Roles And Restrication For Details(ModifyAll)", function () {
         });
 
     });
+
+    it.only('Login TestCase',function(){
+        const lp = new LoginPage();
+        const slp = new SanityLoginPage();
+        //Navigate to url
+        slp.LoginUrl(this.LoginCreds.CAUrl)
+        //Handling Alert
+        cy.on("window:confirm", () => {
+          cy.log("Alert has been Handled");
+        });
+        //Login Assertions
+        cy.contains(" Log In ").should("be.visible");
+        //Enter credentials
+        lp.EnterEmail(this.LoginCreds.username);
+        lp.EnterPassword(this.LoginCreds.Password);
+        lp.Submit();
+        cy.log("User has been Logged In into the application");
+        cy.wait(5000)
+      })
 
     it.only("Navigate to Roles and Restrictions Page For (ModifyAll)Restriction ", function () {
         const kb = new KitBuilderPage();
@@ -125,7 +134,8 @@ describe("Roles And Restrication For Details(ModifyAll)", function () {
         //Page Object
         const slp = new SanityLoginPage();
         const lp = new LoginPage();
-        slp.nvdTest();
+        //Navigate to url
+        slp.LoginUrl(this.LoginCreds.CAUrl)
         //Handling Alert
         cy.on("window:confirm", () => {
             cy.log("Alert has been Handled");
@@ -160,22 +170,20 @@ describe("Roles And Restrication For Details(ModifyAll)", function () {
 
         const lp = new LoginPage();
         const slp = new SanityLoginPage();
-        slp.nvdTest()
-        //slp.TmProd();
-
+        //Navigate to url
+        slp.LoginUrl(this.LoginCreds.CAUrl)
         //Handling Alert
         cy.on("window:confirm", () => {
-            cy.log("Alert has been Handled");
+          cy.log("Alert has been Handled");
         });
         //Login Assertions
         cy.contains(" Log In ").should("be.visible");
         //Enter credentials
-        lp.EnterEmail("propertymanagement@commonareas.work.dev");
-        //lp.EnterEmail("sam@armyspy.com");
-        lp.EnterPassword("1234567Aa");
+        lp.EnterEmail(this.LoginCreds.username);
+        lp.EnterPassword(this.LoginCreds.Password);
         lp.Submit();
         cy.log("User has been Logged In into the application");
-        cy.wait(4000)   
+        cy.wait(5000)
     })
 
     it.only('Open kit item from left panel',function(){
@@ -217,6 +225,7 @@ describe("Roles And Restrication For Details(ModifyAll)", function () {
 
         //Click to save
         cy.get(".navi-bar-dropdown:nth-child(2) .v-btn").click({ force: true });
+        //Validation msg ,which should be recived after apply ModifyAll restriction
         cy.contains(' User does not have permission to modify this kit item ').should(
             "be.visible"
         );

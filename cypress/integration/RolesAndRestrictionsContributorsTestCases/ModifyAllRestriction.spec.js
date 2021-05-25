@@ -6,25 +6,7 @@ import KitTypePage from "../PageObject/KitTypePage";
 
 describe("Roles And Restrication For Contributors(ModifyAll)", function () {
     this.beforeAll(function () {
-        const lp = new LoginPage();
-        const slp = new SanityLoginPage();
-        slp.nvdTest()
-        //slp.TmProd();
-
-        //Handling Alert
-        cy.on("window:confirm", () => {
-            cy.log("Alert has been Handled");
-        });
-
-        //Login Assertions
-        cy.contains(" Log In ").should("be.visible");
-        //Enter credentials
-        lp.EnterEmail("propertymanagement@commonareas.work.dev");
-        //lp.EnterEmail("sam@armyspy.com");
-        lp.EnterPassword("1234567Aa");
-        lp.Submit();
-        cy.log("User has been Logged In into the application");
-
+        
         Cypress.Cookies.preserveOnce(
             ".AspNet.ApplicationCookie",
             "ASP.NET_SessionId",
@@ -47,6 +29,14 @@ describe("Roles And Restrication For Contributors(ModifyAll)", function () {
             "jwtAccessToken"
         );
 
+         //Globally fixtures for login creads
+         cy.fixture("LoginTestData/GlobalLoginCreds").then(function (
+            LogInScriptGloably
+             ) {
+            this.LoginCreds = LogInScriptGloably;
+             });
+         ////////////////////////////////////////////////////////////////////////////////////////////
+
         cy.fixture("KitBuilderTestData/NewKitTypeData").then(function (
             KittypeName
         ) {
@@ -67,6 +57,25 @@ describe("Roles And Restrication For Contributors(ModifyAll)", function () {
         });
 
     });
+
+    it.only('Login TestCase',function(){
+        const lp = new LoginPage();
+        const slp = new SanityLoginPage();
+        //Navigate to url
+        slp.LoginUrl(this.LoginCreds.CAUrl)
+        //Handling Alert
+        cy.on("window:confirm", () => {
+          cy.log("Alert has been Handled");
+        });
+        //Login Assertions
+        cy.contains(" Log In ").should("be.visible");
+        //Enter credentials
+        lp.EnterEmail(this.LoginCreds.username);
+        lp.EnterPassword(this.LoginCreds.Password);
+        lp.Submit();
+        cy.log("User has been Logged In into the application");
+        cy.wait(5000)
+      })
 
     it.only("Navigate to Roles and Restrictions Page For (ModifyAll)Restriction ", function () {
         const kb = new KitBuilderPage();
@@ -121,17 +130,61 @@ describe("Roles And Restrication For Contributors(ModifyAll)", function () {
 
     })
 
-    it.only('Navigate to UI to Validate(Create)Restriction', function () {
+    it.only('Navigate to UI to Validate(ModifyAll)Restriction', function () {
         //Page Object
         const slp = new SanityLoginPage();
         const lp = new LoginPage();
-        slp.nvdTest();
+        //Navigate to url
+        slp.LoginUrl(this.LoginCreds.CAUrl)
         //Handling Alert
         cy.on("window:confirm", () => {
             cy.log("Alert has been Handled");
         });
         //Assertion
         cy.title().should("eq", "Common Areas");
+        cy.wait(10000)
+    })
+
+    it.only('Clear App Cache',function(){
+        const lp = new LoginPage();
+        lp.ClickOnHomePageAdmin();
+        cy.wait(1000)
+        //clear app cache
+        cy.contains('Clear App Cache').click({force:true})
+        cy.wait(2000)
+    })
+
+    it.only("Sign Out for logged in user", function () {
+        //Click on admin
+        cy.get('[name="your-profile"]').click({ force: true });
+        cy.wait(2000);
+        cy.contains("Sign Out").click({ force: true });
+        cy.wait(5000);
+        //Log out validation assertion
+        cy.contains(" Log In ").should("be.visible");
+        cy.url().should("include", "/Public/Login?");
+        cy.log("User has been sign out");
+      });
+
+      it.only('Logged In Again into the application', function () {
+
+        const lp = new LoginPage();
+        const slp = new SanityLoginPage();
+        //Navigate to url
+        slp.LoginUrl(this.LoginCreds.CAUrl)
+        //Handling Alert
+        cy.on("window:confirm", () => {
+          cy.log("Alert has been Handled");
+        });
+        //Login Assertions
+        cy.contains(" Log In ").should("be.visible");
+        //Enter credentials
+        lp.EnterEmail(this.LoginCreds.username);
+        lp.EnterPassword(this.LoginCreds.Password);
+        lp.Submit();
+        cy.log("User has been Logged In into the application");
+        cy.wait(5000)
+        
     })
 
     it.only('Open kit item from left panel', function () {
@@ -148,11 +201,22 @@ describe("Roles And Restrication For Contributors(ModifyAll)", function () {
         cy.xpath('//div[@class="row-list-item-details--content py-2 justify-center col col-10 truncate-wrapper"]')
         .eq(1).click({ force: true })
         cy.wait(2000)
-    
     })
-   
 
+    it.only('Open Contributors Tab',function(){
+        //Click and open Contributors Tab
+        cy.contains(" Contributors ").click({ force: true });
+        cy.wait(1000);
+    })
 
+    it.only('Validate (ModifyAll)Restriciton in Contributors Tab',function(){
+    cy.wait(1000);
+    //Click on Add for Contributors
+    cy.get(".addBtn:nth-child(2) > .v-btn__content").click({ force: true });
+    cy.contains(' You are not permitted to add any contributor for '+'"'+this.KitTypeName.KitName3+'"'+' please contact your administrator to remove this restriction ')
+    .should('be.visible')
+    cy.wait(2000)
 
+    })
     
 })

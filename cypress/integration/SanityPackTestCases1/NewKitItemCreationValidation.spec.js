@@ -3,27 +3,6 @@ import SanityLoginPage from "../PageObject/SanityLoginPage";
 
 describe("New created kit item creation Validation test case", function () {
   this.beforeAll(function () {
-    // cy.viewport(1280, 720);
-    const lp = new LoginPage();
-    const slp = new SanityLoginPage();
-    slp.nvdTest()
-    //slp.TmProd();
-    //Handling Alert
-    cy.on("window:confirm", () => {
-      cy.log("Alert has been Handled");
-    });
-
-    //Login Assertions
-    cy.contains(" Log In ").should("be.visible");
-
-    //Enter credentials
-    //lp.EnterEmail("sam@armyspy.com");
-    lp.EnterEmail("propertymanagement@commonareas.work.dev");
-
-    lp.EnterPassword("1234567Aa");
-    lp.Submit();
-    cy.log("User has been Logged In into the application");
-
     Cypress.Cookies.preserveOnce(
       ".AspNet.ApplicationCookie",
       "ASP.NET_SessionId",
@@ -45,7 +24,14 @@ describe("New created kit item creation Validation test case", function () {
       "refreshToken",
       "jwtAccessToken"
     );
-
+ 
+    //Globally fixtures for login creads
+    cy.fixture("LoginTestData/GlobalLoginCreds").then(function (
+      LogInScriptGloably
+    ) {
+      this.LoginCreds = LogInScriptGloably;
+    });
+    ////////////////////////////////////////////////////////////////////////////////////////////
     cy.fixture("KitTypeTestData/NewKitItemDataValues").then(function (
       KitDataEle
     ) {
@@ -97,6 +83,24 @@ describe("New created kit item creation Validation test case", function () {
     });
   });
 
+  it.only('Login TestCase',function(){
+    const lp = new LoginPage();
+    const slp = new SanityLoginPage();
+    slp.LoginUrl(this.LoginCreds.CAUrl)
+    //Handling Alert
+    cy.on("window:confirm", () => {
+      cy.log("Alert has been Handled");
+    });
+    //Login Assertions
+    cy.contains(" Log In ").should("be.visible");
+    //Enter credentials
+    lp.EnterEmail(this.LoginCreds.username);
+    lp.EnterPassword(this.LoginCreds.Password);
+    lp.Submit();
+    cy.log("User has been Logged In into the application");
+    cy.wait(5000)
+  })
+
   it.only("Click on list view and select kit type to Validate", function () {
     const lp = new LoginPage();
     //Click on Hamburger Icon
@@ -134,7 +138,7 @@ describe("New created kit item creation Validation test case", function () {
     cy.wait(3000)
   });
 
-  it.only('Getting Kit Item ID', function () {
+  it('Getting Kit Item ID', function () {
     cy.wait(2000)
     //geting kit item id
     cy.xpath('//div[@class="truncate align-center d-none d-sm-flex col"]')
@@ -392,14 +396,8 @@ describe("New created kit item creation Validation test case", function () {
 
   it.only("Contributors tab data Validation in details view", function () {
     cy.contains("Contributors").click({ force: true })
-
-    cy.get(".contributor__name")
-      .eq(0)
-      .should("have.text", this.SData.ContributorsName);
-
-    cy.get(".contributor__name")
-      .eq(2)
-      .should("have.text", this.NewKitItemData.AssigningName);
+    cy.contains(this.SData.ContributorsName).should('exist')
+    cy.contains(this.NewKitItemData.AssigningName).should('exist')
     cy.log("Added Contributors exist");
 
   });

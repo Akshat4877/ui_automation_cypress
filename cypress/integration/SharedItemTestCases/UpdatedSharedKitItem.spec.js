@@ -3,25 +3,7 @@ import SanityLoginPage from "../PageObject/SanityLoginPage";
 
 describe("Shared Kit Item Updation Test Case for Internal User", function () {
     this.beforeAll(function () {
-        const lp = new LoginPage();
-        const slp = new SanityLoginPage();
-
-        slp.nvdTest()
-        //slp.TmProd()
-        //Handling Alert
-        cy.on("window:confirm", () => {
-            cy.log("Alert has been Handled");
-        });
-
-        //Login Assertions
-        cy.contains(" Log In ").should("be.visible");
-        //Enter credentials
-        lp.EnterEmail("maintenancedirector@nvdlp.com.dev");
-        //lp.EnterEmail("kat@armyspy.com");
-        lp.EnterPassword("1234567Aa");
-        lp.Submit();
-        cy.log("User has been Logged In into the application");
-
+        
         Cypress.Cookies.preserveOnce(
             ".AspNet.ApplicationCookie",
             "ASP.NET_SessionId",
@@ -43,6 +25,21 @@ describe("Shared Kit Item Updation Test Case for Internal User", function () {
             "refreshToken",
             "jwtAccessToken"
         );
+
+        //Globally fixtures for login creads
+        cy.fixture("LoginTestData/GlobalLoginCreds").then(function (
+        LogInScriptGloably
+        ) {
+        this.LoginCreds = LogInScriptGloably;
+         });
+
+        //Globally fixtures for shared item test cases creads
+        cy.fixture("LoginTestData/SharedUserCredentials").then(function (
+        LogInScriptGloably
+        ) {
+        this.SharedCreds = LogInScriptGloably;
+        });
+      //////////////////////////////////////////////////////////////////////////////////////
 
         cy.fixture("SanityPackTestData/UpdateKItItemData").then(function (
             UpDateKitItemSDTCData
@@ -92,6 +89,24 @@ describe("Shared Kit Item Updation Test Case for Internal User", function () {
             this.ViewName = KitTypeFormViewsNames;
         });
     });
+
+    it.only('Login TestCase',function(){
+        const lp = new LoginPage();
+        const slp = new SanityLoginPage();
+        slp.LoginUrl(this.LoginCreds.CAUrl)
+        //Handling Alert
+        cy.on("window:confirm", () => {
+          cy.log("Alert has been Handled");
+        });
+        //Login Assertions
+        cy.contains(" Log In ").should("be.visible");
+        //Enter credentials
+        lp.EnterEmail(this.SharedCreds.UpdatedInternalUser);
+        lp.EnterPassword(this.LoginCreds.Password);
+        lp.Submit();
+        cy.log("User has been Logged In into the application");
+        cy.wait(5000)
+      })
 
 
     it.only('Click on Shared Kit Item to External Connection', function () {

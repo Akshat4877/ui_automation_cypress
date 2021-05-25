@@ -5,13 +5,20 @@ describe("Comment Email Notification Shared Activity", function () {
         "Shared User Credentials",
         function () {
 
-            cy.fixture("SanityPackTestData2/SharedUserCredentials").then(function (KitDataEle) {
-                this.Credentials = KitDataEle;
-            });
+            cy.fixture("LoginTestData/GlobalLoginCreds").then(function (
+                LogInScriptGloably
+                ) {
+                this.LoginCreds = LogInScriptGloably;
+                 });
+        
+                //Globally fixtures for shared item test cases creads
+                cy.fixture("LoginTestData/SharedUserCredentials").then(function (
+                LogInScriptGloably
+                ) {
+                this.SharedCreds = LogInScriptGloably;
+                });
+              /////////////////////////////////////////////////////////////////////////
 
-            // cy.fixture("SanityPackTestData2(Prod)/SharedUserCredentials(Prod)").then(function (KitDataEle) {
-            //   this.Credentials = KitDataEle;
-            // });
 
             cy.fixture("KitTypeTestData/NewKitItemDataValues").then(function (
                 KitDataEle
@@ -37,7 +44,7 @@ describe("Comment Email Notification Shared Activity", function () {
         const sp = new SignUpPage();
         sp.mailinatorSite();
         cy.url().should("include", "mailinator.com");
-        sp.EnterMailinatorEmail(this.Credentials.BaseConnection);
+        sp.EnterMailinatorEmail(this.SharedCreds.BaseConnection);
         cy.log("User Email has been Entered");
         //Click on Go
         sp.Go();

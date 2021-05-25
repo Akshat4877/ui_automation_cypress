@@ -3,25 +3,7 @@ import SanityLoginPage from "../PageObject/SanityLoginPage";
 
 describe("Update Related New for OneToMany Related Control", function () {
   this.beforeAll(function () {
-    // cy.viewport(1280, 720);
-    const lp = new LoginPage();
-    const slp = new SanityLoginPage();
-    slp.nvdTest()
-    //slp.TmProd();
-
-    //Handling Alert
-    cy.on("window:confirm", () => {
-      cy.log("Alert has been Handled");
-    });
-    //Login Assertions
-    cy.contains(" Log In ").should("be.visible");
-    //Enter credentials
-    lp.EnterEmail("propertymanagement@commonareas.work.dev");
-    //lp.EnterEmail("sam@armyspy.com");
-    lp.EnterPassword("1234567Aa");
-    lp.Submit();
-    cy.log("User has been Logged In into the application");
-
+    
     Cypress.Cookies.preserveOnce(
       ".AspNet.ApplicationCookie",
       "ASP.NET_SessionId",
@@ -44,6 +26,14 @@ describe("Update Related New for OneToMany Related Control", function () {
       "refreshToken",
       "jwtAccessToken"
     );
+
+    //Globally fixtures for login creads
+    cy.fixture("LoginTestData/GlobalLoginCreds").then(function (
+      LogInScriptGloably
+    ) {
+      this.LoginCreds = LogInScriptGloably;
+    });
+    ////////////////////////////////////////////////////////////////////////////////////////////
 
     cy.fixture("SanityPackTestData/RelatedOneToNData").then(function (
       SanityTCData
@@ -101,6 +91,24 @@ describe("Update Related New for OneToMany Related Control", function () {
       this.ViewName = KitTypeFormViewsNames;
     });
   });
+
+  it.only('Login TestCase',function(){
+    const lp = new LoginPage();
+    const slp = new SanityLoginPage();
+    slp.LoginUrl(this.LoginCreds.CAUrl)
+    //Handling Alert
+    cy.on("window:confirm", () => {
+      cy.log("Alert has been Handled");
+    });
+    //Login Assertions
+    cy.contains(" Log In ").should("be.visible");
+    //Enter credentials
+    lp.EnterEmail(this.LoginCreds.username);
+    lp.EnterPassword(this.LoginCreds.Password);
+    lp.Submit();
+    cy.log("User has been Logged In into the application");
+    cy.wait(5000)
+  })
 
   it.only("Navigating to kit item listView and select kit type to Update", function () {
     const lp = new LoginPage();

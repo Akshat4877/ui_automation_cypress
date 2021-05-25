@@ -3,25 +3,7 @@ import SanityLoginPage from "../PageObject/SanityLoginPage";
 
 describe("Update created kit item test case", function () {
   this.beforeAll(function () {
-    const lp = new LoginPage();
-    const slp = new SanityLoginPage();
-    slp.nvdTest()
-    //slp.TmProd();
-
-    //Handling Alert
-    cy.on("window:confirm", () => {
-      cy.log("Alert has been Handled");
-    });
-
-    //Login Assertions
-    cy.contains(" Log In ").should("be.visible");
-    //Enter credentials
-    lp.EnterEmail("propertymanagement@commonareas.work.dev");
-    //lp.EnterEmail("sam@armyspy.com");
-    lp.EnterPassword("1234567Aa");
-    lp.Submit();
-    cy.log("User has been Logged In into the application");
-
+    
     Cypress.Cookies.preserveOnce(
       ".AspNet.ApplicationCookie",
       "ASP.NET_SessionId",
@@ -43,6 +25,14 @@ describe("Update created kit item test case", function () {
       "refreshToken",
       "jwtAccessToken"
     );
+
+    //Globally fixtures for login creads
+    cy.fixture("LoginTestData/GlobalLoginCreds").then(function (
+      LogInScriptGloably
+    ) {
+      this.LoginCreds = LogInScriptGloably;
+    });
+    ////////////////////////////////////////////////////////////////////////////////////////////
 
     cy.fixture("SanityPackTestData/UpdateKItItemData").then(function (
       UpDateKitItemSDTCData
@@ -100,6 +90,24 @@ describe("Update created kit item test case", function () {
       this.ViewName = KitTypeFormViewsNames;
     });
   });
+
+  it.only('Login TestCase',function(){
+    const lp = new LoginPage();
+    const slp = new SanityLoginPage();
+    slp.LoginUrl(this.LoginCreds.CAUrl)
+    //Handling Alert
+    cy.on("window:confirm", () => {
+      cy.log("Alert has been Handled");
+    });
+    //Login Assertions
+    cy.contains(" Log In ").should("be.visible");
+    //Enter credentials
+    lp.EnterEmail(this.LoginCreds.username);
+    lp.EnterPassword(this.LoginCreds.Password);
+    lp.Submit();
+    cy.log("User has been Logged In into the application");
+    cy.wait(5000)
+  })
 
   it.only("Navigating to kit item listView and select kit type to Update", function () {
     const lp = new LoginPage();
@@ -333,13 +341,13 @@ describe("Update created kit item test case", function () {
     });
     cy.log("Toggle updated");
 
-    // //Click on DropDown of SelectList
-    // cy.get(
-    //   " div.row.container-details div.fill-height.col div.container.details-wrapper.fill-height div.row.kit-related-form.pa-6 div.kit-control-component.row-component.px-3.col.col-sm-12.col-md-6.mb-4.px-3.col-sm-12.col-md-6.mb-4.px-3:nth-child(17) div.v-input.kit-control-select-list.layout-alignment.v-input--is-label-active.v-input--is-dirty.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-select div.v-input__control div.v-input__slot div.v-select__slot:nth-child(2) div.v-input__append-inner:nth-child(3) div.v-input__icon.v-input__icon--append > i.v-icon.notranslate.material-icons.theme--light"
-    // ).click({ force: true });
-    // //SelectList Value(Values coming form KitItemValues Json File)
-    // cy.contains(this.UpdateKitItemData.SelectListValue).click({ force: true });
-    // cy.log("SelectList Value has been Updated.");
+    //Click on DropDown of SelectList
+    cy.get(
+      " div.row.container-details div.fill-height.col div.container.details-wrapper.fill-height div.row.kit-related-form.pa-6 div.kit-control-component.row-component.px-3.col.col-sm-12.col-md-6.mb-4.px-3.col-sm-12.col-md-6.mb-4.px-3:nth-child(17) div.v-input.kit-control-select-list.layout-alignment.v-input--is-label-active.v-input--is-dirty.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-select div.v-input__control div.v-input__slot div.v-select__slot:nth-child(2) div.v-input__append-inner:nth-child(3) div.v-input__icon.v-input__icon--append > i.v-icon.notranslate.material-icons.theme--light"
+    ).click({ force: true });
+    //SelectList Value(Values coming form KitItemValues Json File)
+    cy.contains(this.UpdateKitItemData.SelectListValue).click({ force: true });
+    cy.log("SelectList Value has been Updated.");
     cy.wait(2000)
 
     //RadioSelect
@@ -911,7 +919,7 @@ describe("Update created kit item test case", function () {
 
   it.only('Time Element data Validation', function () {
     //Check in josn for LoggedTime
-    cy.get('[placeholder="Add Time"][readonly="readonly"]').eq(1)
+    cy.get('[placeholder="Add Time"][readonly="readonly"]').eq(0)
       .should("have.value", this.UpdateKitItemData.LoggedTime)
   })
 

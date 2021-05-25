@@ -6,24 +6,6 @@ import KitTypePage from "../PageObject/KitTypePage";
 
 describe("Roles And Restrication For Details(Remove)", function () {
     this.beforeAll(function () {
-        const lp = new LoginPage();
-        const slp = new SanityLoginPage();
-        slp.nvdTest()
-        //slp.TmProd();
-
-        //Handling Alert
-        cy.on("window:confirm", () => {
-            cy.log("Alert has been Handled");
-        });
-
-        //Login Assertions
-        cy.contains(" Log In ").should("be.visible");
-        //Enter credentials
-        lp.EnterEmail("propertymanagement@commonareas.work.dev");
-        //lp.EnterEmail("sam@armyspy.com");
-        lp.EnterPassword("1234567Aa");
-        lp.Submit();
-        cy.log("User has been Logged In into the application");
 
         Cypress.Cookies.preserveOnce(
             ".AspNet.ApplicationCookie",
@@ -47,6 +29,14 @@ describe("Roles And Restrication For Details(Remove)", function () {
             "jwtAccessToken"
         );
 
+        //Globally fixtures for login creads
+        cy.fixture("LoginTestData/GlobalLoginCreds").then(function (
+            LogInScriptGloably
+             ) {
+            this.LoginCreds = LogInScriptGloably;
+             });
+         ////////////////////////////////////////////////////////////////////////////////////////////
+
         cy.fixture("KitBuilderTestData/NewKitTypeData").then(function (
             KittypeName
         ) {
@@ -68,7 +58,26 @@ describe("Roles And Restrication For Details(Remove)", function () {
 
     });
 
-    it.only("Navigate to Roles and Restrictions Page For (Remove)Restriction ", function () {
+    it.only('Login TestCase',function(){
+        const lp = new LoginPage();
+        const slp = new SanityLoginPage();
+        //Navigate to url
+        slp.LoginUrl(this.LoginCreds.CAUrl)
+        //Handling Alert
+        cy.on("window:confirm", () => {
+          cy.log("Alert has been Handled");
+        });
+        //Login Assertions
+        cy.contains(" Log In ").should("be.visible");
+        //Enter credentials
+        lp.EnterEmail(this.LoginCreds.username);
+        lp.EnterPassword(this.LoginCreds.Password);
+        lp.Submit();
+        cy.log("User has been Logged In into the application");
+        cy.wait(5000)
+      })
+
+    it("Navigate to Roles and Restrictions Page For (Remove)Restriction ", function () {
         const kb = new KitBuilderPage();
         const lp = new LoginPage();
         const RoleRestr = new RolesAndRestrictionsPage();
@@ -82,7 +91,7 @@ describe("Roles And Restrication For Details(Remove)", function () {
         cy.url().should('include', '/ClientAdmin/KitBuilder#/roles')
     });
 
-    it.only('Select kit type to Configure Restriction For Details(Remove)', function () {
+    it('Select kit type to Configure Restriction For Details(Remove)', function () {
         const RoleRestr = new RolesAndRestrictionsPage();
         cy.wait(2000)
         cy.xpath('//*[text()="edit"]').first().click({ force: true })
@@ -103,7 +112,7 @@ describe("Roles And Restrication For Details(Remove)", function () {
         cy.wait(1000)
     })
 
-    it.only('Apply Remove Restriction', function () {
+    it('Apply Remove Restriction', function () {
 
         cy.xpath('//*[text() ="Details"]')
             .within(($Details) => {
@@ -118,11 +127,12 @@ describe("Roles And Restrication For Details(Remove)", function () {
             })
     })
 
-    it.only('Navigate to UI to Validate(Remove)Restriction', function () {
+    it('Navigate to UI to Validate(Remove)Restriction', function () {
         //Page Object
         const slp = new SanityLoginPage();
         const lp = new LoginPage();
-        slp.nvdTest();
+        //Navigate to url
+        slp.LoginUrl(this.LoginCreds.CAUrl)
         //Handling Alert
         cy.on("window:confirm", () => {
             cy.log("Alert has been Handled");
@@ -132,7 +142,7 @@ describe("Roles And Restrication For Details(Remove)", function () {
         cy.wait(10000)
     })
 
-    it.only('Clear App Cache',function(){
+    it('Clear App Cache',function(){
         const lp = new LoginPage();
         lp.ClickOnHomePageAdmin();
         cy.wait(1000)
@@ -141,7 +151,7 @@ describe("Roles And Restrication For Details(Remove)", function () {
         cy.wait(2000)
     })
 
-    it.only("Sign Out for logged in user", function () {
+    it("Sign Out for logged in user", function () {
         //Click on admin
         cy.get('[name="your-profile"]').click({ force: true });
         cy.wait(2000);
@@ -153,26 +163,24 @@ describe("Roles And Restrication For Details(Remove)", function () {
         cy.log("User has been sign out");
       });
 
-      it.only('Logged In Again into the application', function () {
+      it('Logged In Again into the application', function () {
 
         const lp = new LoginPage();
         const slp = new SanityLoginPage();
-        slp.nvdTest()
-        //slp.TmProd();
-
+        //Navigate to url
+        slp.LoginUrl(this.LoginCreds.CAUrl)
         //Handling Alert
         cy.on("window:confirm", () => {
-            cy.log("Alert has been Handled");
+          cy.log("Alert has been Handled");
         });
         //Login Assertions
         cy.contains(" Log In ").should("be.visible");
         //Enter credentials
-        lp.EnterEmail("propertymanagement@commonareas.work.dev");
-        //lp.EnterEmail("sam@armyspy.com");
-        lp.EnterPassword("1234567Aa");
+        lp.EnterEmail(this.LoginCreds.username);
+        lp.EnterPassword(this.LoginCreds.Password);
         lp.Submit();
         cy.log("User has been Logged In into the application");
-        cy.wait(4000)      
+        cy.wait(5000)
     })
 
     it.only('Open kit item from left panel',function(){
@@ -205,7 +213,8 @@ describe("Roles And Restrication For Details(Remove)", function () {
         cy.wait(2000);
         cy.xpath('//*[text()="Delete"]').click({ force: true });
         //Validate remove Restriction with this validation message
-        cy.contains(' You are not permitted to remove any details for BuildingAreas please contact your administrator to remove this restriction ')
+        cy.contains(' You are not permitted to remove any details for '+this.KitTypeName.KitName3+' please contact your administrator to remove this restriction ')
+       
             .should('be.visible')
 
     })

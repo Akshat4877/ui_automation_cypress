@@ -1,12 +1,15 @@
 class SanityLoginPage {
 
-  TmProd() {
-    cy.visit("https://tm.commonareas.io/Public/Login?ReturnUrl=%2F");
+  LoginUrl(Url) {
+    cy.visit(Url);
+    return this;
   }
 
-  nvdTest() {
-    cy.visit("https://nvd.ca-test.com/Public/Login?ReturnUrl=%2F");
+  BaseUrl(Url) {
+    cy.visit(Url);
+    return this;
   }
+
 }
 
 export default SanityLoginPage;

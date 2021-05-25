@@ -4,26 +4,7 @@ import SanityLoginPage from "../PageObject/SanityLoginPage";
 
 describe("Internal Connection Shared Kit Item Test Case", function () {
     this.beforeAll(function () {
-        //cy.viewport(1280, 720);
-        const lp = new LoginPage();
-        const slp = new SanityLoginPage();
-        slp.nvdTest()
-        //slp.TmProd()
-        //Handling Alert
-        cy.on("window:confirm", () => {
-            cy.log("Alert has been Handled");
-        });
-
-        //Login Assertions
-        cy.contains(" Log In ").should("be.visible");
-        //Enter credentials
-        lp.EnterEmail("Akshat@mailinator.com");
-        //lp.EnterEmail("mack2@mailinator.com");
-
-        lp.EnterPassword("1234567Aa");
-        lp.Submit();
-        cy.log("User has been Logged In into the application");
-
+       
         Cypress.Cookies.preserveOnce(
             ".AspNet.ApplicationCookie",
             "ASP.NET_SessionId",
@@ -45,6 +26,23 @@ describe("Internal Connection Shared Kit Item Test Case", function () {
             "refreshToken",
             "jwtAccessToken"
         );
+
+        
+        //Globally fixtures for login creads
+        cy.fixture("LoginTestData/GlobalLoginCreds").then(function (
+            LogInScriptGloably
+            ) {
+            this.LoginCreds = LogInScriptGloably;
+             });
+    
+            //Globally fixtures for shared item test cases creads
+            cy.fixture("LoginTestData/SharedUserCredentials").then(function (
+            LogInScriptGloably
+            ) {
+            this.SharedCreds = LogInScriptGloably;
+            });
+          //////////////////////////////////////////////////////////////////////////////////////
+    
 
         cy.fixture("KitTypeTestData/NewKitItemDataValues").then(function (
             KitDataEle
@@ -100,6 +98,24 @@ describe("Internal Connection Shared Kit Item Test Case", function () {
             this.ViewName = KitTypeFormViewsNames;
         });
     });
+
+    it.only('Login TestCase',function(){
+        const lp = new LoginPage();
+        const slp = new SanityLoginPage();
+        slp.LoginUrl(this.LoginCreds.CAUrl)
+        //Handling Alert
+        cy.on("window:confirm", () => {
+          cy.log("Alert has been Handled");
+        });
+        //Login Assertions
+        cy.contains(" Log In ").should("be.visible");
+        //Enter credentials
+        lp.EnterEmail(this.SharedCreds.InternalUser);
+        lp.EnterPassword(this.LoginCreds.Password);
+        lp.Submit();
+        cy.log("User has been Logged In into the application");
+        cy.wait(5000)
+      })
 
 
     it.only('Click on Shared Kit Item to Internal User', function () {
@@ -357,46 +373,13 @@ describe("Internal Connection Shared Kit Item Test Case", function () {
         cy.contains(this.SData.ContributorsName).should('exist')
         cy.contains(this.NewKitItemData.AssigningName).should('exist')
     });
-});
-
-describe("Email Notification Shared Activity", function () {
-    this.beforeEach(
-        "Internal User Credentials",
-        function () {
-
-            cy.fixture("SanityPackTestData2/SharedUserCredentials").then(function (KitDataEle) {
-                this.Credentials = KitDataEle;
-            });
-
-            // cy.fixture("SanityPackTestData2(Prod)/SharedUserCredentials(Prod)").then(function (KitDataEle) {
-            //   this.Credentials = KitDataEle;
-            // });
-
-            cy.fixture("KitTypeTestData/NewKitItemDataValues").then(function (
-                KitDataEle
-            ) {
-                this.NewKitItemData = KitDataEle;
-            });
-
-            // cy.fixture("SanityPackTestData(Prod)/NewKitItemDataValue(Prod)").then(
-            //   function (KitDataEle) {
-            //     this.NewKitItemData = KitDataEle;
-            //   }
-            // );
-            ///////////////////////////////////////////////////////////////////
-
-            cy.fixture("SanityPackTestData2/KitItemId").then(function (ItemID) {
-                this.KitItemId = ItemID;
-            });
-
-        });
 
     it.only("Verifying Email Notification Shared Kit Item Activity for Internal User ", function () {
         //PageObject
         const sp = new SignUpPage();
         sp.mailinatorSite();
         cy.url().should("include", "mailinator.com");
-        sp.EnterMailinatorEmail(this.Credentials.InternalUser);
+        sp.EnterMailinatorEmail(this.SharedCreds.InternalUser);
         cy.log("User Email has been Entered");
         //Click on Go
         sp.Go();
@@ -404,3 +387,5 @@ describe("Email Notification Shared Activity", function () {
         cy.contains("New " + this.NewKitItemData.KitName).click({ force: true });
     });
 });
+
+

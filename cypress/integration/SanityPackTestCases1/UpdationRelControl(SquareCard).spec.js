@@ -3,25 +3,7 @@ import SanityLoginPage from "../PageObject/SanityLoginPage";
 
 describe("Update Related New fot Square Card Related Control", function () {
   this.beforeAll(function () {
-    const lp = new LoginPage();
-    const slp = new SanityLoginPage();
-    slp.nvdTest()
-    //slp.TmProd();
-
-    //Handling Alert
-    cy.on("window:confirm", () => {
-      cy.log("Alert has been Handled");
-    });
-
-    //Login Assertions
-    cy.contains(" Log In ").should("be.visible");
-    //Enter credentials
-    lp.EnterEmail("propertymanagement@commonareas.work.dev");
-    //lp.EnterEmail("sam@armyspy.com");
-    lp.EnterPassword("1234567Aa");
-    lp.Submit();
-    cy.log("User has been Logged In into the application");
-
+    
     Cypress.Cookies.preserveOnce(
       ".AspNet.ApplicationCookie",
       "ASP.NET_SessionId",
@@ -43,6 +25,14 @@ describe("Update Related New fot Square Card Related Control", function () {
       "refreshToken",
       "jwtAccessToken"
     );
+
+    //Globally fixtures for login creads
+    cy.fixture("LoginTestData/GlobalLoginCreds").then(function (
+      LogInScriptGloably
+    ) {
+      this.LoginCreds = LogInScriptGloably;
+    });
+    ////////////////////////////////////////////////////////////////////////////////////////////
 
     cy.fixture("SanityPackTestData/RelatedSqCardData").then(function (
       SanityTCData
@@ -100,6 +90,24 @@ describe("Update Related New fot Square Card Related Control", function () {
       this.ViewName = KitTypeFormViewsNames;
     });
   });
+
+  it.only('Login TestCase',function(){
+    const lp = new LoginPage();
+    const slp = new SanityLoginPage();
+    slp.LoginUrl(this.LoginCreds.CAUrl)
+    //Handling Alert
+    cy.on("window:confirm", () => {
+      cy.log("Alert has been Handled");
+    });
+    //Login Assertions
+    cy.contains(" Log In ").should("be.visible");
+    //Enter credentials
+    lp.EnterEmail(this.LoginCreds.username);
+    lp.EnterPassword(this.LoginCreds.Password);
+    lp.Submit();
+    cy.log("User has been Logged In into the application");
+    cy.wait(5000)
+  })
 
   it.only("Navigating to kit item listView and select kit type to Update", function () {
     const lp = new LoginPage();
@@ -1348,7 +1356,6 @@ describe("Update Related New fot Square Card Related Control", function () {
     cy.wait(1000);
     cy.get(".btn-load .inline-svg").eq(1).scrollIntoView({ force: true });
     //Click on three dots on linked square card
-    //Click on created one to many kit item
     cy.get(".px-2:nth-child(1) .inline-svg").click({ force: true });
     //Assertion
     //cy.contains(" Edit Item ").should("be.visible");

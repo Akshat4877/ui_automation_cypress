@@ -5,25 +5,7 @@ import RolesAndRestrictionsPage from "../PageObject/RolesAndRestrictionsPage"
 
 describe("Roles And Restrication For Contributors(Remove)", function () {
     this.beforeAll(function () {
-        const lp = new LoginPage();
-        const slp = new SanityLoginPage();
-        slp.nvdTest()
-        //slp.TmProd();
-
-        //Handling Alert
-        cy.on("window:confirm", () => {
-            cy.log("Alert has been Handled");
-        });
-
-        //Login Assertions
-        cy.contains(" Log In ").should("be.visible");
-        //Enter credentials
-        lp.EnterEmail("propertymanagement@commonareas.work.dev");
-        //lp.EnterEmail("sam@armyspy.com");
-        lp.EnterPassword("1234567Aa");
-        lp.Submit();
-        cy.log("User has been Logged In into the application");
-
+       
         Cypress.Cookies.preserveOnce(
             ".AspNet.ApplicationCookie",
             "ASP.NET_SessionId",
@@ -46,6 +28,14 @@ describe("Roles And Restrication For Contributors(Remove)", function () {
             "jwtAccessToken"
         );
 
+         //Globally fixtures for login creads
+         cy.fixture("LoginTestData/GlobalLoginCreds").then(function (
+            LogInScriptGloably
+             ) {
+            this.LoginCreds = LogInScriptGloably;
+             });
+         ////////////////////////////////////////////////////////////////////////////////////////////
+
         cy.fixture("KitBuilderTestData/NewKitTypeData").then(function (
             KittypeName
         ) {
@@ -66,6 +56,25 @@ describe("Roles And Restrication For Contributors(Remove)", function () {
         });
 
     });
+
+    it.only('Login TestCase',function(){
+        const lp = new LoginPage();
+        const slp = new SanityLoginPage();
+        //Navigate to url
+        slp.LoginUrl(this.LoginCreds.CAUrl)
+        //Handling Alert
+        cy.on("window:confirm", () => {
+          cy.log("Alert has been Handled");
+        });
+        //Login Assertions
+        cy.contains(" Log In ").should("be.visible");
+        //Enter credentials
+        lp.EnterEmail(this.LoginCreds.username);
+        lp.EnterPassword(this.LoginCreds.Password);
+        lp.Submit();
+        cy.log("User has been Logged In into the application");
+        cy.wait(5000)
+      })
 
     it.only("Navigate to Roles and Restrictions Page For (Remove)Restriction ", function () {
         const kb = new KitBuilderPage();
@@ -121,7 +130,8 @@ describe("Roles And Restrication For Contributors(Remove)", function () {
         //Page Object
         const slp = new SanityLoginPage();
         const lp = new LoginPage();
-        slp.nvdTest();
+        //Navigate to url
+        slp.LoginUrl(this.LoginCreds.CAUrl)
         //Handling Alert
         cy.on("window:confirm", () => {
             cy.log("Alert has been Handled");
@@ -156,22 +166,20 @@ describe("Roles And Restrication For Contributors(Remove)", function () {
 
         const lp = new LoginPage();
         const slp = new SanityLoginPage();
-        slp.nvdTest()
-        //slp.TmProd();
-
+        //Navigate to url
+        slp.LoginUrl(this.LoginCreds.CAUrl)
         //Handling Alert
         cy.on("window:confirm", () => {
-            cy.log("Alert has been Handled");
+          cy.log("Alert has been Handled");
         });
         //Login Assertions
         cy.contains(" Log In ").should("be.visible");
         //Enter credentials
-        lp.EnterEmail("propertymanagement@commonareas.work.dev");
-        //lp.EnterEmail("sam@armyspy.com");
-        lp.EnterPassword("1234567Aa");
+        lp.EnterEmail(this.LoginCreds.username);
+        lp.EnterPassword(this.LoginCreds.Password);
         lp.Submit();
         cy.log("User has been Logged In into the application");
-        cy.wait(4000)  
+        cy.wait(5000)
     })
 
     it.only('Open kit item from left panel', function () {
@@ -188,22 +196,21 @@ describe("Roles And Restrication For Contributors(Remove)", function () {
         cy.xpath('//div[@class="row-list-item-details--content py-2 justify-center col col-10 truncate-wrapper"]')
         .eq(1).click({ force: true })
         cy.wait(2000)
-    
     })
 
-    it.only('Validate (Remove)Restriciton in Contributors Tab',function(){
-
+    it.only('Open Contributors Tab',function(){
     //Click and open Contributors Tab
     cy.contains(" Contributors ").click({ force: true });
     cy.wait(1000);
+    })
+
+    it.only('Validate (Remove)Restriciton in Contributors Tab',function(){
     //Click on Add for Contributors
     cy.get('.align-start:nth-child(1) .section-reminder-desktop .delete-icon-svg')
     .click({force:true});
-    cy.contains(' You are not permitted to remove any contributor for "BuildingAreas" please contact your administrator to remove this restriction ')
+    cy.contains(' You are not permitted to remove any contributor for '+'"'+this.KitTypeName.KitName3+'"'+' please contact your administrator to remove this restriction ')
     .should('be.visible')
     cy.wait(2000)
 
     })
-
-
 })
