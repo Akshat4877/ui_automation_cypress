@@ -2,11 +2,11 @@ import LoginPage from "../PageObject/LoginPage";
 import KitBuilderPage from "../PageObject/KitBuilderPage";
 import SanityLoginPage from "../PageObject/SanityLoginPage";
 import RolesAndRestrictionsPage from "../PageObject/RolesAndRestrictionsPage"
+import KitTypePage from "../PageObject/KitTypePage";
 
-
-describe("Roles And Restrication For Comments(View)", function () {
+describe("Roles And Restrication For Reminders(Create)", function () {
     this.beforeAll(function () {
-
+        
         Cypress.Cookies.preserveOnce(
             ".AspNet.ApplicationCookie",
             "ASP.NET_SessionId",
@@ -29,8 +29,8 @@ describe("Roles And Restrication For Comments(View)", function () {
             "jwtAccessToken"
         );
 
-         //Globally fixtures for login creads
-         cy.fixture("LoginTestData/GlobalLoginCreds").then(function (
+        //Globally fixtures for login creads
+        cy.fixture("LoginTestData/GlobalLoginCreds").then(function (
             LogInScriptGloably
              ) {
             this.LoginCreds = LogInScriptGloably;
@@ -56,12 +56,6 @@ describe("Roles And Restrication For Comments(View)", function () {
             this.DataType2 = NewDataForElements;
         });
 
-        cy.fixture("KitTypeTestData/NewKitItemDataValues").then(function (
-            KitDataEle
-          ) {
-            this.NewKitItemData = KitDataEle;
-          });
-
     });
 
     it.only('Login TestCase',function(){
@@ -83,7 +77,7 @@ describe("Roles And Restrication For Comments(View)", function () {
         cy.wait(5000)
       })
 
-    it.only("Navigate to Roles and Restrictions Page For(View) Restriction ", function () {
+    it.only("Navigate to Roles and Restrictions Page For (Create)Restriction ", function () {
         const kb = new KitBuilderPage();
         const lp = new LoginPage();
         const RoleRestr = new RolesAndRestrictionsPage();
@@ -97,7 +91,7 @@ describe("Roles And Restrication For Comments(View)", function () {
         cy.url().should('include', '/ClientAdmin/KitBuilder#/roles')
     });
 
-    it.only('Select kit type to Configure Restriction For Comments(View)', function () {
+    it.only('Select kit type to Configure Restriction For Reminders(Create)', function () {
         const RoleRestr = new RolesAndRestrictionsPage();
         cy.wait(2000)
         cy.xpath('//*[text()="edit"]').first().click({ force: true })
@@ -118,14 +112,14 @@ describe("Roles And Restrication For Comments(View)", function () {
         cy.wait(1000)
     })
 
-    it.only('Apply View Restriction', function () {
+    it.only('Apply Create Restriction', function () {
 
-        cy.xpath('//*[text() ="Comments"]')
-            .within(($Comments) => {
-                cy.xpath('//*[text() ="Comments"]').scrollIntoView({ force: true })
+        cy.xpath('//*[text() ="Reminders"]')
+            .within(($Reminders) => {
+                cy.xpath('//*[text() ="Reminders"]').scrollIntoView()
                 cy.wait(1000)
-                //Click on View
-                cy.xpath("//*[@class='v-chip__content' and contains(text(),'View')]").eq(8)
+                //Click on Create
+                cy.xpath("//*[@class='v-chip__content' and contains(text(),'Create')]").eq(2)
                     .click({ force: true })
                 cy.wait(2000)
                 cy.xpath('//*[text() ="SAVE"]').click({ force: true })
@@ -135,12 +129,12 @@ describe("Roles And Restrication For Comments(View)", function () {
 
     })
 
-    it.only('Navigate to UI to Validate(View)Restriction', function () {
+    it.only('Navigate to UI to Validate(Create)Restriction', function () {
         //Page Object
         const slp = new SanityLoginPage();
         const lp = new LoginPage();
-       //Navigate to url
-       slp.LoginUrl(this.LoginCreds.CAUrl)
+        //Navigate to url
+        slp.LoginUrl(this.LoginCreds.CAUrl)
         //Handling Alert
         cy.on("window:confirm", () => {
             cy.log("Alert has been Handled");
@@ -171,8 +165,7 @@ describe("Roles And Restrication For Comments(View)", function () {
         cy.log("User has been sign out");
       });
 
-      it.only('Logged In Again into the application', function () {
-
+      it.only('Logged In Again for into the application', function () {
         const lp = new LoginPage();
         const slp = new SanityLoginPage();
         //Navigate to url
@@ -189,43 +182,55 @@ describe("Roles And Restrication For Comments(View)", function () {
         lp.Submit();
         cy.log("User has been Logged In into the application");
         cy.wait(5000)
-        
     })
 
-    it.only('Open kit item from left panel', function () {
+    it.only('Open kit item from left panel',function(){
+        //Page object
         const lp = new LoginPage();
         //Click on Hamburger Icon
         lp.HMBIcon();
-        cy.wait(2000)
-         //Open KitType from left panel
-         cy.xpath("//*[contains(@class, 'd-flex col-9')]//*[text() = '" + this.KitTypeName.KitName3 + "']")
-         .click({force: true});
-         cy.wait(2000)
-        //Click the kit item
-        cy.xpath('//div[@class="row-list-item-details--content py-2 justify-center col col-10 truncate-wrapper"]')
-        .eq(1).click({ force: true })
-        cy.wait(2000)
-    })
-
-    it.only('Asides tabs validation',function(){
-    //Contributors Tab
-    cy.contains(" Contributors ").click({ force: true });
-    cy.wait(1000);
-    //Time Entries Tab
-    cy.contains(" Time Entries ").click({ force: true });
-    cy.wait(2000);
-    //Click on common plan tab
-    cy.contains(" Common Plans ").click({ force: true });
-    cy.wait(1000)
-    })
-
-    it.only('Validate (View)Restriciton for Comments Tab',function(){
-        //Comments Tab should not be visible/exist
-        cy.wait(1000);
-        //should not click because the Comments tab should not there
-        cy.contains("Comments ").should('not.exist') 
-        cy.log('Comments tab is not exist')
+        //Open KitType from left panel
+        cy.xpath("//*[contains(@class, 'd-flex col-9')]//*[text() = '" + this.KitTypeName.KitName3 + "']")
+            .click({ force: true, });
+        cy.log("Kit Type has been OPened");
+        //Click on First kit item of kit type to open edit view
+        cy.log("Kit Item Detail View has been Opened");
+        //Validation assertion for details view
+        cy.get(".kits-landing--header-title").should(
+            "have.text",
+            " Recently Viewed "
+        );
         cy.wait(1000)
     })
-  
+
+    it.only('Open Details View',function(){
+
+        cy.wait(4000)
+        //Click on the first Kit Item in Kit item list view
+        cy.xpath('//div[@class="row-list-item-details--content py-2 justify-center col col-10 truncate-wrapper"]')
+        .eq(0).click({ force: true })
+        cy.wait(5000)
+
+        //new form ele visible assertion
+        cy.get("[name" + "=" + this.DataType2.Text + "]")
+        .last()
+        .should("be.visible");
+        //Scroll to Reminder Control
+        cy.contains(' SET REMINDER ').scrollIntoView({force:true})
+        cy.wait(2000)
+    })
+
+    it.only('Validate (Create)Restriciton for Reminders',function(){
+
+        //Click on to create remider, it should not open
+        cy.contains(' SET REMINDER ').click({force:true})
+        cy.contains(' You are not permitted to create any reminder for '+'"'+this.KitTypeName.KitName3+'"'+' please contact your administrator to remove this restriction ')
+        .should('be.visible')
+
+    })
+
+
+
+   
+    
 })

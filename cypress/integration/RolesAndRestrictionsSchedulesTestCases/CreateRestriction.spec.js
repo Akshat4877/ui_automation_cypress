@@ -4,7 +4,7 @@ import SanityLoginPage from "../PageObject/SanityLoginPage";
 import RolesAndRestrictionsPage from "../PageObject/RolesAndRestrictionsPage"
 
 
-describe("Roles And Restrication For Comments(View)", function () {
+describe("Roles And Restrication For Schedules(Create)", function () {
     this.beforeAll(function () {
 
         Cypress.Cookies.preserveOnce(
@@ -56,12 +56,6 @@ describe("Roles And Restrication For Comments(View)", function () {
             this.DataType2 = NewDataForElements;
         });
 
-        cy.fixture("KitTypeTestData/NewKitItemDataValues").then(function (
-            KitDataEle
-          ) {
-            this.NewKitItemData = KitDataEle;
-          });
-
     });
 
     it.only('Login TestCase',function(){
@@ -83,7 +77,7 @@ describe("Roles And Restrication For Comments(View)", function () {
         cy.wait(5000)
       })
 
-    it.only("Navigate to Roles and Restrictions Page For(View) Restriction ", function () {
+    it.only("Navigate to Roles and Restrictions Page For (Create)Restriction ", function () {
         const kb = new KitBuilderPage();
         const lp = new LoginPage();
         const RoleRestr = new RolesAndRestrictionsPage();
@@ -97,7 +91,7 @@ describe("Roles And Restrication For Comments(View)", function () {
         cy.url().should('include', '/ClientAdmin/KitBuilder#/roles')
     });
 
-    it.only('Select kit type to Configure Restriction For Comments(View)', function () {
+    it.only('Select kit type to Configure Restriction For Schedules(Create)', function () {
         const RoleRestr = new RolesAndRestrictionsPage();
         cy.wait(2000)
         cy.xpath('//*[text()="edit"]').first().click({ force: true })
@@ -118,14 +112,14 @@ describe("Roles And Restrication For Comments(View)", function () {
         cy.wait(1000)
     })
 
-    it.only('Apply View Restriction', function () {
+    it.only('Apply Create Restriction', function () {
 
-        cy.xpath('//*[text() ="Comments"]')
-            .within(($Comments) => {
-                cy.xpath('//*[text() ="Comments"]').scrollIntoView({ force: true })
+        cy.xpath('//*[text() ="Schedules"]')
+            .within(($Schedules) => {
+                cy.xpath('//*[text() ="Schedules"]').scrollIntoView()
                 cy.wait(1000)
-                //Click on View
-                cy.xpath("//*[@class='v-chip__content' and contains(text(),'View')]").eq(8)
+                //Click on Create
+                cy.xpath("//*[@class='v-chip__content' and contains(text(),'Create')]").eq(4)
                     .click({ force: true })
                 cy.wait(2000)
                 cy.xpath('//*[text() ="SAVE"]').click({ force: true })
@@ -135,12 +129,12 @@ describe("Roles And Restrication For Comments(View)", function () {
 
     })
 
-    it.only('Navigate to UI to Validate(View)Restriction', function () {
+    it.only('Navigate to UI to Validate(Create)Restriction', function () {
         //Page Object
         const slp = new SanityLoginPage();
         const lp = new LoginPage();
-       //Navigate to url
-       slp.LoginUrl(this.LoginCreds.CAUrl)
+        //Navigate to url
+        slp.LoginUrl(this.LoginCreds.CAUrl)
         //Handling Alert
         cy.on("window:confirm", () => {
             cy.log("Alert has been Handled");
@@ -161,14 +155,14 @@ describe("Roles And Restrication For Comments(View)", function () {
 
     it.only("Sign Out for logged in user", function () {
         //Click on admin
-        cy.get('[name="your-profile"]').click({ force: true });
-        cy.wait(2000);
-        cy.contains("Sign Out").click({ force: true });
-        cy.wait(5000);
-        //Log out validation assertion
-        cy.contains(" Log In ").should("be.visible");
-        cy.url().should("include", "/Public/Login?");
-        cy.log("User has been sign out");
+         cy.get('[name="your-profile"]').click({ force: true });
+         cy.wait(2000);
+         cy.contains("Sign Out").click({ force: true });
+         cy.wait(5000);
+         //Log out validation assertion
+         cy.contains(" Log In ").should("be.visible");
+         cy.url().should("include", "/Public/Login?");
+         cy.log("User has been sign out");
       });
 
       it.only('Logged In Again into the application', function () {
@@ -188,11 +182,11 @@ describe("Roles And Restrication For Comments(View)", function () {
         lp.EnterPassword(this.LoginCreds.Password);
         lp.Submit();
         cy.log("User has been Logged In into the application");
-        cy.wait(5000)
-        
+        cy.wait(5000)   
     })
 
     it.only('Open kit item from left panel', function () {
+
         const lp = new LoginPage();
         //Click on Hamburger Icon
         lp.HMBIcon();
@@ -207,25 +201,31 @@ describe("Roles And Restrication For Comments(View)", function () {
         cy.wait(2000)
     })
 
-    it.only('Asides tabs validation',function(){
-    //Contributors Tab
-    cy.contains(" Contributors ").click({ force: true });
-    cy.wait(1000);
-    //Time Entries Tab
-    cy.contains(" Time Entries ").click({ force: true });
-    cy.wait(2000);
-    //Click on common plan tab
-    cy.contains(" Common Plans ").click({ force: true });
-    cy.wait(1000)
-    })
+    it.only('Click and open Calendar Tab',function(){
 
-    it.only('Validate (View)Restriciton for Comments Tab',function(){
-        //Comments Tab should not be visible/exist
-        cy.wait(1000);
-        //should not click because the Comments tab should not there
-        cy.contains("Comments ").should('not.exist') 
-        cy.log('Comments tab is not exist')
+        //Click on Calendar tab
+        cy.contains(' Calendar ').click({force:true})
         cy.wait(1000)
     })
-  
+
+    it.only('Validate (Create)Restriciton in Calendar Tab',function(){
+        cy.wait(1000)
+        cy.get(".button-w-new-borders > .v-btn__content")
+        .click({ force: true });
+        //Click on add btn to create a schedule
+        cy.contains(' You are not permitted to create any active schedule for '+'"'+this.KitTypeName.KitName3+'"'+' please contact your administrator to remove this restriction ')
+        .should('be.visible')   
+    })
+
+    it.only('Click and Open Schedules Tab',function(){
+      //Click and open Schedules Tab
+      cy.contains(" Scheduler ").click({ force: true });
+      cy.wait(1000)
+    })
+
+    it.only('Validate (Create)Restriciton in Schedules Tab',function(){
+      cy.wait(1000)
+     
+    })
+    
 })

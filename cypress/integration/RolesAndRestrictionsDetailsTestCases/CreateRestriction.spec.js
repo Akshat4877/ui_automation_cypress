@@ -166,25 +166,22 @@ describe("Roles And Restrication For Details(Create)", function () {
       });
 
       it.only('Logged In Again for into the application', function () {
-
         const lp = new LoginPage();
         const slp = new SanityLoginPage();
-        slp.nvdTest()
-        //slp.TmProd();
-
+        //Navigate to url
+        slp.LoginUrl(this.LoginCreds.CAUrl)
         //Handling Alert
         cy.on("window:confirm", () => {
-            cy.log("Alert has been Handled");
+          cy.log("Alert has been Handled");
         });
         //Login Assertions
         cy.contains(" Log In ").should("be.visible");
         //Enter credentials
-        lp.EnterEmail("propertymanagement@commonareas.work.dev");
-        //lp.EnterEmail("sam@armyspy.com");
-        lp.EnterPassword("1234567Aa");
+        lp.EnterEmail(this.LoginCreds.username);
+        lp.EnterPassword(this.LoginCreds.Password);
         lp.Submit();
         cy.log("User has been Logged In into the application");
-        cy.wait(4000)
+        cy.wait(5000)
         
     })
 

@@ -115,7 +115,7 @@ describe("Roles And Restrication For Comments(Create)", function () {
     it.only('Apply Create Restriction', function () {
 
         cy.xpath('//*[text() ="Comments"]')
-            .within(($Details) => {
+            .within(($Comments) => {
                 cy.xpath('//*[text() ="Comments"]').scrollIntoView()
                 cy.wait(1000)
                 //Click on Create

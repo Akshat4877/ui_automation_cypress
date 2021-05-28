@@ -3,10 +3,9 @@ import KitBuilderPage from "../PageObject/KitBuilderPage";
 import SanityLoginPage from "../PageObject/SanityLoginPage";
 import RolesAndRestrictionsPage from "../PageObject/RolesAndRestrictionsPage"
 
-
-describe("Roles And Restrication For Comments(View)", function () {
+describe("Roles And Restrication For Schedule(Remove)", function () {
     this.beforeAll(function () {
-
+    
         Cypress.Cookies.preserveOnce(
             ".AspNet.ApplicationCookie",
             "ASP.NET_SessionId",
@@ -29,13 +28,13 @@ describe("Roles And Restrication For Comments(View)", function () {
             "jwtAccessToken"
         );
 
-         //Globally fixtures for login creads
-         cy.fixture("LoginTestData/GlobalLoginCreds").then(function (
-            LogInScriptGloably
-             ) {
-            this.LoginCreds = LogInScriptGloably;
-             });
-         ////////////////////////////////////////////////////////////////////////////////////////////
+        //Globally fixtures for login creads
+        cy.fixture("LoginTestData/GlobalLoginCreds").then(function (
+        LogInScriptGloably
+        ) {
+        this.LoginCreds = LogInScriptGloably;
+        });
+      ////////////////////////////////////////////////////////////////////////////////////////////
 
         cy.fixture("KitBuilderTestData/NewKitTypeData").then(function (
             KittypeName
@@ -56,18 +55,11 @@ describe("Roles And Restrication For Comments(View)", function () {
             this.DataType2 = NewDataForElements;
         });
 
-        cy.fixture("KitTypeTestData/NewKitItemDataValues").then(function (
-            KitDataEle
-          ) {
-            this.NewKitItemData = KitDataEle;
-          });
-
     });
 
     it.only('Login TestCase',function(){
         const lp = new LoginPage();
         const slp = new SanityLoginPage();
-        //Navigate to url
         slp.LoginUrl(this.LoginCreds.CAUrl)
         //Handling Alert
         cy.on("window:confirm", () => {
@@ -80,10 +72,9 @@ describe("Roles And Restrication For Comments(View)", function () {
         lp.EnterPassword(this.LoginCreds.Password);
         lp.Submit();
         cy.log("User has been Logged In into the application");
-        cy.wait(5000)
       })
 
-    it.only("Navigate to Roles and Restrictions Page For(View) Restriction ", function () {
+    it.only("Navigate to Roles and Restrictions Page For (Remove)Restriction ", function () {
         const kb = new KitBuilderPage();
         const lp = new LoginPage();
         const RoleRestr = new RolesAndRestrictionsPage();
@@ -97,7 +88,7 @@ describe("Roles And Restrication For Comments(View)", function () {
         cy.url().should('include', '/ClientAdmin/KitBuilder#/roles')
     });
 
-    it.only('Select kit type to Configure Restriction For Comments(View)', function () {
+    it.only('Select kit type to Configure Restriction For Schedule(Remove)', function () {
         const RoleRestr = new RolesAndRestrictionsPage();
         cy.wait(2000)
         cy.xpath('//*[text()="edit"]').first().click({ force: true })
@@ -118,29 +109,27 @@ describe("Roles And Restrication For Comments(View)", function () {
         cy.wait(1000)
     })
 
-    it.only('Apply View Restriction', function () {
+    it.only('Apply Remove Restriction', function () {
 
-        cy.xpath('//*[text() ="Comments"]')
-            .within(($Comments) => {
-                cy.xpath('//*[text() ="Comments"]').scrollIntoView({ force: true })
-                cy.wait(1000)
-                //Click on View
-                cy.xpath("//*[@class='v-chip__content' and contains(text(),'View')]").eq(8)
-                    .click({ force: true })
+        cy.xpath('//*[text() ="Common Plans"]')
+            .within(($Details) => {
+                //Click on Remove
+                cy.xpath('//*[text() ="Common Plans"]').scrollIntoView({ force: true })
                 cy.wait(2000)
+                cy.xpath("//*[@class='v-chip__content' and contains(text(),'Remove')]").eq(0)
+                    .click({ force: true })
                 cy.xpath('//*[text() ="SAVE"]').click({ force: true })
                 cy.wait(3000)
 
             })
-
     })
 
-    it.only('Navigate to UI to Validate(View)Restriction', function () {
+    it.only('Navigate to UI to Validate(Remove)Restriction', function () {
         //Page Object
         const slp = new SanityLoginPage();
         const lp = new LoginPage();
-       //Navigate to url
-       slp.LoginUrl(this.LoginCreds.CAUrl)
+         //Navigate to url
+         slp.LoginUrl(this.LoginCreds.CAUrl)
         //Handling Alert
         cy.on("window:confirm", () => {
             cy.log("Alert has been Handled");
@@ -172,10 +161,8 @@ describe("Roles And Restrication For Comments(View)", function () {
       });
 
       it.only('Logged In Again into the application', function () {
-
         const lp = new LoginPage();
         const slp = new SanityLoginPage();
-        //Navigate to url
         slp.LoginUrl(this.LoginCreds.CAUrl)
         //Handling Alert
         cy.on("window:confirm", () => {
@@ -189,7 +176,6 @@ describe("Roles And Restrication For Comments(View)", function () {
         lp.Submit();
         cy.log("User has been Logged In into the application");
         cy.wait(5000)
-        
     })
 
     it.only('Open kit item from left panel', function () {
@@ -207,25 +193,15 @@ describe("Roles And Restrication For Comments(View)", function () {
         cy.wait(2000)
     })
 
-    it.only('Asides tabs validation',function(){
-    //Contributors Tab
-    cy.contains(" Contributors ").click({ force: true });
-    cy.wait(1000);
-    //Time Entries Tab
-    cy.contains(" Time Entries ").click({ force: true });
-    cy.wait(2000);
+    it.only('Open Calender Tab',function(){
     //Click on common plan tab
     cy.contains(" Common Plans ").click({ force: true });
-    cy.wait(1000)
+    cy.wait(1000);
     })
 
-    it.only('Validate (View)Restriciton for Comments Tab',function(){
-        //Comments Tab should not be visible/exist
-        cy.wait(1000);
-        //should not click because the Comments tab should not there
-        cy.contains("Comments ").should('not.exist') 
-        cy.log('Comments tab is not exist')
-        cy.wait(1000)
+   
+     it.only('Validate (Remove)Restriciton in Schedule Tab',function(){
+       //Click on Delete icon for Schedule
+      
     })
-  
 })

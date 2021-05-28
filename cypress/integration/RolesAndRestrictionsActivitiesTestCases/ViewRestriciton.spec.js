@@ -121,7 +121,7 @@ describe("Roles And Restrication For Activities(View)", function () {
     it.only('Apply View Restriction', function () {
 
         cy.xpath('//*[text() ="Activities"]')
-            .within(($Details) => {
+            .within(($Activities) => {
                 cy.xpath('//*[text() ="Activities"]').scrollIntoView({ force: true })
                 cy.wait(1000)
                 //Click on View

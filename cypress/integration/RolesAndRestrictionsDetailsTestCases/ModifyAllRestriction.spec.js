@@ -206,18 +206,24 @@ describe("Roles And Restrication For Details(ModifyAll)", function () {
         cy.wait(10000)
     })
 
-    it.only('Validate (ModifyAll)Restriciton', function () {
+    it.only('Open Details View',function(){
+
         cy.wait(4000)
         //Click on the first Kit Item in Kit item list view
         cy.xpath('//div[@class="row-list-item-details--content py-2 justify-center col col-10 truncate-wrapper"]')
             .eq(0).click({ force: true })
-        cy.wait(6000)
+        cy.wait(5000)
 
         //new form ele visible assertion
         cy.get("[name" + "=" + this.DataType2.Text + "]")
             .last()
             .should("be.visible");
 
+    })
+
+    it.only('Validate (ModifyAll)Restriciton', function () {
+       
+        cy.wait(2000)
         //Enter data in text field
         cy.get("[name" + "=" + this.DataType2.Text + "]")
             .last().type('Modifiy All restriction')

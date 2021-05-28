@@ -2,11 +2,11 @@ import LoginPage from "../PageObject/LoginPage";
 import KitBuilderPage from "../PageObject/KitBuilderPage";
 import SanityLoginPage from "../PageObject/SanityLoginPage";
 import RolesAndRestrictionsPage from "../PageObject/RolesAndRestrictionsPage"
+import KitTypePage from "../PageObject/KitTypePage";
 
-
-describe("Roles And Restrication For Comments(View)", function () {
+describe("Roles And Restrication For Common Plan(ModifyAll)", function () {
     this.beforeAll(function () {
-
+        
         Cypress.Cookies.preserveOnce(
             ".AspNet.ApplicationCookie",
             "ASP.NET_SessionId",
@@ -56,12 +56,6 @@ describe("Roles And Restrication For Comments(View)", function () {
             this.DataType2 = NewDataForElements;
         });
 
-        cy.fixture("KitTypeTestData/NewKitItemDataValues").then(function (
-            KitDataEle
-          ) {
-            this.NewKitItemData = KitDataEle;
-          });
-
     });
 
     it.only('Login TestCase',function(){
@@ -83,7 +77,7 @@ describe("Roles And Restrication For Comments(View)", function () {
         cy.wait(5000)
       })
 
-    it.only("Navigate to Roles and Restrictions Page For(View) Restriction ", function () {
+    it.only("Navigate to Roles and Restrictions Page For (ModifyAll)Restriction ", function () {
         const kb = new KitBuilderPage();
         const lp = new LoginPage();
         const RoleRestr = new RolesAndRestrictionsPage();
@@ -97,7 +91,7 @@ describe("Roles And Restrication For Comments(View)", function () {
         cy.url().should('include', '/ClientAdmin/KitBuilder#/roles')
     });
 
-    it.only('Select kit type to Configure Restriction For Comments(View)', function () {
+    it.only('Select kit type to Configure Restriction For Common Plan(ModifyAll)', function () {
         const RoleRestr = new RolesAndRestrictionsPage();
         cy.wait(2000)
         cy.xpath('//*[text()="edit"]').first().click({ force: true })
@@ -118,14 +112,15 @@ describe("Roles And Restrication For Comments(View)", function () {
         cy.wait(1000)
     })
 
-    it.only('Apply View Restriction', function () {
+    it.only('Apply Modify All Restriction', function () {
 
-        cy.xpath('//*[text() ="Comments"]')
-            .within(($Comments) => {
-                cy.xpath('//*[text() ="Comments"]').scrollIntoView({ force: true })
-                cy.wait(1000)
-                //Click on View
-                cy.xpath("//*[@class='v-chip__content' and contains(text(),'View')]").eq(8)
+        cy.xpath('//*[text() ="Common Plans"]')
+            .within(($Details) => {
+
+                cy.xpath('//*[text() ="Common Plans"]').scrollIntoView({ force: true })
+                cy.wait(2000)
+                //Click on Modify All
+                cy.xpath("//*[@class='v-chip__content' and contains(text(),'Modify All')]").eq(0)
                     .click({ force: true })
                 cy.wait(2000)
                 cy.xpath('//*[text() ="SAVE"]').click({ force: true })
@@ -135,12 +130,12 @@ describe("Roles And Restrication For Comments(View)", function () {
 
     })
 
-    it.only('Navigate to UI to Validate(View)Restriction', function () {
+    it.only('Navigate to UI to Validate(ModifyAll)Restriction', function () {
         //Page Object
         const slp = new SanityLoginPage();
         const lp = new LoginPage();
-       //Navigate to url
-       slp.LoginUrl(this.LoginCreds.CAUrl)
+        //Navigate to url
+        slp.LoginUrl(this.LoginCreds.CAUrl)
         //Handling Alert
         cy.on("window:confirm", () => {
             cy.log("Alert has been Handled");
@@ -193,6 +188,7 @@ describe("Roles And Restrication For Comments(View)", function () {
     })
 
     it.only('Open kit item from left panel', function () {
+
         const lp = new LoginPage();
         //Click on Hamburger Icon
         lp.HMBIcon();
@@ -207,25 +203,76 @@ describe("Roles And Restrication For Comments(View)", function () {
         cy.wait(2000)
     })
 
-    it.only('Asides tabs validation',function(){
-    //Contributors Tab
-    cy.contains(" Contributors ").click({ force: true });
-    cy.wait(1000);
-    //Time Entries Tab
-    cy.contains(" Time Entries ").click({ force: true });
-    cy.wait(2000);
-    //Click on common plan tab
-    cy.contains(" Common Plans ").click({ force: true });
-    cy.wait(1000)
-    })
-
-    it.only('Validate (View)Restriciton for Comments Tab',function(){
-        //Comments Tab should not be visible/exist
-        cy.wait(1000);
-        //should not click because the Comments tab should not there
-        cy.contains("Comments ").should('not.exist') 
-        cy.log('Comments tab is not exist')
+    it.only('Click and Open Common Plans Tab',function(){
+        //Click and open Common Plans Tab
+        cy.contains("Common Plans ").click({ force: true });
         cy.wait(1000)
     })
-  
+
+    it.only("Create A Common Plan", function () {
+        
+        //Click on Add Icon
+        cy.get(
+          " div.tab--content.col div.v-window.tab-content-wrapper.v-item-group.theme--light.v-tabs-items div.v-window__container div.v-window-item.v-window-item--active:nth-child(7) div.wrapper-tabs-content.v-card.v-sheet.theme--light div.v-card__text.kit-documents.fill-height div.row.container-details.fluid.fill-height.kit-details-space-planner.pa-8 div.details-wrapper.fill-height.col div.pr-4.col-sm-12.col:nth-child(2) div.fill-height div.container.xs12.mt-2.container--fluid.grid-list-lg div.row.justify-space-between:nth-child(1) div.col-md-5.col-lg-3.col-12 div.space-planner-card--add-new.hidden-sm-and-down.mb-2.v-card.v-sheet.v-sheet--tile.theme--light div.row.space-planner-card-container.pa-2.card-align.align-center div.d-flex.col.col-12 button.button-w-borders.ml-4.addBtn.v-btn.v-btn--flat.v-btn--text.theme--light.v-size--default > span.v-btn__content"
+        ).click({ force: true });
+        cy.log("Common Plan Board has been Opened");
+        //Common plan board assertion
+        cy.contains(" Layout ").should("be.visible");
+        cy.contains(" Schedule ").should("be.visible");
+        cy.contains(" View ").should("be.visible");
+        //Creating Plan
+        cy.get('[placeholder="Plan Name"]').type('Common Modify All Restri');
+        //Click on save btn to create common plan
+        cy.get(".new-kit-space-planner-wrapper__save > .v-btn__content").click({
+          force: true,
+        });
+        cy.log("Common Plan created and Saved");
+        cy.contains("Plan created").should("be.visible");
+        cy.wait(1000);
+        //Exit the Plan
+        cy.get(".new-kit-space-planner-wrapper__exit path").click({ force: true });
+        cy.log("Taken Exit form Layout Mode");
+        cy.contains('Common Modify All Restri').should("be.visible");
+        cy.log("Common Plan Created");
+        cy.wait(1000);
+    });
+
+    it.only('Click and open a Common plan',function(){
+
+        //Click first common plan in the common plan tab
+        cy.get('.space-planner-card:nth-child(1) .space-planner-card--block')
+        .click({force:true});
+        cy.wait(2000)
+        //Common plan board assertion
+        cy.contains(" Layout ").should("be.visible");
+        cy.contains(" Schedule ").should("be.visible");
+        cy.contains(" View ").should("be.visible");
+        cy.wait(3000)
+       
+    })
+
+    it.only('Validate (ModifyAll)Restriciton',function(){
+
+        //MOdify plan name
+        cy.get('[placeholder="Plan Name"]').type('  Modify');
+        //Click on save btn to create common plan
+        cy.get(".new-kit-space-planner-wrapper__save > .v-btn__content").click({
+             force: true,
+        });
+        cy.contains(" Can't update plan ").should('be.visible')
+        cy.wait(2000)
+
+    })
+
+    it.only('Exit the common Plan and Again Validate',function(){
+
+        //Exit the Plan
+        cy.wait(1000)
+        cy.get(".new-kit-space-planner-wrapper__exit path").click({ force: true });
+        cy.log("Taken Exit form Layout Mode");
+        cy.contains('Common Modify All Restri').should("be.visible");
+        cy.wait(1000)
+
+    })
+    
 })

@@ -4,9 +4,9 @@ import SanityLoginPage from "../PageObject/SanityLoginPage";
 import RolesAndRestrictionsPage from "../PageObject/RolesAndRestrictionsPage"
 
 
-describe("Roles And Restrication For Comments(View)", function () {
+describe("Roles And Restrication For WorkFlow(View)", function () {
     this.beforeAll(function () {
-
+       
         Cypress.Cookies.preserveOnce(
             ".AspNet.ApplicationCookie",
             "ASP.NET_SessionId",
@@ -97,7 +97,7 @@ describe("Roles And Restrication For Comments(View)", function () {
         cy.url().should('include', '/ClientAdmin/KitBuilder#/roles')
     });
 
-    it.only('Select kit type to Configure Restriction For Comments(View)', function () {
+    it.only('Select kit type to Configure Restriction For WorkFlow(View)', function () {
         const RoleRestr = new RolesAndRestrictionsPage();
         cy.wait(2000)
         cy.xpath('//*[text()="edit"]').first().click({ force: true })
@@ -120,12 +120,12 @@ describe("Roles And Restrication For Comments(View)", function () {
 
     it.only('Apply View Restriction', function () {
 
-        cy.xpath('//*[text() ="Comments"]')
-            .within(($Comments) => {
-                cy.xpath('//*[text() ="Comments"]').scrollIntoView({ force: true })
+        cy.xpath('//*[text() ="Workflow"]')
+            .within(($WorkFlow) => {
+                cy.xpath('//*[text() ="Workflow"]').scrollIntoView({ force: true })
                 cy.wait(1000)
                 //Click on View
-                cy.xpath("//*[@class='v-chip__content' and contains(text(),'View')]").eq(8)
+                cy.xpath("//*[@class='v-chip__content' and contains(text(),'Workflow Tab')]")
                     .click({ force: true })
                 cy.wait(2000)
                 cy.xpath('//*[text() ="SAVE"]').click({ force: true })
@@ -139,8 +139,8 @@ describe("Roles And Restrication For Comments(View)", function () {
         //Page Object
         const slp = new SanityLoginPage();
         const lp = new LoginPage();
-       //Navigate to url
-       slp.LoginUrl(this.LoginCreds.CAUrl)
+        //Navigate to url
+        slp.LoginUrl(this.LoginCreds.CAUrl)
         //Handling Alert
         cy.on("window:confirm", () => {
             cy.log("Alert has been Handled");
@@ -193,6 +193,7 @@ describe("Roles And Restrication For Comments(View)", function () {
     })
 
     it.only('Open kit item from left panel', function () {
+
         const lp = new LoginPage();
         //Click on Hamburger Icon
         lp.HMBIcon();
@@ -205,27 +206,43 @@ describe("Roles And Restrication For Comments(View)", function () {
         cy.xpath('//div[@class="row-list-item-details--content py-2 justify-center col col-10 truncate-wrapper"]')
         .eq(1).click({ force: true })
         cy.wait(2000)
+    
     })
 
     it.only('Asides tabs validation',function(){
-    //Contributors Tab
-    cy.contains(" Contributors ").click({ force: true });
-    cy.wait(1000);
-    //Time Entries Tab
-    cy.contains(" Time Entries ").click({ force: true });
-    cy.wait(2000);
-    //Click on common plan tab
-    cy.contains(" Common Plans ").click({ force: true });
-    cy.wait(1000)
+       //Click on Files Tab
+       cy.contains(" Files ").click({ force: true });
+       cy.wait(1000);
+       //Click on Map tab
+       cy.contains(" Map ").click({ force: true });
+       cy.wait(1000)
+        //Click on  Contributors tab
+        cy.contains(' Contributors ').click({force:true})
+        cy.wait(1000)
+       //Time Entries Tab
+       cy.contains(" Time Entries ").click({ force: true });
+       cy.wait(1000);
+       //Click on Common Plans tab
+       cy.contains(' Common Plans ').click({force:true})
+       cy.wait(1000)
+       //Click on Comments tab
+       cy.contains(' Comments ').click({force:true})
+       cy.wait(1000)
+       //Click on Calendar Tab
+       cy.contains(' Calendar ').click({force:true})
+       cy.wait(1000)
+       //Click on Scheduler Tab
+       cy.contains(' Scheduler ').click({force:true})
+       cy.wait(2000)
+       cy.contains(' Reports ').click({force:true})
+       cy.wait(1000)
     })
 
-    it.only('Validate (View)Restriciton for Comments Tab',function(){
-        //Comments Tab should not be visible/exist
+    it.only('Validate (View)Restriciton for WorkFlow Tab',function(){
+        //WorkFlow Tab should not be visible/exist
         cy.wait(1000);
-        //should not click because the Comments tab should not there
-        cy.contains("Comments ").should('not.exist') 
-        cy.log('Comments tab is not exist')
-        cy.wait(1000)
+        //should not click because the WorkFlow tab should not ne there
+        cy.contains(' Workflow ').should('not.exist') 
     })
-  
+    
 })
