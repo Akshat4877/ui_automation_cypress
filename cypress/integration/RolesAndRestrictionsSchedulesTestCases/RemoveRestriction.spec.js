@@ -80,7 +80,7 @@ describe("Roles And Restrication For Schedule(Remove)", function () {
         const RoleRestr = new RolesAndRestrictionsPage();
         cy.wait(3000);
         cy.title().should("eq", "Common Areas");
-        lp.NVDTestKitBuilder();
+        lp.KitBuilder();
         cy.url().should('include', '/ClientAdmin/KitBuilder#/')
         cy.log("User in Kit Builder");
         //Click Roles and Restirction
@@ -111,12 +111,12 @@ describe("Roles And Restrication For Schedule(Remove)", function () {
 
     it.only('Apply Remove Restriction', function () {
 
-        cy.xpath('//*[text() ="Common Plans"]')
-            .within(($Details) => {
+        cy.xpath('//*[text() ="Schedules"]')
+            .within(($Schedules) => {
                 //Click on Remove
-                cy.xpath('//*[text() ="Common Plans"]').scrollIntoView({ force: true })
+                cy.xpath('//*[text() ="Schedules"]').scrollIntoView({ force: true })
                 cy.wait(2000)
-                cy.xpath("//*[@class='v-chip__content' and contains(text(),'Remove')]").eq(0)
+                cy.xpath("//*[@class='v-chip__content' and contains(text(),'Remove')]").eq(5)
                     .click({ force: true })
                 cy.xpath('//*[text() ="SAVE"]').click({ force: true })
                 cy.wait(3000)
@@ -194,14 +194,71 @@ describe("Roles And Restrication For Schedule(Remove)", function () {
     })
 
     it.only('Open Calender Tab',function(){
-    //Click on common plan tab
-    cy.contains(" Common Plans ").click({ force: true });
-    cy.wait(1000);
+      //Click on common plan tab
+      cy.contains(' Calendar ').click({ force: true });
+      cy.wait(1000);
     })
 
-   
+    it.only('Create a Active Schedule in Calendar Tab',function(){
+        //Calender tab assertion
+        cy.contains("Today").should("be.visible");
+        cy.wait(3000);
+        //Click on add
+        cy.get(".button-w-new-borders > .v-btn__content").click({ force: true });
+        cy.contains(" Schedule ").should("be.visible");
+        cy.wait(10000);
+        //Text
+        cy.get("[name" + "=" + this.DataType2.Text + "]")
+        .eq(1)
+        .type('Remove Restriction');
+        cy.wait(1000)
+        //Click on save Calendar
+        cy.get(".row > .pop-up--header--right .v-btn__content")
+        .click({force: true});
+        cy.wait(10000)
+    })
+
+    it.only('Click and Open Created Active schedule in Calendar Tab',function(){
+
+        cy.get(".dhx_event_move").eq(1).scrollIntoView({ force: true });
+        cy.wait(2000);
+        cy.get(".dhx_event_move").eq(1).dblclick({ force: true });
+        cy.wait(2000);
+        cy.get(".icon_edit").should("exist");
+        //click on edit icon
+        cy.get(".icon_edit").click({ force: true });
+        cy.wait(2000);
+    
+    })
+
+    it.only('Validate (Remove)Restriciton in Calendar Tab',function(){
+        cy.wait(2000);
+        //Click on delete btn after open the active schedule
+        cy.get(".row > .pop-up--header--right .v-btn__content").first().click({
+        force: true,
+        });
+        cy.contains(' You are not permitted to deleting any active schedule for '+'"'+this.KitTypeName.KitName3+'"'+' please contact your administrator to remove this restriction ')
+        .should('be.visible')
+        cy.wait(3000)
+    })
+
+    it.only('Validate (Remove)Restriciton in Calendar Tab by Delete Iocn',function(){
+        cy.get(".dhx_event_move").eq(1).scrollIntoView({ force: true });
+        cy.wait(2000);
+        cy.get(".dhx_event_move").eq(1).click({ force: true });
+        cy.wait(2000);
+        cy.get(".icon_delete").should("exist");
+        //click on edit icon
+        cy.get(".icon_delete").click({ force: true });
+        cy.contains(' You are not permitted to deleting any active schedule for '+'"'+this.KitTypeName.KitName3+'"'+' please contact your administrator to remove this restriction ')
+        .should('be.visible')
+    })
+
+     
      it.only('Validate (Remove)Restriciton in Schedule Tab',function(){
        //Click on Delete icon for Schedule
+       cy.contains(' You are not permitted to deleting any active schedule for '+'"'+this.KitTypeName.KitName3+'"'+' please contact your administrator to remove this restriction ')
+        .should('be.visible')
       
     })
 })

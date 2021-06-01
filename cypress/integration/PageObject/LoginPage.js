@@ -10,7 +10,7 @@ class LoginPage {
 
   }
 
-  NVDTestKitBuilder() {
+  KitBuilder() {
     cy.visit("https://nvd.ca-test.com/ClientAdmin/KitBuilder#/");
   }
 

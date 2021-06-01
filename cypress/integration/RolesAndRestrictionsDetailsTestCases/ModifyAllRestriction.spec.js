@@ -2,7 +2,7 @@ import LoginPage from "../PageObject/LoginPage";
 import KitBuilderPage from "../PageObject/KitBuilderPage";
 import SanityLoginPage from "../PageObject/SanityLoginPage";
 import RolesAndRestrictionsPage from "../PageObject/RolesAndRestrictionsPage"
-import KitTypePage from "../PageObject/KitTypePage";
+
 
 describe("Roles And Restrication For Details(ModifyAll)", function () {
     this.beforeAll(function () {
@@ -83,7 +83,7 @@ describe("Roles And Restrication For Details(ModifyAll)", function () {
         const RoleRestr = new RolesAndRestrictionsPage();
         cy.wait(3000);
         cy.title().should("eq", "Common Areas");
-        lp.NVDTestKitBuilder();
+        lp.KitBuilder();
         cy.url().should('include', '/ClientAdmin/KitBuilder#/')
         cy.log("User in Kit Builder");
         //Click Roles and Restirction
@@ -142,7 +142,7 @@ describe("Roles And Restrication For Details(ModifyAll)", function () {
         });
         //Assertion
         cy.title().should("eq", "Common Areas");
-        cy.wait(10000)
+        cy.wait(5000)
     })
 
     it.only('Clear App Cache',function(){
@@ -151,7 +151,7 @@ describe("Roles And Restrication For Details(ModifyAll)", function () {
         cy.wait(1000)
         //clear app cache
         cy.contains('Clear App Cache').click({force:true})
-        cy.wait(2000)
+        cy.wait(1000)
     })
 
     it.only("Sign Out for logged in user", function () {
@@ -195,7 +195,7 @@ describe("Roles And Restrication For Details(ModifyAll)", function () {
         cy.xpath("//*[contains(@class, 'd-flex col-9')]//*[text() = '" + this.KitTypeName.KitName3 + "']")
             .click({ force: true, });
         cy.log("Kit Type has been OPened");
-        cy.wait(5000)
+        cy.wait(2000)
         //Click on First kit item of kit type to open edit view
         cy.log("Kit Item Detail View has been Opened");
         //Validation assertion for details view
@@ -203,12 +203,9 @@ describe("Roles And Restrication For Details(ModifyAll)", function () {
             "have.text",
             " Recently Viewed "
         );
-        cy.wait(10000)
     })
 
     it.only('Open Details View',function(){
-
-        cy.wait(4000)
         //Click on the first Kit Item in Kit item list view
         cy.xpath('//div[@class="row-list-item-details--content py-2 justify-center col col-10 truncate-wrapper"]')
             .eq(0).click({ force: true })
@@ -223,7 +220,7 @@ describe("Roles And Restrication For Details(ModifyAll)", function () {
 
     it.only('Validate (ModifyAll)Restriciton', function () {
        
-        cy.wait(2000)
+        cy.wait(1000)
         //Enter data in text field
         cy.get("[name" + "=" + this.DataType2.Text + "]")
             .last().type('Modifiy All restriction')
@@ -232,10 +229,9 @@ describe("Roles And Restrication For Details(ModifyAll)", function () {
         //Click to save
         cy.get(".navi-bar-dropdown:nth-child(2) .v-btn").click({ force: true });
         //Validation msg ,which should be recived after apply ModifyAll restriction
-        cy.contains(' User does not have permission to modify this kit item ').should(
-            "be.visible"
-        );
-        cy.wait(2000)
+        cy.contains(' You are not permitted to modifying any details for Kit Item please contact your administrator to remove this restriction ')
+        .should("be.visible");
+        cy.wait(4000)
         //Close Kit type
         cy.get(".subheader--button-icon-wrapper .inline-svg").click({
             force: true,

@@ -4,25 +4,7 @@ import SanityLoginPage from "../PageObject/SanityLoginPage";
 
 describe("Adding Results and Filters Element to List Views", function () {
   this.beforeAll(function () {
-    const lp = new LoginPage();
-    const slp = new SanityLoginPage();
-    slp.nvdTest()
-    //slp.TmProd();
-
-    //Handling Alert
-    cy.on("window:confirm", () => {
-      cy.log("Alert has been Handled");
-    });
-
-    //Login Assertions
-    cy.contains(" Log In ").should("be.visible");
-    //Enter credentials
-    lp.EnterEmail("propertymanagement@commonareas.work.dev");
-    //lp.EnterEmail("sam@armyspy.com");
-    lp.EnterPassword("1234567Aa");
-    lp.Submit();
-    cy.log("User has been Logged In into the application");
-
+  
     Cypress.Cookies.preserveOnce(
       ".AspNet.ApplicationCookie",
       "ASP.NET_SessionId",
@@ -46,6 +28,14 @@ describe("Adding Results and Filters Element to List Views", function () {
       "refreshToken",
       "jwtAccessToken"
     );
+
+    //Globally fixtures for login creads
+    cy.fixture("LoginTestData/GlobalLoginCreds").then(function (
+      LogInScriptGloably
+    ) {
+      this.LoginCreds = LogInScriptGloably;
+    });
+    ///////////////////////////////////////////////////////////////////////////////////////////////
 
     cy.fixture("KitBuilderTestData/FormViewsNameData").then(function (
       KitTypeFormViewsNames
@@ -72,11 +62,30 @@ describe("Adding Results and Filters Element to List Views", function () {
 
   });
 
+  it('Login TestCase',function(){
+    const lp = new LoginPage();
+    const slp = new SanityLoginPage();
+    slp.LoginUrl(this.LoginCreds.CAUrl)
+    //Handling Alert
+    cy.on("window:confirm", () => {
+      cy.log("Alert has been Handled");
+    });
+    //Login Assertions
+    cy.contains(" Log In ").should("be.visible");
+    //Enter credentials
+    lp.EnterEmail(this.LoginCreds.username);
+    lp.EnterPassword(this.LoginCreds.Password);
+    lp.Submit();
+    cy.log("User has been Logged In into the application");
+    cy.wait(5000)
+  })
+
+  
   it("Navigating to List Views of Created Kit Type", function () {
     const kb = new KitBuilderPage();
     const lp = new LoginPage();
     cy.title().should("eq", "Common Areas");
-    lp.NVDTestKitBuilder()
+    lp.KitBuilder()
     cy.log("User entered in kit builder");
     cy.wait(3000);
     //Enter created kit type name into search box
@@ -88,7 +97,7 @@ describe("Adding Results and Filters Element to List Views", function () {
     cy.wait(1000);
     cy.contains("List Views").click({ force: true });
     cy.wait(1000);
-  });
+  })
 
   it("Adding Results and Filters Element to Table List View", function () {
     //View Name coming form json file
@@ -480,3 +489,4 @@ describe("Adding Results and Filters Element to List Views", function () {
     cy.log("Assertion closed");
   });
 });
+

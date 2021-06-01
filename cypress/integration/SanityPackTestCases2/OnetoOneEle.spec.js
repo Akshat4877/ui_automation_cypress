@@ -344,7 +344,7 @@ describe("Only One to One Related Control Element Test Case", function () {
       .click({ force: true });
     cy.wait(4000)
     //click on created kit item
-    cy.get('.row:nth-child(1) > .d-flex .v-list-item__subtitle:nth-child(1)')
+    cy.get('.row:nth-child(1) > .d-flex .v-list-item__subtitle:nth-child(1)').last()
       .click({ force: true });
     cy.wait(2000)
   })

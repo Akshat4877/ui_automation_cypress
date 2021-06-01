@@ -289,7 +289,7 @@ describe("TableList KitItem Filter", function () {
     //Validating details view input data
     cy.get('[name="TextAera"]').last()
       .should("have.value", this.NewKitItemData.TextAera)
-    cy.wait(1000)
+    cy.wait(3000)
 
     //Close Kit type
     cy.get(".subheader--button-icon-wrapper .inline-svg").click({
@@ -1123,12 +1123,6 @@ describe("TableList KitItem Filter", function () {
     cy.contains(this.NewKitItemData.SelectListValue).click({ force: true });
     cy.wait(2000);
 
-    cy.get("[name" + "=" + this.DataType2.Telephone + "]")
-      .last()
-      .scrollIntoView({ force: true })
-      .click({ force: true });
-    cy.wait(2000);
-
     cy.contains("Apply Filters").click({ force: true });
     cy.get(".filter-tag").should("be.visible");
     cy.wait(3000);
@@ -1186,13 +1180,6 @@ describe("TableList KitItem Filter", function () {
     cy.contains(this.NewKitItemData.RadioSelectValue).click({ force: true });
     cy.wait(2000);
     //Click on Apply filters dropdown
-    cy.get(
-      "div.d-flex.align-center.justify-end.col.app-secondary-header-left--buttons.fill-height.gray-divider div.row.left_panel_menu.filter.row.button-left--border.second-header-left--buton.button-left--border div.sticky-dropdown div.wrapper-content.col:nth-child(2) div.row.full-width.fill-height div.form.tools-padding.left_panel_body.col.left_column.col div.row.flex-nowrap.flex-column.fill-height div.buttons.col.pl-4 div.apply-clear-wrapper.navi-bar div.navi-bar-dropdown.navi-bar__actions.navi-bar-action-dropdown.col div.v-input.ca-button-green.v-input--hide-details.v-input--is-label-active.v-input--is-dirty.theme--light.v-text-field.v-text-field--single-line.v-text-field--is-booted.v-select.v-autocomplete.v-overflow-btn.v-overflow-btn--segmented div.v-input__control div.v-input__slot div.v-select__slot div.v-input__append-inner:nth-child(2) > div.v-input__icon.v-input__icon--append"
-    ).click({
-      force: true,
-    });
-    cy.wait(2000);
-
     cy.contains("Apply Filters").click({ force: true });
     cy.wait(2000);
     cy.get(".filter-tag").should("be.visible");
@@ -1228,7 +1215,7 @@ describe("TableList KitItem Filter", function () {
     cy.wait(2000);
   });
 
-  it("Validate the Filter CheckboxSelect Element", function () {
+  it.only("Validate the Filter CheckboxSelect Element", function () {
     //Page Object
     const lp = new LoginPage();
     lp.FilterIcon();
@@ -1250,11 +1237,6 @@ describe("TableList KitItem Filter", function () {
     });
     cy.wait(1000);
     //Click on Apply filters dropdown
-    cy.get(
-      "div.d-flex.align-center.justify-end.col.app-secondary-header-left--buttons.fill-height.gray-divider div.row.left_panel_menu.filter.row.button-left--border.second-header-left--buton.button-left--border div.sticky-dropdown div.wrapper-content.col:nth-child(2) div.row.full-width.fill-height div.form.tools-padding.left_panel_body.col.left_column.col div.row.flex-nowrap.flex-column.fill-height div.buttons.col.pl-4 div.apply-clear-wrapper.navi-bar div.navi-bar-dropdown.navi-bar__actions.navi-bar-action-dropdown.col div.v-input.ca-button-green.v-input--hide-details.v-input--is-label-active.v-input--is-dirty.theme--light.v-text-field.v-text-field--single-line.v-text-field--is-booted.v-select.v-autocomplete.v-overflow-btn.v-overflow-btn--segmented div.v-input__control div.v-input__slot div.v-select__slot div.v-input__append-inner:nth-child(2) > div.v-input__icon.v-input__icon--append"
-    ).click({
-      force: true,
-    });
     cy.wait(2000);
     cy.contains("Apply Filters").click({ force: true });
     cy.wait(2000);

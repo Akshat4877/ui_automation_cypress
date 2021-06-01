@@ -145,7 +145,6 @@ describe("Activation Mailinator Account for New Sign up User", function () {
     //Click on Go
     sp.Go();
     //cy.eyesCheckWindow("Common Aera Mail in the inbox");
-    // cy.contains("Common Areas - Account Activation").click();
     //cy.screenshot("Verifying for getting common aera email");
     cy.wait(10000);
     cy.contains("Welcome to Commonareas - Verify Email").click();

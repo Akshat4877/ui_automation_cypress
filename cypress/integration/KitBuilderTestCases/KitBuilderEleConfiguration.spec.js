@@ -4,18 +4,7 @@ import KitBuilderDataTypes from "../PageObject/KitBuilderDataTypes";
 
 describe("Kit Builder All Data Elements Configuration", function () {
   this.beforeAll(function () {
-    //Page Object
-    const lp = new LoginPage();
-    lp.visitCityComTest();
-    //cy.visit('https://tm.ca-build.com:54072/Public/Login?ReturnUrl=%2F')
-    //Login Assertions
-    cy.contains(" Log In ").should("be.visible");
-    //Enter credentials
-    lp.EnterEmail("citycom@commonareas.work.dev");
-    lp.EnterPassword("1234567Aa");
-    lp.Submit();
-    cy.log("User has been Logged In into the application");
-
+  
     Cypress.Cookies.preserveOnce(
       ".AspNet.ApplicationCookie",
       "ASP.NET_SessionId",
@@ -39,6 +28,14 @@ describe("Kit Builder All Data Elements Configuration", function () {
       "refreshToken",
       "jwtAccessToken"
     );
+
+    //Globally fixtures for login creads
+    cy.fixture("LoginTestData/GlobalLoginCreds").then(function (
+      LogInScriptGloably
+    ) {
+      this.LoginCreds = LogInScriptGloably;
+    });
+    ///////////////////////////////////////////////////////////////////////////////////////////////
 
     cy.fixture("KitBuilderTestData/FormViewsNameData").then(function (data) {
       this.data = data;
@@ -67,14 +64,31 @@ describe("Kit Builder All Data Elements Configuration", function () {
     });
   });
 
+  it.only('Login TestCase',function(){
+    const lp = new LoginPage();
+    const slp = new SanityLoginPage();
+    slp.LoginUrl(this.LoginCreds.CAUrl)
+    //Handling Alert
+    cy.on("window:confirm", () => {
+      cy.log("Alert has been Handled");
+    });
+    //Login Assertions
+    cy.contains(" Log In ").should("be.visible");
+    //Enter credentials
+    lp.EnterEmail(this.LoginCreds.username);
+    lp.EnterPassword(this.LoginCreds.Password);
+    lp.Submit();
+    cy.log("User has been Logged In into the application");
+    cy.wait(5000)
+  })
+
   it.only("Navigating to New Form of Created Kit Type", function () {
     const kb = new KitBuilderPage();
     const lp = new LoginPage();
     cy.wait(5000);
     cy.title().should("eq", "Common Areas");
     cy.wait(5000);
-    lp.visitCityComTestKitBuilder();
-    //cy.visit('https://tm.ca-build.com:54072/ClientAdmin/KitBuilder#/')
+    lp.KitBuilder()
     cy.log("User entered in kit builder");
     cy.wait(3000);
     //Open Craeted Kit Type

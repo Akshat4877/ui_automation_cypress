@@ -142,8 +142,8 @@ describe("Create Active schedule for Kit Item through Add button in calendar", f
     cy.get('.button-pop-ups--size > .v-btn__content').first().click({ force: true });
     cy.wait(1000)
 
-    //Text
-    cy.get("[name" + "=" + this.DataType2.Text + "]")
+     //Text
+     cy.get("[name" + "=" + this.DataType2.Text + "]")
       .eq(1)
       .type(this.NewKitItemData.Text);
 
@@ -441,7 +441,7 @@ describe("Create Active schedule for Kit Item through Add button in calendar", f
       .click({ force: true });
     cy.wait(3000);
 
-    //Click on save
+    //Click on save Calendar
     cy.get(".row > .pop-up--header--right .v-btn__content").click({
       force: true,
     });

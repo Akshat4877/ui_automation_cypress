@@ -4,25 +4,7 @@ import SanityLoginPage from "../PageObject/SanityLoginPage";
 
 describe("Adding Results and Filters Element to Table List View", function () {
   this.beforeAll(function () {
-    const lp = new LoginPage();
-    const slp = new SanityLoginPage();
-    slp.nvdTest()
-    //slp.TmProd();
-
-    //Handling Alert
-    cy.on("window:confirm", () => {
-      cy.log("Alert has been Handled");
-    });
-
-    //Login Assertions
-    cy.contains(" Log In ").should("be.visible");
-    //Enter credentials
-    lp.EnterEmail("propertymanagement@commonareas.work.dev");
-    //lp.EnterEmail("sam@armyspy.com");
-    lp.EnterPassword("1234567Aa");
-    lp.Submit();
-    cy.log("User has been Logged In into the application");
-
+   
     Cypress.Cookies.preserveOnce(
       ".AspNet.ApplicationCookie",
       "ASP.NET_SessionId",
@@ -47,6 +29,14 @@ describe("Adding Results and Filters Element to Table List View", function () {
       "jwtAccessToken"
     );
 
+    //Globally fixtures for login creads
+    cy.fixture("LoginTestData/GlobalLoginCreds").then(function (
+      LogInScriptGloably
+    ) {
+      this.LoginCreds = LogInScriptGloably;
+    });
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+
     cy.fixture("KitBuilderTestData/NewKitTypeData").then(function (
       KittypeName
     ) {
@@ -68,15 +58,31 @@ describe("Adding Results and Filters Element to Table List View", function () {
     ) {
       this.DataType = NewDataForElements;
     });
-
-
   });
+
+  it.only('Login TestCase',function(){
+    const lp = new LoginPage();
+    const slp = new SanityLoginPage();
+    slp.LoginUrl(this.LoginCreds.CAUrl)
+    //Handling Alert
+    cy.on("window:confirm", () => {
+      cy.log("Alert has been Handled");
+    });
+    //Login Assertions
+    cy.contains(" Log In ").should("be.visible");
+    //Enter credentials
+    lp.EnterEmail(this.LoginCreds.username);
+    lp.EnterPassword(this.LoginCreds.Password);
+    lp.Submit();
+    cy.log("User has been Logged In into the application");
+    cy.wait(5000)
+  })
 
   it.only("Navigating to Table List Views of Created Kit Type", function () {
     const kb = new KitBuilderPage();
     const lp = new LoginPage();
     cy.title().should("eq", "Common Areas");
-    lp.NVDTestKitBuilder()
+    lp.KitBuilder()
     cy.wait(3000);
     //Enter created kit type name into search box
     kb.KBSearchBox(this.KitTypeName.KitName3);

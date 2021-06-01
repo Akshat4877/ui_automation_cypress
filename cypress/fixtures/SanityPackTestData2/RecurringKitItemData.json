@@ -3,7 +3,7 @@
 
     "Recurring kit itmes tabs":"Data",
 
-    "RecurringFilesTab":"Fixtures",
+    "RecurringFilesTab":"ca-test",
     "RecurringContributorsTab":"Jerome Casanova",
     "RecurringAddTimeEntryLable":"Recurring Time Entry",
     "RecurringAddTimeEntryDescription":"Recurring Time Entry Test case",
@@ -19,7 +19,7 @@
     "KitName":"BuildingAreas",
     "Url":"https://www.recurringitem.com",
     "Text":"Recurring text data",
-    "NewFormLibFileName":"Screenshot_1",
+    "NewFormLibFileName":"ca-test",
     "Telephone":"(123) 123-1200",
     "TextAera":"Recurring kit item",
     "SliderValue":"50",

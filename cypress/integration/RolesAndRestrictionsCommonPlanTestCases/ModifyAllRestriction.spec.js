@@ -83,7 +83,7 @@ describe("Roles And Restrication For Common Plan(ModifyAll)", function () {
         const RoleRestr = new RolesAndRestrictionsPage();
         cy.wait(3000);
         cy.title().should("eq", "Common Areas");
-        lp.NVDTestKitBuilder();
+        lp.KitBuilder();
         cy.url().should('include', '/ClientAdmin/KitBuilder#/')
         cy.log("User in Kit Builder");
         //Click Roles and Restirction

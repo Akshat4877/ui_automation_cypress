@@ -181,7 +181,7 @@ describe("Update created kit item test case", function () {
     // //give file name to select
     // cy.contains(this.UpdateKitItemData.UpdateFileName).click({ force: true });
     // cy.log("New file has been uploaded");
-    //Click on save file
+    // //Click on save file
     // cy.get(
     //   ".container-search > .pop-up--header > .pop-up--header--right > .button-pop-ups--size > .v-btn__content"
     // ).click({ force: true });

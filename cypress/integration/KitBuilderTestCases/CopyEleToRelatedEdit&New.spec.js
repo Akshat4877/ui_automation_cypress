@@ -4,24 +4,7 @@ import SanityLoginPage from "../PageObject/SanityLoginPage";
 
 describe("Copy New Form Elements to the RelatedNew and RelatedEdit form View", function () {
   this.beforeAll(function () {
-    const lp = new LoginPage();
-    const slp = new SanityLoginPage();
-    slp.nvdTest()
-    //slp.TmProd();
-
-    //Handling Alert
-    cy.on("window:confirm", () => {
-      cy.log("Alert has been Handled");
-    });
-
-    //Login Assertions
-    cy.contains(" Log In ").should("be.visible");
-    //Enter credentials
-    lp.EnterEmail("propertymanagement@commonareas.work.dev");
-    //lp.EnterEmail("sam@armyspy.com");
-    lp.EnterPassword("1234567Aa");
-    lp.Submit();
-    cy.log("User has been Logged In into the application");
+    
     Cypress.Cookies.preserveOnce(
       ".AspNet.ApplicationCookie",
       "ASP.NET_SessionId",
@@ -31,9 +14,16 @@ describe("Copy New Form Elements to the RelatedNew and RelatedEdit form View", f
       "refreshToken",
       "jwtAccessToken"
     );
-
     cy.wait(3000);
   });
+
+  //Globally fixtures for login creads
+  cy.fixture("LoginTestData/GlobalLoginCreds").then(function (
+    LogInScriptGloably
+  ) {
+    this.LoginCreds = LogInScriptGloably;
+  });
+  ///////////////////////////////////////////////////////////////////////////////////////////////
 
   this.beforeEach("Fixtures file data", function () {
 
@@ -54,11 +44,29 @@ describe("Copy New Form Elements to the RelatedNew and RelatedEdit form View", f
     });
   });
 
+  it.only('Login TestCase',function(){
+    const lp = new LoginPage();
+    const slp = new SanityLoginPage();
+    slp.LoginUrl(this.LoginCreds.CAUrl)
+    //Handling Alert
+    cy.on("window:confirm", () => {
+      cy.log("Alert has been Handled");
+    });
+    //Login Assertions
+    cy.contains(" Log In ").should("be.visible");
+    //Enter credentials
+    lp.EnterEmail(this.LoginCreds.username);
+    lp.EnterPassword(this.LoginCreds.Password);
+    lp.Submit();
+    cy.log("User has been Logged In into the application");
+    cy.wait(5000)
+  })
+
   it.only("Navigating to New Form of Created Kit Type", function () {
     const kb = new KitBuilderPage();
     const lp = new LoginPage();
     cy.title().should("eq", "Common Areas");
-    lp.NVDTestKitBuilder()
+    lp.KitBuilder()
     cy.log("User entered in kit builder");
     //Open Craeted Kit Type
     kb.KBSearchBox(this.KitTypeName.KitName3);

@@ -102,6 +102,7 @@ describe("New kit item complete creation test case", function () {
     cy.log("User has been Logged In into the application");
     cy.wait(5000)
   })
+  
 
   it.only("Navigating to created Kit type ", function () {
     cy.wait(10000);
@@ -155,17 +156,17 @@ describe("New kit item complete creation test case", function () {
       .last()
       .type(this.NewKitItemData.Text);
 
-    // //File
-    // cy.get(".link-icon--green > path").click({ force: true });
-    // cy.wait(1000);
-    // //give file name to select
-    // cy.contains(this.NewKitItemData.NewFormLibFileName).click({ force: true });
-    // //Click on save file
-    // cy.get(
-    //   ".container-search > .pop-up--header > .pop-up--header--right > .button-pop-ups--size > .v-btn__content"
-    // ).click({ force: true });
-    // cy.contains("File saved").should("be.visible");
-    // cy.log("File Saved");
+    //File
+    cy.get(".link-icon--green > path").click({ force: true });
+    cy.wait(1000);
+    //give file name to select
+    cy.contains(this.NewKitItemData.NewFormLibFileName).click({ force: true });
+    //Click on save file
+    cy.get(
+      ".container-search > .pop-up--header > .pop-up--header--right > .button-pop-ups--size > .v-btn__content"
+    ).click({ force: true });
+    cy.contains("File saved").should("be.visible");
+    cy.log("File Saved");
 
     //Telephone
     cy.get("[name" + "=" + this.DataType2.Telephone + "]")
