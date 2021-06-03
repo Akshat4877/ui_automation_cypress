@@ -4,9 +4,9 @@ import SanityLoginPage from "../PageObject/SanityLoginPage";
 import RolesAndRestrictionsPage from "../PageObject/RolesAndRestrictionsPage"
 
 
-describe("Roles And Restrication For Map(Create)", function () {
+describe("Roles And Restrication For Comments(Create)", function () {
     this.beforeAll(function () {
-       
+
         Cypress.Cookies.preserveOnce(
             ".AspNet.ApplicationCookie",
             "ASP.NET_SessionId",
@@ -56,12 +56,6 @@ describe("Roles And Restrication For Map(Create)", function () {
             this.DataType2 = NewDataForElements;
         });
 
-        cy.fixture("KitTypeTestData/NewKitItemDataValues").then(function (
-            KitDataEle
-          ) {
-            this.NewKitItemData = KitDataEle;
-          });
-
     });
 
     it.only('Login TestCase',function(){
@@ -83,7 +77,7 @@ describe("Roles And Restrication For Map(Create)", function () {
         cy.wait(5000)
       })
 
-    it.only("Navigate to Roles and Restrictions Page For(Create) Restriction ", function () {
+    it.only("Navigate to Roles and Restrictions Page For (Create)Restriction ", function () {
         const kb = new KitBuilderPage();
         const lp = new LoginPage();
         const RoleRestr = new RolesAndRestrictionsPage();
@@ -97,7 +91,7 @@ describe("Roles And Restrication For Map(Create)", function () {
         cy.url().should('include', '/ClientAdmin/KitBuilder#/roles')
     });
 
-    it.only('Select kit type to Configure Restriction For Map(View)', function () {
+    it.only('Select kit type to Configure Restriction For Comments(Create)', function () {
         const RoleRestr = new RolesAndRestrictionsPage();
         cy.wait(2000)
         cy.xpath('//*[text()="edit"]').first().click({ force: true })
@@ -119,12 +113,13 @@ describe("Roles And Restrication For Map(Create)", function () {
     })
 
     it.only('Apply Create Restriction', function () {
-        cy.xpath('//*[text() ="Map"]')
-            .within(($Map) => {
-                cy.xpath('//*[text() ="Map"]').scrollIntoView({ force: true })
+
+        cy.xpath('//*[text() ="Comments"]')
+            .within(($Comments) => {
+                cy.xpath('//*[text() ="Comments"]').scrollIntoView()
                 cy.wait(1000)
                 //Click on Create
-                cy.xpath("//*[@class='v-chip__content' and contains(text(),'Create')]").eq(9)
+                cy.xpath("//*[@class='v-chip__content' and contains(text(),'Create')]").eq(7)
                     .click({ force: true })
                 cy.wait(2000)
                 cy.xpath('//*[text() ="SAVE"]').click({ force: true })
@@ -171,6 +166,7 @@ describe("Roles And Restrication For Map(Create)", function () {
       });
 
       it.only('Logged In Again into the application', function () {
+
         const lp = new LoginPage();
         const slp = new SanityLoginPage();
         //Navigate to url
@@ -186,11 +182,11 @@ describe("Roles And Restrication For Map(Create)", function () {
         lp.EnterPassword(this.LoginCreds.Password);
         lp.Submit();
         cy.log("User has been Logged In into the application");
-        cy.wait(5000)
-        
+        cy.wait(5000)   
     })
 
     it.only('Open kit item from left panel', function () {
+
         const lp = new LoginPage();
         //Click on Hamburger Icon
         lp.HMBIcon();
@@ -203,25 +199,28 @@ describe("Roles And Restrication For Map(Create)", function () {
         cy.xpath('//div[@class="row-list-item-details--content py-2 justify-center col col-10 truncate-wrapper"]')
         .eq(1).click({ force: true })
         cy.wait(2000)
-    
     })
 
-    it.only('Open Map Tab',function(){
-        //Click on Map tab
-        cy.contains(" Map ").click({ force: true });
-        cy.wait(5000)
-        })
+    it.only('Click and Open Comments Tab',function(){
+     //Click and open Comments Tab
+     cy.contains("Comments ").click({ force: true });
+     cy.wait(1000)
 
-    it.only('Validate (Create)Restriciton for Map(Add a Pin)',function(){
-     //Click on Map
-      cy.get('.gm-style > div:nth-child(2) > div:nth-child(3)')
-      .click();
-      //Click to add a pin on Map
-      cy.contains("Add a Pin").click({ force: true });
-      //Pin should not be add on Map
-      cy.contains('Oops! You do not have permission to perform this function. Please contact your administrator. ')
+    })
+
+    it.only('Add A Comment',function(){
+      cy.wait(1000)
+      cy.get('[name="addComment"]')
+      .type('This is the comment create restriction and should not able to add any comment');
+      cy.wait(2000)
+    })
+
+    it.only('Validate (Create)Restriciton in Comments Tab',function(){
+      cy.wait(1000)
+      //Click on save, should not able to add comment in details view
+      cy.get('.left-align > .v-btn__content').click({ force: true });
+      cy.contains(' You are not permitted to create any comments for '+'"'+this.KitTypeName.KitName3+'"'+' please contact your administrator to remove this restriction ')
       .should('be.visible')
-
     })
     
 })

@@ -216,19 +216,5 @@ describe("Roles And Restrication For Schedules(Create)", function () {
         cy.contains(' You are not permitted to create any active schedule for '+'"'+this.KitTypeName.KitName3+'"'+' please contact your administrator to remove this restriction ')
         .should('be.visible')   
     })
-
-    it.only('Click and Open Schedules Tab',function(){
-      //Click and open Schedules Tab
-      cy.contains(" Scheduler ").click({ force: true });
-      cy.wait(1000)
-    })
-
-    it.only('Validate (Create)Restriciton in Schedules Tab',function(){
-      cy.wait(1000)
-      //Click on add btn to create a schedule
-      cy.contains(' You are not permitted to create any active schedule for '+'"'+this.KitTypeName.KitName3+'"'+' please contact your administrator to remove this restriction ')
-      .should('be.visible')   
-     
-    })
     
 })

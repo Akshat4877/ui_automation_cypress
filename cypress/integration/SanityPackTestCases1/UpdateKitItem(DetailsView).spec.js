@@ -230,14 +230,6 @@ describe("Update created kit item test case", function () {
     cy.log("Email Updated");
     cy.wait(1000);
 
-    // //Click to save
-    // cy.get(".navi-bar-dropdown:nth-child(2) .v-btn").click({ force: true });
-    // cy.contains(this.NewKitItemData.KitName + " has been saved").should(
-    //   "be.visible"
-    // );
-    // cy.log("Paritally saved deatils views");
-    // cy.wait(2000);
-
     //scroll
     cy.get('[placeholder="Street address, building, company ... "]')
       .scrollIntoView({ force: true })

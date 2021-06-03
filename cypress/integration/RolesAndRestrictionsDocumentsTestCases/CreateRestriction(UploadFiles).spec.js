@@ -4,9 +4,9 @@ import SanityLoginPage from "../PageObject/SanityLoginPage";
 import RolesAndRestrictionsPage from "../PageObject/RolesAndRestrictionsPage"
 
 
-describe("Roles And Restrication For Map(Create)", function () {
+describe("Roles And Restrication For Documents(Create-Upload File)", function () {
     this.beforeAll(function () {
-       
+
         Cypress.Cookies.preserveOnce(
             ".AspNet.ApplicationCookie",
             "ASP.NET_SessionId",
@@ -56,12 +56,6 @@ describe("Roles And Restrication For Map(Create)", function () {
             this.DataType2 = NewDataForElements;
         });
 
-        cy.fixture("KitTypeTestData/NewKitItemDataValues").then(function (
-            KitDataEle
-          ) {
-            this.NewKitItemData = KitDataEle;
-          });
-
     });
 
     it.only('Login TestCase',function(){
@@ -83,7 +77,7 @@ describe("Roles And Restrication For Map(Create)", function () {
         cy.wait(5000)
       })
 
-    it.only("Navigate to Roles and Restrictions Page For(Create) Restriction ", function () {
+    it.only("Navigate to Roles and Restrictions Page For (Create)Restriction ", function () {
         const kb = new KitBuilderPage();
         const lp = new LoginPage();
         const RoleRestr = new RolesAndRestrictionsPage();
@@ -97,7 +91,7 @@ describe("Roles And Restrication For Map(Create)", function () {
         cy.url().should('include', '/ClientAdmin/KitBuilder#/roles')
     });
 
-    it.only('Select kit type to Configure Restriction For Map(View)', function () {
+    it.only('Select kit type to Configure Restriction For Documents(Create)', function () {
         const RoleRestr = new RolesAndRestrictionsPage();
         cy.wait(2000)
         cy.xpath('//*[text()="edit"]').first().click({ force: true })
@@ -119,19 +113,19 @@ describe("Roles And Restrication For Map(Create)", function () {
     })
 
     it.only('Apply Create Restriction', function () {
-        cy.xpath('//*[text() ="Map"]')
-            .within(($Map) => {
-                cy.xpath('//*[text() ="Map"]').scrollIntoView({ force: true })
+
+        cy.xpath('//*[text() ="Documents"]')
+            .within(($Documents) => {
+                cy.xpath('//*[text() ="Documents"]').scrollIntoView()
                 cy.wait(1000)
                 //Click on Create
-                cy.xpath("//*[@class='v-chip__content' and contains(text(),'Create')]").eq(9)
+                cy.xpath("//*[@class='v-chip__content' and contains(text(),'Create')]").eq(6)
                     .click({ force: true })
                 cy.wait(2000)
                 cy.xpath('//*[text() ="SAVE"]').click({ force: true })
                 cy.wait(3000)
 
             })
-
     })
 
     it.only('Navigate to UI to Validate(Create)Restriction', function () {
@@ -171,6 +165,7 @@ describe("Roles And Restrication For Map(Create)", function () {
       });
 
       it.only('Logged In Again into the application', function () {
+
         const lp = new LoginPage();
         const slp = new SanityLoginPage();
         //Navigate to url
@@ -186,11 +181,11 @@ describe("Roles And Restrication For Map(Create)", function () {
         lp.EnterPassword(this.LoginCreds.Password);
         lp.Submit();
         cy.log("User has been Logged In into the application");
-        cy.wait(5000)
-        
+        cy.wait(5000)   
     })
 
     it.only('Open kit item from left panel', function () {
+
         const lp = new LoginPage();
         //Click on Hamburger Icon
         lp.HMBIcon();
@@ -203,25 +198,27 @@ describe("Roles And Restrication For Map(Create)", function () {
         cy.xpath('//div[@class="row-list-item-details--content py-2 justify-center col col-10 truncate-wrapper"]')
         .eq(1).click({ force: true })
         cy.wait(2000)
-    
     })
 
-    it.only('Open Map Tab',function(){
-        //Click on Map tab
-        cy.contains(" Map ").click({ force: true });
-        cy.wait(5000)
-        })
+    it.only('Click and Open Files Tab',function(){
+      //Click and open Files Tab
+      cy.contains(" Files ").click({ force: true });
+      cy.wait(1000)
+    })
 
-    it.only('Validate (Create)Restriciton for Map(Add a Pin)',function(){
-     //Click on Map
-      cy.get('.gm-style > div:nth-child(2) > div:nth-child(3)')
-      .click();
-      //Click to add a pin on Map
-      cy.contains("Add a Pin").click({ force: true });
-      //Pin should not be add on Map
-      cy.contains('Oops! You do not have permission to perform this function. Please contact your administrator. ')
+    it.only('Validate (Create)Restriciton(File Upload) in Files Tab',function(){
+      cy.wait(1000)
+      //Click on Library
+      cy.contains("Choose From Library").click({ force: true });
+      //select Files from Library
+      cy.get(".thumb-container:nth-child(1) .item-check").click({ force: true });
+      cy.wait(2000);
+      //Click on save file
+      cy.get(".button-pop-ups--size > .v-btn__content")
+      .first()
+      .click({ force: true });
+      cy.contains(' You are not permitted to create any files from '+'"'+this.KitTypeName.KitName3+'"'+' please contact your administrator to remove this restriction ')
       .should('be.visible')
-
     })
     
 })

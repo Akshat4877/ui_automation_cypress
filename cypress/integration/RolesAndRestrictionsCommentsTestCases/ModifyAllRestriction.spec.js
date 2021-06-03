@@ -4,7 +4,7 @@ import SanityLoginPage from "../PageObject/SanityLoginPage";
 import RolesAndRestrictionsPage from "../PageObject/RolesAndRestrictionsPage"
 
 
-describe("Roles And Restrication For Group Assignment(Modify All)", function () {
+describe("Roles And Restrication For Comments(Modify All)", function () {
     this.beforeAll(function () {
 
         Cypress.Cookies.preserveOnce(
@@ -91,7 +91,7 @@ describe("Roles And Restrication For Group Assignment(Modify All)", function () 
         cy.url().should('include', '/ClientAdmin/KitBuilder#/roles')
     });
 
-    it.only('Select kit type to Configure Restriction For Group(Modify All)', function () {
+    it.only('Select kit type to Configure Restriction For Comments(Modify All)', function () {
         const RoleRestr = new RolesAndRestrictionsPage();
         cy.wait(2000)
         cy.xpath('//*[text()="edit"]').first().click({ force: true })
@@ -114,12 +114,12 @@ describe("Roles And Restrication For Group Assignment(Modify All)", function () 
 
     it.only('Apply Modify All Restriction', function () {
 
-        cy.xpath('//*[text() ="Group Assignment"]')
-            .within(($Group) => {
-                cy.xpath('//*[text() ="Group Assignment"]').scrollIntoView()
+        cy.xpath('//*[text() ="Comments"]')
+            .within(($Comments) => {
+                cy.xpath('//*[text() ="Comments"]').scrollIntoView()
                 cy.wait(1000)
                 //Click on Modify All
-                cy.xpath("//*[@class='v-chip__content' and contains(text(),'Modify All')]").eq(9)
+                cy.xpath("//*[@class='v-chip__content' and contains(text(),'Modify All')]").eq(8)
                     .click({ force: true })
                 cy.wait(2000)
                 cy.xpath('//*[text() ="SAVE"]').click({ force: true })
@@ -141,7 +141,7 @@ describe("Roles And Restrication For Group Assignment(Modify All)", function () 
         });
         //Assertion
         cy.title().should("eq", "Common Areas");
-        cy.wait(5000)
+        cy.wait(10000)
     })
 
     it.only('Clear App Cache',function(){
@@ -197,21 +197,35 @@ describe("Roles And Restrication For Group Assignment(Modify All)", function () 
          cy.wait(2000)
         //Click the kit item
         cy.xpath('//div[@class="row-list-item-details--content py-2 justify-center col col-10 truncate-wrapper"]')
-        .eq(1).click({ force: true })
+        .eq(0).click({ force: true })
         cy.wait(2000)
     })
 
-     it.only('Click and Open Group Tab',function(){
-      //Click and open Group Tab
-      cy.contains(' Groups ').click({ force: true });
-      cy.wait(1000)
+    it.only('Click and Open Comments Tab',function(){
+     //Click and open Comments Tab
+     cy.contains("Comments ").click({ force: true });
+     cy.wait(1000)
 
     })
 
-    it.only('Validate (Modify All)Restriciton in Group Tab',function(){
-    
-   
-     
+    it.only('Add A Comment',function(){
+        cy.wait(1000)
+        cy.get('[name="addComment"]')
+        .type('This is the comment create restriction and should not able to add any comment');
+        cy.wait(2000)
+        //Click on Save comment
+        cy.get('.left-align > .v-btn__content').click({ force: true });
+        cy.wait(1000)
+    })
+
+    it.only('Validate (Modify All)Restriciton in Comments Tab',function(){
+      cy.wait(1000)
+      //Click on Externally Viewable for A Added, should not able to modify add comment
+      cy.xpath("//*[@class='v-chip__content' and contains(text(),' Externally Viewable')]")
+      .eq(0)
+      .click({ force: true });
+      cy.contains(' You are not permitted to create any comments for '+'"'+this.KitTypeName.KitName3+'"'+' please contact your administrator to remove this restriction ')
+      .should('be.visible')
     })
     
 })

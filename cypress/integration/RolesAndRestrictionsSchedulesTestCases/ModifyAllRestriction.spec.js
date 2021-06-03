@@ -242,10 +242,5 @@ describe("Roles And Restrication For Schedule(Modify All)", function () {
         .should('be.visible')
         cy.wait(3000)
     })
-     it.only('Validate (Modify All)Restriciton in Schedule Tab',function(){
-       //Click on Delete icon for Schedule
-       cy.contains(' You are not permitted to deleting any active schedule for '+'"'+this.KitTypeName.KitName3+'"'+' please contact your administrator to remove this restriction ')
-        .should('be.visible')
-      
-    })
+     
 })

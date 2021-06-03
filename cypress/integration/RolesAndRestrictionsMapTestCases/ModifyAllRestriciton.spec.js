@@ -4,7 +4,7 @@ import SanityLoginPage from "../PageObject/SanityLoginPage";
 import RolesAndRestrictionsPage from "../PageObject/RolesAndRestrictionsPage"
 
 
-describe("Roles And Restrication For Map(Create)", function () {
+describe("Roles And Restrication For Map(Modify Pin)", function () {
     this.beforeAll(function () {
        
         Cypress.Cookies.preserveOnce(
@@ -64,7 +64,7 @@ describe("Roles And Restrication For Map(Create)", function () {
 
     });
 
-    it.only('Login TestCase',function(){
+    it('Login TestCase',function(){
         const lp = new LoginPage();
         const slp = new SanityLoginPage();
         //Navigate to url
@@ -83,7 +83,7 @@ describe("Roles And Restrication For Map(Create)", function () {
         cy.wait(5000)
       })
 
-    it.only("Navigate to Roles and Restrictions Page For(Create) Restriction ", function () {
+    it("Navigate to Roles and Restrictions Page For(Modify) Restriction ", function () {
         const kb = new KitBuilderPage();
         const lp = new LoginPage();
         const RoleRestr = new RolesAndRestrictionsPage();
@@ -97,7 +97,7 @@ describe("Roles And Restrication For Map(Create)", function () {
         cy.url().should('include', '/ClientAdmin/KitBuilder#/roles')
     });
 
-    it.only('Select kit type to Configure Restriction For Map(View)', function () {
+    it('Select kit type to Configure Restriction For Map(View)', function () {
         const RoleRestr = new RolesAndRestrictionsPage();
         cy.wait(2000)
         cy.xpath('//*[text()="edit"]').first().click({ force: true })
@@ -118,13 +118,13 @@ describe("Roles And Restrication For Map(Create)", function () {
         cy.wait(1000)
     })
 
-    it.only('Apply Create Restriction', function () {
+    it('Apply Modify Restriction', function () {
         cy.xpath('//*[text() ="Map"]')
             .within(($Map) => {
                 cy.xpath('//*[text() ="Map"]').scrollIntoView({ force: true })
                 cy.wait(1000)
-                //Click on Create
-                cy.xpath("//*[@class='v-chip__content' and contains(text(),'Create')]").eq(9)
+                //Click on Modify
+                cy.xpath("//*[@class='v-chip__content' and contains(text(),'Modify All')]").eq(10)
                     .click({ force: true })
                 cy.wait(2000)
                 cy.xpath('//*[text() ="SAVE"]').click({ force: true })
@@ -134,7 +134,7 @@ describe("Roles And Restrication For Map(Create)", function () {
 
     })
 
-    it.only('Navigate to UI to Validate(Create)Restriction', function () {
+    it('Navigate to UI to Validate(Modify)Restriction', function () {
         //Page Object
         const slp = new SanityLoginPage();
         const lp = new LoginPage();
@@ -149,7 +149,7 @@ describe("Roles And Restrication For Map(Create)", function () {
         cy.wait(10000)
     })
 
-    it.only('Clear App Cache',function(){
+    it('Clear App Cache',function(){
         const lp = new LoginPage();
         lp.ClickOnHomePageAdmin();
         cy.wait(1000)
@@ -158,7 +158,7 @@ describe("Roles And Restrication For Map(Create)", function () {
         cy.wait(2000)
     })
 
-    it.only("Sign Out for logged in user", function () {
+    it("Sign Out for logged in user", function () {
         //Click on admin
         cy.get('[name="your-profile"]').click({ force: true });
         cy.wait(2000);
@@ -203,22 +203,39 @@ describe("Roles And Restrication For Map(Create)", function () {
         cy.xpath('//div[@class="row-list-item-details--content py-2 justify-center col col-10 truncate-wrapper"]')
         .eq(1).click({ force: true })
         cy.wait(2000)
-    
     })
 
     it.only('Open Map Tab',function(){
         //Click on Map tab
         cy.contains(" Map ").click({ force: true });
         cy.wait(5000)
-        })
+    })
 
-    it.only('Validate (Create)Restriciton for Map(Add a Pin)',function(){
-     //Click on Map
+    it("Add a pin on Map", function () {
+       //Click on Map
       cy.get('.gm-style > div:nth-child(2) > div:nth-child(3)')
-      .click();
-      //Click to add a pin on Map
+      .click({force:true});
       cy.contains("Add a Pin").click({ force: true });
-      //Pin should not be add on Map
+      cy.contains(" Pin has been added successfully.").should("be.visible");
+      cy.wait(4000);
+    });
+
+    it.only('Modify Added Pin',function(){
+     //Click on created pin on Map
+     cy.get('div:nth-child(2) > div:nth-child(3) > div > div > div > img')
+     .eq(0)
+     .click({force:true});
+     cy.wait(2000)
+    })
+
+    it.only('Validate (Modify)Restriciton for Map(Modify Added Pin)',function(){
+      cy.wait(1000)
+      //Click to modify text in added pin on Map
+      cy.get('[placeholder="Type Here"]').type('Modify Pin')
+      cy.wait(1000)
+      //Click on Svae
+      cy.get('.active').click({force:true})
+      //Validation message
       cy.contains('Oops! You do not have permission to perform this function. Please contact your administrator. ')
       .should('be.visible')
 

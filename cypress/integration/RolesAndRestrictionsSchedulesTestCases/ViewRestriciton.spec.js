@@ -231,12 +231,12 @@ describe("Roles And Restrication For Schedules(View)", function () {
        //Click on Calendar Tab
        cy.contains(' Groups ').click({force:true})
        cy.wait(1000)
-       //Click on Scheduler Tab
+       //Click on Reports Tab
        cy.contains(' Reports ').click({force:true})
        cy.wait(2000)
         })
 
-    it.only('Validate (View)Restriciton for Schedules Tab',function(){
+    it.only('Validate (View)Restriciton for Calendar Tab',function(){
         //Schedules Tab should not be visible/exist
         cy.wait(1000);
         cy.contains(' Calendar ').should('not.exist') 

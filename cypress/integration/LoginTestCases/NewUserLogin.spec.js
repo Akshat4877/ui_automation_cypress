@@ -24,7 +24,7 @@ describe("Login into the application for a new User ", function () {
     );
   });
 
-  it.only("Login into the appLication for New User", function () {
+  it("Login into the appLication for New User", function () {
     //PageObject
     const lp = new LoginPage();
     lp.BaseTest()
@@ -66,7 +66,7 @@ describe("Login into the application for a new User ", function () {
     cy.wait(5000);
   });
 
-  it.only("Sign Out for logged in user", function () {
+  it("Sign Out for logged in user", function () {
     //Click on admin
     cy.get('[name="your-profile"]').click({ force: true });
     cy.wait(2000);

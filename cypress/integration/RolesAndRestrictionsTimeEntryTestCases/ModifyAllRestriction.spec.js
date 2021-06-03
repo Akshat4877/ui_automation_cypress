@@ -57,7 +57,7 @@ describe("Roles And Restrication For Time Entry(ModifyAll)", function () {
 
     });
 
-    it.only('Login TestCase',function(){
+    it('Login TestCase',function(){
         const lp = new LoginPage();
         const slp = new SanityLoginPage();
         slp.LoginUrl(this.LoginCreds.CAUrl)
@@ -75,7 +75,7 @@ describe("Roles And Restrication For Time Entry(ModifyAll)", function () {
         cy.wait(5000)
       })
 
-    it.only("Navigate to Roles and Restrictions Page For (ModifyAll)Restriction ", function () {
+    it("Navigate to Roles and Restrictions Page For (ModifyAll)Restriction ", function () {
         const kb = new KitBuilderPage();
         const lp = new LoginPage();
         const RoleRestr = new RolesAndRestrictionsPage();
@@ -89,7 +89,7 @@ describe("Roles And Restrication For Time Entry(ModifyAll)", function () {
         cy.url().should('include', '/ClientAdmin/KitBuilder#/roles')
     });
 
-    it.only('Select kit type to Configure Restriction For Time Entry(ModifyAll)', function () {
+    it('Select kit type to Configure Restriction For Time Entry(ModifyAll)', function () {
         const RoleRestr = new RolesAndRestrictionsPage();
         cy.wait(2000)
         cy.xpath('//*[text()="edit"]').first().click({ force: true })
@@ -110,7 +110,7 @@ describe("Roles And Restrication For Time Entry(ModifyAll)", function () {
         cy.wait(1000)
     })
 
-    it.only('Apply Modify All Restriction', function () {
+    it('Apply Modify All Restriction', function () {
 
         cy.xpath('//*[text() ="Time"]')
             .within(($Details) => {
@@ -118,7 +118,7 @@ describe("Roles And Restrication For Time Entry(ModifyAll)", function () {
                 cy.xpath('//*[text() ="Time"]').scrollIntoView({ force: true })
                 cy.wait(2000)
                 //Click on Modify All
-                cy.xpath("//*[@class='v-chip__content' and contains(text(),'Modify All')]").eq(5)
+                cy.xpath("//*[@class='v-chip__content' and contains(text(),'Modify All')]").eq(11)
                     .click({ force: true })
                 cy.wait(2000)
                 cy.xpath('//*[text() ="SAVE"]').click({ force: true })
@@ -128,7 +128,7 @@ describe("Roles And Restrication For Time Entry(ModifyAll)", function () {
 
     })
 
-    it.only('Navigate to UI to Validate(Create)Restriction', function () {
+    it('Navigate to UI to Validate(Modity All)Restriction', function () {
         //Page Object
         const slp = new SanityLoginPage();
         const lp = new LoginPage();
@@ -143,7 +143,7 @@ describe("Roles And Restrication For Time Entry(ModifyAll)", function () {
         cy.wait(10000)
     })
 
-    it.only('Clear App Cache',function(){
+    it('Clear App Cache',function(){
         const lp = new LoginPage();
         lp.ClickOnHomePageAdmin();
         cy.wait(1000)
@@ -152,7 +152,7 @@ describe("Roles And Restrication For Time Entry(ModifyAll)", function () {
         cy.wait(2000)
     })
 
-    it.only("Sign Out for logged in user", function () {
+    it("Sign Out for logged in user", function () {
         //Click on admin
         cy.get('[name="your-profile"]').click({ force: true });
         cy.wait(2000);
@@ -199,13 +199,79 @@ describe("Roles And Restrication For Time Entry(ModifyAll)", function () {
     })
 
     it.only('Open Time Entries Tab',function(){
-     //Click and open Time Entries Tab
-     cy.contains(" Time Entries ").click({ force: true });
-     cy.wait(2000);
+      //Click and open Time Entries Tab
+      cy.contains(" Time Entries ").click({ force: true });
+      cy.wait(2000);
     })
 
-    it.only('Validate (Create)Restriciton in Time Entries Tab',function(){
-    cy.wait(1000)
+    it("Add a Time Entries", function () {
+    
+        //Click on Add for Time Entries
+        cy.get(".ml-4 > .v-btn__content").click({ force: true });
+        //Assertion validation
+        cy.contains("Time Entry").should("be.visible");
+        //Click on + icon
+        cy.get(".add-new--icon").click({ force: true });
+        //Assertion validation
+        cy.contains(" Add New Time Type ").should("be.visible");
+        cy.wait(2000);
+        cy.get('[placeholder="Label"]')
+          .eq(0)
+          .type('Restriction');
+        cy.get('[placeholder="Description"]').type('Time Restriction');
+        //Click on Save
+        cy.get(".col-4 .v-btn__content").first().click({ force: true });
+        //Assertion validation
+        cy.contains(" New Time Type saved ").should("be.visible");
+        cy.wait(2000);
+        //Click on Total hours
+        cy.get('[name="totalHours"]').type('5');
+        cy.wait(2000)
+        //Click on select date
+        cy.get('[name="startdate"]').click({ force: true });
+        cy.wait(2000);
+        //Select Date
+        cy.xpath("//div[contains(text(),'25')]").eq(0).click({ force: true });
+        //Click on OK
+        cy.wait(1000);
+        cy.xpath("//span[contains(text(),'OK')]").first().click({ force: true });
+        cy.wait(2000);
+        cy.get('[placeholder="Add a Description"]')
+        .type('Restriction for Modify Time Entry');
+        //Click on Save
+        cy.get(".col-3 > .ca-button-green > .v-btn__content").click({
+          force: true,
+        });
+        //Assertion validation
+        cy.contains(" Time Entry details saved ").should("be.visible");
+        cy.log("Time Entry details saved");
+        cy.wait(2000);
+      });
+
+    it.only('Open Created Time Entry',function(){
+
+        //Click on created time entry
+        cy.get('.time-entry__hours').click({force:true});
+        cy.wait(2000)
+        //Click on Total hours
+        cy.wait(1000)
+        cy.get('[name="totalHours"]').clear().type('5');
+        cy.get('.add-new--icon').scrollIntoView({force:true})
+        cy.wait(2000)
+
+    })
+
+    it.only('Validate (Modify)Restriciton in Time Entries Tab',function(){
+     cy.wait(1000)
+     //Click on Save
+     cy.get(".col-3 > .ca-button-green > .v-btn__content")
+     .click({force: true});
+     cy.contains('You are not permitted to modifying any time entries for '+'"'+this.KitTypeName.KitName3+'"'+' please contact your administrator to remove this restriction')
+     .scrollIntoView({force:true})
+     cy.wait(3000)
+     //Validaiton msg
+     cy.contains('You are not permitted to modifying any time entries for '+'"'+this.KitTypeName.KitName3+'"'+' please contact your administrator to remove this restriction')
+     .should('be.visible')
     
     })
     

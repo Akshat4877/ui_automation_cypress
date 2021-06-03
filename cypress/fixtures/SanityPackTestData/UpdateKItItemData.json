@@ -51,59 +51,8 @@
 
     "Form Element Validation":"Data",
     "LoggedTime":"5:25 pm",
-    "LoggedDate":"05/25/2021",
+    "LoggedDate":"06/25/2021"
 
     
-    
-
-    "ReminderTitle":"PropertyBuilder Inspection",
-    "ReminderTypeOneTime":"One-Time",
-    "ReminderTypeRecurring":"Recurring",
-
-    "ChannelWebApp":"Web App",
-    "ChannelEmail":"E-mail",
-    "ChannelMobileApp":"Mobile App",
-
-    "RepeatDaily":"Daily",
-    "RepeatMonFriday":"Mon-Friday",
-    "RepeatWeekly":"Weekly",
-    "RepeatMonthlyDay":"Monthly - Day",
-    "RepeatMonthlyOfDay":"Monthly - Of Day",
-    "RepeatAnnuallyDate":"Annually - Date",
-    "RepeatAnnuallyOfMonth":"Annually - Of Month",
-    
-
-
-    "These values need to add manual for validate Table List View Result Ele UI Validation":"true",
-    "Important note for Values":"Pls add value in same format that i did",
-    "FileValue":"11615",
-    "SliderValuee":"46",
-    "TimeValue":"04:30 PM",
-    "DateValue":"10/31/2020",
-    "ToggleStatus":"True",
-    "StepperValuee":"Oppo",
-    "InspectionName":"C++",
-    
-
-    "These values need to add manual for validate Table List View Elee":"true",
-    "Important note for (TimelineList View Results Ele)Values":"Pls add value in same format that i did",
-
-    "TimelineListFileEleValue":"11615",
-    "TimelineListSliderValue":"46",
-    "TimelineListTimeValue":"04:30 PM",
-    "TimelineListDateValue":"10/31/2020",
-    "TimelineListToggleStatus":"True",
-    "TimelineListIconTittle":"2 wheeled Trolly",
-    
-    "Add ',' after First Name of UserSelector":"Note-true",
-    "Add ',' after First Name of ContactSelector":"Note-true",
-    "Add ',' after First Name of Assigning":"Note-true",
-
-
-    "TimelineListUserSelector":"Deanne, Howell",
-    "TimelineListContactSelector":"Vivek, Mahajan",
-    "TimelineListAssigningName":"Daniel, Zhao"
-
-
     
 }

@@ -4,7 +4,7 @@ import SanityLoginPage from "../PageObject/SanityLoginPage";
 import RolesAndRestrictionsPage from "../PageObject/RolesAndRestrictionsPage"
 
 
-describe("Roles And Restrication For Map(Create)", function () {
+describe("Roles And Restrication For Content(View Files Tab)", function () {
     this.beforeAll(function () {
        
         Cypress.Cookies.preserveOnce(
@@ -83,7 +83,7 @@ describe("Roles And Restrication For Map(Create)", function () {
         cy.wait(5000)
       })
 
-    it.only("Navigate to Roles and Restrictions Page For(Create) Restriction ", function () {
+    it.only("Navigate to Roles and Restrictions Page For(Files View) Restriction ", function () {
         const kb = new KitBuilderPage();
         const lp = new LoginPage();
         const RoleRestr = new RolesAndRestrictionsPage();
@@ -97,7 +97,7 @@ describe("Roles And Restrication For Map(Create)", function () {
         cy.url().should('include', '/ClientAdmin/KitBuilder#/roles')
     });
 
-    it.only('Select kit type to Configure Restriction For Map(View)', function () {
+    it.only('Select kit type to Configure Restriction For Content(Files View)', function () {
         const RoleRestr = new RolesAndRestrictionsPage();
         cy.wait(2000)
         cy.xpath('//*[text()="edit"]').first().click({ force: true })
@@ -118,13 +118,14 @@ describe("Roles And Restrication For Map(Create)", function () {
         cy.wait(1000)
     })
 
-    it.only('Apply Create Restriction', function () {
-        cy.xpath('//*[text() ="Map"]')
-            .within(($Map) => {
-                cy.xpath('//*[text() ="Map"]').scrollIntoView({ force: true })
+    it.only('Apply Files View Restriction', function () {
+
+        cy.xpath('//*[text() ="Content"]')
+            .within(($Content) => {
+                cy.xpath('//*[text() ="Content"]').scrollIntoView({ force: true })
                 cy.wait(1000)
-                //Click on Create
-                cy.xpath("//*[@class='v-chip__content' and contains(text(),'Create')]").eq(9)
+                //Click on View
+                cy.xpath("//*[@class='v-chip__content' and contains(text(),'View Files')]")
                     .click({ force: true })
                 cy.wait(2000)
                 cy.xpath('//*[text() ="SAVE"]').click({ force: true })
@@ -134,7 +135,7 @@ describe("Roles And Restrication For Map(Create)", function () {
 
     })
 
-    it.only('Navigate to UI to Validate(Create)Restriction', function () {
+    it.only('Navigate to UI to Validate(Files View)Restriction', function () {
         //Page Object
         const slp = new SanityLoginPage();
         const lp = new LoginPage();
@@ -171,6 +172,7 @@ describe("Roles And Restrication For Map(Create)", function () {
       });
 
       it.only('Logged In Again into the application', function () {
+
         const lp = new LoginPage();
         const slp = new SanityLoginPage();
         //Navigate to url
@@ -191,6 +193,7 @@ describe("Roles And Restrication For Map(Create)", function () {
     })
 
     it.only('Open kit item from left panel', function () {
+
         const lp = new LoginPage();
         //Click on Hamburger Icon
         lp.HMBIcon();
@@ -206,22 +209,25 @@ describe("Roles And Restrication For Map(Create)", function () {
     
     })
 
-    it.only('Open Map Tab',function(){
+    it.only('Asides tabs validation',function(){
+        //Click on Activities Tab
+        cy.contains(' Activities ').click({ force: true });
+        cy.wait(1000);
+        //Click on Contributors tab
+        cy.contains(' Contributors ').click({force:true})
+        cy.wait(1000)
         //Click on Map tab
         cy.contains(" Map ").click({ force: true });
-        cy.wait(5000)
+        cy.wait(1000)
+        //Time Entries Tab
+        cy.contains(" Time Entries ").click({ force: true });
+        cy.wait(1000);
         })
 
-    it.only('Validate (Create)Restriciton for Map(Add a Pin)',function(){
-     //Click on Map
-      cy.get('.gm-style > div:nth-child(2) > div:nth-child(3)')
-      .click();
-      //Click to add a pin on Map
-      cy.contains("Add a Pin").click({ force: true });
-      //Pin should not be add on Map
-      cy.contains('Oops! You do not have permission to perform this function. Please contact your administrator. ')
-      .should('be.visible')
-
-    })
-    
+    it.only('Validate (Files View)Restriciton for in Files Tab',function(){
+        //Files Tab should not be visible/exist
+        cy.wait(1000);
+        //should not click because the File tab should not ne there
+        cy.contains(" Files ").should('not.exist') 
+    })  
 })
