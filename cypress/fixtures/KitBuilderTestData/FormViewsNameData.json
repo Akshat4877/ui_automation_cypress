@@ -11,6 +11,7 @@
     "RelatedEditView":"RelatedEditView",
     "TableView":"TableView",
     "SearchView":"SearchView",
-    "TimelineView":"TimelineView"
+    "TimelineView":"TimelineView",
+    "SharedItemView":"SharedItemView"
 
 }

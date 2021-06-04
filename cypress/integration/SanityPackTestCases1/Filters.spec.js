@@ -1215,7 +1215,7 @@ describe("TableList KitItem Filter", function () {
     cy.wait(2000);
   });
 
-  it.only("Validate the Filter CheckboxSelect Element", function () {
+  it("Validate the Filter CheckboxSelect Element", function () {
     //Page Object
     const lp = new LoginPage();
     lp.FilterIcon();

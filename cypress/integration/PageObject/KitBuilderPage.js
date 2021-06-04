@@ -1,12 +1,5 @@
 class KitBuilder {
-  visitKitBuilderServiceBuild() {
-    cy.visit("https://serviceproviders.ca-build.com/ClientAdmin/KitBuilder#/");
-  }
-
-  AdminUrl() {
-    cy.visit("https://serviceproviders.ca-build.com/ClientAdmin/Index/#/");
-  }
-
+  
   ClickOnKitBuilder() {
     const btn = cy.contains("Kit Builder");
     btn.click();
@@ -100,13 +93,17 @@ class KitBuilder {
     btn.click();
   }
 
+  ClickOnSharedItemList() {
+    const btn = cy.get(
+      ".col:nth-child(1) .list-view-block:nth-child(1) .v-icon:nth-child(1)"
+    );
+    btn.click();
+  }
+
   KBSearchBox(KitTypeName) {
     cy.get('.v-text-field__slot').click().type(KitTypeName);
   }
 
-  // KBSearchBox(KitTypeName) {
-  //   cy.get('[placeholder="Search"]').type(KitTypeName);
-  // }
 
   ClickOnCrossIcon() {
     const btn = cy.xpath(

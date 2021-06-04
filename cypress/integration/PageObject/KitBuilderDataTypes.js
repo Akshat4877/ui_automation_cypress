@@ -42,6 +42,11 @@ class KitBuilderDataTypes {
     //Click on Text
     cy.getIframeBody().find('[placeholder="Text"]').click({ force: true });
     cy.wait(3000);
+    //Make text tittle
+    cy.get('.gjs-trt-trait__wrp:nth-child(6) .gjs-chk-icon').click({ force: true });
+    cy.wait(1000)
+    cy.get('.gjs-trt-trait__wrp:nth-child(6) input').click({ force: true });
+    cy.wait(1000)
     //Click on Lable
     cy.get(".gjs-trt-trait__wrp:nth-child(1) input").click().type(TextName);
     //Click on Name
@@ -407,6 +412,11 @@ class KitBuilderDataTypes {
       .click({ force: true })
       .type(Number);
 
+     cy.wait(1000)
+     //Click on to ON External data share for Number 
+     cy.xpath('//*[text()="External Data Share"]').click({ force: true })
+     cy.wait(1000)
+
     //Click on Save
     cy.get(".v-btn--text:nth-child(2)").click();
     //Assertion to close
@@ -454,6 +464,11 @@ class KitBuilderDataTypes {
       .click({ force: true })
       .type(Time);
 
+      cy.wait(1000)
+    //Click on to ON External data share for Time 
+    cy.xpath('//*[text()="External Data Share"]').click({ force: true })
+    cy.wait(1000)
+
     //Click on Save
     cy.get(".v-btn--text:nth-child(2)").click();
     //Assertion to close
@@ -488,6 +503,11 @@ class KitBuilderDataTypes {
       .click({ force: true })
       .type(Date);
 
+      cy.wait(1000)
+    //Click on to ON External data share for Date 
+    cy.xpath('//*[text()="External Data Share"]').click({ force: true })
+    cy.wait(1000)
+
     //Click on Save
     cy.get(".v-btn--text:nth-child(2)").click();
     //Assertion to close
@@ -521,6 +541,11 @@ class KitBuilderDataTypes {
     )
       .click({ force: true })
       .type(Toggle);
+
+      cy.wait(1000)
+    //Click on to ON External data share for Toggle 
+    cy.xpath('//*[text()="External Data Share"]').click({ force: true })
+    cy.wait(1000)
 
     //Click on Save
     cy.get(".v-btn--text:nth-child(2)").click();
@@ -579,6 +604,11 @@ class KitBuilderDataTypes {
     cy.wait(2000);
     //Click on Assertion to close msg
     //cy.get(".closeBtn .v-icon").click();
+
+    cy.wait(1000)
+    //Click on to ON External data share for SelectList 
+    cy.xpath('//*[text()="External Data Share"]').click({ force: true })
+    cy.wait(1000)
 
     cy.wait(1000);
     //Click on Save
@@ -763,6 +793,10 @@ class KitBuilderDataTypes {
     //Click on Assertion to close msg
     //cy.get(".closeBtn .v-icon").click();
     cy.wait(1000);
+    //Click on to ON External data share for RadioSelect 
+    cy.xpath('//*[text()="External Data Share"]').click({ force: true })
+    cy.wait(1000)
+
     //Click on Save
     cy.get(".v-btn--text:nth-child(2)").click();
     cy.log("RadioSelect Data type has been Created");
@@ -934,13 +968,6 @@ class KitBuilderDataTypes {
       .click({ force: true })
       .type(CheckboxSelect);
 
-    //API Name
-    // cy.get(
-    //   "div.v-dialog__container.new-element-header > div > div > div.container.new-element-body > div > div > form > div:nth-child(3) > div > div > div > div.v-input__slot > div"
-    // )
-    //   .click({ force: true })
-    //   .type(CheckboxSelectName);
-
     //CheckboxSelect customize name
     //Click on +
     cy.get(".v-btn__content > .theme--dark").first().click({ force: true });
@@ -956,7 +983,11 @@ class KitBuilderDataTypes {
     cy.wait(4000);
     //Click on Assertion to close msg
     //cy.get(".closeBtn .v-icon").click();
-    cy.wait(1000);
+    cy.wait(1000)
+    //Click on to ON External data share for CheckboxSelect 
+    cy.xpath('//*[text()="External Data Share"]').click({ force: true })
+    cy.wait(1000)
+
     //Click on Save
     cy.get(".v-btn--text:nth-child(2)").click();
     cy.log("CheckboxSelect Data Type has been created");
@@ -1120,12 +1151,10 @@ class KitBuilderDataTypes {
       .click({ force: true })
       .type(UserSelector);
 
-    //API Name
-    // cy.get(
-    //   "div.v-dialog__container.new-element-header > div > div > div.container.new-element-body > div > div > form > div:nth-child(3) > div > div > div > div.v-input__slot > div"
-    // )
-    //   .click({ force: true })
-    //   .type(UserSelector);
+      cy.wait(1000)
+    //Click on to ON External data share for UserSelector 
+    cy.xpath('//*[text()="External Data Share"]').click({ force: true })
+    cy.wait(1000)
 
     //Click on Save
     cy.get(".v-btn--text:nth-child(2)").click();
@@ -1165,12 +1194,10 @@ class KitBuilderDataTypes {
       .click({ force: true })
       .type(ContactSelector);
 
-    //API Name
-    // cy.get(
-    //   "div.v-dialog__container.new-element-header > div > div > div.container.new-element-body > div > div > form > div:nth-child(3) > div > div > div > div.v-input__slot > div"
-    // )
-    //   .click({ force: true })
-    //   .type(ContactSelector);
+      cy.wait(1000)
+    //Click on to ON External data share for ContactSelector 
+    cy.xpath('//*[text()="External Data Share"]').click({ force: true })
+    cy.wait(1000)
 
     //Click on Save
     cy.get(".v-btn--text:nth-child(2)").click();
@@ -1208,12 +1235,11 @@ class KitBuilderDataTypes {
       .click({ force: true })
       .type(Assigning);
 
-    //API Name
-    // cy.get(
-    //   "div.v-dialog__container.new-element-header > div > div > div.container.new-element-body > div > div > form > div:nth-child(3) > div > div > div > div.v-input__slot > div"
-    // )
-    //   .click({ force: true })
-    //   .type(Assigning);
+   
+      cy.wait(1000)
+    //Click on to ON External data share for Assigning 
+    cy.xpath('//*[text()="External Data Share"]').click({ force: true })
+    cy.wait(1000)
 
     //Click on Save
     cy.get(".v-btn--text:nth-child(2)").click();
@@ -1267,6 +1293,10 @@ class KitBuilderDataTypes {
     //Click on Assertion to close msg
     //cy.get(".closeBtn .v-icon").click();
     cy.wait(1000);
+    cy.wait(1000)
+    //Click on to ON External data share for Stepper 
+    cy.xpath('//*[text()="External Data Share"]').click({ force: true })
+    cy.wait(1000)
     //Click on Save
     cy.get(".v-btn--text:nth-child(2)").click();
     cy.log("Stepper Data Type has been Created");
@@ -1426,12 +1456,11 @@ class KitBuilderDataTypes {
       .click({ force: true })
       .type(Icon);
 
-    //API Name
-    // cy.get(
-    //   "div.v-dialog__container.new-element-header > div > div > div.container.new-element-body > div > div > form > div:nth-child(3) > div > div > div > div.v-input__slot > div"
-    // )
-    //   .click({ force: true })
-    //   .type(Icon);
+    
+      cy.wait(1000)
+    //Click on to ON External data share for Icon 
+    cy.xpath('//*[text()="External Data Share"]').click({ force: true })
+    cy.wait(1000)
 
     //Click on Save
     cy.get(".v-btn--text:nth-child(2)").click();
@@ -1476,12 +1505,6 @@ class KitBuilderDataTypes {
       .click({ force: true })
       .type(Inspection);
 
-    //API Name
-    // cy.get(
-    //   "div.v-dialog__container.new-element-header > div > div > div.container.new-element-body > div > div > form > div:nth-child(3) > div > div > div > div.v-input__slot > div"
-    // )
-    //   .click({ force: true })
-    //   .type(InspectionName);
 
     //Inspection customize name
     //Click on +
@@ -1499,6 +1522,10 @@ class KitBuilderDataTypes {
     //Click on Assertion to close msg
     //cy.get(".closeBtn .v-icon").click();
     cy.wait(1000);
+    cy.wait(1000)
+    //Click on to ON External data share for Inspection 
+    cy.xpath('//*[text()="External Data Share"]').click({ force: true })
+    cy.wait(1000)
     //Click on Save
     cy.get(".v-btn--text:nth-child(2)").click();
     cy.log("Inspection Data Type has been Created");
@@ -1680,6 +1707,11 @@ class KitBuilderDataTypes {
       "div.v-dialog__container.new-element-header > div > div > div.container.new-element-body > div > div > form > div:nth-child(4) > div.pa-0.pl-1.col.col-6 > div > div > div.v-input__slot > div.v-select__slot > div.v-input__append-inner > div"
     ).click({ force: true });
 
+    cy.wait(1000)
+    //Click on to ON External data share for URL 
+    cy.xpath('//*[text()="External Data Share"]').click({ force: true })
+    cy.wait(1000)
+
     //Click on Save
     cy.get(".v-btn--text:nth-child(2)").click();
     cy.log("OneToOne Relation Data Type has been created");
@@ -1795,6 +1827,16 @@ class KitBuilderDataTypes {
       "div.v-dialog__container.new-element-header > div > div > div.container.new-element-body > div > div > form > div:nth-child(4) > div.pa-0.pl-1.col.col-6 > div > div > div.v-input__slot > div.v-select__slot > div.v-input__append-inner > div"
     ).click({ force: true });
     cy.contains("More Than One").click({ force: true });
+
+    cy.wait(1000)
+    //Click on to ON External data share for URL 
+    cy.xpath('//*[text()="External Data Share"]').click({ force: true })
+    cy.wait(1000)
+
+    cy.wait(1000)
+    //Click on to ON Implicit External data share for URL 
+    cy.xpath('//*[text()="Implicit External Data Share"]').click({ force: true })
+    cy.wait(1000)
 
     //Click on Save
     cy.get(".v-btn--text:nth-child(2)").click({ force: true });
@@ -1981,7 +2023,6 @@ class KitBuilderDataTypes {
     cy.contains("Element Name").click({ force: true });
 
     //cy.contains("Element Friendly Description")
-
     cy.get(
       "div.v-dialog__container.new-element-header > div > div > div.container.new-element-body > div > div > form > div:nth-child(2) > div > div > div > div.v-input__slot"
     )
@@ -2003,6 +2044,11 @@ class KitBuilderDataTypes {
       "div.v-dialog__container.new-element-header > div > div > div.container.new-element-body > div > div > form > div:nth-child(4) > div.pa-0.pl-1.col.col-6 > div > div > div.v-input__slot > div.v-select__slot > div.v-input__append-inner > div"
     ).click({ force: true });
     cy.contains("More Than One").click({ force: true });
+
+    cy.wait(1000)
+    //Click on to ON External data share for URL 
+    cy.xpath('//*[text()="External Data Share"]').click({ force: true })
+    cy.wait(1000)
 
     //Click on Save
     cy.get(".v-btn--text:nth-child(2)").click({ force: true });

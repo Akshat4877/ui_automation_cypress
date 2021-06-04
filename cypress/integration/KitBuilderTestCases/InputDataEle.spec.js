@@ -46,11 +46,11 @@ describe("Input Section Data Elements Configuration", function () {
     ) {
       this.KitTypeName = KittypeName;
     });
-    cy.fixture("KitBuilderTestData/KitBuilderDataTypes").then(function (
-      datatypes
-    ) {
-      this.DataType = datatypes;
-    });
+    // cy.fixture("KitBuilderTestData/KitBuilderDataTypes").then(function (
+    //   datatypes
+    // ) {
+    //   this.DataType = datatypes;
+    // });
 
     cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
       NewDataForElements

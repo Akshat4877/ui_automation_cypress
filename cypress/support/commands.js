@@ -583,7 +583,7 @@ Cypress.Commands.add("SearchListViewIcon", () => {
   cy.get(
     "div.container > div > div > form > div:nth-child(2) > div.pl-2.pa-0.col.col-6 > div > div > div.v-input__slot > div.v-select__slot > div"
   ).click({ force: true });
-  cy.get(".v-list-item:nth-child(1) .v-list-item__title").click({
+  cy.get(".v-list-item:nth-child(2) .v-list-item__title").click({
     force: true,
   });
 });
@@ -621,7 +621,7 @@ Cypress.Commands.add("TimelineListViewIcon", () => {
   cy.get(
     "div.container > div > div > form > div:nth-child(2) > div.pl-2.pa-0.col.col-6 > div > div > div.v-input__slot > div.v-select__slot > div"
   ).click({ force: true });
-  cy.get(".v-list-item:nth-child(1) .v-list-item__title").click({
+  cy.get(".v-list-item:nth-child(3) .v-list-item__title").click({
     force: true,
   });
 });
@@ -629,13 +629,50 @@ Cypress.Commands.add("TimelineListViewIcon", () => {
 Cypress.Commands.add("SaveTimelineList", () => {
   //Click on Checkbox
   //cy.contains("Default Timeline List View for Kit").click({ force: true });
-  // //Click on Save
+  //Click on Save
   cy.get(".px-4 > .v-btn__content").click();
   //Click on Assertion msg for save
   cy.get(".v-btn__content > .theme--dark").click();
 });
 
-////////////////////////////////////////
+//SharedItem List View details Commands
+Cypress.Commands.add("SharedItemListViewLabel", (SharedItemListViewLabel) => {
+  cy.get(
+    "div.container > div > div > form > div:nth-child(1) > div.pr-2.pa-0.col.col-6 > div > div > div.v-input__slot > div"
+  )
+    .click({ force: true })
+    .type(SharedItemListViewLabel);
+});
+
+Cypress.Commands.add(
+  "SharedItemListViewDescription",
+  (SharedItemListViewDescription) => {
+    cy.get(
+      "div.container > div > div > form > div:nth-child(3) > div > div > div.v-input__slot > div"
+    )
+      .click({ force: true })
+      .type(SharedItemListViewDescription);
+  }
+);
+
+Cypress.Commands.add("SharedItemListViewIcon", () => {
+  cy.get(
+    "div.container > div > div > form > div:nth-child(2) > div.pl-2.pa-0.col.col-6 > div > div > div.v-input__slot > div.v-select__slot > div"
+  ).click({ force: true });
+  cy.get(".v-list-item:nth-child(4) .v-list-item__title").click({
+    force: true,
+  });
+});
+
+Cypress.Commands.add("SaveSharedItemListView", () => {
+  
+  //Click on Save
+  cy.get(".px-4 > .v-btn__content").click();
+  //Click on Assertion msg for save
+  cy.get(".v-btn__content > .theme--dark").click({force:true});
+});
+
+///////////////////////////////////////////////////////////////////////////////
 
 //Update Contact details selector
 
