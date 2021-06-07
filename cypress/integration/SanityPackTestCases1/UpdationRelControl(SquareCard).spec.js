@@ -742,7 +742,7 @@ describe("Update Related New fot Square Card Related Control", function () {
     );
   });
 
-  it.only("Square Card Related New", function () {
+  it.only('Open SquareCard Related New',function(){
     //Click on New Item for square caed Related Control
     cy.get(".ca-item")
       .eq(3)
@@ -753,7 +753,11 @@ describe("Update Related New fot Square Card Related Control", function () {
     //Related Kit Assertion
     cy.contains(this.DataType2.CardKitToBeRelated).should("be.visible");
     cy.wait(4000);
+  })
 
+  it.only("Square Card Related New", function () {
+    
+    cy.wait(1000)
     //Create Sqaurecard RelatedNew
     cy.wait(2000);
     //click on URl pancil icon

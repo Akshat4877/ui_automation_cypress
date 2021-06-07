@@ -743,12 +743,11 @@ describe("Update Related New for OneToMany Related Control", function () {
     );
   });
 
-
-  it.only("OneToMany Related New", function () {
+  it.only('Open SquareCard Related New',function(){
     //OnetoMany Kit item deletion
     //Scroll
     cy.get(".ca-item").eq(1).scrollIntoView({ force: true });
-
+    cy.wait(2000)
     //Click on New item(Open related new-OneToMnay)
     cy.get(".ca-item")
       .eq(1)
@@ -758,8 +757,12 @@ describe("Update Related New for OneToMany Related Control", function () {
     cy.contains("New Item created").should("be.visible");
     //Related Kit Assertion
     cy.contains(this.DataType2.KitToBeRelate).should("be.visible");
-    cy.wait(10000);
+    cy.wait(4000);
+  })
 
+
+  it.only("OneToMany Related New", function () {
+    cy.wait(1000)
     //Create OneToMany RelatedNew
     cy.wait(2000);
     //click on URl pancil icon

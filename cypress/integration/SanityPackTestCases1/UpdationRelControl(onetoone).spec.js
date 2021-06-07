@@ -766,8 +766,8 @@ describe("Update Related New fot OneToOne Related Control", function () {
     cy.wait(1000);
   });
 
+  it.only('Open OneToOne Related New',function(){
 
-  it.only("OneToOne Related New", function () {
     //One To One Relation
     //Click on New Item for one to one Related Control
     cy.get(".mr-4 > .inline-svg > path").eq(1)
@@ -776,11 +776,18 @@ describe("Update Related New fot OneToOne Related Control", function () {
     //New Item Assertion
     cy.contains("New Item created").should("be.visible");
     //Related Kit Assertion
+    cy.wait(4000)
     cy.contains(this.DataType2.KitToBeRelate).should("be.visible");
     cy.get("[name" + "=" + this.DataType2.Text + "]")
       .eq(1).should('be.visible')
-    cy.wait(4000);
+    cy.wait(1000);
 
+  })
+
+
+  it.only("OneToOne Related New", function () {
+    
+    cy.wait(1000)
     //Create OneToMany RelatedNew
     cy.wait(2000);
     //click on URl pancil icon
