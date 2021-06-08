@@ -738,26 +738,34 @@ describe("New kit item complete creation test case", function () {
     //Assertion validation
     cy.contains(this.SData.AddGroup).should("be.visible");
     cy.wait(1000);
+  });
+
+  it.only('Save Validation',function(){
+
     //save Kit Item
     cy.get(".v-select__selections .v-btn__content")
       .first()
       .click({ force: true });
     //save Kit Item
     cy.get(".v-select__selections .v-btn__content").first().click({ force: true });
-    //cy.contains(this.NewKitItemData.KitName + " has been saved").should("be.visible");
-    cy.log(this.NewKitItemData.KitName + "Kit Type has been Saved");
+     //kit item Save Assertion for nothing
+     cy.contains("Nothing to save for " + this.NewKitItemData.KitName).should(
+      "be.visible"
+    );
     cy.wait(3000)
+  })
 
-    //close the Kit Item
-    cy.get(".subheader--button-icon-wrapper path").click({
-      force: true,
-    });
-    cy.log(this.NewKitItemData.KitName + "Kit item has been Close");
-    cy.wait(1000)
-  });
+  it.only('Close kit item',function(){
+     //close the Kit Item
+     cy.get(".subheader--button-icon-wrapper path").click({
+     force: true,
+     });
+     cy.log(this.NewKitItemData.KitName + "Kit item has been Close");
+     cy.wait(1000)
+  })
 
 
-  it.only("Click on list view and select kit type to Validate", function () {
+  it.only("Click on Left Panel and select kit type to Validate", function () {
     const lp = new LoginPage();
     //Click on Hamburger Icon
     lp.HMBIcon();

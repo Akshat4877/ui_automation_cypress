@@ -20,6 +20,15 @@ describe("Login for new User than Create A new Connection and Accept the request
       //   appName: "Common Aera UI Automation",
       //   testName: "Accept the New User Connection Request",
       // });
+
+       //Globally fixtures for login creads
+       cy.fixture("LoginTestData/GlobalLoginCreds").then(function (
+       LogInScriptGloably
+       ) {
+       this.LoginCreds = LogInScriptGloably;
+       });
+     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
       //debugger;
       cy.fixture("ConnectionsDynamicTestData/ConnectionUserCredentials").then(
         //cy.fixture("VerificationTestCasesData/AcceptRequestUserData").then(
@@ -34,46 +43,26 @@ describe("Login for new User than Create A new Connection and Accept the request
     }
   );
 
-  it("First Time Login into the appLication for New User", function () {
-    //PageObjects
-    const sp = new SignUpPage();
+  it.only('Login TestCase',function(){
     const lp = new LoginPage();
-    lp.BaseTest()
-    lp.EnterEmail(this.Credentials.UserEmail);
-    lp.EnterPassword("1234567Aa");
-    //cy.eyesCheckWindow("First time user logging into the application");
-    lp.Submit();
-    //First Time login commands
-    // cy.url().should("include", "Public/TermsAndConditions?acceptTerms=True");
-    // cy.get("#readTerms").click();
-    // //cy.eyesCheckWindow();
-    cy.wait(15000);
-    cy.log("New Users has been logged in first time successfully");
-    //cy.eyesCheckWindow("Logged In");
-    //Welcome User Assertion
-    cy.get(
-      "#inspire > div.v-application--wrap > div:nth-child(1) > div.root-container.fill-height.fill-width > div.base-layout-main-content.box > div.row.content-wrapper.fill-width.fill-height > div.fill-height.body-right-wrapper.col-sm-12.col.col-xs-12.col-md-7.col-lg-8.col-xl-9 > div > div > div > div.px-4.col.col-12 > div > span"
-    ).should("have.text", "Home Page Overview");
-    cy.get(
-      "#inspire > div.v-application--wrap > div:nth-child(1) > div.root-container.fill-height.fill-width > div.base-layout-main-content.box > div > div.fill-height.body-right-wrapper.col-sm-12.col.col-xs-12.col-md-7.col-lg-8.col-xl-9 > div > div > div > div.px-4.col.col-12 > div"
-    ).then(function ($WelEle) {
-      const WelcomeTxt = $WelEle.text();
-      cy.log(WelcomeTxt);
+    const slp = new SanityLoginPage();
+    slp.LoginUrl(this.LoginCreds.CAUrl)
+    //Handling Alert
+    cy.on("window:confirm", () => {
+      cy.log("Alert has been Handled");
     });
-  });
+    //Login Assertions
+    cy.contains(" Log In ").should("be.visible");
+    //Enter credentials
+    lp.EnterEmail(this.LoginCreds.username);
+    lp.EnterPassword(this.LoginCreds.Password);
+    lp.Submit();
+    cy.log("User has been Logged In into the application");
+    cy.wait(5000)
+  })
 
   it.only("Create a new Connection ", function () {
     const lp = new LoginPage();
-    const slp = new SanityLoginPage();
-    slp.nvdTest()
-    lp.EnterEmail("propertymanagement@commonareas.work.dev");
-    lp.EnterPassword("1234567Aa");
-    //cy.screenshot("User Details-(To Create Connection Request");
-    cy.wait(10000);
-    //cy.eyesCheckWindow("Logging into the application");
-    lp.Submit();
-    cy.wait(10000);
-    cy.log("Users has been logged in successfully");
     //cy.eyesCheckWindow("Logged into the application");
     lp.PlusIcon();
     lp.ConnectionIcon();
@@ -106,9 +95,9 @@ describe("Login for new User than Create A new Connection and Accept the request
 
   it.only("Login to appLication for Accepting the Request", function () {
     //PageObjects
-    const sp = new SignUpPage();
+    const slp = new SanityLoginPage();
     const lp = new LoginPage();
-    lp.BaseTest();
+    slp.BaseUrl();
     lp.EnterEmail(this.Credentials.UserEmail);
     lp.EnterPassword("1234567Aa");
     //cy.screenshot("User Details-To Logged In(Accepting Connection Request");

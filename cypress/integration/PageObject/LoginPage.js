@@ -11,7 +11,7 @@ class LoginPage {
   }
 
   KitBuilder() {
-    cy.visit("https://nvd.ca-test.com/ClientAdmin/KitBuilder#/");
+    cy.visit("https://joesplayground.ca-test.com/ClientAdmin/KitBuilder#/");
   }
 
   EnterEmail(value) {

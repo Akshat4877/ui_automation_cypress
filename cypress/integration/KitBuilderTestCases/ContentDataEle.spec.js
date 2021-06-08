@@ -48,12 +48,6 @@ describe("Kit Builder Data Types Details", function () {
     ) {
       this.KitTypeName = KitTypeName;
     });
-    cy.fixture("KitBuilderTestData/KitBuilderDataTypes").then(function (
-      datatypes
-    ) {
-      this.DataType = datatypes;
-    });
-
     cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
       NewDataForElements
     ) {

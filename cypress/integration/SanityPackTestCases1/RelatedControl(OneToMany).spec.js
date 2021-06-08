@@ -71,6 +71,18 @@ describe("Related Control One to Many test case", function () {
     //   }
     // );
 
+    cy.fixture("SanityPackTestData/NewKitItemTabsData").then(function (
+      SanityTCData
+    ) {
+      this.SData = SanityTCData;
+    });
+
+    // cy.fixture("SanityPackTestData(Prod)/NewKitItemTabsData(Prod)").then(
+    //   function (SanityTCData) {
+    //     this.SData = SanityTCData;
+    //   }
+    // );
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     cy.fixture("KitBuilderTestData/FormViewsNameData").then(function (
@@ -484,17 +496,47 @@ describe("Related Control One to Many test case", function () {
       this.NewKitItemData.KitName +
       " created"
     ).should("be.visible");
+    cy.wait(1000)
+  });
 
+  it.only('Add A Contributor to Child Kit Item',function(){
+    //Contributors Tab
+    cy.contains(" Contributors ").click({ force: true });
+    //Click on Add for Contributors
+    cy.get(".addBtn:nth-child(2) > .v-btn__content").click({ force: true });
+    //Assertion validation
+    cy.contains(" Connections ").should("be.visible");
+    //Click on contribytors checkbox
+    cy.contains("Contributor").click({ force: true });
+    cy.wait(1000);
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.SData.ContributorsName}{enter}`)
+    cy.wait(3000)
+    //Select Name
+    cy.contains(this.SData.ContributorsName).click({ force: true });
+    //Click on Save
+    cy.get(".button-pop-ups--size > .v-btn__content")
+      .eq(0)
+      .click({ force: true });
+    //creation Assertion validation
+    cy.contains("Item shared").should("be.visible");
+    cy.log("Contributor added");
+    cy.wait(1000);
+  })
+  
+  it.only('Close the Related New Kit Item',function(){
     //close the Kit Item
     cy.get(".subheader--button-icon-wrapper path").first().click({
       force: true,
     });
     cy.contains(this.NewKitItemData.KitName).should("be.visible");
     cy.log("Related new has been Close");
-    cy.wait(10000);
-  });
+    cy.wait(5000);
+  })
 
-  it.only("Validate One to Many added Element(Releated New)", function () {
+  it.only("New Form Save Validation", function () {
     //Scroll
     cy.contains(this.DataType2.OneToManyRelation).scrollIntoView({
       force: true,
@@ -508,7 +550,6 @@ describe("Related Control One to Many test case", function () {
     cy.wait(1000);
     //Assertion
     cy.contains("Total 1 items").should("be.visible");
-
 
     //save Kit item  (new form)
     cy.get(".v-select__selections .v-btn__content")
@@ -534,14 +575,15 @@ describe("Related Control One to Many test case", function () {
     cy.log("There is nothing to save for Kit Item");
   });
 
-  it.only('Click to open related new', function () {
-    cy.wait(2000)
+  it.only('Click to open and Validate created Related New', function () {
+    cy.wait(1000)
     cy.get('.grid-body > td:nth-child(1) > .v-list-item__subtitle').click({ force: true });
     //Related Kit Assertion
     cy.contains(this.DataType2.KitToBeRelated).should("be.visible");
+    cy.wait(3000)
     //Related New form element assertion
     cy.get("[name" + "=" + this.DataType2.Url + "]").should("be.visible");
-    cy.wait(2000);
+    cy.wait(1000);
   })
 
   it.only("Url Element data Validation", function () {
@@ -860,7 +902,6 @@ describe("Related Control One to Many test case", function () {
   });
 
   it.only("Deletion Link Item", function () {
-
     //Click on delete icon
     cy.get(".btn-manage path").eq(0).click({ force: true });
     //Delete pop up assertion
@@ -885,4 +926,108 @@ describe("Related Control One to Many test case", function () {
       ".grid-body:nth-child(2) > td:nth-child(1) > .v-list-item__subtitle"
     ).should("not.exist");
   });
+
+   it.only('Add A Contributor to Parent Kit Item',function(){
+    //Contributors Tab
+    cy.contains(" Contributors ").click({ force: true });
+    //Click on Add for Contributors
+    cy.get(".addBtn:nth-child(2) > .v-btn__content").click({ force: true });
+    //Assertion validation
+    cy.contains(" Connections ").should("be.visible");
+    //Click on contribytors checkbox
+    cy.contains("Contributor").click({ force: true });
+    cy.wait(1000);
+    cy.xpath('//*[text() ="Search"]').first().click({ force: true })
+    cy.wait(1000)
+    cy.xpath('//*[text() ="Search"]').first().next('input')
+      .type(`${this.SData.ContributorsName}{enter}`)
+    cy.wait(3000)
+    //Select Name
+    cy.contains(this.SData.ContributorsName).click({ force: true });
+    //Click on Save
+    cy.get(".button-pop-ups--size > .v-btn__content")
+      .eq(0)
+      .click({ force: true });
+    //creation Assertion validation
+    cy.contains("Item shared").should("be.visible");
+    cy.log("Contributor added");
+    cy.wait(1000);
+  })
+
+  it.only('Save kit item Validation',function(){
+    //Again save Kit item(new form)
+    cy.get(".v-select__selections .v-btn__content")
+      .first()
+      .click({ force: true });
+    //kit item Save Assertion for nothing
+    cy.contains("Nothing to save for " + this.NewKitItemData.KitName).should(
+      "be.visible"
+    );
+    cy.contains(' Details ').click({force:true})
+    cy.wait(1000)
+  })
+
+  it.only('Close kit item',function(){
+     //close the Kit Item
+     cy.wait(1000)
+     cy.get(".subheader--button-icon-wrapper path").click({
+      force: true,
+    });
+    cy.log(this.NewKitItemData.KitName + "Kit item has been Close");
+    cy.wait(1000)
+  })
+
+  it.only("Click on list view and select kit type to Validate", function () {
+    const lp = new LoginPage();
+    //Click on Hamburger Icon
+    lp.HMBIcon();
+    cy.contains(this.NewKitItemData.KitName).scrollIntoView({
+      force: true,
+    });
+    //scroll to Open KitType from left panel
+    cy.contains(this.NewKitItemData.KitName).scrollIntoView({ force: true })
+    //Open KitType from left panel
+    cy.xpath("//*[contains(@class, 'd-flex col-9')]//*[text() = '" + this.NewKitItemData.KitName + "']")
+      .click({
+        force: true,
+      });
+    cy.log("Kit Type has been OPened");
+    //Click on First kit item of kit type to open edit view
+    cy.log("Kit Item Detail View has been Opened");
+    //Validation assertion for details view
+    cy.get(".kits-landing--header-title").should(
+      "have.text",
+      " Recently Viewed "
+    );
+  });
+
+  it.only('Validate kit item from left panel',function(){
+    //Created kit type existance assertion
+    cy.contains(
+      this.DataType2.Url + ":" + " " + this.RelatedKitItemData.NewKitItemUrl
+    ).should("exist");
+    cy.log("Created New Kit Item has been Exist");
+    //Click on created kit item
+    cy.contains(
+      this.DataType2.Url + ":" + " " + this.RelatedKitItemData.NewKitItemUrl
+    ).click({ force: true });
+    //element visible validation
+    cy.wait(4000)
+  })
+
+  it.only('Getting Kit Item ID', function () {
+    cy.wait(3000)
+    //geting kit item id
+    cy.xpath('//div[@class="truncate align-center d-none d-sm-flex col"]')
+      .invoke('text').then((KitItemId) => {
+        cy.log(KitItemId).writeFile(
+          "cypress/fixtures/SharedRelationKitItemIdData/OneToManyItemId.json",
+          {
+            ItemID: KitItemId,
+          }
+        );
+      })
+    cy.wait(1000)
+  })
+
 });
