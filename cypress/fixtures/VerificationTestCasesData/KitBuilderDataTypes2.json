@@ -1,87 +1,63 @@
 {
-
-    
-    "Url":"AreaLink",
-    "Text":"LandName",
-    "File":"DocFile",
-    "Telephone":"ContactNo",
-    "TextAera":"AeraDetails",
-    "Slider":"AreaRange",
-    "Currency":"Price",
-    "Measure":"AeraSize",
-    "Email":"DealerEmail",
-    "Address":"AreaAddress",
+    "Url":"Url",
+    "Text":"Text",
+    "File":"File",
+    "Telephone":"Telephone",
+    "TextAera":"TextAera",
+    "Slider":"Slider",
+    "Currency":"Currency",
+    "Measure":"Measure",
+    "Email":"Email",
+    "Address":"Address",
     "Section":"Section",
-    "Number":"AreaNumber",
-
+    "Number":"Number",
     "Time":"Time",
     "Date":"Date",
     "ReminderName":"Reminder",
-    
-    "Toggle":"isResidential",
-    
-
-    "SelectList":"AreaRequired",
-    "SelectListName":"AreaRequired",
-    "SelectListValue1":"500sqft",
-    "SelectListValue2":"800sqft",
-    "SelectListValue3":"1000sqft",
-    "SelectListValue4":"1200sqft",
-    "SelectListValue5":"1500sqft",
-    
-    
-    "RadioSelect":"NeedLandFor",
-    "RadioSelectName":"NeedLandFor",
-    "RadioSelectValue1":"HouseArea",
-    "RadioSelectValue2":"OfficeArea",
-    "RadioSelectValue3":"ParkLand",
-    "RadioSelectValue4":"Warehouse",
-    "RadioSelectValue5":"ShowRoom",
-
-
-    "CheckboxSelect":"NearBy",
-    "CheckboxSelectName":"NearBy",
-    "CheckboxSelectValue1":"Market",
-    "CheckboxSelectValue2":"Metro",
-    "CheckboxSelectValue3":"HighWay",
-    "CheckboxSelectValue4":"Mall",
-    "CheckboxSelectValue5":"Restro",
-
-   
-
-    "Stepper":"AreaType",
-    "StepperName":"AreaType",
-    "StepperValue1":"Residential",
-    "StepperValue2":"Industrial",
-    "StepperValue3":"Plan",
-    "StepperValue4":"GreenAera",
-    "StepperValue5":"ForestCity",
-
-
-    "UserSelector":"Dealers",
-    "ContactSelector":"Buyers",
-    "Assigning":"AssignedPepole",
-
-
-    "Icon":"AreaIcon",
-    
+    "Toggle":"Toggle",
+    "SelectList":"SelectList",
+    "SelectListName":"SelectList",
+    "SelectListValue1":"Australia",
+    "SelectListValue2":"Bangla",
+    "SelectListValue3":"India",
+    "SelectListValue4":"Lord",
+    "SelectListValue5":"Venacura",
+    "RadioSelect":"RadioSelect",
+    "RadioSelectName":"RadioSelect",
+    "RadioSelectValue1":"SR1",
+    "RadioSelectValue2":"SR2",
+    "RadioSelectValue3":"SR3",
+    "RadioSelectValue4":"SR4",
+    "RadioSelectValue5":"SR5",
+    "CheckboxSelect":"CheckboxSelect",
+    "CheckboxSelectName":"CheckboxSelect",
+    "CheckboxSelectValue1":"CheckboxSelect1",
+    "CheckboxSelectValue2":"CheckboxSelect2",
+    "CheckboxSelectValue3":"CheckboxSelect3",
+    "CheckboxSelectValue4":"CheckboxSelect4",
+    "CheckboxSelectValue5":"CheckboxSelect5",
+    "Stepper":"Stepper",
+    "StepperName":"Stepper",
+    "StepperValue1":"Jio",
+    "StepperValue2":"Moto",
+    "StepperValue3":"Note",
+    "StepperValue4":"Oppo",
+    "StepperValue5":"RealMe",
+    "UserSelector":"UserSelector",
+    "ContactSelector":"ContactSelector",
+    "Assigning":"Assigning",
+    "Icon":"Icon",
     "pls dont modified these below three icon values":"IconSize-IconLabel-Icontitle",
     "IconSize":"IconSize",
     "IconLabel":"IconLabel",
     "Icontitle":"title",
-    
-
-    "Inspection":"PaymentMode",
-    "InspectionName":"PaymentMode",
-    "InspectionValue1":"Cash",
-    "InspectionValue2":"NEFT",
-    "InspectionValue3":"UPIs",
-    "InspectionValue4":"PayLater",
-    "InspectionValue5":"OnLease",
-
-
-
-    
+    "Inspection":"Inspection",
+    "InspectionName":"Inspection",
+    "InspectionValue1":"Cdot",
+    "InspectionValue2":"Java",
+    "InspectionValue3":"Python",
+    "InspectionValue4":"Ruby",
+    "InspectionValue5":"Zapare",
     "OneToManyRelation":"BaseNRelation",
     "KitToBeRelated":"Extension",
     "OneToManyRelatedNew":"RelatedNewView",
@@ -94,8 +70,6 @@
     "RelatedEle_3":"Telephone",
     "RelatedEle_4":"Email",
     "RelatedEle_5":"Currency",
-
-    
     "OneToOneRelation":"BaseOneToOne",
     "KitToBeRelate":"Extension",
     "OneToOneRelatedNew":"RelatedNewView",
@@ -105,8 +79,6 @@
     "ElementToBeRelate1":"url",
     "ElementToBeRelate2":"text",
     "ElementToBeRelate3":"textAera",
-
-     
     "SquareCardName":"BaseSquareCard",
     "CardKitToBeRelated":"PropertyBuilder",
     "CardRelatedNew":"RelatedNewView",
@@ -119,23 +91,16 @@
     "RelateEle_3":"Telephone",
     "RelateEle_4":"Email",
     "RelateEle_5":"Email",
-
     "RCName":"Reactive Control",
-
     "RVName":"Reactive Vriable",
-
     "TextBlockName":"TextBlockName",
     "TextBlockData":"TextBlock for the sanity automation ",
     "Button":"Button",
     "LinkName":"Link",
     "EnterUrl":"https://www.makemytrip.com",
-
     "CreatedBy":"Created By",
     "ModifiedBy":"Modified By",
     "CreatedOn":"Created On",
     "ModifiedOn":"Modified On",
     "KitItemId":"KitItem Id"
-
-   
-
 }

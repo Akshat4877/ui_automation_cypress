@@ -336,6 +336,19 @@ describe("Base Connection Shared Kit Item Test Case For Basic Controls", functio
         cy.contains(" Scheduler ").should('not.exist')
         cy.contains(" Common Plans ").should('not.exist')
     });
+
+    it.only("Email Notification Shared Kit Item Activity for Base Connection(New View Contributor)", function () {
+        //PageObject
+        const sp = new SignUpPage();
+        sp.mailinatorSite();
+        cy.url().should("include", "mailinator.com");
+        sp.EnterMailinatorEmail(this.SharedCreds.BaseConnection);
+        cy.log("User Email has been Entered");
+        //Click on Go
+        sp.Go();
+        cy.wait(5000);
+        cy.contains("New " + this.NewKitItemData.KitName).click({ force: true });
+    });
 })
 
 

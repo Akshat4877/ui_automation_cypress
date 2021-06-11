@@ -911,7 +911,7 @@ describe("Update created kit item test case", function () {
 
   it.only('Time Element data Validation', function () {
     //Check in josn for LoggedTime
-    cy.get('[placeholder="Add Time"][readonly="readonly"]').eq(0)
+    cy.get('[placeholder="Add Time"][readonly="readonly"]').eq(1)
       .should("have.value", this.UpdateKitItemData.LoggedTime)
   })
 

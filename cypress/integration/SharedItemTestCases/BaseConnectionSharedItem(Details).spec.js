@@ -44,6 +44,17 @@ describe("Base Connection Shared Kit Item Test Case", function () {
             });
           /////////////////////////////////////////////////////////////////////////
 
+          cy.fixture("KitTypeTestData/NewKitItemDataValues").then(function (
+            KitDataEle
+         ) {
+            this.NewKitItemData = KitDataEle;
+         });
+
+         // cy.fixture("SanityPackTestData(Prod)/NewKitItemDataValue(Prod)").then(
+         //   function (KitDataEle) {
+         //     this.NewKitItemData = KitDataEle;
+         //   }
+         // );
 
         cy.fixture("SanityPackTestData/UpdateKItItemData").then(function (
             UpDateKitItemSDTCData
@@ -331,51 +342,21 @@ describe("Base Connection Shared Kit Item Test Case", function () {
         cy.contains(" Scheduler ").should('not.exist')
         cy.contains(" Common Plans ").should('not.exist')
     });
-})
 
-describe("Email Notification Shared Activity", function () {
-    this.beforeEach(
-        "Internal User Credentials",
-        function () {
-
-            cy.fixture("SanityPackTestData2/SharedUserCredentials").then(function (KitDataEle) {
-                this.Credentials = KitDataEle;
-            });
-
-            // cy.fixture("SanityPackTestData2(Prod)/SharedUserCredentials(Prod)").then(function (KitDataEle) {
-            //     this.Credentials = KitDataEle;
-            // });
-
-            cy.fixture("KitTypeTestData/NewKitItemDataValues").then(function (
-                KitDataEle
-            ) {
-                this.NewKitItemData = KitDataEle;
-            });
-
-            // cy.fixture("SanityPackTestData(Prod)/NewKitItemDataValue(Prod)").then(
-            //     function (KitDataEle) {
-            //         this.NewKitItemData = KitDataEle;
-            //     }
-            // );
-        });
-
-    it.only("Verifying Email Notification Shared Kit Item Activity for External User ", function () {
+    it.only("Email Notification Shared Kit Item Activity for Base Connection(New View Contributor)", function () {
         //PageObject
         const sp = new SignUpPage();
         sp.mailinatorSite();
         cy.url().should("include", "mailinator.com");
-        sp.EnterMailinatorEmail(this.Credentials.ExternalConnection);
+        sp.EnterMailinatorEmail(this.SharedCreds.DetailsBaseConnection);
         cy.log("User Email has been Entered");
         //Click on Go
         sp.Go();
-        cy.wait(10000);
+        cy.wait(5000);
         cy.contains("New " + this.NewKitItemData.KitName).click({ force: true });
-        //Validate shared kit item id
-        // cy.get("#html_msg_body").eq(0).then(($iframe) => {
-        //     const $a = $iframe.contents().find("td")
-        //         .then((text) => {
-        //             cy.log(text)
-        //         })
-        // });
     });
-});
+
+
+})
+
+

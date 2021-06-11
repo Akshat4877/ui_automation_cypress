@@ -138,7 +138,7 @@ describe("Kit Builder Data Types Details", function () {
     cy.wait(2000);
   });
 
-  it.only("UserSelector Data Type", function () {
+  it("UserSelector Data Type", function () {
     //Double click on Data Element to drag it on Canvas
     cy.get('[title="User Selector"]').dblclick({ force: true });
     cy.wait(1000);
@@ -169,7 +169,7 @@ describe("Kit Builder Data Types Details", function () {
     cy.wait(5000);
   });
 
-  it.only("ContactSelector Data Type", function () {
+  it("ContactSelector Data Type", function () {
     //Double click on Data Element to drag it on Canvas
     cy.get('[title="Contact Selector"]').dblclick({ force: true });
     cy.wait(1000);
@@ -204,7 +204,7 @@ describe("Kit Builder Data Types Details", function () {
     cy.wait(2000);
   });
 
-  it.only("Icon Data Type", function () {
+  it("Icon Data Type", function () {
     //Double click on Data Element to drag it on Canvas
     cy.get('[title="Icon"]').dblclick({ force: true });
     cy.wait(1000);

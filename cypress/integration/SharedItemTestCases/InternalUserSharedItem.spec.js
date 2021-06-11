@@ -383,7 +383,7 @@ describe("Internal Connection Shared Kit Item Test Case", function () {
         cy.log("User Email has been Entered");
         //Click on Go
         sp.Go();
-        cy.wait(10000);
+        cy.wait(5000);
         cy.contains("New " + this.NewKitItemData.KitName).click({ force: true });
     });
 });
