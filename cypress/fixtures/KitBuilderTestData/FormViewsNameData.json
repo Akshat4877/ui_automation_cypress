@@ -9,6 +9,7 @@
     "CommonPlanView":"CommonPlanView",
     "RelatedNewView":"RelatedNewView",
     "RelatedEditView":"RelatedEditView",
+    "OfflineView":"OfflineView",
     "TableView":"TableView",
     "SearchView":"SearchView",
     "TimelineView":"TimelineView",

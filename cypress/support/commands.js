@@ -523,6 +523,44 @@ Cypress.Commands.add("SaveRelatedEditForm", () => {
   cy.get(".v-btn__content > .theme--dark").click();
 });
 
+
+//Offline View Form
+Cypress.Commands.add("OfflineViewLabel", (OfflineViewLabel) => {
+  cy.get(
+    "div.v-dialog__container > div > div > div > div.container > div > div > form > div:nth-child(1) > div.pr-4.pa-0.col.col-6 > div > div > div.v-input__slot > div"
+  )
+    .click({ force: true })
+    .type(OfflineViewLabel);
+});
+
+Cypress.Commands.add("OfflineViewIcon", () => {
+  cy.get(
+    "div.v-dialog__container > div > div > div > div.container > div > div > form > div:nth-child(2) > div:nth-child(2) > div > div > div.v-input__slot > div.v-select__slot > div"
+  ).click({ force: true });
+  cy.get(".v-list-item:nth-child(4) .v-list-item__title").click({
+    force: true,
+  });
+});
+
+Cypress.Commands.add(
+  "OfflineViewDescription",
+  (OfflineViewDescription) => {
+    cy.get(
+      "div.v-dialog__container > div > div > div > div.container > div > div > form > div:nth-child(3) > div > div > div.v-input__slot > div"
+    )
+      .click({ force: true })
+      .type(OfflineViewDescription);
+  }
+);
+
+Cypress.Commands.add("SaveOfflineForm", () => {
+  //Click on Save btn
+  cy.get(".px-4 > .v-btn__content").click();
+  //Click on Assertion to close msg
+  cy.get(".v-btn__content > .theme--dark").click();
+});
+
+
 //List View details Commands
 //TableList View details Commands
 Cypress.Commands.add("TableListViewLabel", (TableListViewLabel) => {

@@ -208,7 +208,20 @@ describe("Create New Kit type ", function () {
     cy.RelatedEditViewDescription(this.data.RelatedEditView);
     cy.SaveRelatedEditForm();
     cy.log("RelatedEdit View Form has been Created");
-    cy.contains("RelatedEditView").scrollIntoView({ force: true });
+    cy.contains(this.data.RelatedEditView).scrollIntoView({ force: true });
+  });
+
+  it.only("Offline View Form", function () {
+    const kb = new KitBuilderPage();
+    //Click On offline view Form
+    kb.ClickOnOfflineViewForm();
+    //offline Form View Detalis commands coming form command.js
+    cy.OfflineViewLabel(this.data.OfflineView);
+    cy.OfflineViewIcon();
+    cy.OfflineViewDescription(this.data.OfflineView);
+    cy.SaveOfflineForm();
+    cy.log("Offline View Form has been Created");
+    cy.contains(this.data.OfflineView).scrollIntoView({ force: true });
   });
 
   it.only('Open List Views',function(){

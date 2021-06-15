@@ -73,6 +73,13 @@ class KitBuilder {
     btn.click();
   }
 
+  ClickOnOfflineViewForm() {
+    const btn = cy.get(
+      ".col:nth-child(3) > .v-responsive:nth-child(1) .v-icon:nth-child(1)"
+    );
+    btn.click();
+  }
+
   //ListViews
   ClickOnTableList() {
     const btn = cy.get(
