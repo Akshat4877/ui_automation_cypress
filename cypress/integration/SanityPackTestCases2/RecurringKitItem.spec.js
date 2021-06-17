@@ -611,15 +611,14 @@ describe("Recurring New kit item creation test case", function () {
 
   it.only("Add a pin on Map", function () {
     //Map Tab
-    cy.contains(" Map ").click({ force: true });
-    cy.wait(2000);
-    //Click on Map
-    cy.get(
-      ".vue-map-container:nth-child(2) .gm-style > div:nth-child(1) > div:nth-child(3)"
-    ).click({ force: true });
-    cy.contains("Add a Pin").click({ force: true });
-    //cy.contains("Pin has been created successfully.").should("be.visible");
-    cy.wait(1000);
+     cy.contains(" Map ").click({ force: true });
+     cy.wait(2000);
+     //Click on Map
+     cy.get('.gm-style > div:nth-child(2) > div:nth-child(3)')
+     .click();
+     cy.contains("Add a Pin").click({ force: true });
+     cy.contains(" Pin has been added successfully. ").should("be.visible");
+     cy.wait(1000);
   });
 
 
@@ -755,7 +754,9 @@ describe("Recurring New kit item creation test case", function () {
       this.NewKitItemData.RecurringAddComments
     );
     cy.wait(2000)
-    cy.contains(" SAVE ").click({ force: true });
+   //click on save
+   cy.get('.v-window-item:nth-child(7) .v-btn__content:nth-child(1)')
+   .click({force:true});
     //Assertion validation
     cy.contains(" New Comment added ").should("be.visible");
     cy.log("Comment has been added");
@@ -773,16 +774,23 @@ describe("Recurring New kit item creation test case", function () {
     cy.contains(this.NewKitItemData.RecurringAddGroup).click({ force: true });
     //Assertion validation
     cy.contains(this.NewKitItemData.RecurringAddGroup).should("be.visible");
+    cy.wait(1000)
+  });
 
+  it.only('Save Kit item',function(){
     //save Kit Item
     cy.get(".v-select__selections .v-btn__content").first().click({ force: true });
-
+    cy.contains(this.NewKitItemData.KitName + " has been saved").should(
+      "be.visible"
+    );
+    cy.wait(1000)
+    //save Kit Item
+    cy.get(".v-select__selections .v-btn__content").first().click({ force: true });
     //kit item Save Assertion
     cy.contains("Nothing to save for " + this.NewKitItemData.KitName).should(
       "be.visible"
     );
-    
-  });
+  })
 
   it.only('Close the item',function(){
     cy.wait(5000);
