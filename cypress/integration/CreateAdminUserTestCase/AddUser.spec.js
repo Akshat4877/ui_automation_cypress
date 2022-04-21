@@ -1,4 +1,4 @@
-import SignUpPage from "../PageObject/SignUpPage";
+import SanityLoginPage from "../PageObject/SanityLoginPage";
 import LoginPage from "../PageObject/LoginPage";
 import RandomString from "../PageObject/RandomString";
 
@@ -56,25 +56,32 @@ describe("Create user from admin and login with the new user", function () {
         cy.log(this.Credentials.FirstName);
         cy.log(this.Credentials.LastName);
       });
+       //Globally fixtures for login creads
+      cy.fixture("LoginTestData/GlobalLoginCreds").then(function (
+      LogInScriptGloably
+      ) {
+      this.LoginCreds = LogInScriptGloably;
+      });
       //2nd Fixture file(Static) for Adding User
       cy.fixture("AddUserDynamicTestData/AdminUserdata").then(function (data) {
         this.data = data;
       });
-      cy.viewport(1000, 600);
+      cy.viewport(1260, 770);
     }
   );
 
   it.only("Create user form admin", function () {
     //PageObject
     const lp = new LoginPage();
-    lp.visitCityComTest();
+    const slp = new SanityLoginPage();
+    slp.LoginUrl(this.LoginCreds.CAUrl)
 
     //Login Page assertion
     cy.contains(" Log In ").should("be.visible");
 
-    lp.EnterEmail("citycom@commonareas.work.dev");
-    lp.EnterPassword("1234567Aa");
-    cy.screenshot("Create User Admin Details");
+    lp.EnterEmail(this.LoginCreds.username);
+    lp.EnterPassword(this.LoginCreds.Password);
+    //cy.screenshot("Create User Admin Details");
     cy.wait(5000);
     //cy.eyesCheckWindow("Logging into the Application");
     lp.Submit();
@@ -83,14 +90,14 @@ describe("Create user from admin and login with the new user", function () {
     //cy.eyesCheckWindow("Logged In");
     cy.title().should("eq", "Common Areas");
     cy.wait(10000);
-    lp.CityComTestAddUser();
+    lp.AddUser();
     //cy.eyesCheckWindow();
     //cy.ClickOnAddUser();
     //Assertion
     cy.get(".admin--header").contains("Add User").should("be.visible");
     //cy.eyesCheckWindow();
-    cy.screenshot("Add User Admin Form");
-    cy.wait(10000);
+    //cy.screenshot("Add User Admin Form");
+    cy.wait(5000);
 
     //Adding User form Admin Custom Commands coming from command.js
     cy.UserFirstName(this.Credentials.FirstName);
@@ -103,6 +110,11 @@ describe("Create user from admin and login with the new user", function () {
 
     cy.UserPassword(this.data.UserPassword);
     cy.UserConfirmPassword(this.data.UserPassword);
+
+    
+    //Add Role
+    cy.get('select').select("Default")
+
 
     cy.UserTelephone(this.Credentials.UserTelephone);
     cy.UserMobilePhone(this.Credentials.UserPhoneNo);
@@ -133,7 +145,7 @@ describe("Create user from admin and login with the new user", function () {
     //Assertion
     cy.url().should("include", "ClientAdmin/UserDetails/");
     //cy.wait(2000).eyesCheckWindow();
-    cy.SaveUser();
+    //cy.SaveUser();
     cy.log("Admin User has been saved successfully");
 
     //Assertion
@@ -147,7 +159,7 @@ describe("Create user from admin and login with the new user", function () {
     cy.wait(10000);
   });
 
-  it.only("New Add user login into the appliction First time", function () {
+  it("New Add user login into the appliction First time", function () {
     //PageObject
     const lp = new LoginPage();
     lp.visitCityComTest();

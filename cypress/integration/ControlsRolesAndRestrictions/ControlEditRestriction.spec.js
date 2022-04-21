@@ -404,9 +404,7 @@ describe("Element Controls Roles And Restrication", function () {
         //RadioSelect
         cy.xpath('//div[@class="kit-control-radio-select col col-sm-12 col-md-6 mb-4 px-3 col-sm-12 col-md-6 mb-4 px-3"]//div')
         .should('have.class','v-input v-input--is-readonly theme--light v-input--selection-controls v-input--radio-group v-input--radio-group--column')
-    });
-
-   
+    }); 
 })
 
 

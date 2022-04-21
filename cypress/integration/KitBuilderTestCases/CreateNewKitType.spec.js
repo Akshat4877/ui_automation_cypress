@@ -224,6 +224,19 @@ describe("Create New Kit type ", function () {
     cy.contains(this.data.OfflineView).scrollIntoView({ force: true });
   });
 
+  it.only("Routine View Form", function () {
+    const kb = new KitBuilderPage();
+    //Click On offline view Form
+    kb.ClickOnRoutineViewForm();
+    //offline Form View Detalis commands coming form command.js
+    cy.RoutineViewLabel(this.data.RoutineView);
+    cy.RoutineViewIcon();
+    cy.RoutineViewDescription(this.data.RoutineView);
+    cy.SaveRoutineForm();
+    cy.log("Routine View Form has been Created");
+    cy.contains(this.data.RoutineView).scrollIntoView({ force: true });
+  });
+
   it.only('Open List Views',function(){
     //Click on List view Tab
     cy.contains("List Views").click({ force: true });
@@ -232,18 +245,46 @@ describe("Create New Kit type ", function () {
     cy.wait(1000);
   })
 
-  it.only("TableList View", function () {
+  it.only("RoutineList View", function () {
     //Page Object
     const kb = new KitBuilderPage();
     //Table List View Detalis commands coming form command.js
     kb.ClickOnTableList();
     cy.contains('Create Table List View').should('be.visible')
-    cy.TableListViewLabel(this.data.TableView);
-    cy.TableListViewDescription(this.data.TableView);
-    cy.TableListViewIcon();
-    cy.SaveTableList();
+    cy.RoutineListViewLabel(this.data.RoutineListView);
+    cy.RoutineListViewDescription(this.data.RoutineListView);
+    cy.RoutineListViewIcon();
+    cy.SaveRoutineList();
     cy.log("Table List View has been Created");
   })
+
+  it.only('SharedItem List View',function(){
+    //Page Object
+    const kb = new KitBuilderPage();
+    //SharedItem ListView Detalis commands coming form command.js
+    kb.ClickOnSharedItemList();
+    cy.contains('Create Shared Item List View').should('be.visible')
+    cy.SharedItemListViewLabel(this.data.SharedItemView);
+    cy.SharedItemListViewDescription(this.data.SharedItemView);
+    cy.SharedItemListViewIcon();
+    cy.SaveSharedItemListView();
+    cy.log("SharedItem List View has been Created");
+    cy.contains(this.data.SharedItemView).scrollIntoView({ force: true });
+   })
+
+   it.only('TimelineList View',function(){
+    //Page Object
+    const kb = new KitBuilderPage();
+    //Timeline ListView Detalis commands coming form command.js
+    kb.ClickOnTimelineList();
+    cy.contains('Create Timeline List View').should('be.visible')
+    cy.TimelineListViewLabel(this.data.TimelineView);
+    cy.TimelineListViewDescription(this.data.TimelineView);
+    cy.TimelineListViewIcon();
+    cy.SaveTimelineList();
+    cy.log("Timeline List View has been Created");
+ 
+   })
 
   it.only('SearchList View',function(){
     //Page Object
@@ -256,32 +297,19 @@ describe("Create New Kit type ", function () {
     cy.SearchListViewIcon();
     cy.SaveSearchList();
     cy.log("Search List View has been Created");
- 
    })
-   it.only('TimelineList View',function(){
-     //Page Object
-     const kb = new KitBuilderPage();
-     //Timeline ListView Detalis commands coming form command.js
-     kb.ClickOnTimelineList();
-     cy.contains('Create Timeline List View').should('be.visible')
-     cy.TimelineListViewLabel(this.data.TimelineView);
-     cy.TimelineListViewDescription(this.data.TimelineView);
-     cy.TimelineListViewIcon();
-     cy.SaveTimelineList();
-     cy.log("Timeline List View has been Created");
-  
-    })
-    it.only('SharedItem List View',function(){
-     //Page Object
-     const kb = new KitBuilderPage();
-     //SharedItem ListView Detalis commands coming form command.js
-     kb.ClickOnSharedItemList();
-     cy.contains('Create Shared Item List View').should('be.visible')
-     cy.SharedItemListViewLabel(this.data.SharedItemView);
-     cy.SharedItemListViewDescription(this.data.SharedItemView);
-     cy.SharedItemListViewIcon();
-     cy.SaveSharedItemListView();
-     cy.log("SharedItem List View has been Created");
-     cy.contains("TimelineView").scrollIntoView({ force: true });
-    })
+
+   it.only("TableList View", function () {
+    //Page Object
+    const kb = new KitBuilderPage();
+    //Table List View Detalis commands coming form command.js
+    kb.ClickOnTableList();
+    cy.contains('Create Table List View').should('be.visible')
+    cy.TableListViewLabel(this.data.TableView);
+    cy.TableListViewDescription(this.data.TableView);
+    cy.TableListViewIcon();
+    cy.SaveTableList();
+    cy.log("Table List View has been Created");
+    cy.contains(this.data.TableView).scrollIntoView({ force: true });
+  })    
 });

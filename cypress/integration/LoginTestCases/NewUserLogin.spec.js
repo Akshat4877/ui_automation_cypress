@@ -12,6 +12,7 @@ describe("Login into the application for a new User ", function () {
       "refreshToken",
       "jwtAccessToken"
     );
+    cy.viewport(1256, 770)
 
     cy.fixture("SignUpTestData/SignUpTestData").then(function (SignUpData) {
       this.SignUPData = SignUpData;
@@ -24,10 +25,11 @@ describe("Login into the application for a new User ", function () {
     );
   });
 
-  it("Login into the appLication for New User", function () {
+  it.only("Login into the appLication for New User", function () {
     //PageObject
     const lp = new LoginPage();
     lp.BaseTest()
+    
    
     //Login Assertions
     cy.contains(" Log In ").should("be.visible");
@@ -35,7 +37,7 @@ describe("Login into the application for a new User ", function () {
     lp.EnterEmail(this.Credentials.UserEmail);
     lp.EnterPassword(this.Credentials.Password);
     cy.screenshot("User logged In Details");
-    cy.wait(7000);
+    cy.wait(3000);
     lp.Submit();
     cy.log("User has been Logged In into the application");
 
@@ -52,9 +54,9 @@ describe("Login into the application for a new User ", function () {
     cy.wait(5000);
     //cy.title().should("eq", "Common Areas");
     cy.log("New Users has been logged in successfully");
-    cy.get(
-      "#inspire > div.v-application--wrap > div:nth-child(1) > div.root-container.fill-height.fill-width > div.base-layout-main-content.box > div.row.content-wrapper.fill-width.fill-height > div.fill-height.body-right-wrapper.col-sm-12.col.col-xs-12.col-md-7.col-lg-8.col-xl-9 > div > div > div > div.px-4.col.col-12 > div > span"
-    ).should("have.text", this.SignUPData.CompanyName);
+    // cy.get(
+    //   "#inspire > div.v-application--wrap > div:nth-child(1) > div.root-container.fill-height.fill-width > div.base-layout-main-content.box > div.row.content-wrapper.fill-width.fill-height > div.fill-height.body-right-wrapper.col-sm-12.col.col-xs-12.col-md-7.col-lg-8.col-xl-9 > div > div > div > div.px-4.col.col-12 > div > span"
+    // ).should("have.text", this.SignUPData.CompanyName);
     cy.get(
       "#inspire > div.v-application--wrap > div:nth-child(1) > div.root-container.fill-height.fill-width > div.base-layout-main-content.box > div > div.fill-height.body-right-wrapper.col-sm-12.col.col-xs-12.col-md-7.col-lg-8.col-xl-9 > div > div > div > div.px-4.col.col-12 > div"
     ).then(function ($WelEle) {
@@ -66,7 +68,7 @@ describe("Login into the application for a new User ", function () {
     cy.wait(5000);
   });
 
-  it("Sign Out for logged in user", function () {
+  it.only("Sign Out for logged in user", function () {
     //Click on admin
     cy.get('[name="your-profile"]').click({ force: true });
     cy.wait(2000);

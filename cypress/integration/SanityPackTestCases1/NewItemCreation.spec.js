@@ -103,7 +103,6 @@ describe("New kit item complete creation test case", function () {
     cy.wait(5000)
   })
   
-
   it.only("Navigating to created Kit type ", function () {
     cy.wait(10000);
     const lp = new LoginPage();

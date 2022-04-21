@@ -59,7 +59,7 @@ describe("Input Section Data Elements Configuration", function () {
     });
   });
 
-  it('Login TestCase',function(){
+  it.only('Login TestCase',function(){
     const lp = new LoginPage();
     const slp = new SanityLoginPage();
     slp.LoginUrl(this.LoginCreds.CAUrl)
@@ -77,7 +77,7 @@ describe("Input Section Data Elements Configuration", function () {
     cy.wait(5000)
   })
 
-  it("Navigating to New Form of Created Kit Type", function () {
+  it.only("Navigating to New Form of Created Kit Type", function () {
     const kb = new KitBuilderPage();
     const lp = new LoginPage();
     cy.wait(5000);
@@ -95,11 +95,11 @@ describe("Input Section Data Elements Configuration", function () {
     cy.wait(1000);
   });
 
-  it("Input Section Data Elements", function () {
+  it.only("Input Section Data Elements", function () {
     cy.contains("Inputs").click({ force: true });
   });
 
-  it("Url Data Type", function () {
+  it.only("Url Data Type", function () {
     //Double click on Data Element to drag it on Canvas
     cy.get('[title="Url"]').dblclick({ force: true });
     cy.wait(1000);
@@ -109,7 +109,7 @@ describe("Input Section Data Elements Configuration", function () {
     cy.wait(2000);
   });
 
-  it("Text Data Type", function () {
+  it.only("Text Data Type", function () {
     //Double click on Data Element to drag it on Canvas
     cy.get('[title="Text"]').dblclick({ force: true });
     cy.wait(1000);
@@ -120,7 +120,17 @@ describe("Input Section Data Elements Configuration", function () {
     cy.wait(2000);
   });
 
-  it("File Data Type", function () {
+  it.only("QR Code Data Type", function () {
+    //Double click on Data Element to drag it on Canvas
+    cy.get('[title="QR Code"]').dblclick({ force: true });
+    cy.wait(1000);
+    //Page Object
+    const DataType = new KitBuilderDataTypes();
+    DataType.QRCode(this.DataType2.QRCode);
+    cy.wait(2000);
+  });
+
+  it.only("File Data Type", function () {
     //Double click on Data Element to drag it on Canvas
     cy.get('[title="File"]').dblclick({ force: true });
     cy.wait(1000);
@@ -130,7 +140,7 @@ describe("Input Section Data Elements Configuration", function () {
     cy.wait(2000);
   });
 
-  it("Telephone Data Type", function () {
+  it.only("Telephone Data Type", function () {
     //Double click on Data Element to drag it on Canvas
     cy.get('[title="Telephone"]').dblclick({ force: true });
     cy.wait(1000);
@@ -140,7 +150,7 @@ describe("Input Section Data Elements Configuration", function () {
     cy.wait(2000);
   });
 
-  it("TextAera Data Type", function () {
+  it.only("TextAera Data Type", function () {
     //Double click on Data Element to drag it on Canvas
     cy.get('[title="Text Area"]').dblclick({ force: true });
     cy.wait(1000);
@@ -150,7 +160,7 @@ describe("Input Section Data Elements Configuration", function () {
     cy.wait(2000);
   });
 
-  it("Slider Data Type", function () {
+  it.only("Slider Data Type", function () {
     //Double click on Data Element to drag it on Canvas
     cy.get('[title="Slider"]').dblclick({ force: true });
     cy.wait(1000);
@@ -160,7 +170,7 @@ describe("Input Section Data Elements Configuration", function () {
     cy.wait(2000);
   });
 
-  it("Currency Data Type", function () {
+  it.only("Currency Data Type", function () {
     //Double click on Data Element to drag it on Canvas
     cy.get('[title="Currency"]').dblclick({ force: true });
     cy.wait(1000);
@@ -170,7 +180,7 @@ describe("Input Section Data Elements Configuration", function () {
     cy.wait(2000);
   });
 
-  it("Measure Data Type", function () {
+  it.only("Measure Data Type", function () {
     //Double click on Data Element to drag it on Canvas
     cy.get('[title="Measure"]').dblclick({ force: true });
     cy.wait(1000);
@@ -180,7 +190,7 @@ describe("Input Section Data Elements Configuration", function () {
     cy.wait(2000);
   });
 
-  it("Email Data Type", function () {
+  it.only("Email Data Type", function () {
     //Double click on Data Element to drag it on Canvas
     cy.get('[title="Email"]').dblclick({ force: true });
     cy.wait(1000);
@@ -190,7 +200,7 @@ describe("Input Section Data Elements Configuration", function () {
     cy.wait(2000);
   });
 
-  it("Address Data Type", function () {
+  it.only("Address Data Type", function () {
     //Double click on Data Element to drag it on Canvas
     cy.get('[title="Address"]').dblclick({ force: true });
     cy.wait(1000);
@@ -200,7 +210,7 @@ describe("Input Section Data Elements Configuration", function () {
     cy.wait(2000);
   });
 
-  it("Section Data Type", function () {
+  it.only("Section Data Type", function () {
     //Double click on Data Element to drag it on Canvas
     cy.get('[title="Section"]').dblclick({ force: true });
     cy.wait(1000);
@@ -210,7 +220,7 @@ describe("Input Section Data Elements Configuration", function () {
     cy.wait(2000);
   });
 
-  it("Number Data Type", function () {
+  it.only("Number Data Type", function () {
     //Double click on Data Element to drag it on Canvas
     cy.get('[title="Number"]').dblclick({ force: true });
     cy.wait(1000);
@@ -220,7 +230,37 @@ describe("Input Section Data Elements Configuration", function () {
     cy.wait(2000);
   });
 
-  it("Kit Builder Save and Publish", function () {
+  it.only("Color Picker Data Type", function () {
+    //Double click on Data Element to drag it on Canvas
+    cy.get('[title="Color Picker"]').dblclick({ force: true });
+    cy.wait(1000);
+    //Page Object
+    const DataType = new KitBuilderDataTypes();
+    DataType.Color(this.DataType2.ColorPicker);
+    cy.wait(2000);
+  });
+
+  it.only("Bar Code Data Type", function () {
+    //Double click on Data Element to drag it on Canvas
+    cy.get('[title="Bar Code"]').dblclick({ force: true });
+    cy.wait(1000);
+    //Page Object
+    const DataType = new KitBuilderDataTypes();
+    DataType.BarCode(this.DataType2.BarCode);
+    cy.wait(2000);
+  });
+
+  it.only("Rich Text Data Type", function () {
+    //Double click on Data Element to drag it on Canvas
+    cy.get('[title="Rich Text"]').dblclick({ force: true });
+    cy.wait(1000);
+    //Page Object
+    const DataType = new KitBuilderDataTypes();
+    DataType.RichText(this.DataType2.RichText);
+    cy.wait(2000);
+  });
+
+  it.only("Kit Builder Save and Publish", function () {
     //Kit Builder Save
     cy.get(".mr-2:nth-child(2) > .v-btn__content").click({ force: true });
     //save assertion closed

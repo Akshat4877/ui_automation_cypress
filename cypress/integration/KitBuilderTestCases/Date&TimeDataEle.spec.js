@@ -1,6 +1,7 @@
 import LoginPage from "../PageObject/LoginPage";
 import KitBuilderPage from "../PageObject/KitBuilderPage";
 import KitBuilderDataTypes from "../PageObject/KitBuilderDataTypes";
+import SanityLoginPage from "../PageObject/SanityLoginPage";
 
 describe("Date & Time Section Data Elements Configuration", function () {
   this.beforeAll(function () {
@@ -47,11 +48,7 @@ describe("Date & Time Section Data Elements Configuration", function () {
     ) {
       this.KitTypeName = KittypeName;
     });
-    cy.fixture("KitBuilderTestData/KitBuilderDataTypes").then(function (
-      datatypes
-    ) {
-      this.DataType = datatypes;
-    });
+    
 
     cy.fixture("VerificationTestCasesData/KitBuilderDataTypes2").then(function (
       NewDataForElements

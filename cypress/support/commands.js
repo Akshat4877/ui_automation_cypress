@@ -157,28 +157,28 @@ Cypress.Commands.add("KitName", (KitName) => {
     "#app > div.v-dialog__content.v-dialog__content--active > div > div > div.container > div > div > form > div:nth-child(1) > div:nth-child(2) > div > div > div.v-input__slot > div"
   )
     .click({ force: true })
-    .type(KitName);
-});
-
-Cypress.Commands.add("KitDescription", (KitDescription) => {
-  cy.get(
-    "#app > div.v-dialog__content.v-dialog__content--active > div > div > div.container > div > div > form > div:nth-child(2) > div > div > div > div.v-input__slot > div"
-  )
-    .click({ force: true })
-    .type(KitDescription);
+    //.type(KitName);
 });
 
 Cypress.Commands.add("ApiName", (ApiName) => {
   cy.get(
-    "div.v-dialog__content.v-dialog__content--active > div > div > div.container > div > div > form > div:nth-child(3) > div.pa-0.pr-2.col.col-6 > div > div > div.v-input__slot"
+    "div.container > div > div > form > div:nth-child(2) > div:nth-child(2) > div > div > div.v-input__slot > div"
   )
     .click({ force: true })
     .type(ApiName);
 });
 
+Cypress.Commands.add("KitDescription", (KitDescription) => {
+  cy.get(
+    "div.container > div > div > form > div:nth-child(4) > div > div > div > div.v-input__slot"
+  )
+    .click({ force: true })
+    .type(KitDescription);
+});
+
 Cypress.Commands.add("KitIcon", () => {
   cy.get(
-    "div.container > div > div > form > div:nth-child(3) > div:nth-child(2) > div > div > div.v-input__slot > div.v-select__slot > div"
+    " div.container > div > div > form > div:nth-child(3) > div > div > div > div.v-input__slot > div.v-select__slot > div > div > i"
   ).click({ force: true });
   cy.get(".v-list-item:nth-child(5) .v-list-item__title").click({
     force: true,
@@ -561,6 +561,43 @@ Cypress.Commands.add("SaveOfflineForm", () => {
 });
 
 
+//Routine View Form
+Cypress.Commands.add("RoutineViewLabel", (OfflineViewLabel) => {
+  cy.get(
+    "div.v-dialog__container > div > div > div > div.container > div > div > form > div:nth-child(1) > div.pr-4.pa-0.col.col-6 > div > div > div.v-input__slot > div"
+  )
+    .click({ force: true })
+    .type(OfflineViewLabel);
+});
+
+Cypress.Commands.add("RoutineViewIcon", () => {
+  cy.get(
+    "div.v-dialog__container > div > div > div > div.container > div > div > form > div:nth-child(2) > div:nth-child(2) > div > div > div.v-input__slot > div.v-select__slot > div"
+  ).click({ force: true });
+  cy.get(".v-list-item:nth-child(4) .v-list-item__title").click({
+    force: true,
+  });
+});
+
+Cypress.Commands.add(
+  "RoutineViewDescription",
+  (OfflineViewDescription) => {
+    cy.get(
+      "div.v-dialog__container > div > div > div > div.container > div > div > form > div:nth-child(3) > div > div > div.v-input__slot > div"
+    )
+      .click({ force: true })
+      .type(OfflineViewDescription);
+  }
+);
+
+Cypress.Commands.add("SaveRoutineForm", () => {
+  //Click on Save btn
+  cy.get(".px-4 > .v-btn__content").click();
+  //Click on Assertion to close msg
+  cy.get(".v-btn__content > .theme--dark").click();
+});
+
+
 //List View details Commands
 //TableList View details Commands
 Cypress.Commands.add("TableListViewLabel", (TableListViewLabel) => {
@@ -596,6 +633,45 @@ Cypress.Commands.add("SaveTableList", () => {
   //Click on Assertion msg for save
   cy.get(".v-btn__content > .theme--dark").click();
 });
+
+//RoutineList View details Commands
+Cypress.Commands.add("RoutineListViewLabel", (RoutineListViewLabel) => {
+  cy.get(
+    '#tab-list-views > div > div.v-overlay.v-overlay--active.theme--dark > div.v-overlay__content > div > div > div > div > div.container > div > div > form > div:nth-child(1) > div.pr-2.pa-0.col.col-6 > div > div > div.v-input__slot'
+  )
+    .click({ force: true })
+    .type(RoutineListViewLabel);
+});
+
+Cypress.Commands.add(
+  "RoutineListViewDescription",
+  (RoutineListViewDescription) => {
+    cy.get(
+      "div.container > div > div > form > div:nth-child(3) > div > div > div.v-input__slot > div"
+    )
+      .click({ force: true })
+      .type(RoutineListViewDescription);
+  }
+);
+
+
+Cypress.Commands.add("RoutineListViewIcon", () => {
+  cy.get(
+    "div.container > div > div > form > div:nth-child(2) > div.pl-2.pa-0.col.col-6 > div > div > div.v-input__slot > div.v-select__slot > div"
+  ).click({ force: true });
+  cy.get(".v-list-item:nth-child(2) .v-list-item__title").click({
+    force: true,
+  });
+});
+
+Cypress.Commands.add("SaveRoutineList", () => {
+  //Click on Save
+  cy.get(".px-4 > .v-btn__content").click();
+  //Click on Assertion msg for save
+  cy.get(".v-btn__content > .theme--dark").click();
+});
+
+
 
 //SearchList View details Commands
 Cypress.Commands.add("SearchListViewLabel", (SearchListViewLabel) => {

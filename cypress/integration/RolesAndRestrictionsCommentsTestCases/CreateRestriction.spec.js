@@ -100,8 +100,8 @@ describe("Roles And Restrication For Comments(Create)", function () {
         cy.xpath('//div[@class="row d-flex"]//div[@class="v-text-field__slot"]//input').eq(0)
             .invoke('val').then((text) => {
                 cy.log(text)
-                expect(text).equal(this.Roledata.RoleName)
-            })
+            expect(text).equal(this.Roledata.RoleName)
+        })
         cy.get('[href="#PermissionsTab"]').click({ force: true })
         //Assertion
         cy.contains('Configure Restriction').should('be.visible')
@@ -126,7 +126,6 @@ describe("Roles And Restrication For Comments(Create)", function () {
                 cy.wait(3000)
 
             })
-
     })
 
     it.only('Navigate to UI to Validate(Create)Restriction', function () {

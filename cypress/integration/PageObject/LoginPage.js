@@ -11,7 +11,11 @@ class LoginPage {
   }
 
   KitBuilder() {
-    cy.visit("https://nvd.ca-test.com/ClientAdmin/KitBuilder#/");
+    cy.visit("https://certainmanagement.ca-test.com/ClientAdmin/KitBuilder#/");
+  }
+
+  AddUser(){
+    cy.visit("https://certainmanagement.ca-test.com/ClientAdmin/AddUser")
   }
 
   EnterEmail(value) {

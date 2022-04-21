@@ -1,8 +1,6 @@
 import LoginPage from "../PageObject/LoginPage";
-import KitBuilderPage from "../PageObject/KitBuilderPage";
 import KitBuilderDataTypes from "../PageObject/KitBuilderDataTypes";
 import SanityLoginPage from "../PageObject/SanityLoginPage";
-
 
 describe("Choice Pickers Section Data Elements Configuration", function () {
   this.beforeAll(function () {
@@ -76,22 +74,21 @@ describe("Choice Pickers Section Data Elements Configuration", function () {
   it("Navigating to New Form of Created Kit Type", function () {
     const kb = new KitBuilderPage();
     const lp = new LoginPage();
-    cy.wait(5000);
     cy.title().should("eq", "Common Areas");
-    cy.wait(5000);
     lp.KitBuilder()
     cy.log("User entered in kit builder");
     //Open Craeted Kit Type
     kb.KBSearchBox(this.KitTypeName.KitName3);
     cy.wait(2000);
     cy.contains(this.KitTypeName.KitName3).click({ force: true });
+    cy.wait(1000);
     cy.log("Created Kit type has been opened");
     cy.contains("Form Views").click({ force: true });
-    cy.wait(1000);
     cy.contains(this.data.NewView).click({ force: true });
     cy.wait(1000);
   });
 
+  
   it("Choice Pickers Section Data Elements", function () {
     cy.contains("Choice Pickers").click({ force: true });
     cy.wait(1000);

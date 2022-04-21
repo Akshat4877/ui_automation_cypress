@@ -58,12 +58,11 @@ describe("Sign up for a New User", function () {
     }
   );
 
-  it("New User Sign up", function () {
+  it.only("New User Sign UP..", function () {
     //PageObject
     const sp = new SignUpPage();
     const lp = new LoginPage();
     lp.BaseTest()
-    //cy.visit('https://commonareas.io/Public/Login')
     cy.wait(3000);
     //cy.eyesCheckWindow()
 
@@ -134,7 +133,7 @@ describe("Activation Mailinator Account for New Sign up User", function () {
     }
   );
 
-  it("Verifying Email Id for Randomly generated New User on Mailinator site", function () {
+  it.only("Verifying Email Id for Randomly generated New User on Mailinator site", function () {
     //PageObject
     const sp = new SignUpPage();
     sp.mailinatorSite();
@@ -146,7 +145,7 @@ describe("Activation Mailinator Account for New Sign up User", function () {
     sp.Go();
     //cy.eyesCheckWindow("Common Aera Mail in the inbox");
     //cy.screenshot("Verifying for getting common aera email");
-    cy.wait(10000);
+    cy.wait(4000);
     cy.contains("Welcome to Commonareas - Verify Email").click();
     //debugger
     cy.wait(5000);
@@ -187,7 +186,7 @@ describe("Login into the application for a new User ", function () {
     );
   });
 
-  it("Login into the appLication for New User", function () {
+  it.only("Login into the appLication for New User", function () {
     //PageObject
     const sp = new SignUpPage();
     const lp = new LoginPage();
@@ -198,7 +197,7 @@ describe("Login into the application for a new User ", function () {
     lp.EnterEmail(this.Credentials.UserEmail);
     lp.EnterPassword(this.Credentials.Password);
     cy.screenshot("User logged In Details");
-    cy.wait(7000);
+    cy.wait(4000);
     lp.Submit();
     cy.log("User has been Logged In into the application");
 
@@ -225,7 +224,7 @@ describe("Login into the application for a new User ", function () {
     cy.wait(2000);
   });
 
-  it("Sign Out for logged in user", function () {
+  it.only("Sign Out for logged in user", function () {
     //Click on admin
     cy.get('[name="your-profile"]').click({ force: true });
     cy.contains("Sign Out").click({ force: true });

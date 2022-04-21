@@ -1,6 +1,7 @@
 {
-    "KitLabel3": "HouseArea",
-    "KitName3": "HouseArea",
-    "KitDescription3": "HouseArea",
-    "APIName3": "HouseArea"
+    "KitLabel3": "Committee1",
+    "KitName3": "Committee1",
+    "PluralName":"Committee1",
+    "KitDescription3": "Committee1",
+    "APIName3": "Committee1"
 }

@@ -10,9 +10,11 @@
     "RelatedNewView":"RelatedNewView",
     "RelatedEditView":"RelatedEditView",
     "OfflineView":"OfflineView",
+    "RoutineView":"RoutineView",
     "TableView":"TableView",
     "SearchView":"SearchView",
     "TimelineView":"TimelineView",
-    "SharedItemView":"SharedItemView"
+    "SharedItemView":"SharedItemView",
+    "RoutineListView":"RoutineListView"
 
 }

@@ -10,13 +10,13 @@ class SignUpPage {
   }
 
   EnterMailinatorEmail(value) {
-    const field = cy.get('[placeholder="Enter Public Mailinator Inbox"]');
+    const field = cy.get('#search');
     field.type(value);
     return this;
   }
 
   Go() {
-    const go = cy.get("#go-to-public");
+    const go = cy.get('[value="Search for public inbox for free"]');
     go.click();
   }
 

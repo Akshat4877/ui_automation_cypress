@@ -80,32 +80,47 @@ class KitBuilder {
     btn.click();
   }
 
-  //ListViews
-  ClickOnTableList() {
+  ClickOnRoutineViewForm() {
     const btn = cy.get(
-      ".col:nth-child(3) .list-view-block:nth-child(1) .v-icon:nth-child(1)"
+      ".px-1:nth-child(3) .v-icon:nth-child(1)"
     );
     btn.click();
   }
 
-  ClickOnSearchList() {
-    const btn = cy.get(".col:nth-child(4) .list-view-block .v-btn__content");
+  //ListViews
+
+  ClickOnRoutineList() {
+    const btn = cy.get(".col:nth-child(1) .list-view-block:nth-child(1) .v-icon:nth-child(1)");
     btn.click();
   }
 
-  ClickOnTimelineList() {
+  ClickOnSharedItemList() {
     const btn = cy.get(
       ".col:nth-child(2) .list-view-block:nth-child(1) .v-icon:nth-child(1)"
     );
     btn.click();
   }
 
-  ClickOnSharedItemList() {
+  ClickOnTimelineList() {
     const btn = cy.get(
-      ".col:nth-child(1) .list-view-block:nth-child(1) .v-icon:nth-child(1)"
+      ".col:nth-child(3) .list-view-block:nth-child(1) .v-icon:nth-child(1)"
     );
     btn.click();
   }
+
+
+  ClickOnTableList() {
+    const btn = cy.get(
+      ".col:nth-child(4) .list-view-block:nth-child(1) .v-icon:nth-child(1)"
+    );
+    btn.click();
+  }
+
+  ClickOnSearchList() {
+    const btn = cy.get(".col:nth-child(5) .list-view-block:nth-child(1) .v-icon:nth-child(1)");
+    btn.click();
+  }
+
 
   KBSearchBox(KitTypeName) {
     cy.get('.v-text-field__slot').click().type(KitTypeName);

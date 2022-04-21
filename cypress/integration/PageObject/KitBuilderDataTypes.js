@@ -78,6 +78,43 @@ class KitBuilderDataTypes {
     cy.log("Text Data Type has been Created");
   }
 
+  QRCode(QRCode) {
+    //Click on QR Code
+    cy.getIframeBody().contains('Label for QR Code').click({ force: true });
+    cy.wait(3000);
+    cy.get('.gjs-trt-trait__wrp:nth-child(6) input').click({ force: true });
+    cy.wait(1000)
+    //Click on Lable
+    cy.get(".gjs-trt-trait__wrp:nth-child(1) input").click().type(QRCode);
+    //Click on Name
+    cy.get(".gjs-trt-trait__wrp:nth-child(2) input").click();
+    //Select a Value
+    cy.wait(2000);
+    cy.get(".gjs-trt-trait__wrp:nth-child(3) select").select("Select a value");
+    //Select New Kit Element
+    cy.wait(1000);
+    cy.get(".gjs-trt-trait__wrp:nth-child(3) select").select("New Kit Element");
+    cy.wait(2000);
+
+    cy.contains("Element Label").click({ force: true });
+
+    cy.contains("Element Name").click({ force: true });
+
+    //cy.contains("Element Friendly Description")
+    cy.get(
+      "div.v-dialog__container.new-element-header > div > div > div.container.new-element-body > div > div > form > div:nth-child(2) > div > div > div > div.v-input__slot > div"
+    ).click({ force: true }).type(QRCode);
+    cy.wait(1000)
+    //Click on to ON External data share for Text 
+    cy.xpath('//*[text()="External Data Share"]').click({ force: true })
+    cy.wait(1000)
+    //Click on Save
+    cy.get(".v-btn--text:nth-child(2)").click();
+    //Assertion to close
+    cy.get(".v-btn__content > .theme--dark").click();
+    cy.log("QR Code Data Type has been Created");
+  }
+
   File(FileName) {
     //Click on File
     cy.getIframeBody()
@@ -422,6 +459,123 @@ class KitBuilderDataTypes {
     //Assertion to close
     cy.get(".v-btn__content > .theme--dark").click();
     cy.log("Number Data Type has been Created");
+  }
+
+  Color(ColorPicker) {
+    //Click on Color
+    cy.getIframeBody().contains('Color Picker').click({ force: true });
+    cy.wait(3000);
+    //Click on Lable
+    cy.get(".gjs-trt-trait__wrp:nth-child(1) input").click().type(ColorPicker);
+    //Click on Name
+    cy.get(".gjs-trt-trait__wrp:nth-child(2) input").click();
+    //Select a Value
+    cy.wait(2000);
+    cy.get(".gjs-trt-trait__wrp:nth-child(3) select").select("Select a value");
+    //Select New Kit Element
+    cy.wait(1000);
+    cy.get(".gjs-trt-trait__wrp:nth-child(3) select").select("New Kit Element");
+    cy.wait(2000);
+
+    cy.contains("Element Label").click({ force: true });
+
+    cy.contains("Element Name").click({ force: true });
+
+    //cy.contains("Element Friendly Description")
+    cy.get(
+      "div.v-dialog__container.new-element-header > div > div > div.container.new-element-body > div > div > form > div:nth-child(2) > div > div > div > div.v-input__slot > div"
+    )
+      .click({ force: true })
+      .type(ColorPicker);
+
+     cy.wait(1000)
+     //Click on to ON External data share for Number 
+     cy.xpath('//*[text()="External Data Share"]').click({ force: true })
+     cy.wait(1000)
+
+    //Click on Save
+    cy.get(".v-btn--text:nth-child(2)").click();
+    //Assertion to close
+    cy.get(".v-btn__content > .theme--dark").click();
+    cy.log("Color Control Data Type has been Created");
+  }
+
+  BarCode(BarCode) {
+    //Click on Bar Code
+    cy.getIframeBody().contains('Label for Bar Code').click({ force: true });
+    cy.wait(3000);
+    //Click on Lable
+    cy.get(".gjs-trt-trait__wrp:nth-child(1) input").click().type(BarCode);
+    //Click on Name
+    cy.get(".gjs-trt-trait__wrp:nth-child(2) input").click();
+    //Select a Value
+    cy.wait(2000);
+    cy.get(".gjs-trt-trait__wrp:nth-child(3) select").select("Select a value");
+    //Select New Kit Element
+    cy.wait(1000);
+    cy.get(".gjs-trt-trait__wrp:nth-child(3) select").select("New Kit Element");
+    cy.wait(2000);
+
+    cy.contains("Element Label").click({ force: true });
+
+    cy.contains("Element Name").click({ force: true });
+
+    //cy.contains("Element Friendly Description")
+    cy.get(
+      "div.v-dialog__container.new-element-header > div > div > div.container.new-element-body > div > div > form > div:nth-child(2) > div > div > div > div.v-input__slot > div"
+    )
+      .click({ force: true })
+      .type(BarCode);
+
+     cy.wait(1000)
+     //Click on to ON External data share for Number 
+     cy.xpath('//*[text()="External Data Share"]').click({ force: true })
+     cy.wait(1000)
+
+    //Click on Save
+    cy.get(".v-btn--text:nth-child(2)").click();
+    //Assertion to close
+    cy.get(".v-btn__content > .theme--dark").click();
+    cy.log("Bar Code Data Type has been Created");
+  }
+
+  RichText(RichText) {
+    //Click on RichText
+    cy.getIframeBody().get('placeholder="Rich Text"').click({ force: true });
+    cy.wait(3000);
+    //Click on Lable
+    cy.get(".gjs-trt-trait__wrp:nth-child(1) input").click().type(RichText);
+    //Click on Name
+    cy.get(".gjs-trt-trait__wrp:nth-child(2) input").click();
+    //Select a Value
+    cy.wait(2000);
+    cy.get(".gjs-trt-trait__wrp:nth-child(3) select").select("Select a value");
+    //Select New Kit Element
+    cy.wait(1000);
+    cy.get(".gjs-trt-trait__wrp:nth-child(3) select").select("New Kit Element");
+    cy.wait(2000);
+
+    cy.contains("Element Label").click({ force: true });
+
+    cy.contains("Element Name").click({ force: true });
+
+    //cy.contains("Element Friendly Description")
+    cy.get(
+      "div.v-dialog__container.new-element-header > div > div > div.container.new-element-body > div > div > form > div:nth-child(2) > div > div > div > div.v-input__slot > div"
+    )
+      .click({ force: true })
+      .type(RichText);
+
+     cy.wait(1000)
+     //Click on to ON External data share for Number 
+     cy.xpath('//*[text()="External Data Share"]').click({ force: true })
+     cy.wait(1000)
+
+    //Click on Save
+    cy.get(".v-btn--text:nth-child(2)").click();
+    //Assertion to close
+    cy.get(".v-btn__content > .theme--dark").click();
+    cy.log("Rich Text Data Type has been Created");
   }
 
   Section(Section) {

@@ -1,8 +1,9 @@
 {
 
-"username":"propertymanagement@commonareas.work.dev",
+"username":"cpmsupport@commonareas.work.dev",
 "Password":"1234567Aa",
-"CAUrl":"https://nvd.ca-test.com/Public/Login?ReturnUrl=%2F",
+"CAUrl":"https://certainmanagement.ca-test.com/Public/Login?ReturnUrl=%2F#/",
 "BaseUrl":"https://app.ca-test.com/Public/Login?ReturnUrl=%2F"
+
 
 }

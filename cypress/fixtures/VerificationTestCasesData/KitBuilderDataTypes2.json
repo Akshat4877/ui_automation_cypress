@@ -1,6 +1,7 @@
 {
     "Url":"Url",
     "Text":"Text",
+    "QRCode":"QR Code",
     "File":"File",
     "Telephone":"Telephone",
     "TextAera":"TextAera",
@@ -11,6 +12,9 @@
     "Address":"Address",
     "Section":"Section",
     "Number":"Number",
+    "ColorPicker":"Color",
+    "BarCode":"Bar Code",
+    "RichText":"Rich text",
     "Time":"Time",
     "Date":"Date",
     "ReminderName":"Reminder",
